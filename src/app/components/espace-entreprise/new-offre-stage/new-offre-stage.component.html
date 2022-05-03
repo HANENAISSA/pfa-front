@@ -1,0 +1,190 @@
+<ng-container>
+  <!-- Page-header start -->
+  <div class="page-header card">
+    <div class="row align-items-end">
+      <div class="col-lg-8">
+        <div class="page-header-title">
+          <span>
+            <i class="icofont icofont-tools-bag card1-icon" style="background-color: #f4a024;"></i>
+          </span>
+          <div class="d-inline">
+            <span class="d-block">
+              <h4>Nouvelle offre</h4>
+            </span>
+            <!-- <span> Ajouter une nouvelle offre de stage </span> -->
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="page-header-breadcrumb">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a [routerLink]="['/']">
+                <i class="icofont icofont-home"></i>
+              </a>
+            </li>
+            <li class="breadcrumb-item">
+              <a>Nouvelle offre</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <app-card
+
+        [classHeader]="true"
+        [blockClass]="'table-border-style'"
+      >
+        <div class="container">
+          <form
+            name="form"
+            (ngSubmit)="addOffre(fadd)"
+            #fadd="ngForm"
+            novalidate
+          >
+            <div class="modal-body">
+              <div class="input-group">
+                <span class="input-group-prepend"
+                  ><label class="input-group-text"
+                    ><i class="icofont icofont-underline"></i></label
+                ></span>
+                <input
+                  class="form-control"
+                  type="text"
+                  name="titre"
+                  ngModel
+                  required
+                  #titre="ngModel"
+                  placeholder="Saisir un titre"
+                />
+              </div>
+
+              <div
+                *ngIf="titre.invalid && titre.touched"
+                class="alert alert-danger p-2"
+                role="alert"
+              >
+                Saisir un titre
+              </div>
+
+              <div class="input-group">
+                <span class="input-group-prepend"
+                  ><label class="input-group-text"
+                    ><i class="icofont icofont-graduate-alt"></i></label
+                ></span>
+                <select
+                  ngModel="{{ -1 }}"
+                  #type="ngModel"
+                  name="type"
+                  class="form-control"
+                  (change)="getType($event)"
+                  required
+                >
+                  <option disabled [value]="-1">
+                    Séléctionner le type de stage
+                  </option>
+
+                  <option value="1">Initiation</option>
+                  <option value="1">Perfectionnement</option>
+                  <option value="6">PFE</option>
+                  <option value="op">Optionnel</option>
+
+                </select>
+              </div>
+              <div class="input-group">
+                <span class="input-group-prepend"
+                  ><label class="input-group-text"
+                    ><i class="icofont icofont-calendar"></i></label
+                ></span>
+                <input
+                  class="form-control"
+                  type="date"
+                  onkeydown="false"
+                  name="dd"
+                  ngModel
+                  required
+                  #dd="ngModel"
+                  min="{{this.actualDate | date:'yyyy-MM-dd'}}"
+                />
+              </div>
+
+              <div
+                *ngIf="dd.invalid && dd.touched"
+                class="alert alert-danger p-2"
+                role="alert"
+              >
+                Saisir la date début
+              </div>
+
+              <div class="input-group" [hidden]="type.value!='op'">
+                <span class="input-group-prepend"
+                  ><label class="input-group-text"
+                    ><i class="icofont icofont-graduate-alt"></i></label
+                ></span>
+                <select
+
+                  ngModel="{{ -1 }}"
+                  #ddure="ngModel"
+                  name="ddure"
+                  class="form-control"
+                  required
+                >
+                  <option disabled [value]="-1">
+                    Séléctionner la durée de stage
+                  </option>
+                  <!-- <ng-container *ngFor="let voiture of this.voitureList;let i=index;"> -->
+                  <option value="1">1 mois</option>
+                  <option value="2">2 mois </option>
+                  <option value="3">3 mois </option>
+                  <option value="4">4 mois </option>
+                  <option value="5">5 mois </option>
+                  <option value="6">6 mois </option>
+                  <!-- </ng-container> -->
+                </select>
+              </div>
+              <div class="input-group">
+                <span class="input-group-prepend"
+                  ><label class="input-group-text"
+                    ><i class="icofont icofont-file-pdf"></i></label
+                ></span>
+                <input
+                  class="form-control"
+                  type="file"
+                  (change)="fileChange($event)"
+                  accept=".pdf,.doc"
+                  name="cahier_charge"
+                />
+              </div>
+
+              <div class="input-group">
+                <span class="input-group-prepend"
+                  ><label class="input-group-text"
+                    ><i class="icofont icofont-file-text"></i></label
+                ></span>
+                <textarea
+                  class="form-control"
+                  type="text"
+                  name="description"
+                  #description="ngModel"
+                  ngModel
+                  placeholder="Description"
+                ></textarea>
+              </div>
+              <div class="modal-footer">
+                <input
+                  value="Confirmer"
+                  type="submit"
+                  class="btn btn-outline-primary"
+                  [disabled]="fadd.invalid||titre.invalid||type.invalid||dd.invalid||(type.value=='op'&&ddure.value=='-1')||disabled"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+      </app-card>
+    </div>
+  </div>
+</ng-container>

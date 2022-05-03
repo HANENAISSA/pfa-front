@@ -1,0 +1,445 @@
+<div class="page-header card">
+  <div class="row align-items-end">
+    <div class="col-lg-8">
+      <div class="page-header-title">
+        <span><i class="icofont icofont-home bg-c-pink"></i></span>
+        <div class="d-inline">
+          <span class="d-block"><h4>Mes informations</h4></span>
+          <span>Mes informations personnelles</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="page-header-breadcrumb">
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a [routerLink]="'/'">
+              <i class="icofont icofont-home"></i>
+            </a>
+          </li>
+          <li class="breadcrumb-item">
+            <a>Mes informations</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- CV cover end-->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="md-tabs">
+      <ngb-tabset [activeId]="actifTabid" >
+        <ngb-tab title="Informations Personnels" [id]="0">
+          <ng-template ngbTabContent>
+            <div [@fadeInOutTranslate] class="m-t-15">
+              <!-- personal card start -->
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="card-header-text">A propos de moi</h5>
+                  <button
+                    id="edit-btn"
+                    type="button"
+                    class="btn btn-sm btn-primary waves-effect waves-light f-right"
+                    (click)="toggleEditProfile()"
+                  >
+                    <i class="icofont {{ editProfileIcon }}"></i>
+                  </button>
+                </div>
+                <div class="card-body">
+                  <div class="view-info" *ngIf="editProfile">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="general-info">
+                          <div class="row">
+                            <div class="col-lg-12 col-xl-6">
+                              <div class="table-responsive">
+                                <table class="table m-0">
+                                  <tbody>
+                                    <tr>
+                                      <th scope="row">Nom</th>
+                                      <td>stage pfe nom</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Prénom</th>
+                                      <td>stage pfe prenom</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Date naissance</th>
+                                      <td>October 25th, 1990</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                            <!-- end of table col-lg-6 -->
+                            <div class="col-lg-12 col-xl-6">
+                              <div class="table-responsive">
+                                <table class="table">
+                                  <tbody>
+                                    <tr>
+                                      <th scope="row">Sexe</th>
+                                      <td>Female</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Localisation</th>
+                                      <td>Beja</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Email</th>
+                                      <td>
+                                        <a href="javascript:;"
+                                          >stagepfe@gmail.com</a
+                                        >
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                            <!-- end of table col-lg-6 -->
+                          </div>
+                          <!-- <div class="container">
+
+                            <div class="row">
+
+                              <button type="button"
+                              class="col-md-3 col-lg-2 offset-lg-5  btn btn-primary mt-5"
+                              (click)="postulerOffre()">
+                                <i class="icofont icofont-location-arrow"></i>
+                                Envoyer
+                              </button>
+                            </div>
+                          </div> -->
+                          <!-- end of row -->
+                        </div>
+                        <!-- end of general info -->
+                      </div>
+                      <!-- end of col-lg-12 -->
+                    </div>
+                    <!-- end of row -->
+                  </div>
+                  <!-- end of view-info -->
+                  <div class="edit-info" *ngIf="!editProfile">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="general-info">
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <div class="table-responsive">
+                                <table class="table">
+                                  <tbody>
+                                    <tr>
+                                      <td>
+                                        <div class="input-group">
+                                          <span class="input-group-prepend"
+                                            ><label class="input-group-text"
+                                              ><i
+                                                class="icofont icofont-user"
+                                              ></i></label
+                                          ></span>
+                                          <input
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Prénom"
+                                            value="stage pfe prénom"
+                                          />
+                                        </div>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <div class="input-group">
+                                          <span class="input-group-prepend"
+                                            ><label class="input-group-text"
+                                              ><i
+                                                class="icofont icofont-user"
+                                              ></i></label
+                                          ></span>
+                                          <input
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Nom"
+                                            value="stage pfe nom"
+                                          />
+                                        </div>
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      <td>
+                                        <div class="form-radio">
+                                          <div class="group-add-on">
+                                            <div
+                                              class="radio radiofill radio-inline"
+                                            >
+                                              <label>
+                                                <input
+                                                  type="radio"
+                                                  name="sexe"
+                                                /><i class="helper"></i> Homme
+                                              </label>
+                                            </div>
+                                            <div
+                                              class="radio radiofill radio-inline"
+                                            >
+                                              <label>
+                                                <input
+                                                  type="radio"
+                                                  name="sexe"
+                                                  checked
+                                                /><i class="helper"></i> Femme
+                                              </label>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                            <!-- end of table col-lg-6 -->
+
+                            <div class="col-lg-6">
+                              <div class="table-responsive">
+                                <table class="table">
+                                  <tbody>
+                                    <tr>
+                                      <td>
+                                        <div class="input-group">
+                                          <span class="input-group-prepend"
+                                            ><label class="input-group-text"
+                                              ><i
+                                                class="icofont icofont-location-pin"
+                                              ></i></label>
+                                            </span>
+                                          <input
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Localisation"
+                                            value="Beja"
+                                          />
+                                        </div>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <div class="input-group">
+                                          <span class="input-group-prepend"
+                                            ><label class="input-group-text"
+                                              ><i
+                                                class="icofont icofont-mail"
+                                              ></i></label>
+                                            </span>
+                                          <input
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Email"
+                                            value="stagepfe@gmail.com"
+                                          />
+                                        </div>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <input
+                                          id="dropper-default"
+                                          class="form-control"
+                                          type="text"
+                                          value="October 25th, 1990"
+                                          placeholder="selecter votre date de naissance"
+                                        />
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                            <!-- end of table col-lg-6 -->
+                          </div>
+                          <!-- end of row -->
+                          <div class="text-center">
+                            <a
+                              href="javascript:;"
+                              class="btn btn-primary waves-effect waves-light m-r-20"
+                              >Save</a
+                            >
+                            <a
+                              href="javascript:;"
+                              id="edit-cancel"
+                              class="btn btn-default waves-effect"
+                              (click)="toggleEditProfile()"
+                              >Cancel</a
+                            >
+                          </div>
+                        </div>
+                        <!-- end of edit info -->
+                      </div>
+                      <!-- end of col-lg-12 -->
+                    </div>
+                    <!-- end of row -->
+                  </div>
+                  <!-- end of edit-info -->
+                </div>
+                <!-- end of card-body -->
+              </div>
+              <!-- personal card end-->
+            </div>
+
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Compétences" [id]="1">
+          <ng-template ngbTabContent>
+            <div [@fadeInOutTranslate] class="m-t-15">
+              <!-- info card start -->
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="card-header-text">Mes compétences</h5>
+                  <button type="button" class="btn btn-outline-primary col-12 col-md-3 offset-md-9 mt-3 w-100" (click)="this.addComptence()">Nouvelle compétence</button>
+
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                  <ng-container *ngFor="let item of this.listCompetence">
+                    <div class="col-md-6" >
+                      <div
+                        class="card b-l-success business-info services m-b-20" style="background-color: #f4eded;"
+                      >
+                        <div ngbDropdown class="card-header">
+                          <div class="service-header">
+                            <a href="javascript:;"><h5 class="card-header-text">{{item.libelle}}</h5></a>
+                          </div>
+                          <button
+                            ngbDropdownToggle
+                            class="dropdown-toggle addon-btn text-muted f-right service-btn"
+                            style="border: none;"
+                            id="dropdownBasic1"
+                        >
+                          <i class="fa fa-ellipsis-v"></i>
+                        </button>
+                          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                            <button
+                              ngbDropdownItem
+                             (click)="openUpdateComp(item)">
+                              <i class="icofont icofont-edit-alt"></i>Modifier
+                            </button>
+                            <button
+                            (click)="this.openDeleteComp(item.id_competence)"
+                              ngbDropdownItem
+                            >
+                              <i class="icofont icofont-trash"></i>Supprimer
+                            </button>
+                          </div>
+                        </div>
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <!-- <p class="task-detail" *ngIf="item.niveau=='0'">Débutant</p> -->
+                              <div>
+
+                                <span class="fa fa-star checked"></span>
+                                <span [class]="item.niveau=='0'?'fa fa-star':'fa fa-star checked'"></span>
+                                <span [class]="item.niveau=='0'||item.niveau=='1'?'fa fa-star':'fa fa-star checked'"></span>
+                                <span [class]="item.niveau=='3'||item.niveau=='4'?'fa fa-star checked':'fa fa-star'"></span>
+                                <span [class]="item.niveau=='4'?'fa fa-star checked':'fa fa-star'"></span>
+                              </div>
+
+                            </div>
+                            <!-- end of col-sm-8 -->
+                          </div>
+                          <!-- end of row -->
+                        </div>
+                        <!-- end of card-body -->
+                      </div>
+                    </div>
+
+                  </ng-container>
+                   
+                  </div>
+                </div>
+              </div>
+              <!-- info card end -->
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Expériences" [id]="2">
+          <ng-template ngbTabContent>
+            <div [@fadeInOutTranslate] class="m-t-15">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="card-header-text">Mes Expériences</h5>
+                  <button type="button" class="btn btn-outline-primary col-12 col-md-3 offset-md-9 mt-3 w-100" (click)="this.addExperience()">Nouvelle expérience</button>
+
+                </div>
+
+                <ng-container *ngFor="let item of this.listExperience">
+                <div class="card-body">
+
+                  <ul class="media-list">
+                    <div ngbDropdown class="card-header">
+                      <button
+                        ngbDropdownToggle
+                        class="dropdown-toggle addon-btn text-muted f-right service-btn"
+                        style="border: none;"
+                        id="dropdownBasic1"
+                    >
+                      <i class="fa fa-ellipsis-v"></i>
+                    </button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button
+                          ngbDropdownItem
+                          (click)="openUpdateExper(item)"
+                        >
+                          <i class="icofont icofont-edit-alt"></i>Modifier
+                        </button>
+                        <button
+                          ngbDropdownItem
+                          (click)="openDeleteExper(item.id_experience)"
+                        >
+                          <i class="icofont icofont-trash"></i>Supprimer
+                        </button>
+                      </div>
+                    </div>
+                    <li class="media">
+                      <div class="media-body">
+                        <h4 >
+                          {{item.post}}<span class="f-12 text-muted m-l-5"
+                            ></span
+                          >
+                        </h4>
+                        <br/>
+                        <h5 class="media-heading">Au sein de l'entreprise {{item.nom_entreprise}}</h5>
+                        <h5 class="media-heading">  De : {{ this.sharedService.formatDate(item.date_debut)}} jusqu'à {{this.sharedService.formatDate(item.date_fin)}}</h5>
+                        <p class="m-b-0">
+                          {{item.description}}
+                        </p>
+                        <hr />
+                        <!-- Nested media object -->
+                      </div>
+                    </li>
+                    <!-- Nested media object -->
+                  </ul>
+                </div>
+              </ng-container>
+              <!-- <div class="container mb-5">
+
+                <div class="row">
+
+                  <button type="button"
+                  class="col-md-3 col-lg-2 offset-lg-5  btn btn-primary mt-5"
+                  (click)="postulerOffre()">
+                    <i class="icofont icofont-location-arrow"></i>
+                    Envoyer
+                  </button>
+                </div>
+              </div> -->
+              </div>
+            </div>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+
+    </div>
+  </div>
+</div>

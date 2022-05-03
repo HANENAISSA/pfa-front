@@ -1,0 +1,176 @@
+<ng-container>
+    <div class="">
+      <!-- Page-header start -->
+      <div class="page-header card">
+        <div class="row align-items-end">
+          <div class="col-lg-8">
+            <div class="page-header-title">
+              <span>
+                <i
+                  class="icofont icofont-tools-bag card1-icon"
+                  style="background-color: #f4a024"
+                ></i>
+              </span>
+              <div class="d-inline">
+                <span class="d-block">
+                  <h4>Liste Des stagiaires disponibles</h4>
+                </span>
+                <!-- <span>
+                  Liste des offres de stages disponibles pour l'etudiant
+                </span> -->
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="page-header-breadcrumb">
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a [routerLink]="['/']">
+                    <i class="icofont icofont-home" style="color: #294a70"></i>
+                  </a>
+                </li>
+                <!-- <li class="breadcrumb-item">
+                  <a>Liste des offres de stage disponibles</a>
+                </li> -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page-header end -->
+    <div class="row">
+      <div class="col-sm-12">
+        <app-card
+          [title]="'Liste des stagiaires'"
+          [classHeader]="true"
+          [blockClass]="'table-border-style'"
+        >
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4 col-lg-5 offset-lg-1">
+                <div class="pcoded-search">
+                  <div class="pcoded-search-box">
+                    <input
+                      type="text"
+                      placeholder="Rechercher"
+                      name="searchText"
+                      [(ngModel)]="searchText"
+                      autocomplete="off"
+                    />
+                    <span class="search-icon"
+                      ><i class="ti-search" aria-hidden="true"></i
+                    ></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12 col-lg-4 offset-lg-1 w-100 ">
+                <ng-select
+                      [items]="listOffres"
+                      bindLabel="titre"
+                      placeholder="Toutes les offres"
+                      searchable="true"
+                      [(ngModel)]="offreSelected"
+                      (change)="changeOffre()"
+                    >
+                  </ng-select>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-responsive" style="display: contents;">
+            <div style="margin: 50px; ">
+              <table class="table table-hover">
+                <thead>
+                  <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                      <button mat-button>Edit</button>
+                    </mat-cell>
+                  </ng-container>
+                  <tr style="text-align: center">
+                    <th scope="col" [appSort]="listeStagiaires" data-order="desc" data-name="titre">Titre<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
+                    <th scope="col" [appSort]="listeStagiaires" data-order="desc" data-name="type" >Type<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
+                    <th scope="col" [appSort]="listeStagiaires" data-order="desc" data-name="date_debut" data-type="date" >Date début<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
+                    <th scope="col" [appSort]="listeStagiaires" data-order="desc" data-name="nom">nom & prénom<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
+                    <th scope="col" [appSort]="listeStagiaires" data-order="desc" data-name="email" >Profil<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
+
+                    <th scope="col"></th>
+
+                  </tr>
+                </thead>
+                <ng-container
+                  *ngIf="this.listeStagiaires.length > 0 && this.listeStagiaires[0] !== null"
+                >
+                  <tbody
+                    *ngFor="
+                      let offre of this.listeStagiaires
+                        | filter: searchText
+                        | slice: (page - 1) * pageSize:page * pageSize;
+                      let i = index
+                    "
+                  >
+                    <tr style="text-align: center">
+                      <th scope="row">{{ offre.titre }}</th>
+                      <td scope="row">{{ offre.type }}</td>
+                      <td>
+                        {{ this.sharedService.formatDate(offre.date_debut) }}
+                      </td>
+                      <td scope="row">{{ offre.nom+" "+offre.prenom }}</td>
+                      <td>
+                        <a target="_blank" [routerLink]="['/etudiant/cv/','0']">
+                          C.V
+                        </a>
+                      </td>
+
+                    </tr>
+                  </tbody>
+                </ng-container>
+                <ng-container *ngIf="this.listeStagiaires.length === 0">
+                  <tbody>
+                    <tr style="text-align: center">
+                      <td colspan="5">AUCUN ETUDIANT DISPONIBLE !</td>
+                    </tr>
+                  </tbody>
+                </ng-container>
+                <ng-container *ngIf="this.listeStagiaires[0] === null">
+                  <tbody>
+                    <tr style="text-align: center">
+                      <td colspan="5">Chargement ...</td>
+                    </tr>
+                  </tbody>
+                </ng-container>
+              </table>
+              <!-- Pagination -->
+              <div class="d-flex justify-content-between p-2">
+                <ngb-pagination
+                  [(page)]="page"
+                  [pageSize]="pageSize"
+                  [collectionSize]="listeStagiaires.length"
+                >
+                </ngb-pagination>
+                <!-- Items Par Page  -->
+                <div>
+                  Objets par page
+  :
+                  <select
+                    class="custom-select"
+                    style="width: auto"
+                    name="pageSize"
+                    (change)="handlePageSizeChange($event)"
+                  >
+                    <option *ngFor="let size of pageSizes" [ngValue]="size">
+                      {{ size }}
+                    </option>
+                  </select>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </app-card>
+      </div>
+    </div>
+  </ng-container>

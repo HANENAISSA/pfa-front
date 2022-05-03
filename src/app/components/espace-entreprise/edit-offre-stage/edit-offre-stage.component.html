@@ -1,0 +1,238 @@
+<ng-container>
+  <!-- Page-header start -->
+  <div class="page-header card">
+    <div class="row align-items-end">
+      <div class="col-lg-8">
+        <div class="page-header-title">
+          <span>
+            <i class="icofont icofont-tools-bag bg-c-blue card1-icon"></i>
+          </span>
+          <div class="d-inline">
+            <span class="d-block">
+              <h4>Modification d'offre</h4>
+            </span>
+            <!-- <span> Modifier une nouvelle offre de stage </span> -->
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="page-header-breadcrumb">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a [routerLink]="['/']">
+                <i class="icofont icofont-home"></i>
+              </a>
+            </li>
+            <li class="breadcrumb-item">
+              <a>Modification offre</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <app-card
+        [classHeader]="true"
+        [blockClass]="'table-border-style'"
+      >
+        <div class="container">
+          <form
+            name="form"
+            (ngSubmit)="updateOffre(fupdate)"
+            #fupdate="ngForm"
+            novalidate
+          >
+            <div class="modal-body">
+              <div class="input-group">
+                <span class="input-group-prepend"
+                  ><label class="input-group-text"
+                    ><i class="icofont icofont-underline"></i></label
+                ></span>
+                <input
+                  class="form-control"
+                  type="text"
+                  name="titre"
+                  [(ngModel)]="this.offreStage.titre"
+                  required
+                  #titre="ngModel"
+                  placeholder="Saisir un titre"
+                />
+              </div>
+
+              <div
+                *ngIf="titre.invalid && titre.touched"
+                class="alert alert-danger p-2"
+                role="alert"
+              >
+                Saisir un titre
+              </div>
+
+              <div class="input-group">
+                <span class="input-group-prepend"
+                  ><label class="input-group-text"
+                    ><i class="icofont icofont-graduate-alt"></i></label
+                ></span>
+                <select
+                  #type="ngModel"
+                  name="type"
+                  [(ngModel)]="this.offreStage.type"
+                  class="form-control"
+                  (change)="getType($event)"
+                  required
+                >                  
+                  <option value="Initiation">Initiation</option>
+                  <option value="Perfectionnement">Perfectionnement</option>
+                  <option value="PFE">PFE</option>
+                  <option value="Optionnel">Optionnel</option>
+
+                </select>
+              </div>
+              <div class="input-group">
+                <span class="input-group-prepend"
+                  ><label class="input-group-text"
+                    ><i class="icofont icofont-calendar"></i></label
+                ></span>
+                <input
+                  class="form-control"
+                  type="date"
+                  onkeydown="return false"
+                  [(ngModel)]= "this.offreStage.date_debut"
+                  name="dd"
+                  required
+                  #dd="ngModel"
+                  min="{{this.actualDate | date:'yyyy-MM-dd'}}"
+                />
+
+              </div>
+
+              <div
+                *ngIf="dd.invalid && dd.touched"
+                class="alert alert-danger p-2"
+                role="alert"
+              >
+                Saisir la date début
+              </div>
+
+
+              <div class="input-group" [hidden]="this.offreStage.type!='Optionnel'">
+                <span class="input-group-prepend"
+                  ><label class="input-group-text"
+                    ><i class="icofont icofont-graduate-alt"></i></label
+                ></span>
+                <select
+
+                  #ddure="ngModel"
+                  name="ddure"
+                  [(ngModel)]="this.offreStage.duree"
+                  class="form-control"
+                  required
+                >
+                  <!-- <option disabled [value]="-1">
+                    Séléctionner la durée de stage
+                  </option> -->
+                  <option value="1">1 mois</option>
+                  <option value="2">2 mois </option>
+                  <option value="3">3 mois </option>
+                  <option value="4">4 mois </option>
+                  <option value="5">5 mois </option>
+                  <option value="6">6 mois </option>
+                </select>
+              </div>
+
+
+
+
+              <!-- <div class="input-group">
+                <span class="input-group-prepend"
+                  ><label class="input-group-text"
+                    ><i class="icofont icofont-calendar"></i></label
+                ></span>
+                <input
+                  class="form-control"
+                  type="date"
+                  name="df"
+                  [(ngModel)]="this.offreStage.date_fin"
+                  required
+                  #df="ngModel"
+
+                />
+              </div> 
+
+              <div
+                *ngIf="df.invalid && df.touched"
+                class="alert alert-danger p-2"
+                role="alert"
+              >
+                Saisir la date fin
+              </div>
+              -->
+
+              <div class="input-group">
+                <span class="input-group-prepend"
+                  ><label class="input-group-text"
+                    ><i class="icofont icofont-file-pdf"></i></label
+                ></span>
+                <input
+                  class="form-control"
+                  type="file"
+                  (change)="fileChange($event)"
+                  accept=".pdf,.doc"
+                  name="cahier_charge"
+                />
+              </div>
+
+              <div class="input-group">
+                <span class="input-group-prepend"
+                  ><label class="input-group-text"
+                    ><i class="icofont icofont-file-text"></i></label
+                ></span>
+                <textarea
+                  class="form-control"
+                  type="text"
+                  name="description"
+                  [(ngModel)]="this.offreStage.description"
+                  #description="ngModel"
+                  placeholder="Description"
+                ></textarea>
+              </div>
+
+              <!-- <div class="form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="flexSwitchCheckDefault"
+                  [checked]="this.getEtat()"
+
+                  (change)="checkValue($event)"
+
+                />
+
+              </div>
+                <div class="ml-4 p-1">
+
+                  <p *ngIf="this.getEtat()">OFFRE OUVERTE</p>
+                  <p *ngIf="!this.getEtat()">OFFRE FERMÉE</p>
+                </div> -->
+
+              <!-- </label> -->
+              <!-- <div class="custom-control custom-switch">
+
+
+              </div> -->
+              <div class="modal-footer">
+                <input
+                  value="Confirmer"
+                  type="submit"
+                  class="btn btn-outline-primary"
+                  [disabled]="fupdate.invalid||titre.invalid||disabled"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+      </app-card>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,324 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ this.title }}</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+  <!-- add -->
+<div *ngIf="!this.edit && !this.details && this.id_exp =='-1'" class="modal-body">
+  <form name="fadd" (ngSubmit)="onSubmit(fadd,'add')" #fadd="ngForm" novalidate>
+    <div class="input-group">
+      <span class="input-group-prepend"
+        ><label class="input-group-text"
+          ><i class="icofont icofont-company"></i
+        ></label>
+      </span>
+      <input
+        type="text"
+        class="form-control"
+        id="exampleInputNP"
+        placeholder="Nom entreprise"
+        name="nom_entreprise"
+        ngModel
+        #nom_entreprise="ngModel"
+        [ngClass]="{
+          'is-invalid': nom_entreprise.invalid && nom_entreprise.touched
+        }"
+        required
+      />
+    </div>
+    <div
+      *ngIf="nom_entreprise.invalid && nom_entreprise.touched"
+      class="alert alert-danger p-2"
+      role="alert"
+    >
+      <span>
+        nom entreprise Obligatoire !!
+      </span>
+    </div>
+    <div class="input-group">
+      <span class="input-group-prepend"
+        ><label class="input-group-text"
+          ><i class="icofont icofont-calendar"></i></label
+      ></span>
+      <input
+        class="form-control"
+        type="date"
+        onkeydown="return false"
+        name="date_debut"
+        ngModel
+        required
+        #dd="ngModel"
+        required
+        max="{{df.value| date:'yyyy-MM-dd'}}"
+      />
+    </div>
+    <div
+      *ngIf="dd.invalid && dd.touched"
+      class="alert alert-danger p-2"
+      role="alert"
+    >
+      <spna>Saisir la date début</spna>
+    </div>
+
+
+    <div class="input-group">
+      <span class="input-group-prepend"
+        ><label class="input-group-text"
+          ><i class="icofont icofont-calendar"></i></label
+      ></span>
+      <input
+        class="form-control"
+        type="date"
+        onkeydown="return false"
+        name="date_fin"
+        required
+        ngModel
+        #df="ngModel"
+        required
+        min="{{dd.value| date:'yyyy-MM-dd'}}"
+      />
+    </div>
+
+    <div
+      *ngIf="df.invalid && df.touched"
+      class="alert alert-danger p-2"
+      role="alert"
+    >
+      <span>Saisir la date fin</span>
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-prepend"
+        ><label class="input-group-text"
+          ><i class="icofont icofont-file-text"></i
+        ></label>
+      </span>
+      <textarea
+        class="form-control"
+        id="exampleInputDesc"
+        placeholder="Description"
+        name="description"
+        required
+        [ngClass]="{ 'is-invalid': desc.invalid && desc.touched }"
+        [(ngModel)]="this.model.description"
+        #desc="ngModel"
+      >
+      </textarea>
+    </div>
+
+
+    <div *ngIf="desc.invalid && desc.touched" class="alert alert-danger p-2"
+    role="alert">
+      <span >Description Obligatoire !!</span>
+    </div>
+
+
+    <div class="input-group">
+      <span class="input-group-prepend"
+        ><label class="input-group-text"
+          ><i class="icofont icofont-ui-user-group"></i
+        ></label>
+      </span>
+      <input
+        type="text"
+        class="form-control"
+        id="exampleInputNP"
+        placeholder="Poste"
+        name="post"
+        ngModel
+        #post="ngModel"
+        [ngClass]="{ 'is-invalid': post.invalid && post.touched }"
+        required
+      />
+    </div>
+    <div *ngIf="post.invalid && post.touched" class="alert alert-danger p-2" role="alert">
+      <span>Poste Obligatoire !!</span>
+    </div>
+    <div class="modal-footer">
+      <input value="Confirmer" [disabled]="fadd.invalid||this.disabled" type="submit" class="btn btn-outline-primary" />
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="activeModal.close('Close click')"
+      >
+        Fermer
+      </button>
+    </div>
+  </form>
+</div>
+<!-- update -->
+<div *ngIf="this.edit && this.details && this.id_exp =='-1'" class="modal-body">
+  <form
+    name="fupdate"
+    (ngSubmit)="onSubmit(fupdate,'update')"
+    #fupdate="ngForm"
+    novalidate
+  >
+    <div class="input-group">
+      <span class="input-group-prepend"
+        ><label class="input-group-text"
+          ><i class="icofont icofont-company"></i
+        ></label>
+      </span>
+      <input
+        type="text"
+        class="form-control"
+        id="exampleInputNP"
+        placeholder="Nom entreprise"
+        name="nom_entreprise"
+        [(ngModel)]="this.details.nom_entreprise"
+        #nom_entreprise="ngModel"
+        [ngClass]="{
+          'is-invalid': nom_entreprise.invalid && nom_entreprise.touched
+        }"
+        required
+      />
+    </div>
+    <div
+      *ngIf="nom_entreprise.invalid && nom_entreprise.touched"
+      class="alert alert-danger p-2"
+    role="alert"
+    >
+      <span >
+        nom entreprise Obligatoire !!
+      </span>
+    </div>
+    <div class="input-group">
+      <span class="input-group-prepend"
+        ><label class="input-group-text"
+          ><i class="icofont icofont-calendar"></i></label
+      ></span>
+      <input
+        class="form-control"
+        type="date"
+        onkeydown="return false"
+        name="date_debut"
+        [(ngModel)]="this.details.date_debut"
+        required
+        #dd="ngModel"
+        required
+        max="{{df.value| date:'yyyy-MM-dd'}}"
+      />
+    </div>
+
+    <div
+      *ngIf="dd.invalid && dd.touched"
+      class="alert alert-danger p-2"
+      role="alert"
+    >
+      <span>Saisir la date début</span>
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-prepend"
+        ><label class="input-group-text"
+          ><i class="icofont icofont-calendar"></i></label
+      ></span>
+      <input
+        class="form-control"
+        type="date"
+        onkeydown="return false"
+        name="date_fin"
+        required
+        [(ngModel)]="this.details.date_fin"
+        #df="ngModel"
+        required
+        min="{{dd.value| date:'yyyy-MM-dd'}}"
+      />
+    </div>
+
+    <div
+      *ngIf="df.invalid && df.touched"
+      class="alert alert-danger p-2"
+      role="alert"
+    >
+      <span>Saisir la date fin</span>
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-prepend"
+        ><label class="input-group-text"
+          ><i class="icofont icofont-file-text"></i
+        ></label>
+      </span>
+      <textarea
+        class="form-control"
+        id="exampleInputDesc"
+        placeholder="Description"
+        name="description"
+        required
+        [ngClass]="{ 'is-invalid': desc.invalid && desc.touched }"
+        [(ngModel)]="this.details.description"
+        #desc="ngModel"
+      >
+      </textarea>
+    </div>
+    <div *ngIf="desc.invalid && desc.touched" class="alert alert-danger p-2"
+    role="alert">
+      <span >Description Obligatoire !!</span>
+    </div>
+    <div class="input-group">
+      <span class="input-group-prepend"
+        ><label class="input-group-text"
+          ><i class="icofont icofont-ui-user-group"></i
+        ></label>
+      </span>
+      <input
+        type="text"
+        class="form-control"
+        id="exampleInputNP"
+        placeholder="Poste"
+        name="post"
+        [(ngModel)]="this.details.post"
+        #post="ngModel"
+        [ngClass]="{ 'is-invalid': post.invalid && post.touched }"
+        required
+      />
+    </div>
+    <div *ngIf="post.invalid && post.touched" class="alert alert-danger p-2"
+    role="alert">
+      <span >
+        Poste Obligatoire !!
+
+      </span>
+    </div>
+    <div class="modal-footer">
+      <input value="Confirmer" [disabled]="fupdate.invalid||this.disabled" type="submit" class="btn btn-outline-primary" />
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="activeModal.close('Close click')"
+      >
+        Fermer
+      </button>
+    </div>
+  </form>
+</div>
+<!-- delete -->
+<div *ngIf="this.id_exp !='-1' && this.details==null"  class="modal-body">
+  <tbody style="text-align:center" >
+    <tr>
+      <th scope="row">Voulez vous supprimer cette expérience ?</th>                        
+    </tr>    
+                      
+  </tbody>
+  <div class="modal-footer">
+    <input value="Confirmer" [disabled]="this.disabled" type="button" class="btn btn-outline-primary"
+      (click)="deleteExper()"
+    />
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="activeModal.close('Close click')"
+    >
+      Fermer
+    </button>
+  </div>
+</div>
+

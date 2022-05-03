@@ -1,0 +1,391 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ title }}</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body" *ngIf="this.details&&!this.accepted&&!this.invitation">
+  <div class="view-info">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="general-info">
+          <div class="row">
+            <div class="col-lg-12 col-xl-12">
+              <div class="table-responsive">
+                <table class="table m-0">
+                  <tbody>
+                    <tr>
+                      <th scope="row">Titre</th>
+                      <td>
+                        <h5>{{ this.details.titre }}</h5>
+                      </td>
+                    </tr>
+
+                      <!-- <tr>
+                        <th scope="row">Domaine entreprise</th>
+                        <td>{{ this.details.libelle }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Nom société</th>
+                        <td>{{ this.details.nom_societe }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Numéro registre commericale</th>
+                        <td>{{ this.details.num_reg_commerce }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Localisation</th>
+                        <td>{{ this.details.localisation }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Site web</th>
+                        <td>
+                          <a href="{{ this.details.site_web }}" target="_blank">
+                            {{ this.details.site_web }}
+                          </a>
+                        </td>
+                      </tr> -->
+
+
+
+                    <tr>
+                      <th scope="row">Date de la demande</th>
+                      <td>{{ this.sharedService.formatDate(this.details.date_demande,true)}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Nom & prénom</th>
+                      <td>
+                        {{
+                          this.details.nom+" "+this.details.prenom
+                        }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Email</th>
+                      <td>
+                        {{
+                          this.details.email
+                        }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Profil étudiant</th>
+                      <td>
+                        <a target="_blank" [routerLink]="['/dashboard/profil']">
+                          Consulter le profil
+                        </a>
+                      </td>
+                    </tr>
+                    <!-- <tr>
+                      <th scope="row">Date fin stage</th>
+                      <td>
+                        {{
+                          this.sharedService.formatDate(this.details.date_fin)
+                        }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Etat de l'offre de stage</th>
+                      <td *ngIf="this.details.etat === 0">Fermé</td>
+                      <td *ngIf="this.details.etat === 1">Ouvert</td>
+                    </tr>
+                    <tr *ngIf="this.details.cahier_charge">
+                      <th scope="row">Cahier de charge</th>
+                      <td>
+                        <a
+                          href="{{ this.details.cahier_charge }}"
+                          target="_blank"
+                        >
+                          Ouvrir
+                        </a>
+                      </td>
+                    </tr>
+
+
+                    <tr>
+                      <th scope="row">Nombre de vues</th>
+                      <td>{{ this.details.nbr_vue }} vues</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Nombre de postulations</th>
+                      <td>{{ this.details.nbr_postulation }}</td>
+                    </tr> -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- end of table col-lg-6 -->
+          </div>
+          <!-- end of row -->
+        </div>
+        <!-- end of general info -->
+      </div>
+      <!-- end of col-lg-12 -->
+    </div>
+    <!-- end of row -->
+  </div>
+  <div class="modal-footer">
+    <button
+    *ngIf="this.etat==='2'||this.etat==='3'"
+      type="button"
+      class="btn btn-outline-primary"
+      (click)="this.replyDemande(true)"
+      [disabled]="this.disabled"
+    >
+      Accepter
+    </button>
+    <button
+    *ngIf="this.etat==='3'"
+      type="button"
+      class="btn btn-outline-warning"
+      (click)="this.onSubmit()"
+      [disabled]="this.disabled"
+    >
+      Mettre en attente
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="activeModal.close('Close click')"
+    >
+      Fermer
+    </button>
+  </div>
+</div>
+
+<div class="modal-body" *ngIf="this.accepted">
+  <div class="view-info">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="general-info">
+          <div class="row">
+            <div class="col-lg-12 col-xl-12">
+              <form
+                name="fsuccess"
+                (ngSubmit)="onSubmit(fsuccess)"
+                #fsuccess="ngForm"
+                novalidate
+              >
+                <div class="modal-body">
+
+                
+                  
+
+
+                  <div class="input-group">
+                    <span class="input-group-prepend"
+                      ><label class="input-group-text"
+                        ><i class="icofont icofont-calendar"></i></label
+                    ></span>
+                    <input
+                      class="form-control"
+                      type="datetime-local"
+                      onkeydown="return false"
+                      name="dd"
+                      ngModel
+                      required
+                      #dd="ngModel"
+                      min="{{actualDate}}"
+
+                      />
+                  </div>
+
+                  <div
+                    *ngIf="dd.invalid && dd.touched"
+                    class="alert alert-danger p-2"
+                    role="alert"
+                  >
+                    Saisir la date d'entretien
+                  </div>
+
+
+
+
+                  <div class="modal-footer">
+                    <input
+                      [disabled]="dd.invalid"
+                      value="Confirmer"
+                      type="submit"
+                      class="btn btn-outline-primary"
+                      [disabled]="this.disabled"
+                    />
+                    <button
+                    [disabled]="this.disabled"
+                      type="button"
+                      class="btn btn-outline-dark"
+                      (click)="activeModal.close('Close click')"
+                    >
+                      Annuler
+                    </button>
+                  </div>
+
+                </div>
+              </form>
+
+              <!-- end of table col-lg-6 -->
+            </div>
+            <!-- end of row -->
+          </div>
+          <!-- end of general info -->
+        </div>
+        <!-- end of col-lg-12 -->
+      </div>
+      <!-- end of row -->
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal-body" *ngIf="this.invitation">
+  <div class="view-info">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="general-info">
+          <div class="row">
+            <div class="col-lg-12 col-xl-12">
+
+                <div class="modal-body">
+                  
+                  <div class="input-group">
+                    <!-- <span class="input-group-prepend">
+                      <label class="input-group-text">
+                        <i class="icofont icofont-box"></i>
+                      </label>
+                      </span> -->
+                    <ng-select 
+                    [ngStyle]="{'width': '100%'}"
+                      [items]="listOffres"
+                      bindLabel="titre"
+                      placeholder="Séléctionner une offre"
+                      searchable="true"
+                      [(ngModel)]="tabSelected"
+                    >
+                  </ng-select>
+                  </div>
+
+                  <div class="input-group">
+                    <span class="input-group-prepend"
+                      ><label class="input-group-text"
+                        ><i class="icofont icofont-calendar"></i></label
+                    ></span>
+                    <input
+                      class="form-control"
+                      type="datetime-local"
+                      onkeydown="return false"
+                      name="dd"
+                      ngModel
+                      required
+                      #dd="ngModel"
+                      min="{{actualDate}}"
+
+                      />
+                  </div>
+                  
+
+
+                  <div
+                    *ngIf="dd.invalid && dd.touched"
+                    class="alert alert-danger p-2"
+                    role="alert"
+                  >
+                    Saisir la date d'entretien
+                  </div>
+
+
+
+                  <div class="input-group">
+                    <span class="input-group-prepend"
+                      ><label class="input-group-text"
+                        ><i class="icofont icofont-file-text"></i></label
+                    ></span>
+                    <textarea
+                      class="form-control resnone"
+                      type="text"
+                      [disabled]="true"
+                      rows="1"
+                      ngModel="{{'Bonjour Mme/Mr '+(this.etudiant&&this.etudiant.nom)+' '+(this.etudiant&&this.etudiant.prenom)}}"
+
+                    ></textarea>
+                  </div>
+                  <div class="input-group">
+                    <span class="input-group-prepend"
+                      ><label class="input-group-text"
+                        ><i class="icofont icofont-ui-edit"></i></label
+                    ></span>
+                    <textarea
+                      class="form-control"
+                      type="text"
+                      name="body"
+                      rows="9"
+                      #body="ngModel"
+                      [(ngModel)]="this.msg_body"
+                      placeholder="Message"
+                      required
+                    ></textarea>
+                  </div>
+                  <div
+                    *ngIf="body.invalid&&body.touched"
+                    class="alert alert-danger p-2"
+                    role="alert"
+                  >
+                    Saisir le contenu de votre email
+                  </div>
+
+
+
+                  <div class="input-group">
+                    <span class="input-group-prepend"
+                      ><label class="input-group-text"
+                        ><i class="icofont icofont-file-text"></i></label
+                    ></span>
+                    <textarea
+                      class="form-control resnone"
+                      type="text"
+                      [disabled]="true"
+                      rows="4"
+                      ngModel="{{'Priére de confirmer le rendez-vous le '+(this.sharedService.formatDate(dd.value,true))+' .                                                                      '+(this.entrepriseInfo[0]&&this.entrepriseInfo[0].nom_societe) +' situé à '+(this.entrepriseInfo[0]&&this.entrepriseInfo[0].localisation)+' .                                                                             Bien cordialement .'}}"
+
+                    ></textarea>
+                  </div>
+
+                  <div class="modal-footer">
+                    <input
+                      value="Confirmer"
+                      type="button"
+                      class="btn btn-outline-primary"
+                      [disabled]="this.disabled||dd.invalid||body.value==''||(!this.tabSelected)"
+                      (click)="invite(dd.value)"
+                    />
+                    <button
+                      type="button"
+                      class="btn btn-outline-dark"
+                      (click)="activeModal.close('Close click')"
+                    >
+                      Annuler
+                    </button>
+                  </div>
+
+                </div>
+
+              <!-- end of table col-lg-6 -->
+            </div>
+            <!-- end of row -->
+          </div>
+          <!-- end of general info -->
+        </div>
+        <!-- end of col-lg-12 -->
+      </div>
+      <!-- end of row -->
+    </div>
+  </div>
+</div>
+
+
+

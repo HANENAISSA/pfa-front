@@ -1,0 +1,255 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ title }}</h4>
+
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body " *ngIf="this.title==='LISTE DES OFFRES AFFECTEES'">
+  <div class="view-info">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="general-info">
+          <div class="row">
+            <div class="col-lg-12 col-xl-12">
+              <div class="table-responsive">
+                <table class="table m-0">
+                  <thead>
+                    
+                    <tr style="text-align: center">
+                      <th scope="col">Titre</th>
+                      <th scope="col">Type</th>
+                      <th scope="col">Date début</th>
+                      <th scope="col">Date contact</th>
+                    </tr>
+                  </thead>
+                  <tbody 
+                  *ngFor="
+                    let offre of this.listOffres
+                     ;
+                    let i = index
+                  ">
+                    <tr style="text-align: center">
+                      <!-- <th scope="row">Titre</th> -->
+                        <th>{{offre.titre}}</th>
+                    <!-- </tr> -->
+                    <!-- <tr> -->
+                      <!-- <th scope="row">Type</th> -->
+                      <td>{{offre.type}}</td>
+                    <!-- </tr> -->
+                    <!-- <tr> -->
+                      <!-- <th scope="row">Date début</th> -->
+                      <td>{{this.sharedService.formatDate(offre.date_debut)}}</td>
+                    <!-- </tr> -->
+
+                    <!-- <tr> -->
+                      <!-- <th scope="row">Date contact</th> -->
+                      <td>{{this.sharedService.formatDate(offre.date_demande,true)}}</td>
+                    </tr>
+
+                                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- end of table col-lg-6 -->
+          </div>
+          <!-- end of row -->
+        </div>
+        <!-- end of general info -->
+      </div>
+      <!-- end of col-lg-12 -->
+    </div>
+    <!-- end of row -->
+  </div>
+  <div class="modal-footer">
+    
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="activeModal.close('Close click')"
+    >
+      Fermer
+    </button>
+  </div>
+</div>
+
+
+<div class="modal-body" *ngIf="this.title==='DETAILS OFFRE'">
+  <div class="view-info">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="general-info">
+          <div class="row">
+            <div class="col-lg-12 col-xl-12">
+              <div class="table-responsive">
+                <table class="table m-0">
+                  <tbody>
+                    <tr>
+                      <th scope="row">Titre</th>
+                      <td>
+                        <h5>{{ this.details.titre }}</h5>
+                      </td>
+                    </tr>
+                    <ng-container *ngIf="this.role === 'StudentPostuler'">
+
+                      <tr>
+                        <th scope="row">Société</th>
+                        <td>{{ this.details.nom_societe }} située à {{ this.details.localisation }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Domaine entreprise</th>
+                        <td>{{ this.details.libelle_domaine }}</td>
+                      </tr>
+                      <!-- <tr>
+                        <th scope="row">Localisation</th>
+                        <td>{{ this.details.localisation }}</td>
+                      </tr> -->
+                      <tr>
+                        <th scope="row">Site web</th>
+                        <td>
+                          <a href="{{ this.details.site_web }}" target="_blank">
+                            {{ this.details.site_web }}
+                          </a>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <th scope="row">Type offre</th>
+                        <td>{{ this.details.type }}, {{ this.details.duree + " mois" }}</td>
+                      </tr>
+                      <!-- <tr>
+                        <th scope="row">Durée</th>
+                        <td>{{ this.details.duree + " mois" }}</td>
+                      </tr> -->
+                    </ng-container>
+                    <!-- <tr>
+                      <th scope="row">Date début offre</th>
+                      <td>
+                        {{
+                          this.sharedService.formatDate(this.details.date_debut)
+                        }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Date fin offre</th>
+                      <td>
+                        {{
+                          this.sharedService.formatDate(this.details.date_fin)
+                        }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Etat de l'offre</th>
+                      <td *ngIf="this.details.id_etat_offre_stage === 2">Fermé</td>
+                      <td *ngIf="this.details.id_etat_offre_stage === 1">Ouvert</td>
+                    </tr>
+                  -->
+                    <tr *ngIf="this.details.cahier_charge">
+                      <th scope="row">Cahier de charge</th>
+                      <td>
+                        <a
+                          href="{{ this.details.cahier_charge }}"
+                          target="_blank"
+                        >
+                          Ouvrir
+                        </a>
+                      </td>
+                    </tr>
+
+                    <tr *ngIf="this.details.description">
+                      <th scope="row">Description</th>
+                      <td>{{ this.details.description }}</td>
+                    </tr>
+                    <!-- <ng-container  *ngIf="this.role!='StudentPostuler'"> -->
+                    <ng-container *ngIf="this.role === 'StudentPostuler'">
+                    <tr>
+                      <th scope="row">Infos supplementaires</th>
+                      <td>{{ this.details.nbr_vue }} vues, {{ this.details.nbr_postulation }} postulations</td>
+                    </tr>
+                    <!-- <tr>
+                      <th scope="row">Nombre de postulations</th>
+                      <td>{{ this.details.nbr_postulation }}</td>
+                    </tr> -->
+                    </ng-container>
+                    <!-- <tr>
+                      <th scope="row">Etat de la demande</th>
+                      <td>{{  }}</td>
+
+                    </tr> -->
+                    <!-- </ng-container> -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- end of table col-lg-6 -->
+          </div>
+          <!-- end of row -->
+        </div>
+        <!-- end of general info -->
+      </div>
+      <!-- end of col-lg-12 -->
+    </div>
+    <!-- end of row -->
+  </div>
+  <div class="modal-footer">
+    <button *ngIf="this.role === 'StudentPostuler'" type="button" [disabled]="this.disabled" class="btn btn-outline-primary"  (click)="postulerOffre()">Postuler</button>
+    
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="activeModal.close('Close click')"
+    >
+      Fermer
+    </button>
+  </div>
+</div>
+
+<div
+  class="modal-body"
+  *ngIf="this.title=='SUPPRESSION OFFRE'"
+>
+  <h5>Voulez-vous supprimer cette offre ?</h5>
+  <div class="view-info">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="general-info">
+          <div class="row">
+            <div class="col-lg-12 col-xl-12">
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-outline-primary"
+                  (click)="this.deleteOffre()"
+                >
+                  Confirmer
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn-outline-dark"
+                  (click)="activeModal.close('Close click')"
+                >
+                  Fermer
+                </button>
+              </div>
+
+              <!-- end of table col-lg-6 -->
+            </div>
+            <!-- end of row -->
+          </div>
+          <!-- end of general info -->
+        </div>
+        <!-- end of col-lg-12 -->
+      </div>
+      <!-- end of row -->
+    </div>
+  </div>
+</div>

@@ -138,17 +138,6 @@ export class ListOffresStageComponent implements OnInit {
     this.getAllOffreStages(etat);
   }
 
-
-
-  // changeYear(year:string){
-  //   this.listStage = [null];
-  //   this.year=year;
-  //   console.log(year);
-
-  //   this.getAllOffreStages(year,this.etat);
-
-  // }
-
   handlePageSizeChange(event: any): void {
     this.pageSize = event.target.value;
     this.page = 1;

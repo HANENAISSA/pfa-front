@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { PagesRoutingModule } from './pages-routing.module';
 import { AboutComponent } from './about/about.component';
-import { AuthComponent } from './auth/auth.component';
 import { ContactComponent } from './contact/contact.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import { TeamComponent } from '../layout/team/team.component';
@@ -17,13 +16,16 @@ import { CategoriesComponent } from '../layout/categories/categories.component';
 import { NavbarComponent } from '../layout/navbar/navbar.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { LoginEntrepriseComponent } from './auth/login-entreprise/login-entreprise.component';
+import { LoginEtudiantComponent } from './auth/login-etudiant/login-etudiant.component';
+import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { FormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
     AboutComponent,
-    AuthComponent,
     ContactComponent,
     AccueilComponent,
     NavbarComponent,
@@ -35,11 +37,13 @@ import { NotfoundComponent } from './notfound/notfound.component';
     ServicessComponent,
     SpinnerComponent,
     TeamComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    LoginEntrepriseComponent,
+    LoginEtudiantComponent,
+    SignUpComponent
   ],
   exports:[
     AboutComponent,
-    AuthComponent,
     ContactComponent,
     AccueilComponent,
     NavbarComponent,
@@ -50,12 +54,16 @@ import { NotfoundComponent } from './notfound/notfound.component';
     QuotesComponent,
     ServicessComponent,
     SpinnerComponent,
-    TeamComponent
+    TeamComponent,
+    LoginEntrepriseComponent,
+    LoginEtudiantComponent,
+    SignUpComponent
   ],
   imports: [
     CommonModule,
     CarouselModule,
     PagesRoutingModule,
+    FormsModule
   ],
   schemas: [NO_ERRORS_SCHEMA],
 

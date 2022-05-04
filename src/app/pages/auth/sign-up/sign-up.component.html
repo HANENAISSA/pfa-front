@@ -1,0 +1,276 @@
+<app-navbar></app-navbar>
+<!-- Section: Design Block -->
+<section class="text-center">
+  <!-- Background image -->
+  <div
+    class="p-5 bg-image"
+    style="
+      background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
+      height: 125px;
+    "
+  ></div>
+  <!-- Background image -->
+
+  <div
+    class="card mx-4 mx-md-5 shadow-5-strong"
+    style="
+      margin-top: -100px;
+      background: hsla(0, 0%, 100%, 0.8);
+      backdrop-filter: blur(30px);
+    "
+  >
+    <div class="card-body py-5 px-md-5">
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-8">
+          <h2 class="fw-bold mb-5">S'inscrire maintenant</h2>
+          <form name="form" (ngSubmit)="signup(fadd)" #fadd="ngForm" novalidate>
+            <!-- 2 column grid layout with text inputs for the first and last names -->
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <input
+                    type="text"
+                    ngModel
+                    required
+                    #nom="ngModel"
+                    placeholder="Nom"
+                    name="nom"
+                    class="form-control"
+                  />
+                  <label class="form-label mt-2" for="form3Example1">Nom</label>
+                </div>
+                <div
+                  *ngIf="nom.invalid && nom.touched"
+                  class="alert alert-danger p-2"
+                  role="alert"
+                >
+                  Saisir le nom
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <input
+                    type="text"
+                    ngModel
+                    required
+                    #prenom="ngModel"
+                    placeholder="Prénom"
+                    name="prenom"
+                    class="form-control"
+                  />
+                  <label class="form-label mt-2" for="form3Example2"
+                    >Prénom</label
+                  >
+                </div>
+                <div
+                  *ngIf="prenom.invalid && prenom.touched"
+                  class="alert alert-danger p-2"
+                  role="alert"
+                >
+                  Saisir le prénom
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <input
+                    class="form-control"
+                    type="date"
+                    onkeydown="return false"
+                    ngModel
+                    required
+                    #dns="ngModel"
+                    name="dns"
+                    max="{{ this.actualDate | date: 'yyyy-MM-dd' }}"
+                  />
+                  <label class="form-label mt-2" for="dns"
+                    >Date de naissance</label
+                  >
+                </div>
+                <div
+                  *ngIf="dns.invalid && dns.touched"
+                  class="alert alert-danger p-2"
+                  role="alert"
+                >
+                  Saisir la date de naissance
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <select
+                    ngModel="{{ '1' }}"
+                    #role="ngModel"
+                    name="role"
+                    class="form-control"
+                    (change)="getRole($event)"
+                    required
+                  >
+                    <option value="1">Etudiant</option>
+                    <option value="2">Responsable entreprise</option>
+                  </select>
+                  <label class="form-label mt-2" for="role">Acteur</label>
+                </div>
+              </div>
+            </div>
+            <!-- Email input -->
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="form-outline mb-4">
+                  <input
+                    type="email"
+                    name="email"
+                    ngModel
+                    #email="ngModel"
+                    placeholder="Adresse email"
+                    class="form-control"
+                    required
+                  />
+                  <label class="form-label mt-2" for="email"
+                    >Adresse email</label
+                  >
+                </div>
+                  <div
+                    *ngIf="email.invalid && email.touched"
+                    class="alert alert-danger p-2"
+                    role="alert"
+                  >
+                    Saisir l`email
+                  </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="form-outline mb-4">
+                  <input
+                    type="password"
+                    name="pass"
+                    ngModel
+                    #pass="ngModel"
+                    name="password"
+                    placeholder="Mot de passe"
+                    class="form-control"
+                    required
+                  />
+                  <label class="form-label mt-2" for="password"
+                    >Mot de passe</label
+                  >
+                </div>
+                <div
+                  *ngIf="pass.invalid && pass.touched"
+                  class="alert alert-danger p-2"
+                  role="alert"
+                >
+                  Saisir le mot de passe
+                </div>
+              </div>
+            </div>
+
+            <!-- Checkbox -->
+            <ng-container *ngIf="role.value == '1'">
+              <div class="form-check d-flex justify-content-center mb-4">
+                <input
+                  name="etranger"
+                  ngModel
+                  #etranger="ngModel"
+                  class="form-check-input me-2 ml-5 offset-4"
+                  type="checkbox"
+                />
+                <label class="form-check-label mr-5" for="etranger">
+                  Etranger ?
+                </label>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input
+                      type="text"
+                      ngModel
+                      #cinpassport="ngModel"
+                      required
+                      name="cinpassport"
+                      [placeholder]="
+                        etranger && etranger.value == true
+                          ? 'Numéro de passport'
+                          : 'Carte d`identité'
+                      "
+                      class="form-control"
+                    />
+                    <label class="form-label mt-2" for="cinpassport">{{
+                      etranger && etranger.value == true
+                        ? "Numéro de passport"
+                        : "Carte d`identité"
+                    }}</label>
+                  </div>
+                  <div
+                    *ngIf="cinpassport.invalid && cinpassport.touched"
+                    class="alert alert-danger p-2"
+                    role="alert"
+                  >
+                    Saisir
+                    {{
+                      etranger && etranger.value == true
+                        ? "le Numéro de passport"
+                        : "la Carte d`identité"
+                    }}
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <select
+                      ngModel="{{ '-1' }}"
+                      #departement="ngModel"
+                      name="departement"
+                      class="form-control"
+                      (change)="getDepartement($event)"
+                      required
+                    >
+                      <option disabled value="-1">
+                        Séléctionner un département
+                      </option>
+
+                      <option value="3">Technologie de l'informatique</option>
+                      <option value="4">Agro alimentaire</option>
+                      <option value="5">Mécanique</option>
+                      <option value="6">Electrique</option>
+                      <option value="7">Génie civil</option>
+                    </select>
+                    <label class="form-label mt-2" for="departement">
+                      Département
+                    </label>
+                  </div>
+                  <div
+                    *ngIf="departement.value == '-1' && departement.touched"
+                    class="alert alert-danger p-2"
+                    role="alert"
+                  >
+                    Séléctionner le département
+                  </div>
+                </div>
+              </div>
+              <button
+                type="submit"
+                [disabled]="
+                  fadd.invalid ||
+                  (departement &&
+                    departement.value == '-1' &&
+                    role && role.value == '1')
+                "
+                class="btn btn-primary btn-block mb-4"
+              >
+                S'inscrire
+              </button>
+            </ng-container>
+            <button
+              *ngIf="role.value == '2'"
+              type="submit"
+              [disabled]="fadd.invalid"
+              class="btn btn-primary btn-block mb-4"
+            >
+              S'inscrire
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Section: Design Block -->

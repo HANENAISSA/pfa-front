@@ -14,20 +14,6 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4">
-        <div class="page-header-breadcrumb">
-          <ul class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a [routerLink]="['/']">
-                <i class="icofont icofont-home"></i>
-              </a>
-            </li>
-            <li class="breadcrumb-item">
-              <a>Nouvelle offre</a>
-            </li>
-          </ul>
-        </div>
-      </div>
     </div>
   </div>
   <div class="row">
@@ -93,6 +79,13 @@
 
                 </select>
               </div>
+              <div
+                    *ngIf="type.value==='-1' && type.touched"
+                    class="alert alert-danger p-2"
+                    role="alert"
+                  >
+                    Séléctionner le type de stage
+                  </div>
               <div class="input-group">
                 <span class="input-group-prepend"
                   ><label class="input-group-text"
@@ -101,7 +94,7 @@
                 <input
                   class="form-control"
                   type="date"
-                  onkeydown="false"
+                  onkeydown="return false"
                   name="dd"
                   ngModel
                   required
@@ -144,6 +137,14 @@
                   <!-- </ng-container> -->
                 </select>
               </div>
+              <div
+                    *ngIf="ddure.value==='-1' && ddure.touched"
+                    class="alert alert-danger p-2"
+                    role="alert"
+                  >
+                    Séléctionner la durée de stage
+                  </div>
+
               <div class="input-group">
                 <span class="input-group-prepend"
                   ><label class="input-group-text"
@@ -177,8 +178,16 @@
                   value="Confirmer"
                   type="submit"
                   class="btn btn-outline-primary"
-                  [disabled]="fadd.invalid||titre.invalid||type.invalid||dd.invalid||(type.value=='op'&&ddure.value=='-1')||disabled"
+                  [disabled]="fadd.invalid||titre.invalid||type.invalid||
+                  dd.invalid||(type.value=='op'&&ddure.value=='-1')"
                 />
+                <a [routerLink]="['/entreprise/offresStages']">
+                  <input
+                  value="Annuler"
+                  type="button"
+                  class="btn btn-outline-secondary"
+                />
+                </a>
               </div>
             </div>
           </form>

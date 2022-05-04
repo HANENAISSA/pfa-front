@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { DemandeStageEntreprise } from "../../../models/demande-stage-entreprise";
+import { FormulaireCvServiceService } from "../../../services/formulaire-cv-service.service";
+import  swal from "sweetalert";
 import { OffreStage } from "../../../models/offre-stage.model";
 import { OffreStageServiceService } from "../../../services/offre-stage-service.service";
 import { SharedServiceService } from "../../../services/shared-service.service";
@@ -13,49 +16,47 @@ import { PopupOffreComponent } from "../../popups/popup-offre/popup-offre.compon
 export class ListOffresEtudiantComponent implements OnInit {
   listStage: OffreStage[] = [null];
   searchText;
-  year: string;
-  listYears = [];
 
   page = 1;
   pageSize = 5;
-  pageSizes = [5,10,15];
-  disabled: boolean=false;
+  pageSizes = [5, 10, 15];
+  disabled: boolean = false;
 
   constructor(
     private offreStageServ: OffreStageServiceService,
     public sharedService: SharedServiceService,
     private modalService: NgbModal,
+    private formCvServ:FormulaireCvServiceService
   ) {
-    this.year = new Date().getFullYear().toString();
+    // this.year = new Date().getFullYear().toString();
   }
 
   ngOnInit() {
-    this.getAllOffreYears();
+    // this.getAllOffreYears();
 
-    this.getAllOffreStages(this.year);
+    this.getAllOffreStages();
   }
 
-  async getAllOffreYears(){
-    try {
-      const {err,rows}=await this.sharedService.getYears(0)as any||[];
-      if(!err){
-        this.listYears=rows;
-      }
+  // async getAllOffreYears(){
+  //   try {
+  //     const {err,rows}=await this.sharedService.getYears(0)as any||[];
+  //     if(!err){
+  //       this.listYears=rows;
+  //     }
 
-    } catch (error) {
-      this.listYears=[];
-      return error;
+  //   } catch (error) {
+  //     this.listYears=[];
+  //     return error;
 
-    }
+  //   }
 
-  }
-  async getAllOffreStages(year: string) {
+  // }
+  async getAllOffreStages() {
     try {
       const id_etudiant = "1";
       const { err, rows } =
         ((await this.offreStageServ.getAllOffreNonPostuleStages(
-          id_etudiant,
-          year
+          id_etudiant
         )) as any) || [];
       if (!err) {
         this.listStage = rows;
@@ -98,18 +99,12 @@ export class ListOffresEtudiantComponent implements OnInit {
     }
   }
 
-  showFormPostule(id_offre_stage: string) {
-    const modalRef = this.modalService.open(PopupOffreComponent);
-    modalRef.componentInstance.title = `FORMULAIRE POSTULATION`;
-    modalRef.componentInstance.id = Number(id_offre_stage);
-    modalRef.componentInstance.show = true;
-  }
-
-  changeYear(year: string) {
-    this.listStage = [null];
-    this.year = year;
-    this.getAllOffreStages(year);
-  }
+  // showFormPostule(id_offre_stage: string) {
+  //   const modalRef = this.modalService.open(PopupOffreComponent);
+  //   modalRef.componentInstance.title = `FORMULAIRE POSTULATION`;
+  //   modalRef.componentInstance.id = Number(id_offre_stage);
+  //   modalRef.componentInstance.show = true;
+  // }
 
 
   handlePageSizeChange(event: any): void {
@@ -117,16 +112,20 @@ export class ListOffresEtudiantComponent implements OnInit {
     this.page = 1;
   }
 
-   postulerOffre(idOffre : string) {
-
-    // const idEtudiant = "1";
-    // const modalRef = this.modalService.open(PopupVideoComponent);
-    // modalRef.componentInstance.title = `PRESENTATION VIDEO (OPTIONNEL)`;
-    // modalRef.componentInstance.data = [idEtudiant,idOffre];
-    // modalRef.componentInstance.show = true;
-
-
+  async postulerOffre(idOffre : string) {
+    const idEtudiant = "1";
+    try {
+      (await this.offreStageServ.updateOffrePostulations(idOffre)) as any;
+      const demande = new DemandeStageEntreprise(idEtudiant, idOffre);
+      const { err, rows } =
+        (await this.formCvServ.addDemandeStageEntreprise(demande)) as any;
+      if (!err) {
+        swal("Succès!", "Postulation effectuée avec succès", "success");
+        this.sharedService.reloadComponent()
+      }
+    } catch (error) {
+      swal("Échec!", "Postulation non effectuée", "error");
+      return error;
+    }
   }
-
-
 }

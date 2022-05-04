@@ -15,20 +15,6 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4">
-        <div class="page-header-breadcrumb">
-          <ul class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a [routerLink]="'/'">
-                <i class="icofont icofont-home" style="color: #294a70"></i>
-              </a>
-            </li>
-            <li class="breadcrumb-item">
-              <a>Mes demandes de stage</a>
-            </li>
-          </ul>
-        </div>
-      </div>
     </div>
   </div>
   <!-- Page-header end -->
@@ -41,13 +27,9 @@
               <div class="m-t-15">
                 <div class="card">
                   <div class="col-sm-12">
-                    <div class="card-header">
-                      <h5 class="card-header-text">Liste des demandes</h5>
-                    </div>
-
                     <div class="container">
                       <div class="row">
-                        <div class="col-md-6 col-lg-5 offset-lg-1">
+                        <div class="col-md-12 col-lg-4 mb-5 mt-5">
                           <div class="pcoded-search">
                             <div class="pcoded-search-box">
                               <input
@@ -64,20 +46,7 @@
                           </div>
                         </div>
 
-                        <div class="col-md-6 col-lg-3 offset-lg-2">
-                          <div class="input-group">
-                            <select
-                              ngModel="{{ this.year }}"
-                              name="year"
-                              class="form-control"
-                              (change)="this.changeYear($event.target.value)"
-                            >
-                            <ng-container *ngFor="let item of this.listYears">
-                              <option [value]="item.year">{{ item.year }}</option>
-                            </ng-container>
-                            </select>
-                          </div>
-                        </div>
+
                       </div>
                     </div>
 
@@ -85,30 +54,14 @@
                       <div style="margin: 5px; ">
                         <table class="table table-hover" style="width: 100%;">
                           <thead>
-                            <ng-container matColumnDef="actions">
-                              <mat-header-cell *matHeaderCellDef>
-                                Actions
-                              </mat-header-cell>
-                              <mat-cell *matCellDef="let row">
-                                <button mat-button>Edit</button>
-                              </mat-cell>
-                            </ng-container>
                             <tr style="text-align: center">
-                              <th scope="col" [appSort]="listdemande" data-order="desc" data-name="nom_societe">Entreprise<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
+                              <th scope="col" [appSort]="listdemande" data-order="desc" data-name="nom_entreprise">Entreprise<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col" [appSort]="listdemande" data-order="desc" data-name="libelle_domaine" >Domaine entreprise<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col" [appSort]="listdemande" data-order="desc" data-name="titre">Titre<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col" [appSort]="listdemande" data-order="desc" data-name="type" >Type<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col" [appSort]="listdemande" data-order="desc" data-name="id_etat_offre_stage" >Etat offre<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col" [appSort]="listdemande" data-order="desc" data-name="date_demande" data-type="date" >Date demande<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col"></th>
-
-                              <!-- <th scope="col">Entreprise</th>
-                              <th scope="col">Domaine entreprise</th>
-                              <th scope="col">Titre</th>
-                              <th scope="col">Type</th>
-                              <th scope="col">Etat offre</th>
-                              <th scope="col">Date début</th>
-                              <th scope="col"></th> -->
                             </tr>
                           </thead>
                           <ng-container
@@ -124,7 +77,7 @@
                               "
                             >
                               <tr style="text-align: center">
-                                <th scope="row">{{ demande.nom_societe }}</th>
+                                <th scope="row">{{ demande.nom_entreprise }}</th>
                                 <td scope="row">{{ demande.libelle_domaine }}</td>
                                 <td scope="row">{{ demande.titre }}</td>
                                 <td scope="row">{{ demande.type }}</td>
@@ -157,9 +110,8 @@
                           <ng-container *ngIf="this.listdemande.length === 0">
                             <tbody>
                               <tr style="text-align: center">
-                                <td colspan="5">
-                                  AUCUNE DEMANDE NON DÉCIDÉES POUR L'ANNÉE
-                                  {{ this.year }} !
+                                <td colspan="7">
+                                  AUCUNE DEMANDE NON DÉCIDÉES !
                                 </td>
                               </tr>
                             </tbody>
@@ -167,7 +119,7 @@
                           <ng-container *ngIf="this.listdemande[0] === null">
                             <tbody>
                               <tr style="text-align: center">
-                                <td colspan="5">Chargement ...</td>
+                                <td colspan="7">Chargement ...</td>
                               </tr>
                             </tbody>
                           </ng-container>
@@ -182,8 +134,6 @@
                           </ngb-pagination>
                           <!-- Items Par Page  -->
                           <div>
-                            Objets par page
-:
                             <select
                               class="custom-select"
                               style="width: auto"
@@ -214,13 +164,11 @@
                 <!-- info card start -->
                 <div class="card">
                   <div class="col-sm-12">
-                    <div class="card-header">
-                      <h5 class="card-header-text">Liste des demandes</h5>
-                    </div>
+
 
                     <div class="container">
                       <div class="row">
-                        <div class="col-md-6 col-lg-5 offset-lg-1">
+                        <div class="col-md-12 col-lg-4 mb-5 mt-5">
                           <div class="pcoded-search">
                             <div class="pcoded-search-box">
                               <input
@@ -237,37 +185,15 @@
                           </div>
                         </div>
 
-                        <div class="col-md-6 col-lg-3 offset-lg-2">
-                          <div class="input-group">
-                            <select
-                              ngModel="{{ this.year }}"
-                              name="year"
-                              class="form-control"
-                              (change)="this.changeYear($event.target.value)"
-                            >
-                            <ng-container *ngFor="let item of this.listYears">
-                              <option [value]="item.year">{{ item.year }}</option>
-                            </ng-container>
-                            </select>
-                          </div>
-                        </div>
                       </div>
                     </div>
 
-                    <div class="table-responsive">
-                      <div style="margin: 60px; ">
-                        <table class="table table-hover">
+                    <div class="table-responsive" >
+                      <div style="margin: 5px; ">
+                        <table class="table table-hover" style="width: 100%;">
                           <thead>
-                            <ng-container matColumnDef="actions">
-                              <mat-header-cell *matHeaderCellDef>
-                                Actions
-                              </mat-header-cell>
-                              <mat-cell *matCellDef="let row">
-                                <button mat-button>Edit</button>
-                              </mat-cell>
-                            </ng-container>
                             <tr style="text-align: center">
-                              <th scope="col" [appSort]="listdemande" data-order="desc" data-name="nom_societe">Entreprise<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
+                              <th scope="col" [appSort]="listdemande" data-order="desc" data-name="nom_entreprise">Entreprise<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col" [appSort]="listdemande" data-order="desc" data-name="libelle_domaine" >Domaine entreprise<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col" [appSort]="listdemande" data-order="desc" data-name="titre">Titre<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col" [appSort]="listdemande" data-order="desc" data-name="type" >Type<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
@@ -294,7 +220,7 @@
                               "
                             >
                               <tr style="text-align: center">
-                                <th scope="row">{{ demande.nom_societe }}</th>
+                                <th scope="row">{{ demande.nom_entreprise }}</th>
                                 <td scope="row">{{ demande.libelle_domaine }}</td>
                                 <td scope="row">{{ demande.titre }}</td>
                                 <td scope="row">{{ demande.type }}</td>
@@ -327,9 +253,8 @@
                           <ng-container *ngIf="this.listdemande.length === 0">
                             <tbody>
                               <tr style="text-align: center">
-                                <td colspan="5">
-                                  AUCUNE DEMANDE ACCEPTÉE POUR L'ANNÉE
-                                  {{ this.year }} !
+                                <td colspan="7">
+                                  AUCUNE DEMANDE ACCEPTÉE !
                                 </td>
                               </tr>
                             </tbody>
@@ -337,7 +262,7 @@
                           <ng-container *ngIf="this.listdemande[0] === null">
                             <tbody>
                               <tr style="text-align: center">
-                                <td colspan="5">Chargement ...</td>
+                                <td colspan="7">Chargement ...</td>
                               </tr>
                             </tbody>
                           </ng-container>
@@ -352,8 +277,6 @@
                           </ngb-pagination>
                           <!-- Items Par Page  -->
                           <div>
-                            Objets par page
-:
                             <select
                               class="custom-select"
                               style="width: auto"
@@ -383,13 +306,10 @@
                 <!-- info card start -->
                 <div class="card">
                   <div class="col-sm-12">
-                    <div class="card-header">
-                      <h5 class="card-header-text">Liste des demandes</h5>
-                    </div>
 
                     <div class="container">
                       <div class="row">
-                        <div class="col-md-6 col-lg-5 offset-lg-1">
+                        <div class="col-md-12 col-lg-4 mb-5 mt-5">
                           <div class="pcoded-search">
                             <div class="pcoded-search-box">
                               <input
@@ -406,38 +326,15 @@
                           </div>
                         </div>
 
-                        <div class="col-md-6 col-lg-3 offset-lg-2">
-                          <div class="input-group">
-                            <select
-                              ngModel="{{ this.year }}"
-                              name="year"
-                              class="form-control"
-                              (change)="this.changeYear($event.target.value)"
-                            >
-
-                              <ng-container *ngFor="let item of this.listYears">
-                                <option [value]="item.year">{{ item.year }}</option>
-                              </ng-container>
-                            </select>
-                          </div>
-                        </div>
                       </div>
                     </div>
 
-                    <div class="table-responsive">
-                      <div style="margin: 60px; ">
-                        <table class="table table-hover">
+                    <div class="table-responsive" >
+                      <div style="margin: 5px; ">
+                        <table class="table table-hover" style="width: 100%;">
                           <thead>
-                            <ng-container matColumnDef="actions">
-                              <mat-header-cell *matHeaderCellDef>
-                                Actions
-                              </mat-header-cell>
-                              <mat-cell *matCellDef="let row">
-                                <button mat-button>Edit</button>
-                              </mat-cell>
-                            </ng-container>
                             <tr style="text-align: center">
-                              <th scope="col" [appSort]="listdemande" data-order="desc" data-name="nom_societe">Entreprise<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
+                              <th scope="col" [appSort]="listdemande" data-order="desc" data-name="nom_entreprise">Entreprise<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col" [appSort]="listdemande" data-order="desc" data-name="libelle_domaine" >Domaine entreprise<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col" [appSort]="listdemande" data-order="desc" data-name="titre">Titre<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col" [appSort]="listdemande" data-order="desc" data-name="type" >Type<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
@@ -461,7 +358,7 @@
                             >
                               <tr style="text-align: center">
 
-                                <th scope="row">{{ demande.nom_societe }}</th>
+                                <th scope="row">{{ demande.nom_entreprise }}</th>
                                 <td scope="row">{{ demande.libelle_domaine }}</td>
                                 <td scope="row">{{ demande.titre }}</td>
                                 <td scope="row">{{ demande.type }}</td>
@@ -477,8 +374,6 @@
                                     )
                                   }}
                                 </td>
-
-
                                 <td>
                                   <button
                                     class="btn hor-grd ml-2"
@@ -495,8 +390,8 @@
                           <ng-container *ngIf="this.listdemande.length === 0">
                             <tbody>
                               <tr style="text-align: center">
-                                <td colspan="5">
-                                  AUCUNE DEMANDE MISE EN ATTENTE POUR L'ANNÉE {{ this.year }} !
+                                <td colspan="7">
+                                  AUCUNE DEMANDE MISE EN ATTENTE !
                                 </td>
                               </tr>
                             </tbody>
@@ -504,7 +399,7 @@
                           <ng-container *ngIf="this.listdemande[0] === null">
                             <tbody>
                               <tr style="text-align: center">
-                                <td colspan="5">Chargement ...</td>
+                                <td colspan="7">Chargement ...</td>
                               </tr>
                             </tbody>
                           </ng-container>
@@ -519,8 +414,6 @@
                           </ngb-pagination>
                           <!-- Items Par Page  -->
                           <div>
-                            Objets par page
-:
                             <select
                               class="custom-select"
                               style="width: auto"

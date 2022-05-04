@@ -20,7 +20,7 @@
               <div class="table-responsive">
                 <table class="table m-0">
                   <thead>
-                    
+
                     <tr style="text-align: center">
                       <th scope="col">Titre</th>
                       <th scope="col">Type</th>
@@ -28,7 +28,7 @@
                       <th scope="col">Date contact</th>
                     </tr>
                   </thead>
-                  <tbody 
+                  <tbody
                   *ngFor="
                     let offre of this.listOffres
                      ;
@@ -52,7 +52,7 @@
                       <td>{{this.sharedService.formatDate(offre.date_demande,true)}}</td>
                     </tr>
 
-                                    
+
                   </tbody>
                 </table>
               </div>
@@ -69,7 +69,7 @@
     <!-- end of row -->
   </div>
   <div class="modal-footer">
-    
+
     <button
       type="button"
       class="btn btn-outline-dark"
@@ -101,7 +101,7 @@
 
                       <tr>
                         <th scope="row">Société</th>
-                        <td>{{ this.details.nom_societe }} située à {{ this.details.localisation }}</td>
+                        <td>{{ this.details.nom_entreprise }} , {{ this.details.localisation }}</td>
                       </tr>
                       <tr>
                         <th scope="row">Domaine entreprise</th>
@@ -201,7 +201,7 @@
   </div>
   <div class="modal-footer">
     <button *ngIf="this.role === 'StudentPostuler'" type="button" [disabled]="this.disabled" class="btn btn-outline-primary"  (click)="postulerOffre()">Postuler</button>
-    
+
     <button
       type="button"
       class="btn btn-outline-dark"

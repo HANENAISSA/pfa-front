@@ -45,10 +45,10 @@ export class DemandeEtudiantService {
       });
   }
 
-  getListDemande(id_etudiant : string,etatDemande:string,year:string)
+  getListDemande(id_etudiant : string,etatDemande:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`http://localhost:5010/demandeEtudiantStageEntreprise/getAllDemandesEtudiant/${id_etudiant}/${etatDemande}/${year}`)
+      this.httpC.get(`http://localhost:5010/demandeEtudiantStageEntreprise/getAllDemandesEtudiant/${id_etudiant}/${etatDemande}`)
         .forEach(data =>
           {
             resolve(data)

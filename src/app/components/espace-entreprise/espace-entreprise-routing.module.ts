@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { NotfoundComponent } from '../../pages/notfound/notfound.component';
+import { ProfileComponent } from './profile/profile.component';
 import { DemandeCandidaturesComponent } from './demande-candidatures/demande-candidatures.component';
 import { EditOffreStageComponent } from './edit-offre-stage/edit-offre-stage.component';
 import { FilterEtudiantComponent } from './filter-etudiant/filter-etudiant.component';
@@ -22,11 +24,27 @@ const routes: Routes = [
     path: "nouvelle", component: NewOffreStageComponent
   },
   {
+    path: "profil/:id", component: ProfileComponent
+  },
+  {
     path: "modif", component: EditOffreStageComponent
     ,data:{'some data':"values"}
   },
   {
     path: "recherche", component: FilterEtudiantComponent
+  },
+  {
+    path: "introuvable", component: NotfoundComponent
+  },
+  {
+    path: "",
+    redirectTo: "/entreprise/offresStages",
+    pathMatch: "full",
+  },
+  {
+    path: "**",
+    redirectTo: "/entreprise/introuvable",
+    pathMatch: "full",
   },
 ];
 
@@ -34,6 +52,6 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class EspaceEntrepriseRoutingModule { 
+export class EspaceEntrepriseRoutingModule {
 
 }

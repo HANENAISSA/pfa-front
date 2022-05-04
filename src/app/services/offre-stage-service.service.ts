@@ -51,10 +51,10 @@ export class OffreStageServiceService {
 
 
 
-  getAllOffreStages(id_responsable:string,etat:string,year:string)
+  getAllOffreStages(id_responsable:string,etat:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`http://localhost:5010/offrestage/getAll/${id_responsable}/${etat}/${year}`)
+      this.httpC.get(`http://localhost:5010/offrestage/getAll/${id_responsable}/${etat}`)
         .forEach(data =>
           {
             resolve(data)
@@ -98,11 +98,11 @@ export class OffreStageServiceService {
     });
   }
 
-  getAllOffreNonPostuleStages(id:string,year:string)
+  getAllOffreNonPostuleStages(id_etudiant:string)
   {
     return new Promise((resolve, reject) => {
 
-      this.httpC.get(`http://localhost:5010/offrestage/getAllOffresEntreprisNotRegistred/${id}/${year}`)
+      this.httpC.get(`http://localhost:5010/offrestage/getAllOffresEntreprisNotRegistred/${id_etudiant}`)
         .forEach(data =>
           {
             resolve(data)

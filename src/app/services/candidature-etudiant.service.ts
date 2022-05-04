@@ -8,10 +8,10 @@ export class CandidatureEtudiantService {
 
   constructor(private httpC: HttpClient) { }
 
-  getListCandidature(id_responsable:string,etat:string,year:string)
+  getListCandidature(id_responsable:string,etat:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`http://localhost:5010/demandeEntreprise/getAllDemandesEntreprise/${id_responsable}/${etat}/${year}`)
+      this.httpC.get(`http://localhost:5010/demandeEntreprise/getAllDemandesEntreprise/${id_responsable}/${etat}`)
         .forEach(data =>
           {
             resolve(data)

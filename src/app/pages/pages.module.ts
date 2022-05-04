@@ -16,6 +16,7 @@ import { CoursesComponent } from '../layout/courses/courses.component';
 import { CategoriesComponent } from '../layout/categories/categories.component';
 import { NavbarComponent } from '../layout/navbar/navbar.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 
 
@@ -33,15 +34,14 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     QuotesComponent,
     ServicessComponent,
     SpinnerComponent,
-    TeamComponent
+    TeamComponent,
+    NotfoundComponent
   ],
   exports:[
     AboutComponent,
     AuthComponent,
     ContactComponent,
     AccueilComponent,
-
-
     NavbarComponent,
     CategoriesComponent,
     CoursesComponent,

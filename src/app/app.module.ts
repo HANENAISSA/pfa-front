@@ -11,13 +11,12 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 
 // Components
-import { ProfileComponent } from './components/profile/profile.component';
 import { AdminComponent } from './components/admin/admin.component';
 
 
 // Pages Imports
 
-// Module 
+// Module
 import { SharedModule} from './shared/shared.module';
 import { EspaceEntrepriseModule } from './components/espace-entreprise/espace-entreprise.module';
 import { EspaceEtudiantModule } from './components/espace-etudiant/espace-etudiant.module';
@@ -30,7 +29,6 @@ import { PagesModule } from './pages/pages.module';
   declarations: [
     AppComponent,
     AdminComponent,
-    ProfileComponent,
   ],
   imports: [
     CommonModule,

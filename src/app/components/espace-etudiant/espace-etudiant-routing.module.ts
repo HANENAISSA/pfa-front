@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { NotfoundComponent } from '../../pages/notfound/notfound.component';
 import { FormulaireCvComponent } from './formulaire-cv/formulaire-cv.component';
 import { ListDemandesEtudiantComponent } from './list-demandes-etudiant/list-demandes-etudiant.component';
 import { ListOffresEtudiantComponent } from './list-offres-etudiant/list-offres-etudiant.component';
@@ -13,7 +14,20 @@ const routes: Routes = [
     path: "demandesStages", component : ListDemandesEtudiantComponent,
   },
   {
-    path: "cv/:id", component : FormulaireCvComponent,
+    path: "profil/:id", component : FormulaireCvComponent,
+  },
+  {
+    path: "introuvable", component: NotfoundComponent
+  },
+  {
+    path: "",
+    redirectTo: "/etudiant/offresStages",
+    pathMatch: "full",
+  },
+  {
+    path: "**",
+    redirectTo: "/etudiant/introuvable",
+    pathMatch: "full",
   },
 ];
 

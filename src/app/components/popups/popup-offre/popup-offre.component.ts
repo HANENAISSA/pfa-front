@@ -1,8 +1,10 @@
 import { Component, OnInit,Input } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SharedServiceService } from '../../../services/shared-service.service';
 import { OffreStageServiceService } from '../../../services/offre-stage-service.service';
 import swal from "sweetalert";
+import { FormulaireCvServiceService } from '../../../services/formulaire-cv-service.service';
+import { DemandeStageEntreprise } from '../../../models/demande-stage-entreprise';
 
 @Component({
   selector: 'app-popup-offre',
@@ -23,9 +25,9 @@ export class PopupOffreComponent implements OnInit {
 
 
     constructor(private offreService:OffreStageServiceService,
-    public activeModal: NgbActiveModal,public sharedService:SharedServiceService,
-    private modalService: NgbModal,
-
+      private formCvServ:FormulaireCvServiceService,
+    public activeModal: NgbActiveModal,
+    public sharedService:SharedServiceService,
      ) {
     }
 
@@ -52,7 +54,6 @@ deleteOffre(){
       const {err,row,message}=this.offreService.deleteOffreStage(this.id_offre_stage.toString()) as any;
       if(!err){
         swal("Succès!", "Suppression effectuée avec succès", "success");
-
         this.activeModal.dismiss();
         this.sharedService.reloadComponent();
       }
@@ -65,18 +66,24 @@ deleteOffre(){
 
     }
 }
-
-
 async postulerOffre() {
-  // const idEtudiant = "1";
-
-  // this.activeModal.dismiss();
-  // const modalRef = this.modalService.open(PopupVideoComponent);
-  // modalRef.componentInstance.title = `PRESENTATION VIDEO (OPTIONNEL)`;
-  // modalRef.componentInstance.data = [idEtudiant,this.id_offre_stage];
-  // modalRef.componentInstance.show = true;
-
+  const idEtudiant = "1";
+  try {
+    (await this.offreService.updateOffrePostulations(this.id_offre_stage.toString())) as any;
+    const demande = new DemandeStageEntreprise(idEtudiant, this.id_offre_stage.toString());
+    const { err } =
+      (await this.formCvServ.addDemandeStageEntreprise(demande)) as any;
+    if (!err) {
+      swal("Succès!", "Postulation effectuée avec succès", "success");
+      this.sharedService.reloadComponent();
+    }
+  } catch (error) {
+    swal("Échec!", "Opération non effectuée", "error");
+    return error;
+  }
+  this.activeModal.dismiss();
 }
+
 
 
 }

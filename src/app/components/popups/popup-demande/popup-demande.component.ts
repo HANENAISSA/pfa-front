@@ -1,7 +1,6 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import swal from 'sweetalert';
-import { OffreStage } from '../../../models/offre-stage.model';
 import { CandidatureEtudiantService } from '../../../services/candidature-etudiant.service';
 import { ChercherProfilService } from '../../../services/chercher-profil.service';
 import { EntrepriseServiceService } from '../../../services/entreprise-service.service';
@@ -20,7 +19,6 @@ export class PopupDemandeComponent implements OnInit {
   @Input() invitation:boolean;
   // @Input() demande:any=null;
   @Input() accepted:boolean=false;
-  disabled:boolean=false;
   @Input() etat:string;
   @Input() etudiant=null;
   actualDate:string;
@@ -37,15 +35,17 @@ export class PopupDemandeComponent implements OnInit {
     public sharedService:SharedServiceService,
     private candidatureService:CandidatureEtudiantService,
     private entrepriseService:EntrepriseServiceService,
-    private profilService:ChercherProfilService,private offreStageServ:OffreStageServiceService) {
+    private profilService:ChercherProfilService,
+    private offreStageServ:OffreStageServiceService) {
      }
 
   ngOnInit() {
     this.actualDate = new Date().toISOString().slice(0, 16);
     this.loadEntrepriseInfo();
     this.getAllOffresOuvertes();
-
   }
+
+
   async loadEntrepriseInfo() {
     const id_responsbale="1"
     try {
@@ -54,56 +54,49 @@ export class PopupDemandeComponent implements OnInit {
           id_responsbale)) as any) || [];
       if (!err) {
         this.entrepriseInfo = rows;
-
       }
     } catch (error) {
       this.entrepriseInfo = [];
       return error;
     }
-
   }
 
 
   async onSubmit(fadd?){
 
-    this.disabled=true
     let etat="2";
     let text="";
-
     if(this.accepted){
-
        etat="1";
-       text=`<div style="text-align: justify;text-justify: inter-word;"><p style="color:black">Bonjour <strong>${this.details.nom} ${this.details.prenom}</strong>,</p> <p style="color:black">Dans le prolongement de nos échanges, nous avons le plaisir de vous confirmer notre accord initial pour votre demande de stage au sein de notre entreprise <strong style="color:#294a70">${this.details.nom_societe}</strong> située à <strong style="color:#294a70">${this.details.localisation}</strong>.</p><p style="color:black">Votre entretien se déroulera au <strong style="color:#294a70">${this.sharedService.formatDate(fadd.value.dd, true)}</strong>.</p><p style="color:black">Priére de confirmer le rendez-vous .</p></div>`;
+       text=`<div style="text-align: justify;text-justify: inter-word;"><p style="color:black">Bonjour <strong>${this.details.nom} ${this.details.prenom}</strong>,</p> <p style="color:black">Dans le prolongement de nos échanges, nous avons le plaisir de vous confirmer notre accord initial pour votre demande de stage au sein de notre entreprise <strong style="color:#294a70">${this.details.nom_entreprise}</strong> située à <strong style="color:#294a70">${this.details.localisation}</strong>.</p><p style="color:black">Votre entretien se déroulera au <strong style="color:#294a70">${this.sharedService.formatDate(fadd.value.dd, true)}</strong>.</p><p style="color:black">Priére de confirmer le rendez-vous .</p></div>`;
       }
       const payload={
         receivers:this.details.email,
         //  receivers:"barhoumsouidene@gmail.com, aissahanen08@gmail.com,youssefbenmiled40@gmail.com",//this.demande.email
-         subject:"DEMANDE DE STAGE",
+         subject:"INVITATION A UN ENTRETIEN DE STAGE",
          text:text,
          id_etat_demande_stage_entreprise:etat,
          id_demande:this.details.id_demande_stage_entreprise.toString()
        }
-
-
       try {
         const {err}=await this.candidatureService.sendMail(payload)as any||[];
         if(!err){
-          if(this.accepted){
-            swal("Succès!", "Confirmation effctuée avec succès", "success");
-            ;
+          switch (etat) {
+            case "1":
+              swal("Succès!", "Confirmation effectuée avec succès", "success");
+              break;
+            case "2":
+              swal("Succès!", "Mise en attente effectuée avec succès", "success");
+              break;
           }
-          this.activeModal.dismiss();
           this.sharedService.reloadComponent()
         }
 
       } catch (error) {
-        this.disabled=false;
-        this.activeModal.dismiss();
         swal("Echec!", "Opération non effectuée", "error");
         return error;
       }
-      
-
+      this.activeModal.dismiss();
     }
 
     replyDemande(accept:boolean) {
@@ -112,13 +105,10 @@ export class PopupDemandeComponent implements OnInit {
       modalRef.componentInstance.title = `ACCEPTATION CANDIDATURE`;
       modalRef.componentInstance.accepted = accept;
       modalRef.componentInstance.details = this.details;
-
     }
 
     async invite(date_stage:string){
       const id_responsbale=2;
-      this.disabled=true
-
       const text=`
       <div style="text-align: justify;text-justify: inter-word;">
       <p style="color:black">Bonjour Mme/Mr <strong>${this.etudiant.nom} ${this.etudiant.prenom}</strong>,</p>
@@ -147,11 +137,10 @@ export class PopupDemandeComponent implements OnInit {
           }
 
         } catch (error) {
-          this.disabled=false;
-          this.activeModal.dismiss();
           swal("Echec!", "Opération non effectuée", "error");
           return error;
         }
+        this.activeModal.dismiss();
     }
 
     async getAllOffresOuvertes() {//toutes les offres ouvertes
@@ -159,7 +148,7 @@ export class PopupDemandeComponent implements OnInit {
       try {
         const { err, rows } =
           ((await this.offreStageServ.getAllOffresOuvertes(
-            id_responsable_stage           
+            id_responsable_stage
           )) as any) || [];
         if (!err) {
           this.listOffres = rows;
@@ -170,7 +159,7 @@ export class PopupDemandeComponent implements OnInit {
       }
     }
 
-    
+
 
   }
 

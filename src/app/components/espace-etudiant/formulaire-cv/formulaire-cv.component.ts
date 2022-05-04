@@ -9,7 +9,6 @@ import { ExperienceService } from "../../../services/experience.service";
 import { CompetenceService } from "../../../services/competence.service";
 import { PopupExperienceComponent } from "../../popups/popup-experience/popup-experience.component";
 import { OffreStageServiceService } from "../../../services/offre-stage-service.service";
-import swal from "sweetalert";
 import { Competence } from "../../../models/competence";
 import { Experience } from "../../../models/experience";
 import { PopupCompetenceComponent } from "../../popups/popup-competence/popup-competence.component";
@@ -66,7 +65,7 @@ export class FormulaireCvComponent implements OnInit {
   }
 
   ngOnInit() {
-   
+
     this.getListCompetence("1");
     this.getListExperience("1");
   }
@@ -85,7 +84,7 @@ export class FormulaireCvComponent implements OnInit {
     this.editAbout = !this.editAbout;
   }
 
-  
+
 
   async getListExperience(id: string) {
     try {
@@ -113,16 +112,16 @@ export class FormulaireCvComponent implements OnInit {
   addExperience() {
     const modalRef = this.modalService.open(PopupExperienceComponent);
     modalRef.componentInstance.title = `NOUVELLE EXPERIENCE`;
-  
+
   }
-  
+
   addComptence() {
     const modalRef = this.modalService.open(PopupCompetenceComponent);
     modalRef.componentInstance.title = `NOUVELLE COMPETENCE`;
     modalRef.componentInstance.show = true;
 
   }
-  
+
   openUpdateComp(item)
   {
     const modalRef = this.modalService.open(PopupCompetenceComponent);

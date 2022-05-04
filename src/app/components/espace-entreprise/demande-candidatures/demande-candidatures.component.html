@@ -10,20 +10,6 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4">
-        <div class="page-header-breadcrumb">
-          <ul class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a [routerLink]="'/'">
-                <i class="icofont icofont-home" style="color: #294a70"></i>
-              </a>
-            </li>
-            <li class="breadcrumb-item">
-              <a>Liste des candidatures</a>
-            </li>
-          </ul>
-        </div>
-      </div>
     </div>
   </div>
   <!-- Page-header end -->
@@ -37,16 +23,13 @@
                 <div class="card">
 
                   <div class="col-sm-12">
-                    <div class="card-header">
-                    <h5 class="card-header-text">Liste des demandes condidatures</h5>
-                  </div>
 
                     <div class="container">
 
                       <div class="row">
 
 
-                        <div class="col-md-6 col-lg-5 offset-lg-1">
+                        <div class="col-md-12 col-lg-4 mb-5 mt-5">
                           <div class="pcoded-search">
                             <div class="pcoded-search-box">
                               <input
@@ -63,36 +46,19 @@
                           </div>
                         </div>
 
-                        <div class="col-md-6 col-lg-3 offset-lg-2">
 
-                          <div class="input-group">
-
-                            <select
-                              ngModel="{{ this.year }}"
-                              name="year"
-                              class="form-control"
-                              (change)="this.changeYear($event.target.value)"
-
-                            >
-                            <ng-container *ngFor="let item of this.listYears">
-                              <option [value]="item.year">{{ item.year }}</option>
-                            </ng-container>
-
-                            </select>
-                          </div>
-                        </div>
                       </div>
                       </div>
-                      <div class="table-responsive">
-                        <div style="margin: 60px; ">
+                      <div class="table-responsive ">
+                        <div style="margin: 5px; ">
                           <table class="table table-hover">
                             <thead>
-                              <ng-container matColumnDef="actions">
+                              <!-- <ng-container matColumnDef="actions"> -->
                                 <!-- <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                   <button mat-button>Edit</button>
                                 </mat-cell> -->
-                              </ng-container>
+                              <!-- </ng-container> -->
                               <tr style="text-align: center">
                                 <th scope="col"></th>
                                 <th scope="col" [appSort]="listCandidature" data-order="desc" data-name="titre">Titre<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
@@ -131,64 +97,21 @@
                                       <i class="icofont icofont-eye-alt" style="color: white;"></i>
                                     </button>
                                   </td>
-                                  <!-- <td>
-                                    <button
-                                      id="{{ demande.id_offre_stage }}"
-                                      (click)="this.showDemande(demande)"
-                                      ngbDropdownItem
-                                    >
-                                      <i class="icofont icofont-eye-alt"></i>Détails
-                                    </button> -->
-                                    <!-- <div ngbDropdown placement="bottom-right" class="d-inline-block">
-                                      <button
-                                        class="btn btn-outline-none"
-                                        id="dropdownBasic1"
-                                        ngbDropdownToggle
-                                      >
-                                        <i class="fa fa-ellipsis-v"></i>
-                                      </button>
-                                      <div
-                                        ngbDropdownMenu
-                                        aria-labelledby="dropdownBasic1"
-                                      >
-                                    <button
-                                      id="{{ demande.id_offre_stage }}"
-                                      (click)="this.showDemande(demande)"
-                                      ngbDropdownItem
-                                    >
-                                      <i class="icofont icofont-eye-alt"></i>Détails
-                                    </button> -->
-                                    <!-- <button
-                                      id="{{ demande.id_offre_stage }}"
-                                      (click)="this.replyDemande(true,demande)"
-                                      ngbDropdownItem
-                                    >
-                                      <i class="icofont icofont-email"></i>Accepter
-                                    </button> -->
-                                    <!-- <button
-                                      id="{{ demande.id_offre_stage }}"
-                                      (click)="this.replyDemande(false,demande)"
-                                      ngbDropdownItem
-                                    >
-                                      <i class="icofont icofont-close-circled"></i>Refuser
-                                    </button> -->
-                                    <!-- </div>
-                                    </div> -->
-                                  <!-- </td> -->
+
                                 </tr>
                               </tbody>
                             </ng-container>
                             <ng-container *ngIf="this.listCandidature.length === 0">
                               <tbody>
                                 <tr style="text-align: center">
-                                  <td colspan="5">AUCUNE CANDIDATURE POUR L'ANNÉE {{this.year}} !</td>
+                                  <td colspan="7">AUCUNE CANDIDATURE</td>
                                 </tr>
                               </tbody>
                             </ng-container>
                             <ng-container *ngIf="this.listCandidature[0]===null">
                               <tbody>
                                 <tr style="text-align: center">
-                                  <td colspan="5">Chargement ...</td>
+                                  <td colspan="7">Chargement ...</td>
                                 </tr>
                               </tbody>
                             </ng-container>
@@ -200,8 +123,6 @@
                             </ngb-pagination>
                             <!-- Items Par Page  -->
                             <div>
-                              Objets par page
-:
                               <select class="custom-select" style="width: auto" name="pageSize" (change)="handlePageSizeChange($event)">
                                 <option *ngFor="let size of pageSizes" [ngValue]="size">
                                   {{ size }}
@@ -230,16 +151,12 @@
                 <!-- info card start -->
                 <div class="card">
                 <div class="col-sm-12">
-                  <div class="card-header">
-                    <h5 class="card-header-text">Liste des demandes</h5>
-                  </div>
-
-                  <div class="container">
+                    <div class="container">
 
                     <div class="row">
 
 
-                      <div class="col-md-6 col-lg-5 offset-lg-1">
+                      <div class="col-md-12 col-lg-4 mb-5 mt-5">
                         <div class="pcoded-search">
                           <div class="pcoded-search-box">
                             <input
@@ -256,38 +173,21 @@
                         </div>
                       </div>
 
-                      <div class="col-md-6 col-lg-3 offset-lg-2">
 
-                        <div class="input-group">
-
-                          <select
-                            ngModel="{{ this.year }}"
-                            name="year"
-                            class="form-control"
-                            (change)="this.changeYear($event.target.value)"
-
-                          >
-                          <ng-container *ngFor="let item of this.listYears">
-                            <option [value]="item.year">{{ item.year }}</option>
-                          </ng-container>
-
-                          </select>
-                        </div>
-                      </div>
                     </div>
                     </div>
 
 
-                    <div class="table-responsive">
-                      <div style="margin: 60px; ">
+                    <div class="table-responsive ">
+                      <div style="margin: 5px; ">
                         <table class="table table-hover">
                           <thead>
-                            <ng-container matColumnDef="actions">
+                            <!-- <ng-container matColumnDef="actions"> -->
                               <!-- <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
                               <mat-cell *matCellDef="let row">
                                 <button mat-button>Edit</button>
                               </mat-cell> -->
-                            </ng-container>
+                            <!-- </ng-container> -->
                             <tr style="text-align: center">
                               <th scope="col" [appSort]="listCandidature" data-order="desc" data-name="titre">Titre<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col" [appSort]="listCandidature" data-order="desc" data-name="type">Type<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
@@ -367,14 +267,14 @@
                           <ng-container *ngIf="this.listCandidature.length === 0">
                             <tbody>
                               <tr style="text-align: center">
-                                <td colspan="5">AUCUNE CANDIDATURE ACCEPTÉES POUR L'ANNÉE {{this.year}} !</td>
+                                <td colspan="7">AUCUNE CANDIDATURE ACCEPTÉES </td>
                               </tr>
                             </tbody>
                           </ng-container>
                           <ng-container *ngIf="this.listCandidature[0]===null">
                             <tbody>
                               <tr style="text-align: center">
-                                <td colspan="5">Chargement ...</td>
+                                <td colspan="7">Chargement ...</td>
                               </tr>
                             </tbody>
                           </ng-container>
@@ -386,8 +286,6 @@
                           </ngb-pagination>
                           <!-- Items Par Page  -->
                           <div>
-                            Objets par page
-:
                             <select class="custom-select" style="width: auto" name="pageSize" (change)="handlePageSizeChange($event)">
                               <option *ngFor="let size of pageSizes" [ngValue]="size">
                                 {{ size }}
@@ -416,16 +314,12 @@
                 <!-- info card start -->
                 <div class="card">
                 <div class="col-sm-12">
-                  <div class="card-header">
-                    <h5 class="card-header-text">Liste des demandes</h5>
-                  </div>
-
                   <div class="container">
 
                     <div class="row">
 
 
-                      <div class="col-md-6 col-lg-5 offset-lg-1">
+                      <div class="col-md-12 col-lg-4 mb-5 mt-5">
                         <div class="pcoded-search">
                           <div class="pcoded-search-box">
                             <input
@@ -442,37 +336,20 @@
                         </div>
                       </div>
 
-                      <div class="col-md-6 col-lg-3 offset-lg-2">
 
-                        <div class="input-group">
-
-                          <select
-                            ngModel="{{ this.year }}"
-                            name="year"
-                            class="form-control"
-                            (change)="this.changeYear($event.target.value)"
-
-                          >
-                          <ng-container *ngFor="let item of this.listYears">
-                            <option [value]="item.year">{{ item.year }}</option>
-                          </ng-container>
-
-                          </select>
-                        </div>
-                      </div>
                     </div>
                     </div>
 
-                    <div class="table-responsive">
-                      <div style="margin: 60px; ">
+                    <div class="table-responsive ">
+                      <div style="margin: 5px; ">
                         <table class="table table-hover">
                           <thead>
-                            <ng-container matColumnDef="actions">
+                            <!-- <ng-container matColumnDef="actions"> -->
                               <!-- <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
                               <mat-cell *matCellDef="let row">
                                 <button mat-button>Edit</button>
                               </mat-cell> -->
-                            </ng-container>
+                            <!-- </ng-container> -->
                             <tr style="text-align: center">
                               <th scope="col" [appSort]="listCandidature" data-order="desc" data-name="titre">Titre<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col" [appSort]="listCandidature" data-order="desc" data-name="type">Type<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
@@ -509,14 +386,14 @@
                           <ng-container *ngIf="this.listCandidature.length === 0">
                             <tbody>
                               <tr style="text-align: center">
-                                <td colspan="5">AUCUNE CANDIDATURE EN ATTENTE POUR L'ANNÉE {{this.year}} !</td>
+                                <td colspan="7">AUCUNE CANDIDATURE EN ATTENTE !</td>
                               </tr>
                             </tbody>
                           </ng-container>
                           <ng-container *ngIf="this.listCandidature[0]===null">
                             <tbody>
                               <tr style="text-align: center">
-                                <td colspan="5">Chargement ...</td>
+                                <td colspan="7">Chargement ...</td>
                               </tr>
                             </tbody>
                           </ng-container>
@@ -529,8 +406,6 @@
                       </ngb-pagination>
                       <!-- Items Par Page  -->
                       <div>
-                        Objets par page
-:
                         <select class="custom-select" style="width: auto" name="pageSize" (change)="handlePageSizeChange($event)">
                           <option *ngFor="let size of pageSizes" [ngValue]="size">
                             {{ size }}

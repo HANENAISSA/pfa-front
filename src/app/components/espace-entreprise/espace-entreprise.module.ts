@@ -10,6 +10,8 @@ import { EspaceEntrepriseRoutingModule } from './espace-entreprise-routing.modul
 import { FormsModule } from '@angular/forms';
 import {  NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { PagesModule } from '../../pages/pages.module';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     FilterEtudiantComponent,
     ListOffresStageComponent,
     StagiairesComponent,
-    NewOffreStageComponent
+    NewOffreStageComponent,
+    ProfileComponent
+    // NotfoundComponent
   ],
   imports: [
     CommonModule,
@@ -27,6 +31,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     FormsModule,
     NgbModule,
     Ng2SearchPipeModule,
+    PagesModule
   ],
   exports: [
     DemandeCandidaturesComponent,
@@ -34,7 +39,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     FilterEtudiantComponent,
     ListOffresStageComponent,
     StagiairesComponent,
-    NewOffreStageComponent
+    NewOffreStageComponent,
+    ProfileComponent
   ],
   schemas: [NO_ERRORS_SCHEMA],
 

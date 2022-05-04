@@ -21,20 +21,6 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-4">
-            <div class="page-header-breadcrumb">
-              <ul class="breadcrumb">
-                <li class="breadcrumb-item">
-                  <a [routerLink]="['/']">
-                    <i class="icofont icofont-home" style="color: #294a70"></i>
-                  </a>
-                </li>
-                <!-- <li class="breadcrumb-item">
-                  <a>Liste des offres de stage disponibles</a>
-                </li> -->
-              </ul>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -130,14 +116,14 @@
                 <ng-container *ngIf="this.listeStagiaires.length === 0">
                   <tbody>
                     <tr style="text-align: center">
-                      <td colspan="5">AUCUN ETUDIANT DISPONIBLE !</td>
+                      <td colspan="6">AUCUN ETUDIANT DISPONIBLE !</td>
                     </tr>
                   </tbody>
                 </ng-container>
                 <ng-container *ngIf="this.listeStagiaires[0] === null">
                   <tbody>
                     <tr style="text-align: center">
-                      <td colspan="5">Chargement ...</td>
+                      <td colspan="6">Chargement ...</td>
                     </tr>
                   </tbody>
                 </ng-container>
@@ -152,8 +138,6 @@
                 </ngb-pagination>
                 <!-- Items Par Page  -->
                 <div>
-                  Objets par page
-  :
                   <select
                     class="custom-select"
                     style="width: auto"

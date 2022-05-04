@@ -7,6 +7,7 @@ import { EspaceEtudiantRoutingModule } from './espace-etudiant-routing.module';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { PagesModule } from '../../pages/pages.module';
 
 
 
@@ -14,7 +15,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
   declarations: [
     FormulaireCvComponent,
     ListDemandesEtudiantComponent,
-    ListOffresEtudiantComponent
+    ListOffresEtudiantComponent,
+    // NotfoundComponent
   ],
   imports: [
     CommonModule,
@@ -22,6 +24,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     FormsModule,
     NgbModule,
     Ng2SearchPipeModule,
+    PagesModule
+
   ],
   exports: [
     FormulaireCvComponent,

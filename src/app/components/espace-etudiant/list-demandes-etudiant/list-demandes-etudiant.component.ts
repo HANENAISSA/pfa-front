@@ -12,51 +12,29 @@ import { PopupOffreComponent } from "../../popups/popup-offre/popup-offre.compon
 export class ListDemandesEtudiantComponent implements OnInit {
   searchText:string;
   listdemande = [null];
-  year:string;
-  listYears=[];
   etat:string;
-
   page = 1;
   pageSize = 5;
   pageSizes = [5, 10, 15];
-  public search:any = '';
 
   constructor(
     private demandeStageServ: DemandeEtudiantService,
     private modalService: NgbModal,
     public sharedService : SharedServiceService
   ) {
-    this.year=new Date().getFullYear().toString();
     this.etat="3";
-
   }
 
   ngOnInit() {
-    this.getAllOffreYears();
-
-    this.getAllDemandestages(this.etat,this.year);
+    this.getAllDemandestages(this.etat);
   }
 
-  async getAllOffreYears(){
-    try {
-      const {err,rows}=await this.sharedService.getYears(1)as any||[];
-      if(!err){
-        this.listYears=rows;
-      }
 
-    } catch (error) {
-      this.listYears=[];
-      return error;
-
-    }
-
-  }
-
-  async getAllDemandestages(etat:string,year:string) {
+  async getAllDemandestages(etat:string) {
     this.listdemande = [null];
     try {
       const id_etudiant = "1";
-      const { err, rows } =await this.demandeStageServ.getListDemande(id_etudiant,etat,year) as any;
+      const { err, rows } =await this.demandeStageServ.getListDemande(id_etudiant,etat) as any;
       if (!err) {
        this.listdemande=rows;
       }
@@ -77,19 +55,12 @@ export class ListDemandesEtudiantComponent implements OnInit {
   }
 
 
-  changeYear(year:string){
 
-    this.year=year;
-    this.getAllDemandestages(this.etat,year);
-
-  }
 
 changeEtat(event){
   const etat=event.nextId.toString();
   this.etat=etat;
-  this.getAllDemandestages(etat,this.year);
-
-
+  this.getAllDemandestages(etat);
 }
 
 

@@ -1,4 +1,4 @@
-<div class="page-header card">
+<!-- <div class="page-header card">
   <div class="row align-items-end">
     <div class="col-lg-8">
       <div class="page-header-title">
@@ -9,23 +9,42 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-4">
-      <div class="page-header-breadcrumb">
-        <ul class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a [routerLink]="'/'">
-              <i class="icofont icofont-home"></i>
-            </a>
-          </li>
-          <li class="breadcrumb-item">
-            <a>Mes informations</a>
-          </li>
-        </ul>
+  </div>
+</div> -->
+<!--profile cover start-->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="cover-profile">
+      <div class="profile-bg-img">
+        <img class="profile-bg-img img-fluid" src="assets/images/user-profile/bg-img1.jpg" alt="bg-img">
+        <div class="card-body user-info">
+          <div class="col-md-12">
+            <div class="media-left">
+              <a href="javascript:;" class="profile-image">
+                <img class="user-img img-radius" src="assets/images/user-profile/user-img.jpg" alt="user-img">
+              </a>
+            </div>
+            <div class="media-body row">
+              <div class="col-lg-12">
+                <div class="user-title">
+                  <h2>Josephin Villa</h2>
+                  <span class="text-white">Web designer</span>
+                </div>
+              </div>
+              <div>
+                <div class="pull-right cover-btn">
+                  <button type="button" class="btn btn-primary m-b-10 m-r-10"><i class="icofont icofont-plus"></i> Follow</button>
+                  <button type="button" class="btn btn-primary m-b-10"><i class="icofont icofont-ui-messaging"></i> Message</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
-<!-- CV cover end-->
+<!--profile cover end-->
 <div class="row">
   <div class="col-lg-12">
     <div class="md-tabs">
@@ -295,7 +314,6 @@
               <!-- info card start -->
               <div class="card">
                 <div class="card-header">
-                  <h5 class="card-header-text">Mes compétences</h5>
                   <button type="button" class="btn btn-outline-primary col-12 col-md-3 offset-md-9 mt-3 w-100" (click)="this.addComptence()">Nouvelle compétence</button>
 
                 </div>
@@ -304,7 +322,7 @@
                   <ng-container *ngFor="let item of this.listCompetence">
                     <div class="col-md-6" >
                       <div
-                        class="card b-l-success business-info services m-b-20" style="background-color: #f4eded;"
+                        class="card b-l-success business-info services m-b-20" style="background-color: #F0FBFC;"
                       >
                         <div ngbDropdown class="card-header">
                           <div class="service-header">
@@ -337,12 +355,11 @@
                             <div class="col-sm-12">
                               <!-- <p class="task-detail" *ngIf="item.niveau=='0'">Débutant</p> -->
                               <div>
-
-                                <span class="fa fa-star checked"></span>
-                                <span [class]="item.niveau=='0'?'fa fa-star':'fa fa-star checked'"></span>
-                                <span [class]="item.niveau=='0'||item.niveau=='1'?'fa fa-star':'fa fa-star checked'"></span>
-                                <span [class]="item.niveau=='3'||item.niveau=='4'?'fa fa-star checked':'fa fa-star'"></span>
-                                <span [class]="item.niveau=='4'?'fa fa-star checked':'fa fa-star'"></span>
+                                <span class="fa fa-star checked text-primary"></span>
+                                <span [class]="item.niveau=='0'?'fa fa-star ':'fa fa-star checked text-primary'"></span>
+                                <span [class]="item.niveau=='0'||item.niveau=='1'?'fa fa-star':'fa fa-star checked text-primary'"></span>
+                                <span [class]="item.niveau=='3'||item.niveau=='4'?'fa fa-star checked text-primary':'fa fa-star'"></span>
+                                <span [class]="item.niveau=='4'?'fa fa-star checked text-primary':'fa fa-star'"></span>
                               </div>
 
                             </div>
@@ -355,7 +372,7 @@
                     </div>
 
                   </ng-container>
-                   
+
                   </div>
                 </div>
               </div>
@@ -368,7 +385,6 @@
             <div [@fadeInOutTranslate] class="m-t-15">
               <div class="card">
                 <div class="card-header">
-                  <h5 class="card-header-text">Mes Expériences</h5>
                   <button type="button" class="btn btn-outline-primary col-12 col-md-3 offset-md-9 mt-3 w-100" (click)="this.addExperience()">Nouvelle expérience</button>
 
                 </div>
@@ -409,8 +425,8 @@
                           >
                         </h4>
                         <br/>
-                        <h5 class="media-heading">Au sein de l'entreprise {{item.nom_entreprise}}</h5>
-                        <h5 class="media-heading">  De : {{ this.sharedService.formatDate(item.date_debut)}} jusqu'à {{this.sharedService.formatDate(item.date_fin)}}</h5>
+                        <h5 class="media-heading">Au sein de l'entreprise <b>{{item.nom_entreprise.toUpperCase()}}</b></h5>
+                        <h5 class="media-heading">  de  {{ this.sharedService.formatDate(item.date_debut)}} jusqu'à {{this.sharedService.formatDate(item.date_fin)}}</h5>
                         <p class="m-b-0">
                           {{item.description}}
                         </p>

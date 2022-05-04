@@ -31,33 +31,33 @@ export class ListOffresStageComponent implements OnInit {
      }
 
   ngOnInit() {
-    this.year=new Date().getFullYear().toString();
-    this.getAllOffreYears();
+    // this.year=new Date().getFullYear().toString();
+    // this.getAllOffreYears();
     this.etat="0";
-    this.getAllOffreStages(new Date().getFullYear().toString(),this.etat);
+    this.getAllOffreStages(this.etat);
   }
 
 
-  async getAllOffreYears(){
-    try {
-      const {err,rows}=await this.sharedService.getYears(0)as any||[];
-      if(!err){
-        this.listYears=rows;
-      }
+  // async getAllOffreYears(){
+  //   try {
+  //     const {err,rows}=await this.sharedService.getYears(0)as any||[];
+  //     if(!err){
+  //       this.listYears=rows;
+  //     }
 
-    } catch (error) {
-      this.listYears=[];
-      return error;
+  //   } catch (error) {
+  //     this.listYears=[];
+  //     return error;
 
-    }
+  //   }
 
-  }
+  // }
 
 
-  async getAllOffreStages(year:string,etat:string){
+  async getAllOffreStages(etat:string){
     const id_responsable="2";
     try {
-      const {err,rows}=await this.offreStageServ.getAllOffreStages(id_responsable,etat,year)as any||[];
+      const {err,rows}=await this.offreStageServ.getAllOffreStages(id_responsable,etat)as any||[];
       if(!err){
         this.listStage=rows;
       }
@@ -88,7 +88,8 @@ export class ListOffresStageComponent implements OnInit {
   supprimerOffre(id_offre:string){
     const modalRef = this.modalService.open(PopupOffreComponent);
     modalRef.componentInstance.title = `SUPPRESSION OFFRE`;
-    modalRef.componentInstance.id = Number(id_offre);
+    modalRef.componentInstance.id_offre_stage = Number(id_offre);
+
 
   }
   AddOffre(){
@@ -134,21 +135,19 @@ export class ListOffresStageComponent implements OnInit {
     this.listStage = [null];
     const etat=event.nextId.toString();
     this.etat=etat;
-    this.getAllOffreStages(this.year,etat);
-
-
+    this.getAllOffreStages(etat);
   }
 
 
 
-  changeYear(year:string){
-    this.listStage = [null];
-    this.year=year;
-    console.log(year);
+  // changeYear(year:string){
+  //   this.listStage = [null];
+  //   this.year=year;
+  //   console.log(year);
 
-    this.getAllOffreStages(year,this.etat);
+  //   this.getAllOffreStages(year,this.etat);
 
-  }
+  // }
 
   handlePageSizeChange(event: any): void {
     this.pageSize = event.target.value;
@@ -161,10 +160,8 @@ export class ListOffresStageComponent implements OnInit {
       const {err,rows}=await this.offreStageServ.closeOpenOffre(id_offre_stage.toString(),id_etat_offre)as any||[];
       if(!err){
         swal("Succès!", "Opération effctuée avec succès", "success");
-        this.getAllOffreStages(this.year,this.etat);
-
+        this.getAllOffreStages(this.etat);
       }
-
     } catch (error) {
       swal("Échec!", "Opération non effectuée", "error");
       return error;
@@ -172,20 +169,4 @@ export class ListOffresStageComponent implements OnInit {
     }
   }
 
-
-  // async offreExpired(){//postponed for a later date
-  //   try {
-  //     const {err,rows}=await this.offreStageServ.offreExpired()as any||[];
-  //     if(!err){
-
-  //       this.getAllOffreStages(this.year,this.etat);
-
-  //     }
-
-  //   } catch (error) {
-
-  //     return error;
-
-  //   }
-  // }
 }

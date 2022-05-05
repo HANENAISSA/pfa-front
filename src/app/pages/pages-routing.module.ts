@@ -6,6 +6,8 @@ import { LoginEntrepriseComponent } from './auth/login-entreprise/login-entrepri
 import { LoginEtudiantComponent } from './auth/login-etudiant/login-etudiant.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { ContactComponent } from './contact/contact.component';
+import { NotfoundComponent } from './notfound/notfound.component';
+import { VerifauthComponent } from './verifauth/verifauth.component';
 
 
 const routes: Routes = [
@@ -25,6 +27,9 @@ const routes: Routes = [
     path: "inscription", component : SignUpComponent,
   },
   {
+    path: "compte/:hashedid", component : VerifauthComponent,
+  },
+  {
     path:"espace",
     children:[
       {
@@ -34,7 +39,10 @@ const routes: Routes = [
         path: "etudiant", component : LoginEtudiantComponent,
       },
     ]
-  }
+  },
+  {
+    path: "introuvable", component: NotfoundComponent
+  },
 
 ];
 

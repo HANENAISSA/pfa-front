@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class CandidatureEtudiantService {
   getListCandidature(id_responsable:string,etat:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`http://localhost:5010/demandeEntreprise/getAllDemandesEntreprise/${id_responsable}/${etat}`)
+      this.httpC.get(`${environment.api}/demandeEntreprise/getAllDemandesEntreprise/${id_responsable}/${etat}`)
         .forEach(data =>
           {
             resolve(data)
@@ -28,7 +29,7 @@ export class CandidatureEtudiantService {
   sendMail(payload)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.post(`http://localhost:5010/confirmationDemande/sendMail`,payload)
+      this.httpC.post(`${environment.api}/confirmationDemande/sendMail`,payload)
         .forEach(data =>
           {
             resolve(data)
@@ -44,7 +45,7 @@ export class CandidatureEtudiantService {
   updateCandidatureVue(id:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.patch(`http://localhost:5010/demandeEntreprise/updateVueDemande`,{id_demande:id})
+      this.httpC.patch(`${environment.api}/demandeEntreprise/updateVueDemande`,{id_demande:id})
         .forEach(data =>
           {
             resolve(data)
@@ -61,7 +62,7 @@ export class CandidatureEtudiantService {
   updateCandidatResEntretien(id_demande:string,etat:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.patch(`http://localhost:5010/demandeEntreprise/updateEtatEntretien`,{id_etat_entretien_stage_pfe:etat,id_demande_stage_entreprise:id_demande})
+      this.httpC.patch(`${environment.api}/demandeEntreprise/updateEtatEntretien`,{id_etat_entretien_stage_pfe:etat,id_demande_stage_entreprise:id_demande})
         .forEach(data =>
           {
             resolve(data)

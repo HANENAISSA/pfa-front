@@ -20,6 +20,7 @@ import { LoginEntrepriseComponent } from './auth/login-entreprise/login-entrepri
 import { LoginEtudiantComponent } from './auth/login-etudiant/login-etudiant.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { FormsModule } from '@angular/forms';
+import { VerifauthComponent } from './verifauth/verifauth.component';
 
 
 
@@ -40,7 +41,8 @@ import { FormsModule } from '@angular/forms';
     NotfoundComponent,
     LoginEntrepriseComponent,
     LoginEtudiantComponent,
-    SignUpComponent
+    SignUpComponent,
+    VerifauthComponent
   ],
   exports:[
     AboutComponent,
@@ -57,7 +59,8 @@ import { FormsModule } from '@angular/forms';
     TeamComponent,
     LoginEntrepriseComponent,
     LoginEtudiantComponent,
-    SignUpComponent
+    SignUpComponent,
+    VerifauthComponent
   ],
   imports: [
     CommonModule,

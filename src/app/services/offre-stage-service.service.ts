@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class OffreStageServiceService {
 
   addOffreStage(offreStage : FormData){
     return new Promise((resolve, reject) => {
-      this.httpC.post('http://localhost:5010/offrestage/add', offreStage)
+      this.httpC.post(`${environment.api}/offrestage/add`, offreStage)
         .forEach(data =>{
           resolve(data)
         }
@@ -26,7 +27,7 @@ export class OffreStageServiceService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.patch('http://localhost:5010/offrestage/update', offreStage)
+      this.httpC.patch('${environment.api}/offrestage/update', offreStage)
         .forEach(data =>
           resolve(data)
         ).catch((err) => {
@@ -39,7 +40,7 @@ export class OffreStageServiceService {
 
 
       return new Promise((resolve, reject) => {
-        this.httpC.delete(`http://localhost:5010/offrestage/delete/${id_offre_stage}`)
+        this.httpC.delete(`${environment.api}/offrestage/delete/${id_offre_stage}`)
           .forEach(data =>
             resolve(data)
           ).catch((err) => {
@@ -50,11 +51,10 @@ export class OffreStageServiceService {
   }
 
 
-
   getAllOffreStages(id_responsable:string,etat:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`http://localhost:5010/offrestage/getAll/${id_responsable}/${etat}`)
+      this.httpC.get(`${environment.api}/offrestage/getAll/${id_responsable}/${etat}`)
         .forEach(data =>
           {
             resolve(data)
@@ -69,7 +69,7 @@ export class OffreStageServiceService {
   getAllOffresEntreprise(id_entreprise:string){
 
     return new Promise((resolve, reject) => {
-      this.httpC.get(`http://localhost:5010/offrestage/getAllOffresEntreprise/${id_entreprise}`)
+      this.httpC.get(`${environment.api}/offrestage/getAllOffresEntreprise/${id_entreprise}`)
 
         .forEach(data =>
           {
@@ -85,7 +85,7 @@ export class OffreStageServiceService {
   getOneOffreDetails(id_offre_stage:string){
 
     return new Promise((resolve, reject) => {
-      this.httpC.get(`http://localhost:5010/offrestage/getOneOffreEntreprise/${id_offre_stage}`)
+      this.httpC.get(`${environment.api}/offrestage/getOneOffreEntreprise/${id_offre_stage}`)
 
         .forEach(data =>
           {
@@ -102,7 +102,7 @@ export class OffreStageServiceService {
   {
     return new Promise((resolve, reject) => {
 
-      this.httpC.get(`http://localhost:5010/offrestage/getAllOffresEntreprisNotRegistred/${id_etudiant}`)
+      this.httpC.get(`${environment.api}/offrestage/getAllOffresEntreprisNotRegistred/${id_etudiant}`)
         .forEach(data =>
           {
             resolve(data)
@@ -119,7 +119,7 @@ export class OffreStageServiceService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.patch('http://localhost:5010/offrestage/update_Nbr_vue', {"id_offre_stage":id_offre_stage})
+      this.httpC.patch('${environment.api}/offrestage/update_Nbr_vue', {"id_offre_stage":id_offre_stage})
         .forEach(data =>
           resolve(data)
         ).catch((err) => {
@@ -132,7 +132,7 @@ export class OffreStageServiceService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.patch('http://localhost:5010/offrestage/update_Nbr_postulations', {"id_offre_stage":id_offre_stage})
+      this.httpC.patch(`${environment.api}/offrestage/update_Nbr_postulations`, {"id_offre_stage":id_offre_stage})
         .forEach(data =>
           resolve(data)
         ).catch((err) => {
@@ -145,7 +145,7 @@ export class OffreStageServiceService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.patch('http://localhost:5010/offrestage/closeOpenOffre', {id_offre_stage,id_etat_offre})
+      this.httpC.patch(`${environment.api}/offrestage/closeOpenOffre`, {id_offre_stage,id_etat_offre})
         .forEach(data =>
           resolve(data)
         ).catch((err) => {
@@ -159,7 +159,7 @@ export class OffreStageServiceService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.get(`http://localhost:5010/offrestage/getAllOffresOuvertes/${id_responsable}`)
+      this.httpC.get(`${environment.api}/offrestage/getAllOffresOuvertes/${id_responsable}`)
         .forEach(data =>
           resolve(data)
         ).catch((err) => {
@@ -173,7 +173,7 @@ export class OffreStageServiceService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.get(`http://localhost:5010/offrestage/getOffresEtudiantsContactes/${id_responsable}/${id_etudiant}`)
+      this.httpC.get(`${environment.api}/offrestage/getOffresEtudiantsContactes/${id_responsable}/${id_etudiant}`)
         .forEach(data =>
           resolve(data)
         ).catch((err) => {
@@ -187,7 +187,7 @@ export class OffreStageServiceService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.patch('http://localhost:5010/offrestage/offreExpired',null)
+      this.httpC.patch(`${environment.api}/offrestage/offreExpired`,null)
         .forEach(data =>
           resolve(data)
         ).catch((err) => {
@@ -201,7 +201,7 @@ export class OffreStageServiceService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.get(`http://localhost:5010/offrestage/loadAllOffres/${id_responsable}`)
+      this.httpC.get(`${environment.api}/offrestage/loadAllOffres/${id_responsable}`)
         .forEach(data =>
           resolve(data)
         ).catch((err) => {

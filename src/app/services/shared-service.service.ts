@@ -3,6 +3,7 @@ import * as moment from "moment";
 import { ActivatedRoute, Router } from "@angular/router";
 import * as CryptoJS from "crypto-js";
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -60,10 +61,10 @@ export class SharedServiceService {
     let path:string=``;
     switch (yearsType) {
       case 0:
-        path=`http://localhost:5010/offrestage/getOffresYears`;
+        path=`${environment.api}/offrestage/getOffresYears`;
         break;
       case 1:
-        path=`http://localhost:5010/demandeEtudiantStageEntreprise/getAllDemandesYears`;
+        path=`${environment.api}/demandeEtudiantStageEntreprise/getAllDemandesYears`;
         break;
 
       default:

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DemandeEtudiant } from '../models/demande-etudiant';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class DemandeEtudiantService {
 
   addDemande(demande : DemandeEtudiant){
     return new Promise((resolve, reject) => {
-      this.httpC.post('http://localhost:5010/demandeEtudiantStageEntreprise/getAllDemandesEtudiant/add', demande)
+      this.httpC.post('${environment.api}/demandeEtudiantStageEntreprise/getAllDemandesEtudiant/add', demande)
         .forEach(data =>{
           resolve(data)
         }
@@ -25,7 +26,7 @@ export class DemandeEtudiantService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.patch('http://localhost:5010/demandeEtudiantStageEntreprise/getAllDemandesEtudiant/patch', demande)
+      this.httpC.patch(`${environment.api}/demandeEtudiantStageEntreprise/getAllDemandesEtudiant/patch`, demande)
         .forEach(data =>
           resolve(data)
         ).catch((err) => {
@@ -36,7 +37,7 @@ export class DemandeEtudiantService {
 
   deleteDemande(id_demande: string){
       return new Promise((resolve, reject) => {
-        this.httpC.delete(`http://localhost:5010/demandeEtudiantStageEntreprise/getAllDemandesEtudiant/delete/${id_demande}`)
+        this.httpC.delete(`${environment.api}/demandeEtudiantStageEntreprise/getAllDemandesEtudiant/delete/${id_demande}`)
           .forEach(data =>
             resolve(data)
           ).catch((err) => {
@@ -48,7 +49,7 @@ export class DemandeEtudiantService {
   getListDemande(id_etudiant : string,etatDemande:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`http://localhost:5010/demandeEtudiantStageEntreprise/getAllDemandesEtudiant/${id_etudiant}/${etatDemande}`)
+      this.httpC.get(`${environment.api}/demandeEtudiantStageEntreprise/getAllDemandesEtudiant/${id_etudiant}/${etatDemande}`)
         .forEach(data =>
           {
             resolve(data)

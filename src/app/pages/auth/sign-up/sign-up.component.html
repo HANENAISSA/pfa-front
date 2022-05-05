@@ -100,8 +100,8 @@
                 <div class="form-outline">
                   <select
                     ngModel="{{ '1' }}"
-                    #role="ngModel"
-                    name="role"
+                    #id_role="ngModel"
+                    name="id_role"
                     class="form-control"
                     (change)="getRole($event)"
                     required
@@ -129,7 +129,6 @@
                   <label class="form-label mt-2" for="email"
                     >Adresse email</label
                   >
-                </div>
                   <div
                     *ngIf="email.invalid && email.touched"
                     class="alert alert-danger p-2"
@@ -137,12 +136,12 @@
                   >
                     Saisir l`email
                   </div>
+                </div>
               </div>
               <div class="col-md-6 mb-4">
                 <div class="form-outline mb-4">
                   <input
                     type="password"
-                    name="pass"
                     ngModel
                     #pass="ngModel"
                     name="password"
@@ -153,20 +152,20 @@
                   <label class="form-label mt-2" for="password"
                     >Mot de passe</label
                   >
-                </div>
-                <div
-                  *ngIf="pass.invalid && pass.touched"
-                  class="alert alert-danger p-2"
-                  role="alert"
-                >
-                  Saisir le mot de passe
+                  <div
+                    *ngIf="pass.invalid && pass.touched"
+                    class="alert alert-danger p-2"
+                    role="alert"
+                  >
+                    Saisir le mot de passe
+                  </div>
                 </div>
               </div>
             </div>
 
             <!-- Checkbox -->
-            <ng-container *ngIf="role.value == '1'">
-              <div class="form-check d-flex justify-content-center mb-4">
+            <ng-container *ngIf="id_role.value == '1'">
+              <div class="form-check d-flex justify-content-center mb-5">
                 <input
                   name="etranger"
                   ngModel
@@ -217,8 +216,8 @@
                   <div class="form-outline">
                     <select
                       ngModel="{{ '-1' }}"
-                      #departement="ngModel"
-                      name="departement"
+                      #id_departement="ngModel"
+                      name="id_departement"
                       class="form-control"
                       (change)="getDepartement($event)"
                       required
@@ -238,7 +237,7 @@
                     </label>
                   </div>
                   <div
-                    *ngIf="departement.value == '-1' && departement.touched"
+                    *ngIf="id_departement.value == '-1' && id_departement.touched"
                     class="alert alert-danger p-2"
                     role="alert"
                   >
@@ -250,9 +249,9 @@
                 type="submit"
                 [disabled]="
                   fadd.invalid ||
-                  (departement &&
-                    departement.value == '-1' &&
-                    role && role.value == '1')
+                  (id_departement &&
+                    id_departement.value == '-1' &&
+                    id_role && id_role.value == '1')
                 "
                 class="btn btn-primary btn-block mb-4"
               >
@@ -260,7 +259,7 @@
               </button>
             </ng-container>
             <button
-              *ngIf="role.value == '2'"
+              *ngIf="id_role.value == '2'"
               type="submit"
               [disabled]="fadd.invalid"
               class="btn btn-primary btn-block mb-4"

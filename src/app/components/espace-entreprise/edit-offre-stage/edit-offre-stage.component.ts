@@ -45,8 +45,6 @@ export class EditOffreStageComponent implements OnInit {
       const decryptedData=this.sharedService.decryptData(res.data);
       this.offreStage=JSON.parse(decryptedData);
       this.type=this.offreStage.type;
-
-
     });
     this.actualDate=new Date().toDateString()
   }
@@ -107,18 +105,6 @@ export class EditOffreStageComponent implements OnInit {
       this.offre.append("cahier_charge", file, file.name);
     }
   }
-
-  // checkValue(e?){
-  //     this.event=e;
-  //     return !this.event.target.checked
-
-  // }
-
-  // getEtat(){
-  //   if(this.event)
-  //   return this.event.target.checked
-  //   return this.offreStage.id_offre_stage===1
-  // }
 
   setDate(dd, duree) {
     const datedebut = new Date(dd);

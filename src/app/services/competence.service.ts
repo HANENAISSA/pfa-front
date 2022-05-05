@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Competence } from '../models/competence';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class CompetenceService {
   addCompetence(competence : Competence){
 
     return new Promise((resolve, reject) => {
-      this.httpC.post('http://localhost:5010/competence/add', competence)
+      this.httpC.post(`${environment.api}/competence/add`, competence)
         .forEach(data =>{
           resolve(data)
         }
@@ -25,7 +26,7 @@ export class CompetenceService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.patch('http://localhost:5010/competence/update', competence)
+      this.httpC.patch(`${environment.api}/competence/update`, competence)
         .forEach(data =>
           resolve(data)
         ).catch((err) => {
@@ -37,7 +38,7 @@ export class CompetenceService {
   deleteCompetence(id_competence: string){
 
       return new Promise((resolve, reject) => {
-        this.httpC.delete(`http://localhost:5010/competence/delete/${id_competence}`)
+        this.httpC.delete(`${environment.api}/competence/delete/${id_competence}`)
           .forEach(data =>
             resolve(data)
           ).catch((err) => {
@@ -50,7 +51,7 @@ export class CompetenceService {
   getListCompetence(id:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`http://localhost:5010/competence/getAll/${id}`)
+      this.httpC.get(`${environment.api}/competence/getAll/${id}`)
         .forEach(data =>
           {
             resolve(data)
@@ -66,7 +67,7 @@ export class CompetenceService {
   getCvBayEtudiont(id:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`http://localhost:5010/competence/getCvByEtudiant/${id}`)
+      this.httpC.get(`${environment.api}/competence/getCvByEtudiant/${id}`)
         .forEach(data =>
           {
             resolve(data)
@@ -84,7 +85,7 @@ export class CompetenceService {
   loadCompetences()
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`http://localhost:5010/competence/loadCompetences`)
+      this.httpC.get(`${environment.api}/competence/loadCompetences`)
         .forEach(data =>
           {
             resolve(data)
@@ -101,7 +102,7 @@ export class CompetenceService {
   filterCompetences(idomaine:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`http://localhost:5010/competence/filterCompetences/${idomaine}`)
+      this.httpC.get(`${environment.api}/competence/filterCompetences/${idomaine}`)
         .forEach(data =>
           {
             resolve(data)
@@ -118,7 +119,7 @@ export class CompetenceService {
   filterAllEtudiantsByCompetences(list:string[])
   {
     return new Promise((resolve, reject) => {
-      this.httpC.post(`http://localhost:5010/etudiantComp/getAllEtudiantsByCompetences`,{"competencesList":list})
+      this.httpC.post(`${environment.api}/etudiantComp/getAllEtudiantsByCompetences`,{"competencesList":list})
         .forEach(data =>
           {
             resolve(data)

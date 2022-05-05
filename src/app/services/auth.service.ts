@@ -1,38 +1,50 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { environment } from "../../environments/environment";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AuthService {
+  constructor(private httpC: HttpClient) {}
 
-  constructor(private httpC: HttpClient) { }
+  signup(payload, id_role: number) {
+    let role:string='etudiant';
+    if(id_role==2)role='responsable'
 
-  signupEtudiant(payload)
-  {
     return new Promise((resolve, reject) => {
-      this.httpC.post(`${environment.api}/auth/signup/etudiant`,payload)
+      this.httpC
+        .post(`${environment.api}/auth/signup/${role}`, payload)
         .forEach(data =>
-          {resolve(data)}
-        ).catch((err) => {
+          resolve(data)
+        )
+        .catch((err) =>
+          reject(err)
+        );
+    });
+  }
+
+  validate(hashedid: string) {
+
+    return new Promise((resolve, reject) => {
+      this.httpC
+        .get(`${environment.api}/auth/validate/user/${hashedid}`)
+        .forEach((data) => resolve(data))
+        .catch((err) => {
           reject(err);
         });
     });
   }
-
-  validateEtudiant(hashedid:string)
-  {
+  login(payload) {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/auth/validate/etudiant/${hashedid}`)
-        .forEach(data =>
-          {
-            resolve(data)
-          })
-          .catch((err) => {
-          reject(err);
-        });
+      this.httpC
+        .post(`${environment.api}/auth/login`,payload)
+        .forEach((data) =>
+          resolve(data)
+        )
+        .catch((err) =>
+          reject(err)
+        );
     });
-
   }
 }

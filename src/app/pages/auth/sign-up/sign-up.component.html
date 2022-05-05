@@ -103,7 +103,6 @@
                     #id_role="ngModel"
                     name="id_role"
                     class="form-control"
-                    (change)="getRole($event)"
                     required
                   >
                     <option value="1">Etudiant</option>
@@ -141,6 +140,32 @@
               <div class="col-md-6 mb-4">
                 <div class="form-outline mb-4">
                   <input
+                    type="tel"
+                    ngModel
+                    #num_tel="ngModel"
+                    name="num_tel"
+                    placeholder="Numéro de téléphone"
+                    class="form-control"
+                    required
+                  />
+                  <label class="form-label mt-2" for="tel"
+                    >Numéro de téléphone</label
+                  >
+                  <div
+                    *ngIf="num_tel.invalid && num_tel.touched"
+                    class="alert alert-danger p-2"
+                    role="alert"
+                  >
+                    Saisir le numéro de téléphone
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="form-outline mb-4">
+                  <input
                     type="password"
                     ngModel
                     #pass="ngModel"
@@ -158,6 +183,29 @@
                     role="alert"
                   >
                     Saisir le mot de passe
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="form-outline mb-4">
+                  <input
+                    type="password"
+                    name="pass2"
+                    ngModel
+                    #pass2="ngModel"
+                    placeholder="Confirmez le mot de passe"
+                    class="form-control"
+                    required
+                  />
+                  <label class="form-label mt-2" for="pass2"
+                    >Confirmez le mot de passe</label
+                  >
+                  <div
+                    *ngIf="pass2.invalid && pass2.touched || (pass.value!=pass2.value)"
+                    class="alert alert-danger p-2"
+                    role="alert"
+                  >
+                  Le mot de passe ne correspond pas
                   </div>
                 </div>
               </div>
@@ -219,7 +267,6 @@
                       #id_departement="ngModel"
                       name="id_departement"
                       class="form-control"
-                      (change)="getDepartement($event)"
                       required
                     >
                       <option disabled value="-1">

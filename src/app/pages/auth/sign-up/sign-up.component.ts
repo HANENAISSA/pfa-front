@@ -21,13 +21,14 @@ export class SignUpComponent implements OnInit {
   ngOnInit() {}
 
   async signup(form: NgForm) {
-    const {etranger,cinpassport}=form.value;
+    const {etranger,cinpassport,id_role}=form.value;
     const payload = { ...form.value,num_passport:etranger==true?cinpassport:null,cin:etranger!=true?cinpassport:null };
+    delete payload['pass2'];
     try {
-       await this.authService.signupEtudiant(
-        payload
+       await this.authService.signup(
+        payload,id_role
       ) as any;
-      swal("Succès!", `un email d'activation a été envoyé pour cette adresse email ${form.value.email}`, "success");
+      swal("Succès!", `un email d'activation a été envoyé à ${form.value.email}`, "success");
       this.sharedService.reloadComponent();
       // this.router.navigate(['/accueil'])
     } catch (error) {
@@ -35,7 +36,4 @@ export class SignUpComponent implements OnInit {
       return error;
     }
   }
-
-  getRole(event) {}
-  getDepartement(event) {}
 }

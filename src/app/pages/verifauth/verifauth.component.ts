@@ -24,9 +24,8 @@ export class VerifauthComponent implements OnInit {
   async validateAccount() {
     const hashedid = this.activatedRoute.snapshot.paramMap.get("hashedid")
     try {
-      (await this.authService.validateEtudiant(hashedid)) as any;
+      (await this.authService.validate(hashedid)) as any;
       this.validation=true;
-      // this.router.navigate(['/accueil'])
     } catch (error) {
       this.router.navigate(['/introuvable'])
       return error;

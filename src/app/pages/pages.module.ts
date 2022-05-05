@@ -16,11 +16,11 @@ import { CategoriesComponent } from '../layout/categories/categories.component';
 import { NavbarComponent } from '../layout/navbar/navbar.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NotfoundComponent } from './notfound/notfound.component';
-import { LoginEntrepriseComponent } from './auth/login-entreprise/login-entreprise.component';
-import { LoginEtudiantComponent } from './auth/login-etudiant/login-etudiant.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { FormsModule } from '@angular/forms';
 import { VerifauthComponent } from './verifauth/verifauth.component';
+import { LoginComponent } from './auth/login/login.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 
@@ -39,10 +39,10 @@ import { VerifauthComponent } from './verifauth/verifauth.component';
     SpinnerComponent,
     TeamComponent,
     NotfoundComponent,
-    LoginEntrepriseComponent,
-    LoginEtudiantComponent,
     SignUpComponent,
-    VerifauthComponent
+    VerifauthComponent,
+    LoginComponent,
+    ResetPasswordComponent
   ],
   exports:[
     AboutComponent,
@@ -57,10 +57,10 @@ import { VerifauthComponent } from './verifauth/verifauth.component';
     ServicessComponent,
     SpinnerComponent,
     TeamComponent,
-    LoginEntrepriseComponent,
-    LoginEtudiantComponent,
     SignUpComponent,
-    VerifauthComponent
+    VerifauthComponent,
+    LoginComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,

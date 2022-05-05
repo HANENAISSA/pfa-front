@@ -38,7 +38,7 @@ export class AuthService {
   login(payload) {
     return new Promise((resolve, reject) => {
       this.httpC
-        .post(`${environment.api}/auth/login`,payload)
+        .post(`${environment.api}/auth/login/user`,payload)
         .forEach((data) =>
           resolve(data)
         )

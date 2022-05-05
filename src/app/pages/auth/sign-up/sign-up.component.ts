@@ -28,7 +28,7 @@ export class SignUpComponent implements OnInit {
        await this.authService.signup(
         payload,id_role
       ) as any;
-      swal("Succès!", `un email d'activation a été envoyé à ${form.value.email}`, "success");
+      swal("Succès!", `un email d'activation a été envoyé à ${form.value.email} vérifier votre spam aussi !`, "success");
       this.sharedService.reloadComponent();
       // this.router.navigate(['/accueil'])
     } catch (error) {

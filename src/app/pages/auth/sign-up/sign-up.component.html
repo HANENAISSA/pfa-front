@@ -201,7 +201,7 @@
                     >Confirmez le mot de passe</label
                   >
                   <div
-                    *ngIf="pass2.invalid && pass2.touched || (pass.value!=pass2.value)"
+                    *ngIf="pass2.invalid && pass2.touched || (pass.value!=pass2.value&&pass2.valid)"
                     class="alert alert-danger p-2"
                     role="alert"
                   >

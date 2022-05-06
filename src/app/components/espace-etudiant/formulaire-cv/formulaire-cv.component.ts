@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { animate, style, transition, trigger } from "@angular/animations";
-import {  ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { DemandeStageEntreprise } from "../../../models/demande-stage-entreprise";
 import { FormulaireCvServiceService } from "../../../services/formulaire-cv-service.service";
 import { SharedServiceService } from "../../../services/shared-service.service";
@@ -14,6 +14,7 @@ import { Experience } from "../../../models/experience";
 import { PopupCompetenceComponent } from "../../popups/popup-competence/popup-competence.component";
 import { ChercherProfilService } from "../../../services/chercher-profil.service";
 import { NgForm } from "@angular/forms";
+import swal from "sweetalert";
 
 @Component({
   selector: "app-formulaire-cv",
@@ -51,9 +52,9 @@ export class FormulaireCvComponent implements OnInit {
   listCompetence: Competence[] = [];
   listExperience: Experience[] = [];
   profil;
-  actualDate:string;
+  actualDate: string;
 
-  actifTabid : number
+  actifTabid: number;
 
   constructor(
     private offreStageServ: OffreStageServiceService,
@@ -63,10 +64,10 @@ export class FormulaireCvComponent implements OnInit {
     private serviceExperience: ExperienceService,
     private servicecompetence: CompetenceService,
     private router: Router,
-    private activatedRoute:ActivatedRoute,
-    private profilService:ChercherProfilService
+    private activatedRoute: ActivatedRoute,
+    private profilService: ChercherProfilService
   ) {
-    this.actualDate=new Date().toDateString()
+    this.actualDate = new Date().toDateString();
   }
 
   ngOnInit() {
@@ -74,7 +75,6 @@ export class FormulaireCvComponent implements OnInit {
     this.getListCompetence();
     this.getListExperience();
   }
-
 
   toggleEditProfile() {
     this.editProfileIcon =
@@ -90,12 +90,10 @@ export class FormulaireCvComponent implements OnInit {
     this.editAbout = !this.editAbout;
   }
 
-
-
   async getListExperience() {
     try {
       const { err, rows } =
-        ((await this.serviceExperience.getExperience() as any) || []);
+        ((await this.serviceExperience.getExperience()) as any) || [];
       if (!err) {
         this.listExperience = rows;
       }
@@ -121,12 +119,11 @@ export class FormulaireCvComponent implements OnInit {
       if (!err) {
         this.profil = rows[0];
         console.log(this.profil);
-
-
       }
     } catch (error) {
       return error;
-    }  }
+    }
+  }
 
   addExperience() {
     const modalRef = this.modalService.open(PopupExperienceComponent);
@@ -139,44 +136,54 @@ export class FormulaireCvComponent implements OnInit {
     modalRef.componentInstance.show = true;
   }
 
-  openUpdateComp(item)
-  {
+  openUpdateComp(item) {
     const modalRef = this.modalService.open(PopupCompetenceComponent);
     modalRef.componentInstance.title = `MODIFICATION COMPETENCE`;
-    modalRef.componentInstance.details = {...item};
+    modalRef.componentInstance.details = { ...item };
     modalRef.componentInstance.edit = true;
-
   }
-  openDeleteComp(id:string)
-  {
-      const modalRef = this.modalService.open(PopupCompetenceComponent);
-      modalRef.componentInstance.title = `SUPPRESSION COMPETENCE`;
-      modalRef.componentInstance.id_com = id;
+  openDeleteComp(id: string) {
+    const modalRef = this.modalService.open(PopupCompetenceComponent);
+    modalRef.componentInstance.title = `SUPPRESSION COMPETENCE`;
+    modalRef.componentInstance.id_com = id;
   }
 
-  openUpdateExper(item){
+  openUpdateExper(item) {
     const modalRef = this.modalService.open(PopupExperienceComponent);
     modalRef.componentInstance.title = `MODIFICATION EXPERIENCE`;
-    modalRef.componentInstance.details = {...item};
+    modalRef.componentInstance.details = { ...item };
     modalRef.componentInstance.edit = true;
   }
 
-  openDeleteExper(id: string){
+  openDeleteExper(id: string) {
     const modalRef = this.modalService.open(PopupExperienceComponent);
     modalRef.componentInstance.title = `SUPPRESSION EXPERIENCE`;
     modalRef.componentInstance.id_exp = id;
   }
 
-  changephoto(event){
-    console.log(event);
+  async changephoto(event) {
+    const fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+      const file: File = fileList[0];
 
+      if (file.type.split("/")[0] === "image") {
+        try {
+          const formData = new FormData();
+          formData.append("photo", file);
+            ((await this.profilService.changeEtudiantphoto(formData)) as any) ||
+            [];
+          this.sharedService.reloadComponent();
+        } catch (error) {
+          swal("Echec!", "Réessayer plus tard ! ", "error");
+        }
+      } else {
+        swal("Echec!", "choisir une image ! ", "error");
+      }
+    }
   }
-  changecv(event){
+  changecv(event) {}
 
-  }
-
-  submit(form:NgForm){
+  submit(form: NgForm) {
     console.log(form);
-
   }
 }

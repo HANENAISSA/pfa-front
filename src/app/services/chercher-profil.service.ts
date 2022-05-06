@@ -155,4 +155,19 @@ export class ChercherProfilService {
 
   }
 
+  changeEtudiantphoto(photo:FormData)
+  {
+    return new Promise((resolve, reject) => {
+      this.httpC.put(`${environment.api}/etudiant/profil/photo`,photo)
+        .forEach(data =>
+          {
+            resolve(data)
+          }
+        ).catch((err) => {
+          reject(err);
+        });
+    });
+
+  }
+
 }

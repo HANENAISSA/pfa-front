@@ -64,7 +64,6 @@ export class NewOffreStageComponent implements OnInit {
       }
     } catch (error) {
       swal("Echec!", "Opération non effectuée", "error");
-      return error;
     }
   }
 

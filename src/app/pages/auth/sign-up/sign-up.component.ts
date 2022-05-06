@@ -33,7 +33,6 @@ export class SignUpComponent implements OnInit {
       // this.router.navigate(['/accueil'])
     } catch (error) {
       swal("Echec!", error.error.message, "error");
-      return error;
     }
   }
 }

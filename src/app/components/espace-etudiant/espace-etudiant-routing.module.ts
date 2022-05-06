@@ -13,11 +13,14 @@ const routes: Routes = [
   {
     path: "demandesStages", component : ListDemandesEtudiantComponent,
   },
-  {
-    path: "profil/:tabid", component : FormulaireCvComponent,
-  },
+  // {
+  //   path: "profil/:tabid", component : FormulaireCvComponent,
+  // },
   {
     path: "profil", component : FormulaireCvComponent,
+  },
+  {
+    path: "entreprise/profil", component : FormulaireCvComponent,
   },
   {
     path: "introuvable", component: NotfoundComponent

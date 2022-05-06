@@ -9,9 +9,17 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-  <!-- add -->
-<div *ngIf="!this.edit && this.details==null && this.id_experience =='-1'" class="modal-body">
-  <form name="fadd" (ngSubmit)="onSubmit(fadd,'add')" #fadd="ngForm" novalidate>
+<!-- add -->
+<div
+  *ngIf="!this.edit && this.details == null && this.id_experience == '-1'"
+  class="modal-body"
+>
+  <form
+    name="fadd"
+    (ngSubmit)="onSubmit(fadd, 'add')"
+    #fadd="ngForm"
+    novalidate
+  >
     <div class="input-group">
       <span class="input-group-prepend"
         ><label class="input-group-text"
@@ -25,7 +33,6 @@
         name="nom_entreprise"
         ngModel
         #nom_entreprise="ngModel"
-
         required
       />
     </div>
@@ -34,9 +41,7 @@
       class="alert alert-danger p-2"
       role="alert"
     >
-      <span>
-        saisir nom entreprise
-      </span>
+      <span> saisir nom entreprise </span>
     </div>
     <div class="input-group">
       <span class="input-group-prepend"
@@ -44,14 +49,16 @@
           ><i class="icofont icofont-calendar"></i></label
       ></span>
       <input
-        class="form-control"
-        type="date"
+        class="form-control textbox-n"
+        [type]="htmlinputType"
+        placeholder="Date début"
         onkeydown="return false"
         name="date_debut"
         ngModel
         #dd="ngModel"
         required
-        max="{{this.actualDate| date:'yyyy-MM-dd'}}"
+        (click)="geninputtype($event)"
+        max="{{ this.actualDate | date: 'yyyy-MM-dd' }}"
       />
     </div>
     <div
@@ -62,7 +69,6 @@
       <spna>Saisir la date début</spna>
     </div>
 
-
     <div class="input-group">
       <span class="input-group-prepend"
         ><label class="input-group-text"
@@ -70,15 +76,16 @@
       ></span>
       <input
         class="form-control"
-        type="date"
+        [type]="htmlinputType"
+        placeholder="Date fin"
         onkeydown="return false"
         name="date_fin"
-        required
         ngModel
         #df="ngModel"
+        (click)="geninputtype($event)"
         required
-        min="{{dd.value| date:'yyyy-MM-dd'}}"
-        max="{{this.actualDate| date:'yyyy-MM-dd'}}"
+        min="{{ dd.value | date: 'yyyy-MM-dd' }}"
+        max="{{ this.actualDate | date: 'yyyy-MM-dd' }}"
       />
     </div>
 
@@ -98,23 +105,23 @@
       </span>
       <textarea
         class="form-control"
-        id="exampleInputDesc"
         placeholder="Description"
         name="description"
         required
-        [(ngModel)]="this.details&&this.details.description"
+        [(ngModel)]="this.details && this.details.description"
         #desc="ngModel"
-        >
+      >
       </textarea>
     </div>
     <!-- [ngClass]="{ 'is-invalid': desc.invalid && desc.touched }" -->
 
-
-    <div *ngIf="desc.invalid && desc.touched" class="alert alert-danger p-2"
-    role="alert">
-      <span >Description Obligatoire !!</span>
+    <div
+      *ngIf="desc.invalid && desc.touched"
+      class="alert alert-danger p-2"
+      role="alert"
+    >
+      <span>Description Obligatoire !!</span>
     </div>
-
 
     <div class="input-group">
       <span class="input-group-prepend"
@@ -133,11 +140,20 @@
         required
       />
     </div>
-    <div *ngIf="post.invalid && post.touched" class="alert alert-danger p-2" role="alert">
+    <div
+      *ngIf="post.invalid && post.touched"
+      class="alert alert-danger p-2"
+      role="alert"
+    >
       <span>Sujet Obligatoire !!</span>
     </div>
     <div class="modal-footer">
-      <input value="Confirmer" [disabled]="fadd.invalid" type="submit" class="btn btn-outline-primary" />
+      <input
+        value="Confirmer"
+        [disabled]="fadd.invalid"
+        type="submit"
+        class="btn btn-outline-primary"
+      />
       <button
         type="button"
         class="btn btn-outline-dark"
@@ -149,10 +165,13 @@
   </form>
 </div>
 <!-- update -->
-<div *ngIf="this.edit && this.details && this.id_experience =='-1'" class="modal-body">
+<div
+  *ngIf="this.edit && this.details && this.id_experience == '-1'"
+  class="modal-body"
+>
   <form
     name="fupdate"
-    (ngSubmit)="onSubmit(fupdate,'update')"
+    (ngSubmit)="onSubmit(fupdate, 'update')"
     #fupdate="ngForm"
     novalidate
   >
@@ -170,19 +189,17 @@
         [(ngModel)]="this.details.nom_entreprise"
         #nom_entreprise="ngModel"
         required
-        />
-      </div>
-      <!-- [ngClass]="{
+      />
+    </div>
+    <!-- [ngClass]="{
         'is-invalid': nom_entreprise.invalid && nom_entreprise.touched
       }" -->
     <div
       *ngIf="nom_entreprise.invalid && nom_entreprise.touched"
       class="alert alert-danger p-2"
-    role="alert"
+      role="alert"
     >
-      <span >
-        nom entreprise Obligatoire !!
-      </span>
+      <span> nom entreprise Obligatoire !! </span>
     </div>
     <div class="input-group">
       <span class="input-group-prepend"
@@ -194,11 +211,11 @@
         type="date"
         onkeydown="return false"
         name="date_debut"
-        [(ngModel)]="this.details&&this.details.date_debut"
+        [(ngModel)]="this.details && this.details.date_debut"
         required
         #dd="ngModel"
         required
-        max="{{this.actualDate| date:'yyyy-MM-dd'}}"
+        max="{{ this.actualDate | date: 'yyyy-MM-dd' }}"
       />
     </div>
 
@@ -217,15 +234,15 @@
       ></span>
       <input
         class="form-control"
+        [type]="htmlinputType"
         type="date"
         onkeydown="return false"
         name="date_fin"
-        required
-        [(ngModel)]="this.details&&this.details.date_fin"
+        [(ngModel)]="this.details && this.details.date_fin"
         #df="ngModel"
         required
-        min="{{dd.value| date:'yyyy-MM-dd'}}"
-        max="{{this.actualDate| date:'yyyy-MM-dd'}}"
+        min="{{ dd.value | date: 'yyyy-MM-dd' }}"
+        max="{{ this.actualDate | date: 'yyyy-MM-dd' }}"
       />
     </div>
 
@@ -245,19 +262,21 @@
       </span>
       <textarea
         class="form-control"
-        id="exampleInputDesc"
         placeholder="Description"
         name="description"
         required
-        [(ngModel)]="this.details&&this.details.description"
+        [(ngModel)]="this.details && this.details.description"
         #desc="ngModel"
-        >
+      >
       </textarea>
       <!-- [ngClass]="{ 'is-invalid': desc.invalid && desc.touched }" -->
     </div>
-    <div *ngIf="desc.invalid && desc.touched" class="alert alert-danger p-2"
-    role="alert">
-      <span >Description Obligatoire !!</span>
+    <div
+      *ngIf="desc.invalid && desc.touched"
+      class="alert alert-danger p-2"
+      role="alert"
+    >
+      <span>Description Obligatoire !!</span>
     </div>
     <div class="input-group">
       <span class="input-group-prepend"
@@ -270,21 +289,26 @@
         class="form-control"
         placeholder="Sujet"
         name="post"
-        [(ngModel)]="this.details&&this.details.post"
+        [(ngModel)]="this.details && this.details.post"
         #post="ngModel"
         required
-        />
-      </div>
-      <!-- [ngClass]="{ 'is-invalid': post.invalid && post.touched }" -->
-    <div *ngIf="post.invalid && post.touched" class="alert alert-danger p-2"
-    role="alert">
-      <span >
-        Sujet Obligatoire !!
-
-      </span>
+      />
+    </div>
+    <!-- [ngClass]="{ 'is-invalid': post.invalid && post.touched }" -->
+    <div
+      *ngIf="post.invalid && post.touched"
+      class="alert alert-danger p-2"
+      role="alert"
+    >
+      <span> Sujet Obligatoire !! </span>
     </div>
     <div class="modal-footer">
-      <input value="Confirmer" [disabled]="fupdate.invalid" type="submit" class="btn btn-outline-primary" />
+      <input
+        value="Confirmer"
+        [disabled]="fupdate.invalid"
+        type="submit"
+        class="btn btn-outline-primary"
+      />
       <button
         type="button"
         class="btn btn-outline-dark"
@@ -295,5 +319,3 @@
     </div>
   </form>
 </div>
-
-

@@ -45,7 +45,6 @@ export class PopupOffreComponent implements OnInit {
       }
     } catch (error) {
       this.listOffres = [];
-      return error;
     }
   }
 

@@ -19,7 +19,7 @@ export class FilterEtudiantComponent implements OnInit {
   searchText;
   tabSelected:any
   selectedidDomaine:string="-1"
- 
+
 
 
   page = 1;
@@ -46,11 +46,10 @@ export class FilterEtudiantComponent implements OnInit {
         )) as any) || [];
       if (!err) {
         this.listEtudiant = rows;
-        
+
       }
     } catch (error) {
       this.listEtudiant = [];
-      return error;
     }
   }
 
@@ -61,14 +60,13 @@ export class FilterEtudiantComponent implements OnInit {
         )) as any) || [];
       if (!err) {
         this.listEtudiant = rows;
-        
+
       }
     } catch (error) {
       this.listEtudiant = [];
-      return error;
     }
   }
-  
+
   async filterEtudiantsByDepContacted(id:string,id_responsable:string) {
     try {
       const { err, rows } =
@@ -76,14 +74,13 @@ export class FilterEtudiantComponent implements OnInit {
         )) as any) || [];
       if (!err) {
         this.listEtudiantContacte = rows;
-        
+
       }
     } catch (error) {
       this.listEtudiantContacte = [];
-      return error;
     }
   }
-  
+
 
 
   async loadDepartmentsList() {
@@ -92,11 +89,10 @@ export class FilterEtudiantComponent implements OnInit {
         ((await this.serviceEtudiant.getDepartementsList(
         )) as any) || [];
       if (!err) {
-        this.listDepartements = rows;         
+        this.listDepartements = rows;
       }
     } catch (error) {
       this.listDepartements = [];
-      return error;
     }
   }
 
@@ -136,7 +132,7 @@ export class FilterEtudiantComponent implements OnInit {
     this.filterCompetences(event)
   }
 
-  
+
 
   async getAllListEtudiantContacte(id_responsable:string) {
 
@@ -146,11 +142,10 @@ export class FilterEtudiantComponent implements OnInit {
         )) as any) || [];
       if (!err) {
         this.listEtudiantContacte = rows;
-        
+
       }
     } catch (error) {
       this.listEtudiantContacte = [];
-      return error;
     }
   }
 
@@ -160,11 +155,10 @@ export class FilterEtudiantComponent implements OnInit {
         ((await this.competenceService.loadCompetences(
         )) as any) || [];
       if (!err) {
-        this.listCompetences = rows; 
+        this.listCompetences = rows;
       }
     } catch (error) {
       this.listCompetences = [];
-      return error;
     }
   }
 
@@ -175,21 +169,18 @@ export class FilterEtudiantComponent implements OnInit {
         ((await this.competenceService.filterCompetences(idomaine
         )) as any) || [];
       if (!err) {
-        this.listCompetences = rows; 
+        this.listCompetences = rows;
       }
     } catch (error) {
       this.listCompetences = [];
-      return error;
     }
   }
 
   changeCompetences(){
     if(this.tabSelected.length>0){
-      
       const list=this.getSelectedValues(this.tabSelected)
       this.filterAllEtudiantsByCompetences(list)
       this.filterAllEtudiantsContactesByCompetences(list)
-
     }
     else{
       this.getAllListEtudiant();
@@ -215,11 +206,10 @@ export class FilterEtudiantComponent implements OnInit {
         ((await this.competenceService.filterAllEtudiantsByCompetences(list
         )) as any) || [];
       if (!err) {
-        this.listEtudiant = rows; 
+        this.listEtudiant = rows;
       }
     } catch (error) {
       this.listEtudiant = [];
-      return error;
     }
   }
 
@@ -230,11 +220,10 @@ export class FilterEtudiantComponent implements OnInit {
         ((await this.serviceEtudiant.getListEtudiantsContactesByCompetences(list
         )) as any) || [];
       if (!err) {
-        this.listEtudiantContacte = rows; 
+        this.listEtudiantContacte = rows;
       }
     } catch (error) {
       this.listEtudiantContacte = [];
-      return error;
     }
   }
   handlePageSizeChange(event: any): void {

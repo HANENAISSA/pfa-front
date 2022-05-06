@@ -24,7 +24,6 @@ export class EditOffreStageComponent implements OnInit {
   // event;
   actualDate:string;
   type: string;
-  disabled:boolean=false;
 
 
 
@@ -53,7 +52,6 @@ export class EditOffreStageComponent implements OnInit {
 
   async updateOffre(f: NgForm) {
     const { dd, ddure,  titre, description } = f.value;
-    this.disabled=true;
     try {
       this.offre.append("titre", titre);
       this.offre.append("date_debut", dd.toString());
@@ -87,9 +85,7 @@ export class EditOffreStageComponent implements OnInit {
         this.route.navigate(["/entreprise/offresStages"]);
       }
     } catch (error) {
-      this.disabled=false;
       swal("Echec!", "Opération non effectuée", "error");
-      return error;
     }
   }
 

@@ -39,18 +39,15 @@ export class ListDemandesEtudiantComponent implements OnInit {
       }
     } catch (error) {
       this.listdemande=[];
-      return error;
     }
   }
 
   showDemandeDetails(demande) {
-
     const modalRef = this.modalService.open(PopupOffreComponent);
     modalRef.componentInstance.title = `DETAILS OFFRE`;
     modalRef.componentInstance.details = demande;
     modalRef.componentInstance.show = true;
     modalRef.componentInstance.role = "StudentDemande";
-
   }
 
 
@@ -67,6 +64,4 @@ handlePageSizeChange(event: any): void {
   this.pageSize = event.target.value;
   this.page = 1;
 }
-
-
 }

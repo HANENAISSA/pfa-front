@@ -57,7 +57,6 @@ export class PopupDemandeComponent implements OnInit {
       }
     } catch (error) {
       this.entrepriseInfo = [];
-      return error;
     }
   }
 
@@ -94,7 +93,6 @@ export class PopupDemandeComponent implements OnInit {
 
       } catch (error) {
         swal("Echec!", "Opération non effectuée", "error");
-        return error;
       }
       this.activeModal.dismiss();
     }
@@ -138,7 +136,6 @@ export class PopupDemandeComponent implements OnInit {
 
         } catch (error) {
           swal("Echec!", "Opération non effectuée", "error");
-          return error;
         }
         this.activeModal.dismiss();
     }
@@ -155,12 +152,6 @@ export class PopupDemandeComponent implements OnInit {
         }
       } catch (error) {
         this.listOffres = [];
-        return error;
       }
     }
-
-
-
   }
-
-

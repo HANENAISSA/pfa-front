@@ -12,7 +12,7 @@ export class PopupShowCompetenceEtudiantComponent implements OnInit {
   @Input() title: string;
   @Input() etudiant= null;
 
-  
+
   listComp: any[] = [];
 
   constructor(
@@ -31,7 +31,6 @@ export class PopupShowCompetenceEtudiantComponent implements OnInit {
       }
     } catch (error) {
      this.listComp = [];
-      return error;
     }
   }
 

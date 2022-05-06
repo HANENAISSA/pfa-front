@@ -90,7 +90,6 @@ export class FormulaireCvComponent implements OnInit {
         this.listExperience = rows;
       }
     } catch (error) {
-      return error;
     }
   }
   async getListCompetence() {
@@ -101,7 +100,6 @@ export class FormulaireCvComponent implements OnInit {
         this.listCompetence = rows;
       }
     } catch (error) {
-      return error;
     }
   }
   async getEtudiantInfo() {
@@ -113,7 +111,6 @@ export class FormulaireCvComponent implements OnInit {
         console.log(this.profil);
       }
     } catch (error) {
-      return error;
     }
   }
 

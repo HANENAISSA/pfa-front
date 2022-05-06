@@ -31,27 +31,9 @@ export class ListOffresStageComponent implements OnInit {
      }
 
   ngOnInit() {
-    // this.year=new Date().getFullYear().toString();
-    // this.getAllOffreYears();
     this.etat="0";
     this.getAllOffreStages(this.etat);
   }
-
-
-  // async getAllOffreYears(){
-  //   try {
-  //     const {err,rows}=await this.sharedService.getYears(0)as any||[];
-  //     if(!err){
-  //       this.listYears=rows;
-  //     }
-
-  //   } catch (error) {
-  //     this.listYears=[];
-  //     return error;
-
-  //   }
-
-  // }
 
 
   async getAllOffreStages(etat:string){
@@ -61,13 +43,9 @@ export class ListOffresStageComponent implements OnInit {
       if(!err){
         this.listStage=rows;
       }
-
     } catch (error) {
       this.listStage=[];
-      return error;
-
     }
-
   }
 
 
@@ -75,9 +53,7 @@ export class ListOffresStageComponent implements OnInit {
     const modalRef = this.modalService.open(PopupOffreComponent);
     modalRef.componentInstance.title = `MODIFICATION D'UNE OFFRE`;
     modalRef.componentInstance.id = Number(offre.id_offre_stage);
-
     modalRef.componentInstance.offreStage = {...offre};
-
   }
 
   passerOffre(offre:OffreStage){
@@ -89,13 +65,10 @@ export class ListOffresStageComponent implements OnInit {
     const modalRef = this.modalService.open(PopupOffreComponent);
     modalRef.componentInstance.title = `SUPPRESSION OFFRE`;
     modalRef.componentInstance.id_offre_stage = Number(id_offre);
-
-
   }
   AddOffre(){
     const modalRef = this.modalService.open(PopupOffreComponent);
     modalRef.componentInstance.title = `NOUVELLE OFFRE`;
-
   }
 
   async showOffre(id_offre_stage: string) {
@@ -112,7 +85,6 @@ export class ListOffresStageComponent implements OnInit {
     const modalRef = this.modalService.open(PopupOffreComponent);
     modalRef.componentInstance.title = `NOUVELLE OFFRE`;
     modalRef.componentInstance.show = true;
-
   }
 
   async getOneOffreDetails(id_offre_stage:string,callback){
@@ -121,15 +93,10 @@ export class ListOffresStageComponent implements OnInit {
       if(!err){
         callback(rows)
       }
-
     } catch (error) {
-      return error;
-
     }
 
   }
-
-
 
   changeEtat(event){
     this.listStage = [null];
@@ -142,8 +109,6 @@ export class ListOffresStageComponent implements OnInit {
     this.pageSize = event.target.value;
     this.page = 1;
   }
-
-
   async closeOpenOffre(id_offre_stage:number,id_etat_offre:string){
     try {
       const {err,rows}=await this.offreStageServ.closeOpenOffre(id_offre_stage.toString(),id_etat_offre)as any||[];
@@ -153,8 +118,6 @@ export class ListOffresStageComponent implements OnInit {
       }
     } catch (error) {
       swal("Échec!", "Opération non effectuée", "error");
-      return error;
-
     }
   }
 

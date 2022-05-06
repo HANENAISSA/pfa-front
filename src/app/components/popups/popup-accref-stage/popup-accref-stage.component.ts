@@ -28,15 +28,13 @@ export class PopupAccrefStageComponent implements OnInit {
         this.activeModal.dismiss();
         this.sharedService.reloadComponent();
 
-      } 
+      }
     }
     catch (error) {
       swal("Échec!", "Opération non effectuée", "error");
       this.activeModal.dismiss();
-      return error;
-
    }
-    
+
   }
 
 }

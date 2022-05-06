@@ -24,7 +24,10 @@ const routes: Routes = [
     path: "nouvelle", component: NewOffreStageComponent
   },
   {
-    path: "profil/:id", component: ProfileComponent
+    path: "profil", component: ProfileComponent
+  },
+  {
+    path: "etudiant/profil", component: ProfileComponent
   },
   {
     path: "modif", component: EditOffreStageComponent

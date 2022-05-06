@@ -33,8 +33,6 @@ export class ListOffresEtudiantComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.getAllOffreYears();
-
     this.getAllOffreStages();
   }
 
@@ -47,7 +45,6 @@ export class ListOffresEtudiantComponent implements OnInit {
 
   //   } catch (error) {
   //     this.listYears=[];
-  //     return error;
 
   //   }
 
@@ -62,7 +59,6 @@ export class ListOffresEtudiantComponent implements OnInit {
       }
     } catch (error) {
       this.listStage = [];
-      return error;
     }
   }
   async showOffre(id_offre_stage: string) {
@@ -80,7 +76,6 @@ export class ListOffresEtudiantComponent implements OnInit {
         modalRef.componentInstance.details = data[0];
       });
     } catch (error) {
-      return error;
     }
   }
 
@@ -94,7 +89,6 @@ export class ListOffresEtudiantComponent implements OnInit {
         callback(rows);
       }
     } catch (error) {
-      return error;
     }
   }
 
@@ -122,7 +116,6 @@ export class ListOffresEtudiantComponent implements OnInit {
       }
     } catch (error) {
       swal("Échec!", "Postulation non effectuée", "error");
-      return error;
     }
   }
 }

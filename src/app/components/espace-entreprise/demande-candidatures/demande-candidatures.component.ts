@@ -46,7 +46,6 @@ export class DemandeCandidaturesComponent implements OnInit {
       }
     } catch (error) {
       this.listCandidature = [];
-      return error;
     }
   }
 
@@ -70,7 +69,6 @@ export class DemandeCandidaturesComponent implements OnInit {
       }
     }
     catch (error) {
-     return error;
    }
   }
 

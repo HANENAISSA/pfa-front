@@ -28,7 +28,6 @@ export class VerifauthComponent implements OnInit {
       this.validation=true;
     } catch (error) {
       this.router.navigate(['/introuvable'])
-      return error;
     }
   }
 }

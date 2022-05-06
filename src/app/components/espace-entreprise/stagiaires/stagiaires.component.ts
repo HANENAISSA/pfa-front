@@ -43,7 +43,6 @@ export class StagiairesComponent implements OnInit {
       }
     } catch (error) {
       this.listeStagiaires = [];
-      return error;
     }
   }
 
@@ -60,11 +59,10 @@ export class StagiairesComponent implements OnInit {
       }
     } catch (error) {
       this.listOffres = [];
-      return error;
     }
   }
 
- 
+
 
 
 
@@ -83,9 +81,5 @@ export class StagiairesComponent implements OnInit {
     this.pageSize = event.target.value;
     this.page = 1;
   }
-
- 
-
-
 }
 

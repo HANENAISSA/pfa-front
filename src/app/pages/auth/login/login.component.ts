@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
       }
     } catch (error) {
       swal("Echec!", error.error.message, "error");
-      return error;
     }
   }
 }

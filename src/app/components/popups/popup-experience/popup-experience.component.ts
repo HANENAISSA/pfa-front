@@ -19,13 +19,15 @@ export class PopupExperienceComponent implements OnInit {
 
   actualDate:string;
 
+  htmlinputType:string;
   constructor(
     public activeModal: NgbActiveModal,
     public sharedService: SharedServiceService,
     public serviceExperience: ExperienceService,
     public serviceComptence: CompetenceService
   ) {
-    this.actualDate=new Date().toDateString()
+    this.actualDate=new Date().toDateString();
+    this.htmlinputType='text';
   }
 
   ngOnInit() {
@@ -73,5 +75,8 @@ export class PopupExperienceComponent implements OnInit {
     this.activeModal.dismiss();
   }
 
+  geninputtype(){
+    this.htmlinputType='date';
+  }
 
 }

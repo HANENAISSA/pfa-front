@@ -65,9 +65,5 @@ export class PopupCompetenceComponent implements OnInit {
       swal("Echec!", "Opération non effectuée", "error");
     }
     this.activeModal.dismiss();
-
   }
-
-
-
 }

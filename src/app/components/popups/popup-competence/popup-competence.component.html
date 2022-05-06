@@ -12,7 +12,7 @@
 
 <!-- add -->
 
-<div *ngIf="!this.edit && !this.details && this.id_com =='-1'" class="modal-body">
+<div *ngIf="!this.edit && !this.details && this.id_competence =='-1'" class="modal-body">
   <form name="fadd" (ngSubmit)="onSubmit(fadd,'add')" #fadd="ngForm" novalidate>
     <div class="input-group">
       <span class="input-group-prepend"
@@ -22,12 +22,10 @@
       <input
         type="text"
         class="form-control"
-        id="exampleInputNP"
         placeholder="Libelle"
         name="libelle"
         ngModel
         #libelle="ngModel"
-        [ngClass]="{ 'is-invalid': libelle.invalid && libelle.touched }"
         required
       />
     </div>
@@ -55,14 +53,14 @@
         <option value="4">Expert</option>
 
       </select>
-     
+
     </div>
     <div *ngIf="(niveau.touched&&niveau.value==-1)" class="alert alert-danger p-2" role="alert">
           <span>Niveau obligatoire !! </span>
     </div>
 
     <div class="modal-footer">
-      <input value="Confirmer" [disabled]="fadd.invalid||niveau.value=='-1'||this.disabled" type="submit" class="btn btn-outline-primary" />
+      <input value="Confirmer" [disabled]="fadd.invalid||niveau.value=='-1'" type="submit" class="btn btn-outline-primary" />
       <button
         type="button"
         class="btn btn-outline-dark"
@@ -74,7 +72,7 @@
   </form>
 </div>
 <!-- update -->
-<div  *ngIf="this.edit && this.details && this.id_com =='-1'" class="modal-body">
+<div  *ngIf="this.edit && this.details && this.id_competence =='-1'" class="modal-body">
   <form name="fupdate" (ngSubmit)="onSubmit(fupdate,'update')" #fupdate="ngForm" novalidate>
     <div class="input-group">
       <span class="input-group-prepend"
@@ -84,14 +82,13 @@
       <input
         type="text"
         class="form-control"
-        id="exampleInputNP"
         placeholder="Libelle"
         name="libelle"
         [(ngModel)]="this.details.libelle"
         #libelle="ngModel"
-        [ngClass]="{ 'is-invalid': libelle.invalid && libelle.touched }"
         required
       />
+        <!-- [ngClass]="{ 'is-invalid': libelle.invalid && libelle.touched }" -->
       <div *ngIf="libelle.invalid && libelle.touched" class="invalid-feedback">
         <div *ngIf="libelle.errors.required">Libelle Obligatoire !!</div>
       </div>
@@ -108,18 +105,15 @@
         class="form-control"
         required
       >
-        <!-- <ng-container *ngFor="let voiture of this.voitureList;let i=index;"> -->
           <option value="0">Débutant</option>
           <option value="1">Amateur</option>
           <option value="2">Intermédiaire</option>
           <option value="3">Avancé</option>
           <option value="4">Expert</option>
-
-        <!-- </ng-container> -->
       </select>
     </div>
     <div class="modal-footer">
-      <input value="Confirmer" [disabled]="fupdate.invalid||this.disabled" type="submit" class="btn btn-outline-primary" />
+      <input value="Confirmer" [disabled]="fupdate.invalid" type="submit" class="btn btn-outline-primary" />
       <button
         type="button"
         class="btn btn-outline-dark"
@@ -129,28 +123,4 @@
       </button>
     </div>
   </form>
-</div>
-<!-- delete -->
-<div *ngIf="this.id_com !='-1' && this.details==null" class="modal-body">
-  <!-- <form name="fdelete" (ngSubmit)="onSubmit(fdelete)" #fdelete="ngForm" novalidate> -->
-    <div class="modal-body">
-      <tbody style="text-align:center" >
-        <tr>
-          <th scope="row">Voulez vous supprimer cette compétence ?</th>                        
-        </tr>    
-                          
-      </tbody>
-    </div>
-    <div class="modal-footer">
-      <button type="button" [disabled]="this.disabled" class="btn btn-outline-primary"
-      (click)="this.deleteComp()">Confirmer</button>
-      <button
-        type="button"
-        class="btn btn-outline-dark"
-        (click)="activeModal.close('Close click')"
-      >
-        Fermer
-      </button>
-    </div>
-  <!-- </form> -->
 </div>

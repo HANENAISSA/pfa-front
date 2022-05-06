@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
       if (!err) {
         this.sharedService.setCookie("token", token, 7);
         this.router.navigate(['/etudiant']);
-        // console.log(id_role,token);
       }
     } catch (error) {
       swal("Echec!", error.error.message, "error");

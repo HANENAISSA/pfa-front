@@ -10,7 +10,7 @@
   </button>
 </div>
   <!-- add -->
-<div *ngIf="!this.edit && !this.details && this.id_exp =='-1'" class="modal-body">
+<div *ngIf="!this.edit && this.details==null && this.id_experience =='-1'" class="modal-body">
   <form name="fadd" (ngSubmit)="onSubmit(fadd,'add')" #fadd="ngForm" novalidate>
     <div class="input-group">
       <span class="input-group-prepend"
@@ -21,14 +21,11 @@
       <input
         type="text"
         class="form-control"
-        id="exampleInputNP"
         placeholder="Nom entreprise"
         name="nom_entreprise"
         ngModel
         #nom_entreprise="ngModel"
-        [ngClass]="{
-          'is-invalid': nom_entreprise.invalid && nom_entreprise.touched
-        }"
+
         required
       />
     </div>
@@ -38,7 +35,7 @@
       role="alert"
     >
       <span>
-        nom entreprise Obligatoire !!
+        saisir nom entreprise
       </span>
     </div>
     <div class="input-group">
@@ -52,10 +49,9 @@
         onkeydown="return false"
         name="date_debut"
         ngModel
-        required
         #dd="ngModel"
         required
-        max="{{df.value| date:'yyyy-MM-dd'}}"
+        max="{{this.actualDate| date:'yyyy-MM-dd'}}"
       />
     </div>
     <div
@@ -82,6 +78,7 @@
         #df="ngModel"
         required
         min="{{dd.value| date:'yyyy-MM-dd'}}"
+        max="{{this.actualDate| date:'yyyy-MM-dd'}}"
       />
     </div>
 
@@ -105,12 +102,12 @@
         placeholder="Description"
         name="description"
         required
-        [ngClass]="{ 'is-invalid': desc.invalid && desc.touched }"
-        [(ngModel)]="this.model.description"
+        [(ngModel)]="this.details&&this.details.description"
         #desc="ngModel"
-      >
+        >
       </textarea>
     </div>
+    <!-- [ngClass]="{ 'is-invalid': desc.invalid && desc.touched }" -->
 
 
     <div *ngIf="desc.invalid && desc.touched" class="alert alert-danger p-2"
@@ -125,23 +122,22 @@
           ><i class="icofont icofont-ui-user-group"></i
         ></label>
       </span>
+      <!-- [ngClass]="{ 'is-invalid': post.invalid && post.touched }" -->
       <input
         type="text"
         class="form-control"
-        id="exampleInputNP"
-        placeholder="Poste"
+        placeholder="Sujet"
         name="post"
         ngModel
         #post="ngModel"
-        [ngClass]="{ 'is-invalid': post.invalid && post.touched }"
         required
       />
     </div>
     <div *ngIf="post.invalid && post.touched" class="alert alert-danger p-2" role="alert">
-      <span>Poste Obligatoire !!</span>
+      <span>Sujet Obligatoire !!</span>
     </div>
     <div class="modal-footer">
-      <input value="Confirmer" [disabled]="fadd.invalid||this.disabled" type="submit" class="btn btn-outline-primary" />
+      <input value="Confirmer" [disabled]="fadd.invalid" type="submit" class="btn btn-outline-primary" />
       <button
         type="button"
         class="btn btn-outline-dark"
@@ -153,7 +149,7 @@
   </form>
 </div>
 <!-- update -->
-<div *ngIf="this.edit && this.details && this.id_exp =='-1'" class="modal-body">
+<div *ngIf="this.edit && this.details && this.id_experience =='-1'" class="modal-body">
   <form
     name="fupdate"
     (ngSubmit)="onSubmit(fupdate,'update')"
@@ -169,17 +165,16 @@
       <input
         type="text"
         class="form-control"
-        id="exampleInputNP"
         placeholder="Nom entreprise"
         name="nom_entreprise"
         [(ngModel)]="this.details.nom_entreprise"
         #nom_entreprise="ngModel"
-        [ngClass]="{
-          'is-invalid': nom_entreprise.invalid && nom_entreprise.touched
-        }"
         required
-      />
-    </div>
+        />
+      </div>
+      <!-- [ngClass]="{
+        'is-invalid': nom_entreprise.invalid && nom_entreprise.touched
+      }" -->
     <div
       *ngIf="nom_entreprise.invalid && nom_entreprise.touched"
       class="alert alert-danger p-2"
@@ -199,11 +194,11 @@
         type="date"
         onkeydown="return false"
         name="date_debut"
-        [(ngModel)]="this.details.date_debut"
+        [(ngModel)]="this.details&&this.details.date_debut"
         required
         #dd="ngModel"
         required
-        max="{{df.value| date:'yyyy-MM-dd'}}"
+        max="{{this.actualDate| date:'yyyy-MM-dd'}}"
       />
     </div>
 
@@ -226,10 +221,11 @@
         onkeydown="return false"
         name="date_fin"
         required
-        [(ngModel)]="this.details.date_fin"
+        [(ngModel)]="this.details&&this.details.date_fin"
         #df="ngModel"
         required
         min="{{dd.value| date:'yyyy-MM-dd'}}"
+        max="{{this.actualDate| date:'yyyy-MM-dd'}}"
       />
     </div>
 
@@ -253,11 +249,11 @@
         placeholder="Description"
         name="description"
         required
-        [ngClass]="{ 'is-invalid': desc.invalid && desc.touched }"
-        [(ngModel)]="this.details.description"
+        [(ngModel)]="this.details&&this.details.description"
         #desc="ngModel"
-      >
+        >
       </textarea>
+      <!-- [ngClass]="{ 'is-invalid': desc.invalid && desc.touched }" -->
     </div>
     <div *ngIf="desc.invalid && desc.touched" class="alert alert-danger p-2"
     role="alert">
@@ -272,24 +268,23 @@
       <input
         type="text"
         class="form-control"
-        id="exampleInputNP"
-        placeholder="Poste"
+        placeholder="Sujet"
         name="post"
-        [(ngModel)]="this.details.post"
+        [(ngModel)]="this.details&&this.details.post"
         #post="ngModel"
-        [ngClass]="{ 'is-invalid': post.invalid && post.touched }"
         required
-      />
-    </div>
+        />
+      </div>
+      <!-- [ngClass]="{ 'is-invalid': post.invalid && post.touched }" -->
     <div *ngIf="post.invalid && post.touched" class="alert alert-danger p-2"
     role="alert">
       <span >
-        Poste Obligatoire !!
+        Sujet Obligatoire !!
 
       </span>
     </div>
     <div class="modal-footer">
-      <input value="Confirmer" [disabled]="fupdate.invalid||this.disabled" type="submit" class="btn btn-outline-primary" />
+      <input value="Confirmer" [disabled]="fupdate.invalid" type="submit" class="btn btn-outline-primary" />
       <button
         type="button"
         class="btn btn-outline-dark"
@@ -300,25 +295,5 @@
     </div>
   </form>
 </div>
-<!-- delete -->
-<div *ngIf="this.id_exp !='-1' && this.details==null"  class="modal-body">
-  <tbody style="text-align:center" >
-    <tr>
-      <th scope="row">Voulez vous supprimer cette expérience ?</th>                        
-    </tr>    
-                      
-  </tbody>
-  <div class="modal-footer">
-    <input value="Confirmer" [disabled]="this.disabled" type="button" class="btn btn-outline-primary"
-      (click)="deleteExper()"
-    />
-    <button
-      type="button"
-      class="btn btn-outline-dark"
-      (click)="activeModal.close('Close click')"
-    >
-      Fermer
-    </button>
-  </div>
-</div>
+
 

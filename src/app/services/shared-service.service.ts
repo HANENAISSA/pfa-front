@@ -28,7 +28,7 @@ export class SharedServiceService {
     this.router.navigateByUrl("/", { skipLocationChange: true }).then(() => {
       if (tabid && tabid != 0)
         // this.router.navigate([currentRoute+"/"+tabid]);
-        this.router.navigate(["/etudiant/cv", tabid.toString()]);
+        this.router.navigate(["/etudiant/profil", tabid.toString()]);
       else this.router.navigate([currentRoute]);
       // navigate to same route
     });

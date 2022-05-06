@@ -12,106 +12,66 @@ import swal from "sweetalert";
   styleUrls: ["./popup-experience.component.scss"],
 })
 export class PopupExperienceComponent implements OnInit {
-  @Input() show: boolean = false;
-  @Input() id_exp: string = "-1";
+  @Input() id_experience: string = "-1";
   @Input() title: string;
-  @Input() object: any = null;
   @Input() details: any = null;
   @Input() edit: boolean = false;
-  model: any = {};
-  maycv: any[] = [];
-  disabled:boolean=false;
+
+  actualDate:string;
 
   constructor(
     public activeModal: NgbActiveModal,
     public sharedService: SharedServiceService,
     public serviceExperience: ExperienceService,
     public serviceComptence: CompetenceService
-  ) {}
+  ) {
+    this.actualDate=new Date().toDateString()
+  }
 
   ngOnInit() {
-    this.getMyCV("1");
   }
 
-  async onSubmit(form: NgForm, typeOp: string) {
-    switch (typeOp) {
+  async onSubmit(form: NgForm, action: string) {
+    switch (action) {
       case "add":
-        this.addExper(form);
+        this.addExperience(form);
         break;
       case "update":
-        this.updateExper(form);
-        break;
-      default:
+        this.updateExperience(form);
         break;
     }
   }
 
-  async getMyCV(id: string) {
+  async addExperience(form: NgForm){
     try {
-      const { err, rows, message } =
-        (await this.serviceComptence.getCvByEtudiant()) as any;
-      if (!err && rows.length > 0) {
-        this.maycv = rows;
-      }
-    } catch (error) {
-      return error;
-    }
-  }
-
-  async addExper(form: NgForm){
-    try {
-      this.disabled=true;
-      const { err, rows, message } =
+      const { err } =
         (await this.serviceExperience.addExperience({
           ...form.value,
-          id_cv: this.maycv[0].id_cv,
         })) as any;
       if (!err) {
-        swal("Succès!", "Ajout effectué avec succès", "success");
-        this.activeModal.dismiss();
         this.sharedService.reloadComponent(2);
+        swal("Succès!", "Ajout effectué avec succès", "success");
       }
     } catch (error) {
-      this.disabled=false;
       swal("Échec!", "Opération non effectuée", "error");
-      this.activeModal.dismiss();
-      return error;
     }
+    this.activeModal.dismiss();
   }
 
-  async updateExper(form: NgForm) {
+  async updateExperience(form: NgForm) {
     try {
-      this.disabled=true;
-      const { err, rows } = (await this.serviceExperience.updateExperience(
+      const { err } = (await this.serviceExperience.updateExperience(
         {...form.value, id_experience: this.details.id_experience.toString()}
       )) as any;
       if (!err) {
-        swal("Succès!", "Opération effectuée avec succès", "success");
-        this.activeModal.dismiss();
         this.sharedService.reloadComponent(2);
+        swal("Succès!", "Opération effectuée avec succès", "success");
       }
     } catch (error) {
-      this.disabled=false;
       swal("Echec!", "Opération non effectuée", "error");
-      this.activeModal.dismiss();
-      return error;
     }
+    this.activeModal.dismiss();
   }
 
-  async deleteExper() {
-    try {
-      this.disabled=true;
-      const { err, rows } = (await this.serviceExperience.deleteExperience(this.id_exp)) as any;
-      if (!err) {
-        swal("Succès!", "Opération effectuée avec succès", "success");
-        this.activeModal.dismiss();
-        this.sharedService.reloadComponent(2);
-      }
-    } catch (error) {
-      this.disabled=false;
-      // this.activeModal.dismiss();
-      swal("Echec!", "Opération non effectuée", "error");
-      return error;
-    }
-  }
+
 }

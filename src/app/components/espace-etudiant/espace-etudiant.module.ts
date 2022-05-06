@@ -10,8 +10,6 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { PagesModule } from '../../pages/pages.module';
 
 
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptorService } from '../../services/token-interceptor.service';
 
 
 @NgModule({
@@ -35,11 +33,7 @@ import { TokenInterceptorService } from '../../services/token-interceptor.servic
     ListDemandesEtudiantComponent,
     ListOffresEtudiantComponent
   ],
-  providers:[{
-    provide:HTTP_INTERCEPTORS,
-    useClass:TokenInterceptorService,
-    multi:true
-  }],
+
   schemas: [NO_ERRORS_SCHEMA],
 
 })

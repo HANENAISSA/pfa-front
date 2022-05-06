@@ -21,6 +21,8 @@ import { FormsModule } from '@angular/forms';
 import { VerifauthComponent } from './verifauth/verifauth.component';
 import { LoginComponent } from './auth/login/login.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptorService } from '../services/token-interceptor.service';
 
 
 
@@ -69,6 +71,10 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     FormsModule
   ],
   schemas: [NO_ERRORS_SCHEMA],
-
+  providers:[{
+    provide:HTTP_INTERCEPTORS,
+    useClass:TokenInterceptorService,
+    multi:true
+  }],
 })
 export class PagesModule { }

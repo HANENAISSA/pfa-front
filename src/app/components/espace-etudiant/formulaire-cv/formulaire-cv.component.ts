@@ -1,14 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { animate, style, transition, trigger } from "@angular/animations";
-import { ActivatedRoute, Router } from "@angular/router";
-import { DemandeStageEntreprise } from "../../../models/demande-stage-entreprise";
-import { FormulaireCvServiceService } from "../../../services/formulaire-cv-service.service";
 import { SharedServiceService } from "../../../services/shared-service.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ExperienceService } from "../../../services/experience.service";
 import { CompetenceService } from "../../../services/competence.service";
 import { PopupExperienceComponent } from "../../popups/popup-experience/popup-experience.component";
-import { OffreStageServiceService } from "../../../services/offre-stage-service.service";
 import { Competence } from "../../../models/competence";
 import { Experience } from "../../../models/experience";
 import { PopupCompetenceComponent } from "../../popups/popup-competence/popup-competence.component";
@@ -57,14 +53,10 @@ export class FormulaireCvComponent implements OnInit {
   actifTabid: number;
 
   constructor(
-    private offreStageServ: OffreStageServiceService,
-    private formCvServ: FormulaireCvServiceService,
     public sharedService: SharedServiceService,
     private modalService: NgbModal,
     private serviceExperience: ExperienceService,
     private servicecompetence: CompetenceService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
     private profilService: ChercherProfilService
   ) {
     this.actualDate = new Date().toDateString();
@@ -133,7 +125,6 @@ export class FormulaireCvComponent implements OnInit {
   addComptence() {
     const modalRef = this.modalService.open(PopupCompetenceComponent);
     modalRef.componentInstance.title = `NOUVELLE COMPETENCE`;
-    modalRef.componentInstance.show = true;
   }
 
   openUpdateComp(item) {
@@ -142,11 +133,21 @@ export class FormulaireCvComponent implements OnInit {
     modalRef.componentInstance.details = { ...item };
     modalRef.componentInstance.edit = true;
   }
-  openDeleteComp(id: string) {
-    const modalRef = this.modalService.open(PopupCompetenceComponent);
-    modalRef.componentInstance.title = `SUPPRESSION COMPETENCE`;
-    modalRef.componentInstance.id_com = id;
+
+
+  openDeleteComp(id_competence: string) {
+    swal({
+      title: "Voulez-vous supprimer la compétence?",
+      buttons:['cancel','confirm'],
+      closeOnEsc:true,
+      closeOnClickOutside:true
+    }).then((result) => {
+      if(result){
+        this.deleteComp(id_competence);
+      }
+    });
   }
+
 
   openUpdateExper(item) {
     const modalRef = this.modalService.open(PopupExperienceComponent);
@@ -155,17 +156,23 @@ export class FormulaireCvComponent implements OnInit {
     modalRef.componentInstance.edit = true;
   }
 
-  openDeleteExper(id: string) {
-    const modalRef = this.modalService.open(PopupExperienceComponent);
-    modalRef.componentInstance.title = `SUPPRESSION EXPERIENCE`;
-    modalRef.componentInstance.id_exp = id;
+  openDeleteExper(id_experience: string) {
+    swal({
+      title: "Voulez-vous supprimer l'expérience?",
+      buttons:['cancel','confirm'],
+      closeOnEsc:true,
+      closeOnClickOutside:true
+    }).then((result) => {
+      if(result){
+        this.deleteExperience(id_experience);
+      }
+    });
   }
 
   async changephoto(event) {
     const fileList: FileList = event.target.files;
     if (fileList.length > 0) {
       const file: File = fileList[0];
-
       if (file.type.split("/")[0] === "image") {
         try {
           const formData = new FormData();
@@ -186,4 +193,30 @@ export class FormulaireCvComponent implements OnInit {
   submit(form: NgForm) {
     console.log(form);
   }
+
+
+
+  async deleteComp(id_competence:string) {
+    try {
+      const { err } = (await this.servicecompetence.deleteCompetence(id_competence)) as any;
+      if (!err) {
+        this.sharedService.reloadComponent(1);
+        swal("Succès!", "Opération effectuée avec succès", "success");
+      }
+    } catch (error) {
+      swal("Echec!", "Opération non effectuée", "error");
+    }
+  }
+  async deleteExperience(id_experience:string) {
+    try {
+      const { err } = (await this.serviceExperience.deleteExperience(id_experience)) as any;
+      if (!err) {
+        this.sharedService.reloadComponent(2);
+        swal("Succès!", "Opération effectuée avec succès", "success");
+      }
+    } catch (error) {
+      swal("Echec!", "Opération non effectuée", "error");
+    }
+  }
+
 }

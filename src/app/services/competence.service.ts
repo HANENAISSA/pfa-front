@@ -12,7 +12,7 @@ export class CompetenceService {
   addCompetence(competence : Competence){
 
     return new Promise((resolve, reject) => {
-      this.httpC.post(`${environment.api}/competence/add`, competence)
+      this.httpC.post(`${environment.api}/competences/add`, competence)
         .forEach(data =>{
           resolve(data)
         }
@@ -22,11 +22,9 @@ export class CompetenceService {
     });
   }
 
-  updateCompetence(competence : Competence){
-
+  updateCompetence(id_competence){
     return new Promise((resolve, reject) => {
-
-      this.httpC.patch(`${environment.api}/competence/update`, competence)
+      this.httpC.patch(`${environment.api}/competences/update`, id_competence)
         .forEach(data =>
           resolve(data)
         ).catch((err) => {
@@ -38,7 +36,7 @@ export class CompetenceService {
   deleteCompetence(id_competence: string){
 
       return new Promise((resolve, reject) => {
-        this.httpC.delete(`${environment.api}/competence/delete/${id_competence}`)
+        this.httpC.delete(`${environment.api}/competences/delete/${id_competence}`)
           .forEach(data =>
             resolve(data)
           ).catch((err) => {
@@ -51,7 +49,7 @@ export class CompetenceService {
   getListCompetence()
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/competence/getAll`)
+      this.httpC.get(`${environment.api}/competences/getAll`)
         .forEach(data =>
           {
             resolve(data)
@@ -64,28 +62,28 @@ export class CompetenceService {
 
   }
 
-  getCvByEtudiant()
-  {
-    return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/cv/getCvByEtudiant`)
-        .forEach(data =>
-          {
-            resolve(data)
-          }
+  // getCvByEtudiant()
+  // {
+  //   return new Promise((resolve, reject) => {
+  //     this.httpC.get(`${environment.api}/cv/getCvByEtudiant`)
+  //       .forEach(data =>
+  //         {
+  //           resolve(data)
+  //         }
 
-        ).catch((err) => {
-          reject(err);
-        });
-    });
+  //       ).catch((err) => {
+  //         reject(err);
+  //       });
+  //   });
 
-  }
+  // }
 
 
 
   loadCompetences()
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/competence/loadCompetences`)
+      this.httpC.get(`${environment.api}/competences/loadCompetences`)
         .forEach(data =>
           {
             resolve(data)
@@ -102,7 +100,7 @@ export class CompetenceService {
   filterCompetences(idomaine:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/competence/filterCompetences/${idomaine}`)
+      this.httpC.get(`${environment.api}/competences/filterCompetences/${idomaine}`)
         .forEach(data =>
           {
             resolve(data)

@@ -14,6 +14,9 @@ const routes: Routes = [
     path: "demandesStages", component : ListDemandesEtudiantComponent,
   },
   {
+    path: "profil/:tabid", component : FormulaireCvComponent,
+  },
+  {
     path: "profil", component : FormulaireCvComponent,
   },
   {

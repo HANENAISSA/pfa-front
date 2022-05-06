@@ -1,60 +1,79 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {animate, AUTO_STYLE, state, style, transition, trigger} from '@angular/animations';
-import {MenuItems} from '../../shared/menu-items/menu-items';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import {
+  animate,
+  AUTO_STYLE,
+  state,
+  style,
+  transition,
+  trigger,
+} from "@angular/animations";
+import { MenuItems } from "../../shared/menu-items/menu-items";
+import { SharedServiceService } from "../../services/shared-service.service";
 
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss'],
+  selector: "app-admin",
+  templateUrl: "./admin.component.html",
+  styleUrls: ["./admin.component.scss"],
   animations: [
-    trigger('mobileMenuTop', [
-      state('no-block, void',
+    trigger("mobileMenuTop", [
+      state(
+        "no-block, void",
         style({
-          overflow: 'hidden',
-          height: '0px',
+          overflow: "hidden",
+          height: "0px",
         })
       ),
-      state('yes-block',
+      state(
+        "yes-block",
         style({
           height: AUTO_STYLE,
         })
       ),
-      transition('no-block <=> yes-block', [
-        animate('400ms ease-in-out')
-      ])
+      transition("no-block <=> yes-block", [animate("400ms ease-in-out")]),
     ]),
-    trigger('slideInOut', [
-      state('in', style({
-        transform: 'translate3d(0, 0, 0)'
-      })),
-      state('out', style({
-        transform: 'translate3d(100%, 0, 0)'
-      })),
-      transition('in => out', animate('400ms ease-in-out')),
-      transition('out => in', animate('400ms ease-in-out'))
+    trigger("slideInOut", [
+      state(
+        "in",
+        style({
+          transform: "translate3d(0, 0, 0)",
+        })
+      ),
+      state(
+        "out",
+        style({
+          transform: "translate3d(100%, 0, 0)",
+        })
+      ),
+      transition("in => out", animate("400ms ease-in-out")),
+      transition("out => in", animate("400ms ease-in-out")),
     ]),
-    trigger('slideOnOff', [
-      state('on', style({
-        transform: 'translate3d(0, 0, 0)'
-      })),
-      state('off', style({
-        transform: 'translate3d(100%, 0, 0)'
-      })),
-      transition('on => off', animate('400ms ease-in-out')),
-      transition('off => on', animate('400ms ease-in-out'))
+    trigger("slideOnOff", [
+      state(
+        "on",
+        style({
+          transform: "translate3d(0, 0, 0)",
+        })
+      ),
+      state(
+        "off",
+        style({
+          transform: "translate3d(100%, 0, 0)",
+        })
+      ),
+      transition("on => off", animate("400ms ease-in-out")),
+      transition("off => on", animate("400ms ease-in-out")),
     ]),
-    trigger('fadeInOutTranslate', [
-      transition(':enter', [
-        style({opacity: 0}),
-        animate('400ms ease-in-out', style({opacity: 1}))
+    trigger("fadeInOutTranslate", [
+      transition(":enter", [
+        style({ opacity: 0 }),
+        animate("400ms ease-in-out", style({ opacity: 1 })),
       ]),
-      transition(':leave', [
-        style({transform: 'translate(0)'}),
-        animate('400ms ease-in-out', style({opacity: 0}))
-      ])
-    ])
-  ]
+      transition(":leave", [
+        style({ transform: "translate(0)" }),
+        animate("400ms ease-in-out", style({ opacity: 0 })),
+      ]),
+    ]),
+  ],
 })
 export class AdminComponent implements OnInit {
   navType: string; /* st1, st2(default), st3, st4 */
@@ -98,49 +117,53 @@ export class AdminComponent implements OnInit {
   isSidebarChecked: boolean;
   isHeaderChecked: boolean;
 
-  @ViewChild('searchFriends', /* TODO: add static flag */ {static: false}) search_friends: ElementRef;
+  @ViewChild("searchFriends", /* TODO: add static flag */ { static: false })
+  search_friends: ElementRef;
 
   public config: any;
 
-  constructor(public menuItems: MenuItems, private modalService: NgbModal) {
-    this.navType = 'st5';
-    this.themeLayout = 'vertical';
-    this.vNavigationView = 'view1';
-    this.verticalPlacement = 'left';
-    this.verticalLayout = 'wide';
-    this.deviceType = 'desktop';
-    this.verticalNavType = 'expanded';
-    this.verticalEffect = 'shrink';
-    this.pcodedHeaderPosition = 'fixed';
-    this.pcodedSidebarPosition = 'fixed';
-    this.headerTheme = 'theme1';
-    this.logoTheme = 'theme1';
+  constructor(
+    public menuItems: MenuItems,
+    private sharedService: SharedServiceService
+  ) {
+    this.navType = "st5";
+    this.themeLayout = "vertical";
+    this.vNavigationView = "view1";
+    this.verticalPlacement = "left";
+    this.verticalLayout = "wide";
+    this.deviceType = "desktop";
+    this.verticalNavType = "expanded";
+    this.verticalEffect = "shrink";
+    this.pcodedHeaderPosition = "fixed";
+    this.pcodedSidebarPosition = "fixed";
+    this.headerTheme = "theme1";
+    this.logoTheme = "theme1";
 
     this.toggleOn = true;
 
-    this.headerFixedMargin = '80px';
-    this.navBarTheme = 'themelight1';
-    this.activeItemTheme = 'theme4';
+    this.headerFixedMargin = "80px";
+    this.navBarTheme = "themelight1";
+    this.activeItemTheme = "theme4";
 
-    this.isCollapsedMobile = 'no-block';
-    this.isCollapsedSideBar = 'no-block';
+    this.isCollapsedMobile = "no-block";
+    this.isCollapsedSideBar = "no-block";
 
-    this.chatToggle = 'out';
-    this.chatToggleInverse = 'in';
-    this.chatInnerToggle = 'off';
-    this.chatInnerToggleInverse = 'on';
+    this.chatToggle = "out";
+    this.chatToggleInverse = "in";
+    this.chatInnerToggle = "off";
+    this.chatInnerToggleInverse = "on";
 
-    this.menuTitleTheme = 'theme5';
+    this.menuTitleTheme = "theme5";
     this.itemBorder = true;
-    this.itemBorderStyle = 'none';
+    this.itemBorderStyle = "none";
     this.subItemBorder = true;
-    this.subItemIcon = 'style6';
-    this.dropDownIcon = 'style1';
+    this.subItemIcon = "style6";
+    this.dropDownIcon = "style1";
     this.isSidebarChecked = true;
     this.isHeaderChecked = true;
 
     const scrollHeight = window.screen.height - 150;
-    this.innerHeight = scrollHeight + 'px';
+    this.innerHeight = scrollHeight + "px";
     this.windowWidth = window.innerWidth;
     this.setMenuAttributes(this.windowWidth);
 
@@ -157,21 +180,24 @@ export class AdminComponent implements OnInit {
     // dark-light
     // this.setNavBarTheme('theme1');
     // this.navType = 'st3';
-
   }
 
   ngOnInit() {
-    this.setBackgroundPattern('pattern2');
+    this.setBackgroundPattern("pattern2");
   }
 
   onResize(event) {
-    this.innerHeight = event.target.innerHeight + 'px';
+    this.innerHeight = event.target.innerHeight + "px";
     /* menu responsive */
     this.windowWidth = event.target.innerWidth;
     let reSizeFlag = true;
-    if (this.deviceType === 'tablet' && this.windowWidth >= 768 && this.windowWidth <= 1024) {
+    if (
+      this.deviceType === "tablet" &&
+      this.windowWidth >= 768 &&
+      this.windowWidth <= 1024
+    ) {
       reSizeFlag = false;
-    } else if (this.deviceType === 'mobile' && this.windowWidth < 768) {
+    } else if (this.deviceType === "mobile" && this.windowWidth < 768) {
       reSizeFlag = false;
     }
     /* for check device */
@@ -182,116 +208,128 @@ export class AdminComponent implements OnInit {
 
   setMenuAttributes(windowWidth) {
     if (windowWidth >= 768 && windowWidth <= 1024) {
-      this.deviceType = 'tablet';
-      this.verticalNavType = 'offcanvas';
-      this.verticalEffect = 'push';
+      this.deviceType = "tablet";
+      this.verticalNavType = "offcanvas";
+      this.verticalEffect = "push";
     } else if (windowWidth < 768) {
-      this.deviceType = 'mobile';
-      this.verticalNavType = 'offcanvas';
-      this.verticalEffect = 'overlay';
+      this.deviceType = "mobile";
+      this.verticalNavType = "offcanvas";
+      this.verticalEffect = "overlay";
     } else {
-      this.deviceType = 'desktop';
-      this.verticalNavType = 'expanded';
-      this.verticalEffect = 'shrink';
+      this.deviceType = "desktop";
+      this.verticalNavType = "expanded";
+      this.verticalEffect = "shrink";
     }
   }
 
   toggleOpened() {
     if (this.windowWidth < 768) {
-      this.toggleOn = this.verticalNavType === 'offcanvas' ? true : this.toggleOn;
+      this.toggleOn =
+        this.verticalNavType === "offcanvas" ? true : this.toggleOn;
     }
-    this.verticalNavType = this.verticalNavType === 'expanded' ? 'offcanvas' : 'expanded';
+    this.verticalNavType =
+      this.verticalNavType === "expanded" ? "offcanvas" : "expanded";
   }
 
   onClickedOutside(e: Event) {
-    if (this.windowWidth < 768 && this.toggleOn && this.verticalNavType !== 'offcanvas') {
+    if (
+      this.windowWidth < 768 &&
+      this.toggleOn &&
+      this.verticalNavType !== "offcanvas"
+    ) {
       this.toggleOn = true;
-      this.verticalNavType = 'offcanvas';
+      this.verticalNavType = "offcanvas";
     }
   }
 
   onMobileMenu() {
-    this.isCollapsedMobile = this.isCollapsedMobile === 'yes-block' ? 'no-block' : 'yes-block';
+    this.isCollapsedMobile =
+      this.isCollapsedMobile === "yes-block" ? "no-block" : "yes-block";
   }
 
   toggleChat() {
-    this.chatToggle = this.chatToggle === 'out' ? 'in' : 'out';
-    this.chatToggleInverse = this.chatToggleInverse === 'out' ? 'in' : 'out';
-    this.chatInnerToggle = 'off';
-    this.chatInnerToggleInverse = 'off';
+    this.chatToggle = this.chatToggle === "out" ? "in" : "out";
+    this.chatToggleInverse = this.chatToggleInverse === "out" ? "in" : "out";
+    this.chatInnerToggle = "off";
+    this.chatInnerToggleInverse = "off";
   }
 
   toggleChatInner() {
-    this.chatInnerToggle = this.chatInnerToggle === 'off' ? 'on' : 'off';
-    this.chatInnerToggleInverse = this.chatInnerToggleInverse === 'off' ? 'on' : 'off';
+    this.chatInnerToggle = this.chatInnerToggle === "off" ? "on" : "off";
+    this.chatInnerToggleInverse =
+      this.chatInnerToggleInverse === "off" ? "on" : "off";
   }
 
   searchFriendList(e: Event) {
-    const search = (this.search_friends.nativeElement.value).toLowerCase();
+    const search = this.search_friends.nativeElement.value.toLowerCase();
     let search_input: string;
     let search_parent: any;
-    const friendList = document.querySelectorAll('.userlist-box .media-body .chat-header');
-    Array.prototype.forEach.call(friendList, function(elements, index) {
-      search_input = (elements.innerHTML).toLowerCase();
-      search_parent = (elements.parentNode).parentNode;
+    const friendList = document.querySelectorAll(
+      ".userlist-box .media-body .chat-header"
+    );
+    Array.prototype.forEach.call(friendList, function (elements, index) {
+      search_input = elements.innerHTML.toLowerCase();
+      search_parent = elements.parentNode.parentNode;
       if (search_input.indexOf(search) !== -1) {
-        search_parent.classList.add('show');
-        search_parent.classList.remove('hide');
+        search_parent.classList.add("show");
+        search_parent.classList.remove("hide");
       } else {
-        search_parent.classList.add('hide');
-        search_parent.classList.remove('show');
+        search_parent.classList.add("hide");
+        search_parent.classList.remove("show");
       }
     });
   }
 
   toggleOpenedSidebar() {
-    this.isCollapsedSideBar = this.isCollapsedSideBar === 'yes-block' ? 'no-block' : 'yes-block';
+    this.isCollapsedSideBar =
+      this.isCollapsedSideBar === "yes-block" ? "no-block" : "yes-block";
   }
 
   toggleRightbar() {
-    this.configOpenRightBar = this.configOpenRightBar === 'open' ? '' : 'open';
+    this.configOpenRightBar = this.configOpenRightBar === "open" ? "" : "open";
   }
 
   setSidebarPosition() {
     this.isSidebarChecked = !this.isSidebarChecked;
-    this.pcodedSidebarPosition = this.isSidebarChecked === true ? 'fixed' : 'absolute';
+    this.pcodedSidebarPosition =
+      this.isSidebarChecked === true ? "fixed" : "absolute";
   }
 
   setHeaderPosition() {
     this.isHeaderChecked = !this.isHeaderChecked;
-    this.pcodedHeaderPosition = this.isHeaderChecked === true ? 'fixed' : 'relative';
-    this.headerFixedMargin = this.isHeaderChecked === true ? '80px' : '';
+    this.pcodedHeaderPosition =
+      this.isHeaderChecked === true ? "fixed" : "relative";
+    this.headerFixedMargin = this.isHeaderChecked === true ? "80px" : "";
   }
 
   setBackgroundPattern(pattern) {
-    document.querySelector('body').setAttribute('themebg-pattern', pattern);
+    document.querySelector("body").setAttribute("themebg-pattern", pattern);
   }
 
   setLayoutType(type: string) {
     this.layoutType = type;
-    if (type === 'dark') {
-      this.headerTheme = 'theme6';
-      this.navBarTheme = 'theme1';
-      this.logoTheme = 'theme6';
-      document.querySelector('body').classList.add('dark');
+    if (type === "dark") {
+      this.headerTheme = "theme6";
+      this.navBarTheme = "theme1";
+      this.logoTheme = "theme6";
+      document.querySelector("body").classList.add("dark");
     } else {
-      this.headerTheme = 'theme1';
-      this.navBarTheme = 'themelight1';
-      this.logoTheme = 'theme1';
-      document.querySelector('body').classList.remove('dark');
+      this.headerTheme = "theme1";
+      this.navBarTheme = "themelight1";
+      this.logoTheme = "theme1";
+      document.querySelector("body").classList.remove("dark");
     }
   }
 
   setNavBarTheme(theme: string) {
-    if (theme === 'themelight1') {
-      this.navBarTheme = 'themelight1';
+    if (theme === "themelight1") {
+      this.navBarTheme = "themelight1";
     } else {
-      this.navBarTheme = 'theme1';
+      this.navBarTheme = "theme1";
     }
   }
 
-
-
-
-
+  logout() {
+    this.sharedService.deleteCookie("token");
+  }
 }

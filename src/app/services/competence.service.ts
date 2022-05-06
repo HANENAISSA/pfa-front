@@ -48,10 +48,10 @@ export class CompetenceService {
 
   }
 
-  getListCompetence(id:string)
+  getListCompetence()
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/competence/getAll/${id}`)
+      this.httpC.get(`${environment.api}/competence/getAll`)
         .forEach(data =>
           {
             resolve(data)
@@ -64,10 +64,10 @@ export class CompetenceService {
 
   }
 
-  getCvBayEtudiont(id:string)
+  getCvByEtudiant()
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/competence/getCvByEtudiant/${id}`)
+      this.httpC.get(`${environment.api}/cv/getCvByEtudiant`)
         .forEach(data =>
           {
             resolve(data)

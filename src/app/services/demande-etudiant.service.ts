@@ -46,10 +46,10 @@ export class DemandeEtudiantService {
       });
   }
 
-  getListDemande(id_etudiant : string,etatDemande:string)
+  getListDemande(etatDemande:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/demandeEtudiantStageEntreprise/getAllDemandesEtudiant/${id_etudiant}/${etatDemande}`)
+      this.httpC.get(`${environment.api}/demandeEtudiantStageEntreprise/getAllDemandesEtudiant/${etatDemande}`)
         .forEach(data =>
           {
             resolve(data)

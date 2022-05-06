@@ -49,7 +49,7 @@ export class PopupExperienceComponent implements OnInit {
   async getMyCV(id: string) {
     try {
       const { err, rows, message } =
-        (await this.serviceComptence.getCvBayEtudiont(id)) as any;
+        (await this.serviceComptence.getCvByEtudiant()) as any;
       if (!err && rows.length > 0) {
         this.maycv = rows;
       }

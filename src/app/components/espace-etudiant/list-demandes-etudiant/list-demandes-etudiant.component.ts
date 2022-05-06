@@ -33,8 +33,7 @@ export class ListDemandesEtudiantComponent implements OnInit {
   async getAllDemandestages(etat:string) {
     this.listdemande = [null];
     try {
-      const id_etudiant = "1";
-      const { err, rows } =await this.demandeStageServ.getListDemande(id_etudiant,etat) as any;
+      const { err, rows } =await this.demandeStageServ.getListDemande(etat) as any;
       if (!err) {
        this.listdemande=rows;
       }

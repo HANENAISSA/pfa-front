@@ -71,12 +71,12 @@
                 </a>
                 <ul class="show-notification profile-notification">
                   <li>
-                    <a [routerLink]="['/etudiant/profil/0']">
+                    <a [routerLink]="['/etudiant/profil']">
                       <i class="ti-user"></i> Profil
                     </a>
                   </li>
                   <li>
-                    <a [routerLink]="['/authentication/login/with-bg-image']">
+                    <a [routerLink]="['/connexion']" (click)="logout()">
                       <i class="ti-layout-sidebar-left"></i> Déconnexion
                     </a>
                   </li>
@@ -127,10 +127,10 @@
                     class="more-details"
                     [ngClass]="isCollapsedSideBar"
                   >
-                    <a [routerLink]="['/etudiant/profil/0']"
+                    <a [routerLink]="['/etudiant/profil']"
                       ><i class="ti-user"></i>Profil</a
                     >
-                    <a [routerLink]="['/authentication/login/with-bg-image']"
+                    <a [routerLink]="['/connexion']" (click)="logout()"
                       ><i class="ti-layout-sidebar-left"></i>Déconnexion</a
                     >
                   </li>
@@ -252,17 +252,7 @@
                       <span class="pcoded-mcaret"></span>
                     </a>
                     <ul class="pcoded-submenu">
-                      <!-- <li appAccordionLink>
-                        <a
-                          [routerLink]="['/etudiant/cv','0']"
-                          appAccordionToggle
-                        >
-                          <span class="pcoded-micon">
-                            <i class="ti-angle-right"></i>
-                          </span>
-                          <span class="pcoded-mtext">Profil</span>
-                        </a>
-                      </li> -->
+
                       <li appAccordionLink>
                         <a
                           [routerLink]="['/etudiant/offresStages']"

@@ -29,7 +29,7 @@ export class PopupCompetenceComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getMyCV("1");
+    this.getMyCV();
   }
   async onSubmit(form: NgForm, typeOp: string) {
     switch (typeOp) {
@@ -44,11 +44,11 @@ export class PopupCompetenceComponent implements OnInit {
     }
   }
 
-  async getMyCV(id: string) {
+  async getMyCV() {
     try {
-      
+
       const { err, rows, message } =
-        (await this.serviceComptence.getCvBayEtudiont(id)) as any;
+        (await this.serviceComptence.getCvByEtudiant()) as any;
       if (!err && rows.length > 0) {
         this.maycv = rows;
       }
@@ -112,5 +112,5 @@ export class PopupCompetenceComponent implements OnInit {
       return error;
     }
   }
- 
+
 }

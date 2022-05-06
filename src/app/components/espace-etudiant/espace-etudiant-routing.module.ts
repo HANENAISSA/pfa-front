@@ -14,7 +14,7 @@ const routes: Routes = [
     path: "demandesStages", component : ListDemandesEtudiantComponent,
   },
   {
-    path: "profil/:id", component : FormulaireCvComponent,
+    path: "profil", component : FormulaireCvComponent,
   },
   {
     path: "introuvable", component: NotfoundComponent

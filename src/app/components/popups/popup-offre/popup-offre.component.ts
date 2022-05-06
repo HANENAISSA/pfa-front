@@ -54,32 +54,25 @@ deleteOffre(){
       const {err,row,message}=this.offreService.deleteOffreStage(this.id_offre_stage.toString()) as any;
       if(!err){
         swal("Succès!", "Suppression effectuée avec succès", "success");
-        this.activeModal.dismiss();
         this.sharedService.reloadComponent();
       }
 
     } catch (error) {
       swal("Échec!", "Opération non effectuée", "error");
-      this.activeModal.dismiss();
-
-      return error;
-
     }
+    this.activeModal.dismiss();
 }
 async postulerOffre() {
-  const idEtudiant = "1";
   try {
     (await this.offreService.updateOffrePostulations(this.id_offre_stage.toString())) as any;
-    const demande = new DemandeStageEntreprise(idEtudiant, this.id_offre_stage.toString());
     const { err } =
-      (await this.formCvServ.addDemandeStageEntreprise(demande)) as any;
+      (await this.formCvServ.addDemandeStageEntreprise({'id_offre_stage':this.id_offre_stage.toString()})) as any;
     if (!err) {
       swal("Succès!", "Postulation effectuée avec succès", "success");
       this.sharedService.reloadComponent();
     }
   } catch (error) {
     swal("Échec!", "Opération non effectuée", "error");
-    return error;
   }
   this.activeModal.dismiss();
 }

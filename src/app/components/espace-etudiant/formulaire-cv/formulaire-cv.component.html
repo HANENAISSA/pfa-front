@@ -20,22 +20,31 @@
         <div class="card-body user-info">
           <div class="col-md-12">
             <div class="media-left">
-              <a href="javascript:;" class="profile-image">
-                <img class="user-img img-radius" src="assets/images/user-profile/user-img.jpg" alt="user-img">
+              <a class="profile-image">
+                <img class="user-img img-radius w-25 h-25" [src]="profil&&profil.photo" alt="user-img">
               </a>
             </div>
             <div class="media-body row">
-              <div class="col-lg-12">
-                <div class="user-title">
-                  <h2>Josephin Villa</h2>
-                  <span class="text-white">Web designer</span>
-                </div>
-              </div>
+              <!-- <div class="col-lg-12"> -->
+                <!-- <div class="user-title"> -->
+                  <!-- <h2>{{profil&&profil.nom+" "+profil&&profil.prenom}}</h2> -->
+                  <!-- <span class="text-white">{{profil&&profil.libelle}}</span> -->
+                <!-- </div> -->
+              <!-- </div> -->
               <div>
                 <div class="pull-right cover-btn">
-                  <button type="button" class="btn btn-primary m-b-10 m-r-10"><i class="icofont icofont-plus"></i> Follow</button>
-                  <button type="button" class="btn btn-primary m-b-10"><i class="icofont icofont-ui-messaging"></i> Message</button>
-                </div>
+                  <div class="file-upload mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    <button class="btn btn-primary m-b-10 m-r-10">
+                      <input type="file" accept="image/*" (change)="changephoto($event)" name="FileAttachment" id="FileAttachment" class="upload" />
+                      <i class="icofont icofont-plus"></i>
+                      PHOTO
+                    </button>
+                  </div>
+                  <script>
+                    document.getElementById("FileAttachment").onchange = function () {
+                    document.getElementById("fileuploadurl").value = this.value.replace(/C:\\fakepath\\/i, '');};
+                  </script>
+                 </div>
               </div>
             </div>
           </div>
@@ -55,7 +64,6 @@
               <!-- personal card start -->
               <div class="card">
                 <div class="card-header">
-                  <h5 class="card-header-text">A propos de moi</h5>
                   <button
                     id="edit-btn"
                     type="button"
@@ -77,15 +85,20 @@
                                   <tbody>
                                     <tr>
                                       <th scope="row">Nom</th>
-                                      <td>stage pfe nom</td>
+                                      <td>{{profil&&profil.nom}}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row">Prénom</th>
-                                      <td>stage pfe prenom</td>
+                                      <td>{{profil&&profil.prenom}}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row">Date naissance</th>
-                                      <td>October 25th, 1990</td>
+                                      <td>{{profil&&profil.date_naissance|date:'dd/MM/yyyy'}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Identité utilisateur</th>
+                                      <td>{{profil&&profil.cin&&profil.cin}}</td>
+                                      <td>{{profil&&profil.num_passport&&profil.num_passport}}</td>
                                     </tr>
                                   </tbody>
                                 </table>
@@ -97,18 +110,26 @@
                                 <table class="table">
                                   <tbody>
                                     <tr>
-                                      <th scope="row">Sexe</th>
-                                      <td>Female</td>
-                                    </tr>
-                                    <tr>
-                                      <th scope="row">Localisation</th>
-                                      <td>Beja</td>
+                                      <th scope="row">N°Téléphone</th>
+                                      <td>{{profil&&profil.num_tel}}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row">Email</th>
                                       <td>
-                                        <a href="javascript:;"
-                                          >stagepfe@gmail.com</a
+                                        <a
+                                          >{{profil&&profil.email}}</a
+                                        >
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Département</th>
+                                      <td>{{profil&&profil.libelle}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">C.V</th>
+                                      <td>
+                                        <a [href]="profil&&profil.cv" target="_blank"
+                                          >OUVRIR</a
                                         >
                                       </td>
                                     </tr>
@@ -142,7 +163,8 @@
                   <div class="edit-info" *ngIf="!editProfile">
                     <div class="row">
                       <div class="col-lg-12">
-                        <div class="general-info">
+                        <form name="form" (ngSubmit)="submit(fprofil)" #fprofil="ngForm" novalidate>
+                          <div class="general-info">
                           <div class="row">
                             <div class="col-lg-6">
                               <div class="table-responsive">
@@ -159,9 +181,34 @@
                                           ></span>
                                           <input
                                             type="text"
+                                            name="nom"
+                                            required
+                                            [(ngModel)]="profil&&profil.nom"
+                                            #nom="ngModel"
                                             class="form-control"
                                             placeholder="Prénom"
-                                            value="stage pfe prénom"
+                                          />
+                                        </div>
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      <td>
+                                        <div class="input-group">
+                                          <span class="input-group-prepend"
+                                            ><label class="input-group-text"
+                                              ><i
+                                                class="icofont icofont-user"
+                                              ></i></label
+                                          ></span>
+                                          <input
+                                            type="text"
+                                            name="prenom"
+                                            required
+                                            [(ngModel)]="profil&&profil.prenom"
+                                            #prenom="ngModel"
+                                            class="form-control"
+                                            placeholder="Prénom"
                                           />
                                         </div>
                                       </td>
@@ -176,44 +223,41 @@
                                               ></i></label
                                           ></span>
                                           <input
-                                            type="text"
+                                            type="date"
+                                            onkeydown="return false"
+                                            name="date_naissance"
+                                            required
+                                            [(ngModel)]="profil&&profil.dns"
+                                            #date_naissance="ngModel"
                                             class="form-control"
-                                            placeholder="Nom"
-                                            value="stage pfe nom"
+                                            min="{{this.actualDate | date:'yyyy-MM-dd'}}"
                                           />
                                         </div>
                                       </td>
                                     </tr>
-
                                     <tr>
                                       <td>
-                                        <div class="form-radio">
-                                          <div class="group-add-on">
-                                            <div
-                                              class="radio radiofill radio-inline"
-                                            >
-                                              <label>
-                                                <input
-                                                  type="radio"
-                                                  name="sexe"
-                                                /><i class="helper"></i> Homme
-                                              </label>
-                                            </div>
-                                            <div
-                                              class="radio radiofill radio-inline"
-                                            >
-                                              <label>
-                                                <input
-                                                  type="radio"
-                                                  name="sexe"
-                                                  checked
-                                                /><i class="helper"></i> Femme
-                                              </label>
-                                            </div>
-                                          </div>
+                                        <div class="input-group">
+                                          <span class="input-group-prepend"
+                                            ><label class="input-group-text"
+                                              ><i
+                                                class="icofont icofont-user"
+                                              ></i></label
+                                          ></span>
+                                          <input
+                                          type="text"
+                                          name="identite"
+                                          required
+                                          [(ngModel)]="profil&&profil.cin?profil.cin:profil.num_passport"
+                                          #identite="ngModel"
+                                          class="form-control"
+                                          placeholder="Identité utilisateur"
+                                        />
                                         </div>
                                       </td>
                                     </tr>
+
+
                                   </tbody>
                                 </table>
                               </div>
@@ -234,10 +278,12 @@
                                               ></i></label>
                                             </span>
                                           <input
-                                            type="text"
+                                            type="tel"
                                             class="form-control"
-                                            placeholder="Localisation"
-                                            value="Beja"
+                                            placeholder="N°Téléphone"
+                                            required
+                                            [(ngModel)]="profil&&profil.num_tel"
+                                            #tel="ngModel"
                                           />
                                         </div>
                                       </td>
@@ -248,29 +294,65 @@
                                           <span class="input-group-prepend"
                                             ><label class="input-group-text"
                                               ><i
-                                                class="icofont icofont-mail"
+                                                class="icofont icofont-location-pin"
                                               ></i></label>
                                             </span>
                                           <input
-                                            type="text"
+                                            type="email"
                                             class="form-control"
                                             placeholder="Email"
-                                            value="stagepfe@gmail.com"
+                                            required
+                                            [(ngModel)]="profil&&profil.email"
+                                            #email="ngModel"
                                           />
                                         </div>
                                       </td>
                                     </tr>
                                     <tr>
                                       <td>
-                                        <input
-                                          id="dropper-default"
+                                        <div class="input-group">
+                                          <span class="input-group-prepend"
+                                            ><label class="input-group-text"
+                                              ><i
+                                                class="icofont icofont-user"
+                                              ></i></label
+                                          ></span>
+                                          <select
+                                          ngModel="{{ profil&&profil.id_departement }}"
+                                          #id_departement="ngModel"
+                                          name="id_departement"
                                           class="form-control"
-                                          type="text"
-                                          value="October 25th, 1990"
-                                          placeholder="selecter votre date de naissance"
-                                        />
+                                          required
+                                        >
+                                          <option value="3">Technologie de l'informatique</option>
+                                          <option value="4">Agro alimentaire</option>
+                                          <option value="5">Mécanique</option>
+                                          <option value="6">Electrique</option>
+                                          <option value="7">Génie civil</option>
+                                        </select>
+                                        </div>
                                       </td>
                                     </tr>
+
+                                    <tr>
+                                      <td>
+                                        <div class="input-group">
+                                          <span class="input-group-prepend"
+                                            ><label class="input-group-text"
+                                              ><i
+                                                class="icofont icofont-location-pin"
+                                              ></i></label>
+                                            </span>
+                                          <input
+                                            type="file"
+                                            class="form-control"
+                                            (change)="changecv($event)"
+                                          />
+                                        </div>
+                                      </td>
+                                    </tr>
+
+
                                   </tbody>
                                 </table>
                               </div>
@@ -282,18 +364,19 @@
                             <a
                               href="javascript:;"
                               class="btn btn-primary waves-effect waves-light m-r-20"
-                              >Save</a
+                              >Enregistrer</a
                             >
                             <a
                               href="javascript:;"
                               id="edit-cancel"
                               class="btn btn-default waves-effect"
                               (click)="toggleEditProfile()"
-                              >Cancel</a
+                              >annuler</a
                             >
                           </div>
                         </div>
                         <!-- end of edit info -->
+                      </form>
                       </div>
                       <!-- end of col-lg-12 -->
                     </div>

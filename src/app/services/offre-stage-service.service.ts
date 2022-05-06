@@ -98,11 +98,11 @@ export class OffreStageServiceService {
     });
   }
 
-  getAllOffreNonPostuleStages(id_etudiant:string)
+  getAllOffreNonPostuleStages()
   {
     return new Promise((resolve, reject) => {
 
-      this.httpC.get(`${environment.api}/offrestage/getAllOffresEntreprisNotRegistred/${id_etudiant}`)
+      this.httpC.get(`${environment.api}/offrestage/getAllOffresEntrepriseNotRegistred`)
         .forEach(data =>
           {
             resolve(data)
@@ -119,7 +119,7 @@ export class OffreStageServiceService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.patch('${environment.api}/offrestage/update_Nbr_vue', {"id_offre_stage":id_offre_stage})
+      this.httpC.patch(`${environment.api}/offrestage/update_Nbr_vue`, {"id_offre_stage":id_offre_stage})
         .forEach(data =>
           resolve(data)
         ).catch((err) => {
@@ -132,7 +132,7 @@ export class OffreStageServiceService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.patch(`${environment.api}/offrestage/update_Nbr_postulations`, {"id_offre_stage":id_offre_stage})
+      this.httpC.patch(`${environment.api}/offrestage/update_Nbr_postulations`, {id_offre_stage})
         .forEach(data =>
           resolve(data)
         ).catch((err) => {

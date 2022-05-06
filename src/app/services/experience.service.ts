@@ -9,10 +9,10 @@ import { environment } from '../../environments/environment';
 export class ExperienceService {
 
   constructor(private httpC: HttpClient) { }
-  getExperience(id:string)
+  getExperience()
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/experience/getAll/${id}`)
+      this.httpC.get(`${environment.api}/experience/getAll`)
         .forEach(data =>
           {
             resolve(data)

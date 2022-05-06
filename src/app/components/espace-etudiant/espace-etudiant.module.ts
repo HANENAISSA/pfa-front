@@ -10,6 +10,9 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { PagesModule } from '../../pages/pages.module';
 
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptorService } from '../../services/token-interceptor.service';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +27,7 @@ import { PagesModule } from '../../pages/pages.module';
     FormsModule,
     NgbModule,
     Ng2SearchPipeModule,
-    PagesModule
+    PagesModule,
 
   ],
   exports: [
@@ -32,6 +35,11 @@ import { PagesModule } from '../../pages/pages.module';
     ListDemandesEtudiantComponent,
     ListOffresEtudiantComponent
   ],
+  providers:[{
+    provide:HTTP_INTERCEPTORS,
+    useClass:TokenInterceptorService,
+    multi:true
+  }],
   schemas: [NO_ERRORS_SCHEMA],
 
 })

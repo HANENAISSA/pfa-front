@@ -12,6 +12,8 @@ import { OffreStageServiceService } from "../../../services/offre-stage-service.
 import { Competence } from "../../../models/competence";
 import { Experience } from "../../../models/experience";
 import { PopupCompetenceComponent } from "../../popups/popup-competence/popup-competence.component";
+import { ChercherProfilService } from "../../../services/chercher-profil.service";
+import { NgForm } from "@angular/forms";
 
 @Component({
   selector: "app-formulaire-cv",
@@ -48,6 +50,8 @@ export class FormulaireCvComponent implements OnInit {
   profitChartOption: any;
   listCompetence: Competence[] = [];
   listExperience: Experience[] = [];
+  profil;
+  actualDate:string;
 
   actifTabid : number
 
@@ -60,15 +64,17 @@ export class FormulaireCvComponent implements OnInit {
     private servicecompetence: CompetenceService,
     private router: Router,
     private activatedRoute:ActivatedRoute,
+    private profilService:ChercherProfilService
   ) {
-    this.actifTabid=Number(this.activatedRoute.snapshot.paramMap.get('id'))
+    this.actualDate=new Date().toDateString()
   }
 
   ngOnInit() {
-
-    this.getListCompetence("1");
-    this.getListExperience("1");
+    this.getEtudiantInfo();
+    this.getListCompetence();
+    this.getListExperience();
   }
+
 
   toggleEditProfile() {
     this.editProfileIcon =
@@ -86,40 +92,51 @@ export class FormulaireCvComponent implements OnInit {
 
 
 
-  async getListExperience(id: string) {
+  async getListExperience() {
     try {
       const { err, rows } =
-        ((await this.serviceExperience.getExperience(id)) as any) || [];
-      if (!err && rows.length > 0) {
+        ((await this.serviceExperience.getExperience() as any) || []);
+      if (!err) {
         this.listExperience = rows;
       }
     } catch (error) {
       return error;
     }
   }
-  async getListCompetence(id: string) {
+  async getListCompetence() {
     try {
       const { err, rows } =
-        ((await this.servicecompetence.getListCompetence(id)) as any) || [];
-      if (!err && rows.length > 0) {
+        ((await this.servicecompetence.getListCompetence()) as any) || [];
+      if (!err) {
         this.listCompetence = rows;
       }
     } catch (error) {
       return error;
     }
   }
+  async getEtudiantInfo() {
+    try {
+      const { err, rows } =
+        ((await this.profilService.getEtudiantInfo()) as any) || [];
+      if (!err) {
+        this.profil = rows[0];
+        console.log(this.profil);
+
+
+      }
+    } catch (error) {
+      return error;
+    }  }
 
   addExperience() {
     const modalRef = this.modalService.open(PopupExperienceComponent);
     modalRef.componentInstance.title = `NOUVELLE EXPERIENCE`;
-
   }
 
   addComptence() {
     const modalRef = this.modalService.open(PopupCompetenceComponent);
     modalRef.componentInstance.title = `NOUVELLE COMPETENCE`;
     modalRef.componentInstance.show = true;
-
   }
 
   openUpdateComp(item)
@@ -150,4 +167,16 @@ export class FormulaireCvComponent implements OnInit {
     modalRef.componentInstance.id_exp = id;
   }
 
+  changephoto(event){
+    console.log(event);
+
+  }
+  changecv(event){
+
+  }
+
+  submit(form:NgForm){
+    console.log(form);
+
+  }
 }

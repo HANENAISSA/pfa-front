@@ -12,7 +12,7 @@ export class ChercherProfilService {
   getListEtudiant()
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/etudiantComp/getAll`)
+      this.httpC.get(`${environment.api}/etudiantController/getAll`)
         .forEach(data =>
           {
             resolve(data)
@@ -26,7 +26,7 @@ export class ChercherProfilService {
   getCompetenceByEtudiant(id_etudiant:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/etudiantComp/getCompetenceByEtudiant/${id_etudiant}}`)
+      this.httpC.get(`${environment.api}/etudiantController/getCompetenceByEtudiant/${id_etudiant}}`)
         .forEach(data =>
           {
             resolve(data)
@@ -42,7 +42,7 @@ export class ChercherProfilService {
   getDepartementsList()
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/etudiantComp/getDepartementsList`)
+      this.httpC.get(`${environment.api}/etudiantController/getDepartementsList`)
         .forEach(data =>
           {
             resolve(data)
@@ -57,7 +57,7 @@ export class ChercherProfilService {
   filterEtudiants(id:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/etudiantComp/getFilteredStudents/${id}`)
+      this.httpC.get(`${environment.api}/etudiantController/getFilteredStudents/${id}`)
         .forEach(data =>
           {
             resolve(data)
@@ -71,7 +71,7 @@ export class ChercherProfilService {
 
   contacterProfil(mailPayload){
     return new Promise((resolve, reject) => {
-      this.httpC.post('${environment.api}/confirmationDemande/contactStudent', mailPayload)
+      this.httpC.post(`${environment.api}/confirmationDemande/contactStudent`, mailPayload)
         .forEach(data =>{
           resolve(data)
         }
@@ -84,7 +84,7 @@ export class ChercherProfilService {
   getToutEtudiantContacte(id_responsable:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/etudiantComp/getContactedStudents/${id_responsable}`)
+      this.httpC.get(`${environment.api}/etudiantController/getContactedStudents/${id_responsable}`)
         .forEach(data =>
           {
             resolve(data)
@@ -99,7 +99,7 @@ export class ChercherProfilService {
   filterEtudiantsContacte(id:string,id_resposable:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/etudiantComp/getFilteredStudentsContacte/${id}/${id_resposable}`)
+      this.httpC.get(`${environment.api}/etudiantController/getFilteredStudentsContacte/${id}/${id_resposable}`)
         .forEach(data =>
           {
             resolve(data)
@@ -113,7 +113,7 @@ export class ChercherProfilService {
   getListEtudiantsByCompetences(payload)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.post(`${environment.api}/etudiantComp/getAllEtudiantsByCompetences`,payload)
+      this.httpC.post(`${environment.api}/etudiantController/getAllEtudiantsByCompetences`,payload)
         .forEach(data =>
           {
             resolve(data)
@@ -128,7 +128,22 @@ export class ChercherProfilService {
   getListEtudiantsContactesByCompetences(payload)
   {
     return new Promise((resolve, reject) => {
-    this.httpC.post(`${environment.api}/etudiantComp/getAllEtudiantsContactesByCompetences`,{"competencesList":payload})
+    this.httpC.post(`${environment.api}/etudiantController/getAllEtudiantsContactesByCompetences`,{"competencesList":payload})
+        .forEach(data =>
+          {
+            resolve(data)
+          }
+        ).catch((err) => {
+          reject(err);
+        });
+    });
+
+  }
+
+  getEtudiantInfo()
+  {
+    return new Promise((resolve, reject) => {
+      this.httpC.get(`${environment.api}/etudiant/getetudiant`)
         .forEach(data =>
           {
             resolve(data)

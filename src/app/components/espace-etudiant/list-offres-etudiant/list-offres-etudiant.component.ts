@@ -20,15 +20,16 @@ export class ListOffresEtudiantComponent implements OnInit {
   page = 1;
   pageSize = 5;
   pageSizes = [5, 10, 15];
-  disabled: boolean = false;
 
   constructor(
-    private offreStageServ: OffreStageServiceService,
-    public sharedService: SharedServiceService,
     private modalService: NgbModal,
+
+    public sharedService: SharedServiceService,
+
+
+    private offreStageServ: OffreStageServiceService,
     private formCvServ:FormulaireCvServiceService
   ) {
-    // this.year = new Date().getFullYear().toString();
   }
 
   ngOnInit() {
@@ -53,10 +54,8 @@ export class ListOffresEtudiantComponent implements OnInit {
   // }
   async getAllOffreStages() {
     try {
-      const id_etudiant = "1";
       const { err, rows } =
         ((await this.offreStageServ.getAllOffreNonPostuleStages(
-          id_etudiant
         )) as any) || [];
       if (!err) {
         this.listStage = rows;
@@ -113,12 +112,10 @@ export class ListOffresEtudiantComponent implements OnInit {
   }
 
   async postulerOffre(idOffre : string) {
-    const idEtudiant = "1";
     try {
       (await this.offreStageServ.updateOffrePostulations(idOffre)) as any;
-      const demande = new DemandeStageEntreprise(idEtudiant, idOffre);
       const { err, rows } =
-        (await this.formCvServ.addDemandeStageEntreprise(demande)) as any;
+        (await this.formCvServ.addDemandeStageEntreprise(idOffre)) as any;
       if (!err) {
         swal("Succès!", "Postulation effectuée avec succès", "success");
         this.sharedService.reloadComponent()

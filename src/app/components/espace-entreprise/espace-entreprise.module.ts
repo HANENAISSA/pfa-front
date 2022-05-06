@@ -12,7 +12,8 @@ import {  NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { PagesModule } from '../../pages/pages.module';
 import { ProfileComponent } from './profile/profile.component';
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptorService } from '../../services/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,13 @@ import { ProfileComponent } from './profile/profile.component';
     ProfileComponent
   ],
   schemas: [NO_ERRORS_SCHEMA],
+  providers:[
+  //   {
+  //   provide:HTTP_INTERCEPTORS,
+  //   useClass:TokenInterceptorService,
+  //   multi:true
+  // }
+],
 
 })
 export class EspaceEntrepriseModule { }

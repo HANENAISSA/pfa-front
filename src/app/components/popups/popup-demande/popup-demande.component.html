@@ -54,7 +54,7 @@
 
 
                     <tr>
-                      <th scope="row">Date de la demande</th>
+                      <th scope="row">Date postulation</th>
                       <td>{{ this.sharedService.formatDate(this.details.date_demande,true)}}</td>
                     </tr>
                     <tr>
@@ -76,7 +76,7 @@
                     <tr>
                       <th scope="row">Profil étudiant</th>
                       <td>
-                        <a target="_blank" [routerLink]="['/dashboard/profil']">
+                        <a target="_blank" class="link-primary" [href]="'/entreprise/etudiant/profil/'+this.details.crypted_user">
                           Consulter le profil
                         </a>
                       </td>

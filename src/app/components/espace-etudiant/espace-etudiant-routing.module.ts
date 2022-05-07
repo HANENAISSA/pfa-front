@@ -5,6 +5,7 @@ import { VisitProfilEtudiantComponent } from '../espace-entreprise/visit-profil-
 import { FormulaireCvComponent } from './formulaire-cv/formulaire-cv.component';
 import { ListDemandesEtudiantComponent } from './list-demandes-etudiant/list-demandes-etudiant.component';
 import { ListOffresEtudiantComponent } from './list-offres-etudiant/list-offres-etudiant.component';
+import { VisitProfilResponsableComponent } from './visit-profil-responsable/visit-profil-responsable.component';
 
 
 const routes: Routes = [
@@ -18,7 +19,7 @@ const routes: Routes = [
     path: "profil", component : FormulaireCvComponent,
   },
   {
-    path: "responsbale/profil/:id", component : VisitProfilEtudiantComponent,
+    path: "responsbale/profil/:id", component : VisitProfilResponsableComponent,
   },
   {
     path: "introuvable", component: NotfoundComponent

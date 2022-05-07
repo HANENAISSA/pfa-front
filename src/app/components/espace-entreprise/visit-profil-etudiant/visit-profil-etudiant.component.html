@@ -1,1 +1,213 @@
-<p>visit-profil-etudiant works!</p>
+<!-- <div class="page-header card">
+  <div class="row align-items-end">
+    <div class="col-lg-8">
+      <div class="page-header-title">
+        <span><i class="icofont icofont-home bg-c-pink"></i></span>
+        <div class="d-inline">
+          <span class="d-block"><h4>Mes informations</h4></span>
+          <span>Mes informations personnelles</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!--profile cover start-->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="cover-profile">
+      <div class="profile-bg-img">
+        <img class="profile-bg-img img-fluid" src="assets/images/user-profile/bg-img1.jpg" alt="bg-img">
+        <div class="card-body user-info">
+          <div class="col-md-12">
+            <div class="media-left">
+              <a class="profile-image">
+                <img class="user-img img-radius" id="profil-photo" [src]="profil&&profil.photo"
+                  alt="user-img">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--profile cover end-->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="md-tabs">
+      <ngb-tabset (tabChange)="changeTabset($event)">
+        <ngb-tab title="Informations Personnels" [id]="0">
+          <ng-template ngbTabContent>
+            <div [@fadeInOutTranslate] class="m-t-15">
+              <!-- personal card start -->
+              <div class="card">
+                <div class="card-header">
+
+                </div>
+                <div class="card-body">
+                  <div class="view-info" *ngIf="editProfile">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="general-info">
+                          <div class="row">
+                            <div class="col-lg-12 col-xl-6">
+                              <div class="table-responsive">
+                                <table class="table m-0">
+                                  <tbody>
+                                    <tr>
+                                      <th scope="row">Nom complet</th>
+                                      <td>{{profil&&profil.nom+" "+profil.prenom}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Date naissance</th>
+                                      <td>{{profil&&profil.date_naissance|date:'dd/MM/yyyy'}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">C.V</th>
+                                      <td>
+                                        <a *ngIf="profil&&profil.cv" [href]="profil&&profil.cv"
+                                          target="_blank">OUVRIR</a>
+                                          <span *ngIf="profil&&profil.cv==null" >AUCUN C.V</span>
+                                      </td>
+
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                            <!-- end of table col-lg-6 -->
+                            <div class="col-lg-12 col-xl-6">
+                              <div class="table-responsive">
+                                <table class="table">
+                                  <tbody>
+                                    <tr>
+                                      <th scope="row">N°Téléphone</th>
+                                      <td>{{profil&&profil.num_tel}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Email</th>
+                                      <td>
+                                        <a>{{profil&&profil.email}}</a>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Département</th>
+                                      <td>{{profil&&profil.libDepartement}}</td>
+                                    </tr>
+
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                            <!-- end of table col-lg-6 -->
+                          </div>
+
+                        </div>
+                        <!-- end of general info -->
+                      </div>
+                      <!-- end of col-lg-12 -->
+                    </div>
+                    <!-- end of row -->
+                  </div>
+
+                </div>
+                <!-- end of card-body -->
+              </div>
+              <!-- personal card end-->
+            </div>
+
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Compétences" [id]="1">
+          <ng-template ngbTabContent>
+            <div [@fadeInOutTranslate] class="m-t-15">
+              <!-- info card start -->
+              <div class="card">
+
+                <div class="card-body">
+                  <div class="row">
+                    <ng-container *ngFor="let item of this.list?this.list:[]">
+                      <div class="col-md-6">
+                        <div class="card b-l-success business-info services m-b-20" style="background-color: #F0FBFC;">
+                          <div ngbDropdown class="card-header">
+                            <div class="service-header">
+                              <a href="javascript:;">
+                                <h5 class="card-header-text">{{item&&item.libelle}}</h5>
+                              </a>
+                            </div>
+                          </div>
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-sm-12">
+                                <!-- <p class="task-detail" *ngIf="item.niveau=='0'">Débutant</p> -->
+                                <div>
+                                  <span class="fa fa-star checked text-primary"></span>
+                                  <span
+                                    [class]="item&&item.niveau=='0'?'fa fa-star ':'fa fa-star checked text-primary'"></span>
+                                  <span
+                                    [class]="item&&item.niveau=='0'||item&&item.niveau=='1'?'fa fa-star':'fa fa-star checked text-primary'"></span>
+                                  <span
+                                    [class]="item&&item.niveau=='3'||item&&item.niveau=='4'?'fa fa-star checked text-primary':'fa fa-star'"></span>
+                                  <span
+                                    [class]="item&&item.niveau=='4'?'fa fa-star checked text-primary':'fa fa-star'"></span>
+                                </div>
+
+                              </div>
+                              <!-- end of col-sm-8 -->
+                            </div>
+                            <!-- end of row -->
+                          </div>
+                          <!-- end of card-body -->
+                        </div>
+                      </div>
+
+                    </ng-container>
+
+                  </div>
+                </div>
+              </div>
+              <!-- info card end -->
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Expériences" [id]="2">
+          <ng-template ngbTabContent>
+            <div [@fadeInOutTranslate] class="m-t-15">
+              <div class="card">
+
+
+                <ng-container *ngFor="let item of this.list?this.list:[]">
+                  <div class="card-body">
+
+                    <ul class="media-list">
+                      <li class="media">
+                        <div class="media-body">
+                          <h4>
+                            {{item&&item.post}}<span class="f-12 text-muted m-l-5"></span>
+                          </h4>
+                          <br />
+                          <h5 class="media-heading">Au sein de l'entreprise <b>{{item&&item.nom_entreprise.toUpperCase()}}</b>
+                          </h5>
+                          <h5 class="media-heading">de {{ this.sharedService.formatDate(item&&item.date_debut)}} jusqu'à
+                            {{this.sharedService.formatDate(item&&item.date_fin)}}</h5>
+                          <p class="m-b-0">
+                            {{item&&item.description}}
+                          </p>
+                          <hr />
+                          <!-- Nested media object -->
+                        </div>
+                      </li>
+                      <!-- Nested media object -->
+                    </ul>
+                  </div>
+                </ng-container>
+
+              </div>
+            </div>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+
+    </div>
+  </div>
+</div>

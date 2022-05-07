@@ -17,7 +17,7 @@ import { EspaceEntrepriseModule } from './components/espace-entreprise/espace-en
 import { EspaceEtudiantModule } from './components/espace-etudiant/espace-etudiant.module';
 import { PopupsModule } from './components/popups/popups.module';
 import { PagesModule } from './pages/pages.module';
-// import { TokenInterceptorService } from './services/token-interceptor.service';
+import { TokenInterceptorService } from './services/token-interceptor.service';
 
 
 @NgModule({
@@ -41,11 +41,11 @@ import { PagesModule } from './pages/pages.module';
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [DatePipe,NgSelectConfig, ɵs,NgbActiveModal
-  //   ,{
-  //   provide:HTTP_INTERCEPTORS,
-  //   useClass:TokenInterceptorService,
-  //   multi:true
-  // }
+    ,{
+    provide:HTTP_INTERCEPTORS,
+    useClass:TokenInterceptorService,
+    multi:true
+  }
 ],
   bootstrap: [AppComponent],
 

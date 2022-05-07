@@ -35,7 +35,7 @@ const routes: Routes = [
     ,data:{'some data':"values"}
   },
   {
-    path: "recherche", component: FilterEtudiantComponent
+    path: "recherche/profil", component: FilterEtudiantComponent
   },
   {
     path: "introuvable", component: NotfoundComponent

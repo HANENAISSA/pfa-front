@@ -43,15 +43,15 @@ export class PopupDemandeComponent implements OnInit {
     this.actualDate = new Date().toISOString().slice(0, 16);
     this.loadEntrepriseInfo();
     this.getAllOffresOuvertes();
+
   }
 
 
   async loadEntrepriseInfo() {
-    const id_responsbale="1"
     try {
       const { err, rows } =
         ((await this.entrepriseService.getEntrpriseInfo(
-          id_responsbale)) as any) || [];
+        )) as any) || [];
       if (!err) {
         this.entrepriseInfo = rows;
       }
@@ -112,11 +112,9 @@ export class PopupDemandeComponent implements OnInit {
       <p style="color:black">Bonjour Mme/Mr <strong>${this.etudiant.nom} ${this.etudiant.prenom}</strong>,</p>
       <p style="color:black">${this.msg_body}</p>
       <p style="color:black">Priére de confirmer le rendez-vous le <strong style="color:#294a70">${this.sharedService.formatDate(date_stage, true)}</strong>.</p>
-      <p style="color:black"><strong style="color:#294a70">${this.entrepriseInfo[0].nom_societe}</strong> situé à <strong style="color:#294a70">${this.entrepriseInfo[0].localisation}</strong>.</p>
+      <p style="color:black"><strong style="color:#294a70">${this.entrepriseInfo[0].nom_entreprise}</strong> situé à <strong style="color:#294a70">${this.entrepriseInfo[0].localisation}</strong>.</p>
       <p style="color:black">Bien cordialement .</p>
       </div>`
-
-
         const payload={
           id_etudiant:this.etudiant.id_etudiant,
           id_responsable_entr:id_responsbale,
@@ -129,9 +127,8 @@ export class PopupDemandeComponent implements OnInit {
         try {
           const {err}=await this.profilService.contacterProfil(payload)as any||[];
           if(!err){
-            this.activeModal.dismiss();
-            swal("Succès!", "Confirmation effctuée avec succès", "success");
             this.sharedService.reloadComponent();
+            swal("Succès!", "Confirmation effctuée avec succès", "success");
           }
 
         } catch (error) {
@@ -139,6 +136,8 @@ export class PopupDemandeComponent implements OnInit {
         }
         this.activeModal.dismiss();
     }
+
+
 
     async getAllOffresOuvertes() {//toutes les offres ouvertes
       const id_responsable_stage = "2";

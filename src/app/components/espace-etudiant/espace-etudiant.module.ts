@@ -19,7 +19,6 @@ import { VisitProfilResponsableComponent } from './visit-profil-responsable/visi
     ListDemandesEtudiantComponent,
     ListOffresEtudiantComponent,
     VisitProfilResponsableComponent,
-    // NotfoundComponent
   ],
   imports: [
     CommonModule,

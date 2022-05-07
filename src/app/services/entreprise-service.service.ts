@@ -49,10 +49,10 @@ export class EntrepriseServiceService {
   // }
 
 
-  getEntrpriseInfo(id_responsable:string)
+  getEntrpriseInfo()
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/entreprise/getEntrepriseInfo/${id_responsable}`)
+      this.httpC.get(`${environment.api}/entreprise/getEntrepriseInfo`)
         .forEach(data =>
           {
             resolve(data)

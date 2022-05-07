@@ -62,21 +62,21 @@ export class CompetenceService {
 
   }
 
-  // getCvByEtudiant()
-  // {
-  //   return new Promise((resolve, reject) => {
-  //     this.httpC.get(`${environment.api}/cv/getCvByEtudiant`)
-  //       .forEach(data =>
-  //         {
-  //           resolve(data)
-  //         }
+  getProfilCompetence()
+  {
+    return new Promise((resolve, reject) => {
+      this.httpC.get(`${environment.api}/competences/getAll`)
+        .forEach(data =>
+          {
+            resolve(data)
+          }
 
-  //       ).catch((err) => {
-  //         reject(err);
-  //       });
-  //   });
+        ).catch((err) => {
+          reject(err);
+        });
+    });
 
-  // }
+  }
 
 
 

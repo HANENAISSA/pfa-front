@@ -24,16 +24,14 @@ export class PopupAccrefStageComponent implements OnInit {
     try {
       const {err}=await this.candidatureService.updateCandidatResEntretien(this.id_demande,this.decision) as any;
       if(!err){
-        swal("Succes!", "Opération effectuée", "success");
-        this.activeModal.dismiss();
         this.sharedService.reloadComponent();
-
+        swal("Succes!", "Opération effectuée", "success");
       }
     }
     catch (error) {
       swal("Échec!", "Opération non effectuée", "error");
-      this.activeModal.dismiss();
-   }
+    }
+    this.activeModal.dismiss();
 
   }
 

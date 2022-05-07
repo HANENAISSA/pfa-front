@@ -24,7 +24,6 @@ import { ListOffresStageComponent } from './offre-stage/list-offres-stage/list-o
     NewOffreStageComponent,
     ProfileComponent,
     VisitProfilEtudiantComponent
-    // NotfoundComponent
   ],
   imports: [
     CommonModule,

@@ -38,13 +38,6 @@ export class FormulaireCvComponent implements OnInit {
   editAbout = true;
   editAboutIcon = "icofont-edit";
 
-  public basicContent: string;
-
-  public rowsOnPage = 10;
-  public filterQuery = "";
-  public sortBy = "";
-  public sortOrder = "desc";
-  profitChartOption: any;
   listCompetence: Competence[] = [];
   listExperience: Experience[] = [];
   profil;

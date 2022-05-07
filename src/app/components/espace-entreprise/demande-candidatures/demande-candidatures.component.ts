@@ -4,6 +4,7 @@ import { SharedServiceService } from "../../../services/shared-service.service";
 import {  NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { PopupDemandeComponent } from "../../popups/popup-demande/popup-demande.component";
 import { PopupAccrefStageComponent } from "../../popups/popup-accref-stage/popup-accref-stage.component";
+import swal from "sweetalert";
 
 @Component({
   selector: "app-demande-candidatures",
@@ -34,11 +35,9 @@ export class DemandeCandidaturesComponent implements OnInit {
   }
 
   async getAllCandidature(etat) {
-    const id_responsable = "2";
     try {
       const { err, rows } =
         ((await this.candidatureService.getListCandidature(
-          id_responsable,
          etat,
         )) as any) || [];
       if (!err) {
@@ -60,7 +59,6 @@ export class DemandeCandidaturesComponent implements OnInit {
    try {
       const {err}=await this.candidatureService.updateCandidatureVue(demande.id_demande_stage_entreprise) as any;
       if(!err){
-        this.getAllCandidature(this.etat)
         const modalRef = this.modalService.open(PopupDemandeComponent);
         modalRef.componentInstance.title = `DETAILS DEMANDE`;
         modalRef.componentInstance.id = Number(demande.id_offre_stage);
@@ -69,6 +67,7 @@ export class DemandeCandidaturesComponent implements OnInit {
       }
     }
     catch (error) {
+      swal('Echec!','Erreur ! Réssayer plus tard ! ','error')
    }
   }
 

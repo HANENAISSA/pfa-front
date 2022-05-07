@@ -21,7 +21,6 @@ export class EditOffreStageComponent implements OnInit {
   pdfUpload: File;
   uploaded: boolean = false;
   offreStage :any;
-  // event;
   actualDate:string;
   type: string;
 
@@ -57,7 +56,6 @@ export class EditOffreStageComponent implements OnInit {
       this.offre.append("date_debut", dd.toString());
       this.offre.append("type", this.type);
       this.offre.append("description", description);
-      this.offre.append("id_responsable_entreprise", "2");
 
       if (this.type != "Optionnel") {
         const duree=this.getDuree(this.type)
@@ -77,7 +75,7 @@ export class EditOffreStageComponent implements OnInit {
         this.offreStage.id_offre_stage.toString()
         );
 
-      const { err, rows, message } = (await this.offreService.updateOffreStage(
+      const { err} = (await this.offreService.updateOffreStage(
         this.offre
       )) as any;
       if (!err) {

@@ -4,7 +4,6 @@ import { SharedServiceService } from '../../../services/shared-service.service';
 import { OffreStageServiceService } from '../../../services/offre-stage-service.service';
 import swal from "sweetalert";
 import { FormulaireCvServiceService } from '../../../services/formulaire-cv-service.service';
-import { DemandeStageEntreprise } from '../../../models/demande-stage-entreprise';
 
 @Component({
   selector: 'app-popup-offre',
@@ -13,7 +12,6 @@ import { DemandeStageEntreprise } from '../../../models/demande-stage-entreprise
 })
 export class PopupOffreComponent implements OnInit {
 
-  @Input() show:boolean=false;
   @Input() details:any=null;
   @Input() id_offre_stage:number=-1;
   @Input() title:string;
@@ -48,27 +46,16 @@ export class PopupOffreComponent implements OnInit {
     }
   }
 
-deleteOffre(){
-  try {
-      const {err,row,message}=this.offreService.deleteOffreStage(this.id_offre_stage.toString()) as any;
-      if(!err){
-        swal("Succès!", "Suppression effectuée avec succès", "success");
-        this.sharedService.reloadComponent();
-      }
 
-    } catch (error) {
-      swal("Échec!", "Opération non effectuée", "error");
-    }
-    this.activeModal.dismiss();
-}
+
 async postulerOffre() {
   try {
     (await this.offreService.updateOffrePostulations(this.id_offre_stage.toString())) as any;
     const { err } =
       (await this.formCvServ.addDemandeStageEntreprise({'id_offre_stage':this.id_offre_stage.toString()})) as any;
     if (!err) {
-      swal("Succès!", "Postulation effectuée avec succès", "success");
       this.sharedService.reloadComponent();
+      swal("Succès!", "Postulation effectuée avec succès", "success");
     }
   } catch (error) {
     swal("Échec!", "Opération non effectuée", "error");

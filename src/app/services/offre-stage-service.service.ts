@@ -27,7 +27,7 @@ export class OffreStageServiceService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.patch('${environment.api}/offrestage/update', offreStage)
+      this.httpC.patch(`${environment.api}/offrestage/update`, offreStage)
         .forEach(data =>
           resolve(data)
         ).catch((err) => {
@@ -51,10 +51,10 @@ export class OffreStageServiceService {
   }
 
 
-  getAllOffreStages(id_responsable:string,etat:string)
+  getAllOffreStages(etat:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/offrestage/getAll/${id_responsable}/${etat}`)
+      this.httpC.get(`${environment.api}/offrestage/getAll/${etat}`)
         .forEach(data =>
           {
             resolve(data)

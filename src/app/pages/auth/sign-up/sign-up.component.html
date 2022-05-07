@@ -112,6 +112,37 @@
                 </div>
               </div>
             </div>
+            <div class="row">
+            <div  *ngIf="id_role.value=='2'" class="col-md-12 mb-4">
+              <div class="form-outline">
+                <select
+                  ngModel="{{ '-1' }}"
+                  #id_domaine="ngModel"
+                  name="id_domaine"
+                  class="form-control"
+                  required
+                >
+                  <option disabled value="-1">
+                    Séléctionner un domaine
+                  </option>
+                  <option value="1">Mécanique</option>
+                  <option value="2">Informatique</option>
+                  <option value="3">Electrique</option>
+                  <option value="4">Génie civil</option>
+                </select>
+                <label class="form-label mt-2" for="departement">
+                  Domaine entreprise
+                </label>
+              </div>
+              <div
+                *ngIf="id_domaine.value == '-1' && id_domaine.touched"
+                class="alert alert-danger p-2"
+                role="alert"
+              >
+                Séléctionner le domaine
+              </div>
+            </div>
+            </div>
             <!-- Email input -->
             <div class="row">
               <div class="col-md-6 mb-4">
@@ -292,6 +323,7 @@
                   </div>
                 </div>
               </div>
+
               <button
                 type="submit"
                 [disabled]="
@@ -305,6 +337,7 @@
                 S'inscrire
               </button>
             </ng-container>
+
             <button
               *ngIf="id_role.value == '2'"
               type="submit"

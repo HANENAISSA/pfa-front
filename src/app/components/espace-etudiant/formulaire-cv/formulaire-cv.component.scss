@@ -57,8 +57,10 @@
     width: 250px; }
 
 
-    #profil-photo{
-      height:50%
-      width auto;
-      max-width:25%;
-  }
+    #profil-photo {
+      width: 130px;
+      height: 130px;
+      max-height: 100%;
+      max-width: 100%;
+    }
+

@@ -1,72 +1,80 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { Router } from "@angular/router";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import swal from "sweetalert";
-import { OffreStage } from '../../../models/offre-stage.model';
-import { OffreStageServiceService } from '../../../services/offre-stage-service.service';
-import { SharedServiceService } from '../../../services/shared-service.service';
-import { PopupOffreComponent } from '../../popups/popup-offre/popup-offre.component';
+import { OffreStage } from "../../../models/offre-stage.model";
+import { OffreStageServiceService } from "../../../services/offre-stage-service.service";
+import { SharedServiceService } from "../../../services/shared-service.service";
+import { PopupOffreComponent } from "../../popups/popup-offre/popup-offre.component";
 
 @Component({
-  selector: 'app-list-offres-stage',
-  templateUrl: './list-offres-stage.component.html',
-  styleUrls: ['./list-offres-stage.component.scss']
+  selector: "app-list-offres-stage",
+  templateUrl: "./list-offres-stage.component.html",
+  styleUrls: ["./list-offres-stage.component.scss"],
 })
 export class ListOffresStageComponent implements OnInit {
-
-  listStage:OffreStage[]=[null];
-  year:string;
-  listYears:[]=[];
-  searchText:string;
-  etat:string;
+  listStage: OffreStage[] = [null];
+  year: string;
+  listYears: [] = [];
+  searchText: string;
+  etat: string;
 
   page = 1;
   pageSize = 5;
-  pageSizes = [5,10,15];
+  pageSizes = [5, 10, 15];
 
-  constructor(private offreStageServ: OffreStageServiceService,
-    private router :Router,
-    private modalService: NgbModal,public sharedService:SharedServiceService) {
-
-     }
+  constructor(
+    private offreStageServ: OffreStageServiceService,
+    private router: Router,
+    private modalService: NgbModal,
+    public sharedService: SharedServiceService,
+    private offreService: OffreStageServiceService
+  ) {}
 
   ngOnInit() {
-    this.etat="0";
+    this.etat = "0";
     this.getAllOffreStages(this.etat);
   }
 
-
-  async getAllOffreStages(etat:string){
-    const id_responsable="2";
+  async getAllOffreStages(etat: string) {
     try {
-      const {err,rows}=await this.offreStageServ.getAllOffreStages(id_responsable,etat)as any||[];
-      if(!err){
-        this.listStage=rows;
+      const { err, rows } =
+        ((await this.offreStageServ.getAllOffreStages(etat)) as any) || [];
+      if (!err) {
+        this.listStage = rows;
       }
     } catch (error) {
-      this.listStage=[];
+      this.listStage = [];
     }
   }
 
-
-  updateOffre(offre:OffreStage){
+  updateOffre(offre: OffreStage) {
     const modalRef = this.modalService.open(PopupOffreComponent);
     modalRef.componentInstance.title = `MODIFICATION D'UNE OFFRE`;
     modalRef.componentInstance.id = Number(offre.id_offre_stage);
-    modalRef.componentInstance.offreStage = {...offre};
+    modalRef.componentInstance.offreStage = { ...offre };
   }
 
-  passerOffre(offre:OffreStage){
-    const cryptedData=this.sharedService.encryptData(JSON.stringify(offre))
-    this.router.navigate(['/entreprise/modif'],{ queryParams: { data: cryptedData } })
+  passerOffre(offre: OffreStage) {
+    const cryptedData = this.sharedService.encryptData(JSON.stringify(offre));
+    this.router.navigate(["/entreprise/modif"], {
+      queryParams: { data: cryptedData },
+    });
   }
 
-  supprimerOffre(id_offre:string){
-    const modalRef = this.modalService.open(PopupOffreComponent);
-    modalRef.componentInstance.title = `SUPPRESSION OFFRE`;
-    modalRef.componentInstance.id_offre_stage = Number(id_offre);
+  supprimerOffre(id_offre: string) {
+    swal({
+      title: "Voulez-vous supprimer l'offre?",
+      buttons: ["cancel", "confirm"],
+      closeOnEsc: true,
+      closeOnClickOutside: true,
+    }).then((result) => {
+      if (result) {
+        this.deleteOffre(id_offre);
+      }
+    });
   }
-  AddOffre(){
+  AddOffre() {
     const modalRef = this.modalService.open(PopupOffreComponent);
     modalRef.componentInstance.title = `NOUVELLE OFFRE`;
   }
@@ -81,27 +89,28 @@ export class ListOffresStageComponent implements OnInit {
     });
   }
 
-  showAddOffre(){
+  showAddOffre() {
     const modalRef = this.modalService.open(PopupOffreComponent);
     modalRef.componentInstance.title = `NOUVELLE OFFRE`;
     modalRef.componentInstance.show = true;
   }
 
-  async getOneOffreDetails(id_offre_stage:string,callback){
+  async getOneOffreDetails(id_offre_stage: string, callback) {
     try {
-      const {err,rows}=await this.offreStageServ.getOneOffreDetails(id_offre_stage)as any||[];
-      if(!err){
-        callback(rows)
+      const { err, rows } =
+        ((await this.offreStageServ.getOneOffreDetails(
+          id_offre_stage
+        )) as any) || [];
+      if (!err) {
+        callback(rows);
       }
-    } catch (error) {
-    }
-
+    } catch (error) {}
   }
 
-  changeEtat(event){
+  changeEtat(event) {
     this.listStage = [null];
-    const etat=event.nextId.toString();
-    this.etat=etat;
+    const etat = event.nextId.toString();
+    this.etat = etat;
     this.getAllOffreStages(etat);
   }
 
@@ -109,10 +118,15 @@ export class ListOffresStageComponent implements OnInit {
     this.pageSize = event.target.value;
     this.page = 1;
   }
-  async closeOpenOffre(id_offre_stage:number,id_etat_offre:string){
+
+  async closeOpenOffre(id_offre_stage: number, id_etat_offre: string) {
     try {
-      const {err,rows}=await this.offreStageServ.closeOpenOffre(id_offre_stage.toString(),id_etat_offre)as any||[];
-      if(!err){
+      const { err, rows } =
+        ((await this.offreStageServ.closeOpenOffre(
+          id_offre_stage.toString(),
+          id_etat_offre
+        )) as any) || [];
+      if (!err) {
         swal("Succès!", "Opération effctuée avec succès", "success");
         this.getAllOffreStages(this.etat);
       }
@@ -121,4 +135,15 @@ export class ListOffresStageComponent implements OnInit {
     }
   }
 
+  deleteOffre(id_offre_stage: string) {
+    try {
+      const { err } = this.offreService.deleteOffreStage(id_offre_stage) as any;
+      if (!err) {
+        swal("Succès!", "Suppression effectuée avec succès", "success");
+        this.sharedService.reloadComponent();
+      }
+    } catch (error) {
+      swal("Échec!", "Opération non effectuée", "error");
+    }
+  }
 }

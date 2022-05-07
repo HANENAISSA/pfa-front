@@ -19,6 +19,7 @@ export class NewOffreStageComponent implements OnInit {
   type: string;
   duree: string;
   actualDate:string;
+  htmlinputType:string;
 
   constructor(
     private offreService: OffreStageServiceService,
@@ -26,6 +27,8 @@ export class NewOffreStageComponent implements OnInit {
     private route: Router,
     public datepipe: DatePipe
   ) {
+    this.htmlinputType='text';
+
   }
 
   ngOnInit() {
@@ -43,7 +46,6 @@ export class NewOffreStageComponent implements OnInit {
       const { dd, titre, ddure, description } = f.value;
       this.offre.append("type", this.type);
       this.offre.append("date_debut", dd.toString());
-      this.offre.append("id_responsable_entreprise", "2");
       this.offre.append("titre", titre);
       this.offre.append("description", description);
 
@@ -81,5 +83,10 @@ export class NewOffreStageComponent implements OnInit {
   getType(event) {
     this.type = event.target.options[event.target.options.selectedIndex].text;
     this.duree = event.target.value;
+  }
+
+
+  geninputtype(){
+    this.htmlinputType='date';
   }
 }

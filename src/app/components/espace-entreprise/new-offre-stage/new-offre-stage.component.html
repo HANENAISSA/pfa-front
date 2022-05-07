@@ -93,9 +93,11 @@
                 ></span>
                 <input
                   class="form-control"
-                  type="date"
+                  [type]="htmlinputType"
                   onkeydown="return false"
+                  (click)="geninputtype($event)"
                   name="dd"
+                  placeholder="Date début stage"
                   ngModel
                   required
                   #dd="ngModel"

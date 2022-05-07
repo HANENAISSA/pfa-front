@@ -13,11 +13,24 @@ export class TokenInterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     const authService = this.injector.get(SharedServiceService);
     const token = authService.getCookie("token");
-    const tokenizedreq = req.clone({
-      setHeaders: {
-        authorization: `Bearer ${token}`,
-      },
-    });
+    let tokenizedreq;
+    //inject id_role test!!!
+    // if(token){
+
+      tokenizedreq = req.clone({
+        setHeaders: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+    // }else{
+      //injector.call refreshToken
+      //setcookie
+      // tokenizedreq = req.clone({
+      //   setHeaders: {
+      //     authorization: `Bearer ${token}`,
+      //   },
+      // });
+    // }
     return next.handle(tokenizedreq);
   }
 }

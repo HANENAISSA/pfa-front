@@ -24,4 +24,20 @@ export class StagiairesService {
         });
     });
   }
+
+
+  deleteStagiaire(id_demande:string)
+  {
+    return new Promise((resolve, reject) => {
+      this.httpC.delete(`${environment.api}/stagiaires/deleteStagiaire/${id_demande}`)
+        .forEach(data =>
+          {
+            resolve(data)
+          }
+
+        ).catch((err) => {
+          reject(err);
+        });
+    });
+  }
 }

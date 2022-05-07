@@ -36,20 +36,22 @@ export class PopupOffreComponent implements OnInit {
   }
 
 
-async postulerOffre() {
-  try {
-    (await this.offreService.updateOffrePostulations(this.id_offre_stage.toString())) as any;
-    const { err } =
-      (await this.formCvServ.addDemandeStageEntreprise({'id_offre_stage':this.id_offre_stage.toString()})) as any;
-    if (!err) {
-      this.sharedService.reloadComponent();
-      swal("Succès!", "Postulation effectuée avec succès", "success");
+
+
+  async postulerOffre() {
+    try {
+      (await this.offreStageServ.updateOffrePostulations(this.id_offre_stage.toString())) as any;
+      const { err, rows } =
+        (await this.formCvServ.addDemandeStageEntreprise(this.id_offre_stage.toString())) as any;
+      if (!err) {
+        swal("Succès!", "Postulation effectuée avec succès", "success");
+        this.sharedService.reloadComponent()
+      }
+    } catch (error) {
+      swal("Échec!", "Postulation non effectuée", "error");
     }
-  } catch (error) {
-    swal("Échec!", "Opération non effectuée", "error");
+    this.activeModal.dismiss()
   }
-  this.activeModal.dismiss();
-}
 
 
 async getOffresEtudiantsTousContacts() {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+
+import swal from "sweetalert";
 import { SharedServiceService } from "../../../services/shared-service.service";
 import { StagiairesService } from "../../../services/stagiaires.service";
 
@@ -38,6 +39,32 @@ export class StagiairesComponent implements OnInit {
   }
   consulterProfil(crypted_user: string) {
     this.router.navigate(["/entreprise/etudiant/profil/", crypted_user]);
+  }
+supprimerStagiaire(id_demande_stage_entreprise){
+
+  swal({
+    title: "Voulez-vous supprimer le stagiaire?",
+    buttons:['cancel','confirm'],
+    closeOnEsc:true,
+    closeOnClickOutside:true
+  }).then((result) => {
+    if(result){
+      this.deleteStagiaire(id_demande_stage_entreprise.toString());
+    }
+  });
+}
+  async deleteStagiaire(id_demande_stage_entreprise: string) {
+    try {
+      const { err, rows } =
+        ((await this.stagiairesService.deleteStagiaire(id_demande_stage_entreprise)) as any) || [];
+      if (!err) {
+        this.sharedService.reloadComponent()
+        swal("Succès!", "Modification effectuée avec succès", "success");
+
+      }
+    } catch (error) {
+      swal("Echec!", "Opération non effectuée", "error");
+    }
   }
 
   handlePageSizeChange(event: any): void {

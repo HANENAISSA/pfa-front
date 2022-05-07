@@ -33,6 +33,7 @@ export class DemandeCandidaturesComponent implements OnInit {
 
   ngOnInit() {
     this.getAllCandidature(this.etat);
+
   }
 
   async getAllCandidature(etat) {

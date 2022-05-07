@@ -8,12 +8,7 @@
             <span>
               <i class="icofont icofont-tools-bag card1-icon" style="background-color: #f4a024"></i>
             </span>
-            <div class="d-inline">
-              <span class="d-block">
-                <h4>Liste Des Etudiants</h4>
-              </span>
-              <span> Liste Des Etudiants disponibles pour un Stage </span>
-            </div>
+
           </div>
         </div>
       </div>
@@ -37,8 +32,11 @@
                               <th scope="col" [appSort]="listStagiaires" data-order="desc" data-name="nom">
                                 Nom et Prénom<i class="fa fa-sort" style="margin-left: 10px"></i>
                               </th>
-                              <th scope="col" [appSort]="listStagiaires" data-order="desc" data-name="departement_lib">
-                                Offre<i class="fa fa-sort" style="margin-left: 10px"></i>
+                              <th scope="col" [appSort]="listStagiaires" data-order="desc" data-name="email">
+                                Email<i class="fa fa-sort" style="margin-left: 10px"></i>
+                              </th>
+                              <th scope="col" [appSort]="listStagiaires" data-order="desc" data-name="cahier_charge">
+                                Cahier de charge<i class="fa fa-sort" style="margin-left: 10px"></i>
                               </th>
                               <th scope="col"></th>
                             </tr>
@@ -63,7 +61,16 @@
                                 <td scope="row">
                                   {{ stagiaire.nom + " " + stagiaire.prenom }}
                                 </td>
-                                <td scope="row">{{ stagiaire.libelle }}</td>
+                                <td scope="row">{{ stagiaire.email }}</td>
+                                <td scope="row">
+                                  <a *ngIf="stagiaire.cahier_charge"
+                                    href="{{ stagiaire.cahier_charge }}"
+                                    target="_blank"
+                                  >
+                                    Ouvrir
+                                  </a>
+                                  <span *ngIf="!stagiaire.cahier_charge">AUCUN C.C</span>
+                                </td>
                                 <td>
                                   <div ngbDropdown placement="bottom-right" class="d-inline-block">
                                     <button class="btn btn-outline-none" id="dropdownBasic1" ngbDropdownToggle>
@@ -73,6 +80,11 @@
                                           this.consulterProfil(stagiaire.crypted_user)
                                         " ngbDropdownItem>
                                         <i class="icofont icofont-eye-alt"></i>Profil
+                                      </button>
+                                      <button (click)="
+                                          this.supprimerStagiaire(stagiaire.id_demande_stage_entreprise)
+                                        " ngbDropdownItem>
+                                        <i class="icofont icofont-trash"></i>Supprimer
                                       </button>
 
                                     </div>

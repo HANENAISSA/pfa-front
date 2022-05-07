@@ -22,7 +22,7 @@
     <div class="col-lg-12">
       <div class="md-tabs">
         <ngb-tabset (tabChange)="changeEtat($event)">
-          <ngb-tab title="DEMANDES NON DECIDÉES" [id]="3">
+          <ngb-tab title="NON DECIDÉES" [id]="3">
             <ng-template ngbTabContent>
               <div class="m-t-15">
                 <div class="card">
@@ -392,6 +392,142 @@
                               <tr style="text-align: center">
                                 <td colspan="7">
                                   AUCUNE DEMANDE MISE EN ATTENTE
+                                </td>
+                              </tr>
+                            </tbody>
+                          </ng-container>
+                          <ng-container *ngIf="this.listdemande[0] === null">
+                            <tbody>
+                              <tr style="text-align: center">
+                                <td colspan="7">Chargement ...</td>
+                              </tr>
+                            </tbody>
+                          </ng-container>
+                        </table>
+                        <!-- Pagination  -->
+                        <div class="d-flex justify-content-between p-2">
+                          <ngb-pagination
+                            [(page)]="page"
+                            [pageSize]="pageSize"
+                            [collectionSize]="listdemande.length"
+                          >
+                          </ngb-pagination>
+                          <!-- Items Par Page  -->
+                          <div>
+                            <select
+                              class="custom-select"
+                              style="width: auto"
+                              name="pageSize"
+                              (change)="handlePageSizeChange($event)"
+                            >
+                              <option
+                                *ngFor="let size of pageSizes"
+                                [ngValue]="size"
+                              >
+                                {{ size }}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="REFUSEE" [id]="4">
+            <ng-template ngbTabContent>
+              <div class="m-t-15" style="position: relative">
+                <!-- info card start -->
+                <div class="card">
+                  <div class="col-sm-12">
+
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md-12 col-lg-4 mb-5 mt-5">
+                          <div class="pcoded-search">
+                            <div class="pcoded-search-box">
+                              <input
+                                type="text"
+                                placeholder="Rechercher"
+                                name="search"
+                                [(ngModel)]="searchText"
+                                autocomplete="off"
+                              />
+                              <span class="search-icon"
+                                ><i class="ti-search" aria-hidden="true"></i
+                              ></span>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div class="table-responsive" >
+                      <div style="margin: 5px; ">
+                        <table class="table table-hover" style="width: 100%;">
+                          <thead>
+                            <tr style="text-align: center">
+                              <th scope="col" [appSort]="listdemande" data-order="desc" data-name="nom_entreprise">Entreprise<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
+                              <th scope="col" [appSort]="listdemande" data-order="desc" data-name="libelle_domaine" >Domaine entreprise<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
+                              <th scope="col" [appSort]="listdemande" data-order="desc" data-name="titre">Titre<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
+                              <th scope="col" [appSort]="listdemande" data-order="desc" data-name="type" >Type<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
+                              <th scope="col" [appSort]="listdemande" data-order="desc" data-name="id_etat_offre_stage" >Etat offre<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
+                              <th scope="col" [appSort]="listdemande" data-order="desc" data-name="date_demande" data-type="date" >Date demande<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
+                              <th scope="col"></th>
+
+                            </tr>
+                          </thead>
+                          <ng-container
+                            *ngIf="
+                              this.listdemande.length > 0 &&
+                              this.listdemande[0] !== null
+                            "
+                          >
+                            <tbody
+                              *ngFor="
+                                let demande of this.listdemande
+                                  | filter: searchText | slice: (page-1) * pageSize : page * pageSize ; let i = index
+                              "
+                            >
+                              <tr style="text-align: center">
+
+                                <th scope="row">{{ demande.nom_entreprise }}</th>
+                                <td scope="row">{{ demande.libelle_domaine }}</td>
+                                <td scope="row">{{ demande.titre }}</td>
+                                <td scope="row">{{ demande.type }}</td>
+
+                                <td *ngIf="this.demande.id_etat_offre_stage === 1">Ouvert</td>
+                                <td *ngIf="this.demande.id_etat_offre_stage === 2">Fermé</td>
+
+                                <td>
+                                  {{
+                                    this.sharedService.formatDate(
+                                      demande.date_demande,
+                                      true
+                                    )
+                                  }}
+                                </td>
+                                <td>
+                                  <button
+                                    class="btn hor-grd ml-2"
+                                    id="{{ demande.id_offre_stage }}"
+                                    (click)="showDemandeDetails(demande)"
+                                    style="background-color: #878787"
+                                  >
+                                    <i class="icofont icofont-eye-alt" style="color : white ;"></i>
+                                  </button>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </ng-container>
+                          <ng-container *ngIf="this.listdemande.length === 0">
+                            <tbody>
+                              <tr style="text-align: center">
+                                <td colspan="7">
+                                  AUCUNE DEMANDE REFUSEE
                                 </td>
                               </tr>
                             </tbody>

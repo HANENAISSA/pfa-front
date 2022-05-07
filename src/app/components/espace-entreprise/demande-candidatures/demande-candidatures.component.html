@@ -64,7 +64,7 @@
                                 <th scope="col" [appSort]="listCandidature" data-order="desc" data-name="titre">Titre<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                                 <th scope="col" [appSort]="listCandidature" data-order="desc" data-name="type">Type<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                                 <th scope="col" [appSort]="listCandidature" data-order="desc" data-name="nom" >Nom & prénom<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
-                                <th scope="col" [appSort]="listCandidature" data-order="desc" data-name="date_demande" >Date demande<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
+                                <th scope="col" [appSort]="listCandidature" data-order="desc" data-name="date_demande" >Date postulation<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                                 <th scope="col"></th>
                               </tr>
                             </thead>
@@ -182,23 +182,13 @@
                       <div style="margin: 5px; ">
                         <table class="table table-hover">
                           <thead>
-                            <!-- <ng-container matColumnDef="actions"> -->
-                              <!-- <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
-                              <mat-cell *matCellDef="let row">
-                                <button mat-button>Edit</button>
-                              </mat-cell> -->
-                            <!-- </ng-container> -->
+
                             <tr style="text-align: center">
                               <th scope="col" [appSort]="listCandidature" data-order="desc" data-name="titre">Titre<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col" [appSort]="listCandidature" data-order="desc" data-name="type">Type<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col" [appSort]="listCandidature" data-order="desc" data-name="nom" >Nom & prénom<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
-                              <th scope="col" [appSort]="listCandidature" data-order="desc" data-name="date_demande" >Date demande<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
+                              <th scope="col" [appSort]="listCandidature" data-order="desc" data-name="date_demande" >Date postulation<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col"></th>
-                              <!-- <th scope="col">Titre</th>
-                              <th scope="col">Type</th>
-                              <th scope="col">Nom & prénom</th>
-                              <th scope="col">Date demande</th>
-                              <th scope="col"></th> -->
                             </tr>
                           </thead>
                           <ng-container *ngIf="this.listCandidature.length > 0&&this.listCandidature[0]!==null">
@@ -228,7 +218,7 @@
                                   <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                                                                       <button
                                       id="{{ demande.id_demande_stage_entreprise }}"
-                                      (click)="accref(demande.id_demande_stage_entreprise,'1')"
+                                      (click)="accref(demande.id_demande_stage_entreprise,true)"
 
                                       ngbDropdownItem
                                     >
@@ -236,7 +226,7 @@
                                     </button>
                                     <button
                                       id="{{ demande.id_demande_stage_entreprise }}"
-                                      (click)="accref(demande.id_demande_stage_entreprise,'2')"
+                                      (click)="accref(demande.id_demande_stage_entreprise,false)"
                                       ngbDropdownItem
                                     >
                                       <i class="icofont icofont-close-squared"></i>Refuser
@@ -251,15 +241,6 @@
                                     </button>
                                   </div>
                                 </div>
-<!--
-                                  <button
-                                    class="btn hor-grd ml-1"
-                                    id="{{ demande.id_offre_stage }}"
-                                    (click)="this.showDemande(demande)"
-                                    style="background-color: #878787"
-                                  >
-                                    <i class="icofont icofont-eye-alt" style="color: white;"></i>
-                                  </button> -->
                                 </td>
                               </tr>
                             </tbody>
@@ -344,17 +325,11 @@
                       <div style="margin: 5px; ">
                         <table class="table table-hover">
                           <thead>
-                            <!-- <ng-container matColumnDef="actions"> -->
-                              <!-- <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
-                              <mat-cell *matCellDef="let row">
-                                <button mat-button>Edit</button>
-                              </mat-cell> -->
-                            <!-- </ng-container> -->
                             <tr style="text-align: center">
                               <th scope="col" [appSort]="listCandidature" data-order="desc" data-name="titre">Titre<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col" [appSort]="listCandidature" data-order="desc" data-name="type">Type<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col" [appSort]="listCandidature" data-order="desc" data-name="nom" >Nom & prénom<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
-                              <th scope="col" [appSort]="listCandidature" data-order="desc" data-name="date_demande" >Date demande<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
+                              <th scope="col" [appSort]="listCandidature" data-order="desc" data-name="date_demande" >Date postulation<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col"></th>
                             </tr>
                           </thead>
@@ -386,7 +361,7 @@
                           <ng-container *ngIf="this.listCandidature.length === 0">
                             <tbody>
                               <tr style="text-align: center">
-                                <td colspan="7">AUCUNE CANDIDATURE EN ATTENTE !</td>
+                                <td colspan="7">AUCUNE CANDIDATURE EN ATTENTE </td>
                               </tr>
                             </tbody>
                           </ng-container>

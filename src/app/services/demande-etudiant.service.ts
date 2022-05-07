@@ -60,4 +60,21 @@ export class DemandeEtudiantService {
         });
     });
   }
+
+
+  decideDemande(id_demande_stage:string,etat_demande:string='4')
+  {
+    return new Promise((resolve, reject) => {
+      this.httpC.put(`${environment.api}/demandeEtudiantStageEntreprise/decide/${id_demande_stage}/${etat_demande}`,null)
+        .forEach(data =>
+          {
+            resolve(data)
+          }
+
+        ).catch((err) => {
+          reject(err);
+        });
+    });
+  }
+
 }

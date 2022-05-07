@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ChercherProfilService } from '../../../services/chercher-profil.service';
-import { CompetenceService } from '../../../services/competence.service';
 import { PopupDemandeComponent } from '../../popups/popup-demande/popup-demande.component';
 import { PopupOffreComponent } from '../../popups/popup-offre/popup-offre.component';
-import { PopupShowCompetenceEtudiantComponent } from '../../popups/popup-show-competence-etudiant/popup-show-competence-etudiant.component';
 
 @Component({
   selector: 'app-filter-etudiant',

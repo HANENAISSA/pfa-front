@@ -21,20 +21,20 @@ export class FormulaireCvServiceService {
       });
     };
 
-    getListPostulations(id_etudiant : string)//testing form send
-  {
-    return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/demandeEtudiantStageEntreprise/getAllPostulationsEtudiant/${id_etudiant}`)
-        .forEach(data =>
-          {
-            resolve(data);
-          }
+  //   getListPostulations(id_etudiant : string)//testing form send
+  // {
+  //   return new Promise((resolve, reject) => {
+  //     this.httpC.get(`${environment.api}/demandeEtudiantStageEntreprise/getAllPostulationsEtudiant/${id_etudiant}`)
+  //       .forEach(data =>
+  //         {
+  //           resolve(data);
+  //         }
 
-        ).catch((err) => {
-          reject(err);
-        });
-    });
-  }
+  //       ).catch((err) => {
+  //         reject(err);
+  //       });
+  //   });
+  // }
 
 
 

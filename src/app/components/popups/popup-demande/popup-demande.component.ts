@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { DemandeEtudiantService } from "../../../services/demande-etudiant.service";
 import swal from "sweetalert";
 import { CandidatureEtudiantService } from "../../../services/candidature-etudiant.service";
 import { ChercherProfilService } from "../../../services/chercher-profil.service";
@@ -37,7 +38,8 @@ export class PopupDemandeComponent implements OnInit {
     private candidatureService: CandidatureEtudiantService,
     private entrepriseService: EntrepriseServiceService,
     private profilService: ChercherProfilService,
-    private offreStageServ: OffreStageServiceService
+    private offreStageServ: OffreStageServiceService,
+    private demandeService:DemandeEtudiantService
   ) {}
 
   ngOnInit() {
@@ -168,5 +170,30 @@ export class PopupDemandeComponent implements OnInit {
 
   geninputtype() {
     this.htmlinputType = "datetime-local";
+  }
+
+  refuseDemande(){
+    console.log(this.details);
+    swal({
+      title: "Voulez-vous refuser la demande?",
+      buttons:['cancel','confirm'],
+      closeOnEsc:true,
+      closeOnClickOutside:true
+    }).then(async(result) => {
+      if(result){
+        try {
+          const { err } =
+            ((await this.demandeService.decideDemande(this.details.id_demande_stage_entreprise.toString())) as any) || [];
+          if (!err) {
+            this.sharedService.reloadComponent();
+            swal("Succès!", "Demande refusée", "warning");
+          }
+        } catch (error) {
+          swal("Echec!", "Opération non effectuée", "error");
+        }
+      }
+    });
+    this.activeModal.dismiss();
+
   }
 }

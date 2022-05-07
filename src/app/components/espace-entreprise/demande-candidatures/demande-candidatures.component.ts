@@ -3,8 +3,8 @@ import { CandidatureEtudiantService } from "../../../services/candidature-etudia
 import { SharedServiceService } from "../../../services/shared-service.service";
 import {  NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { PopupDemandeComponent } from "../../popups/popup-demande/popup-demande.component";
-import { PopupAccrefStageComponent } from "../../popups/popup-accref-stage/popup-accref-stage.component";
 import swal from "sweetalert";
+import { DemandeEtudiantService } from "../../../services/demande-etudiant.service";
 
 @Component({
   selector: "app-demande-candidatures",
@@ -13,7 +13,6 @@ import swal from "sweetalert";
 })
 export class DemandeCandidaturesComponent implements OnInit {
   listCandidature = [null];
-  listYears = [];
   searchText;
   etat: string;
 
@@ -26,6 +25,8 @@ export class DemandeCandidaturesComponent implements OnInit {
     public sharedService: SharedServiceService,
     private modalService: NgbModal,
     public activeModal: NgbActiveModal,
+    private demandeService:DemandeEtudiantService
+
   ) {
     this.etat = "3";
   }
@@ -61,7 +62,6 @@ export class DemandeCandidaturesComponent implements OnInit {
       if(!err){
         const modalRef = this.modalService.open(PopupDemandeComponent);
         modalRef.componentInstance.title = `DETAILS DEMANDE`;
-        modalRef.componentInstance.id = Number(demande.id_offre_stage);
         modalRef.componentInstance.etat = this.etat;
         modalRef.componentInstance.details = demande;
       }
@@ -78,12 +78,33 @@ export class DemandeCandidaturesComponent implements OnInit {
 
 
 
-  accref(id_demande:string,decision:string)
+  accref(id_demande:string,decision:boolean)
   {
-        const modalRef = this.modalService.open(PopupAccrefStageComponent);
-        modalRef.componentInstance.title = `DECISION DE STAGE`;
-        modalRef.componentInstance.id_demande = id_demande;
-        modalRef.componentInstance.decision = decision;
+      swal({
+        title: `Voulez-vous ${decision?'accepter':'refuser'} la demande?`,
+        buttons:['cancel','confirm'],
+        closeOnEsc:true,
+        closeOnClickOutside:true
+      }).then(async(result) => {
+        if(result){
+          this.decideDemande(id_demande,decision?'5':'4')//5 and 4 are state in db
+        }
+      });
+      this.activeModal.dismiss();
+
+  }
+
+  async decideDemande(id_demande:string,decision:string){
+    try {
+      const { err } =
+        ((await this.demandeService.decideDemande(id_demande,decision)) as any) || [];
+      if (!err) {
+        this.sharedService.reloadComponent();
+        swal("Succès!", "Opération effectuée", "success");
+      }
+    } catch (error) {
+      swal("Echec!", "Opération non effectuée", "error");
+    }
   }
 
 }

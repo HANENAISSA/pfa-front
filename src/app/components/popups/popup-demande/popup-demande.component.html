@@ -25,40 +25,12 @@
                         <h5>{{ this.details.titre }}</h5>
                       </td>
                     </tr>
-
-                      <!-- <tr>
-                        <th scope="row">Domaine entreprise</th>
-                        <td>{{ this.details.libelle }}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Nom société</th>
-                        <td>{{ this.details.nom_societe }}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Numéro registre commericale</th>
-                        <td>{{ this.details.num_reg_commerce }}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Localisation</th>
-                        <td>{{ this.details.localisation }}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Site web</th>
-                        <td>
-                          <a href="{{ this.details.site_web }}" target="_blank">
-                            {{ this.details.site_web }}
-                          </a>
-                        </td>
-                      </tr> -->
-
-
-
                     <tr>
                       <th scope="row">Date postulation</th>
                       <td>{{ this.sharedService.formatDate(this.details.date_demande,true)}}</td>
                     </tr>
                     <tr>
-                      <th scope="row">Nom & prénom</th>
+                      <th scope="row">Nom et prénom</th>
                       <td>
                         {{
                           this.details.nom+" "+this.details.prenom
@@ -73,6 +45,7 @@
                         }}
                       </td>
                     </tr>
+
                     <tr>
                       <th scope="row">Profil étudiant</th>
                       <td>
@@ -113,6 +86,14 @@
       (click)="this.onSubmit()"
     >
       Mettre en attente
+    </button>
+    <button
+    *ngIf="this.etat==='2'||this.etat==='3'"
+      type="button"
+      class="btn btn-outline-danger"
+      (click)="this.refuseDemande()"
+    >
+      Refuser
     </button>
     <button
       type="button"

@@ -45,7 +45,7 @@ export class CandidatureEtudiantService {
   updateCandidatureVue(id:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.patch(`${environment.api}/demandeEntreprise/updateVueDemande`,{id_demande:id})
+      this.httpC.patch(`${environment.api}/demandeEntreprise/updateVueDemande/${id}`,null)
         .forEach(data =>
           {
             resolve(data)

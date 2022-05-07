@@ -2,10 +2,10 @@ import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { Router } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import swal from "sweetalert";
-import { OffreStage } from "../../../models/offre-stage.model";
-import { OffreStageServiceService } from "../../../services/offre-stage-service.service";
-import { SharedServiceService } from "../../../services/shared-service.service";
-import { PopupOffreComponent } from "../../popups/popup-offre/popup-offre.component";
+import { OffreStage } from "../../../../models/offre-stage.model";
+import { OffreStageServiceService } from "../../../../services/offre-stage-service.service";
+import { SharedServiceService } from "../../../../services/shared-service.service";
+import { PopupOffreComponent } from "../../../popups/popup-offre/popup-offre.component";
 
 @Component({
   selector: "app-list-offres-stage",

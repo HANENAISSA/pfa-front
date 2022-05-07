@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { PagesModule } from '../../pages/pages.module';
+import { VisitProfilResponsableComponent } from './visit-profil-responsable/visit-profil-responsable.component';
 
 
 
@@ -17,6 +18,7 @@ import { PagesModule } from '../../pages/pages.module';
     FormulaireCvComponent,
     ListDemandesEtudiantComponent,
     ListOffresEtudiantComponent,
+    VisitProfilResponsableComponent,
     // NotfoundComponent
   ],
   imports: [
@@ -31,7 +33,8 @@ import { PagesModule } from '../../pages/pages.module';
   exports: [
     FormulaireCvComponent,
     ListDemandesEtudiantComponent,
-    ListOffresEtudiantComponent
+    ListOffresEtudiantComponent,
+    VisitProfilResponsableComponent
   ],
 
   schemas: [NO_ERRORS_SCHEMA],

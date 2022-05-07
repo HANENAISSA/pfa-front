@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { OffreStageServiceService } from "../../../services/offre-stage-service.service";
-import { SharedServiceService } from "../../../services/shared-service.service";
+import { OffreStageServiceService } from "../../../../services/offre-stage-service.service";
+import { SharedServiceService } from "../../../../services/shared-service.service";
 
 import swal from "sweetalert";
 import { DatePipe } from "@angular/common";

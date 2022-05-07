@@ -3,11 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { NotfoundComponent } from '../../pages/notfound/notfound.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DemandeCandidaturesComponent } from './demande-candidatures/demande-candidatures.component';
-import { EditOffreStageComponent } from './edit-offre-stage/edit-offre-stage.component';
+import { EditOffreStageComponent } from './offre-stage/edit-offre-stage/edit-offre-stage.component';
 import { FilterEtudiantComponent } from './filter-etudiant/filter-etudiant.component';
-import { ListOffresStageComponent } from './list-offres-stage/list-offres-stage.component';
-import { NewOffreStageComponent } from './new-offre-stage/new-offre-stage.component';
+import { ListOffresStageComponent } from './offre-stage/list-offres-stage/list-offres-stage.component';
+import { NewOffreStageComponent } from './offre-stage/new-offre-stage/new-offre-stage.component';
 import { StagiairesComponent } from './stagiaires/stagiaires.component';
+import { VisitProfilEtudiantComponent } from './visit-profil-etudiant/visit-profil-etudiant.component';
 
 
 const routes: Routes = [
@@ -27,7 +28,7 @@ const routes: Routes = [
     path: "profil", component: ProfileComponent
   },
   {
-    path: "etudiant/profil", component: ProfileComponent
+    path: "etudiant/profil/:id", component: VisitProfilEtudiantComponent
   },
   {
     path: "modif", component: EditOffreStageComponent

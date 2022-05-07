@@ -151,8 +151,7 @@
                       ngModel
                       required
                       #dd="ngModel"
-                      min="{{actualDate}}"
-
+                      min="{{actualDate|date:'dd/MM/yyyy HH:mm'}}"
                       />
                   </div>
 
@@ -205,22 +204,28 @@
         <div class="general-info">
           <div class="row">
             <div class="col-lg-12 col-xl-12">
-
+              <form
+                name="invitationForm"
+                (ngSubmit)="invite(invitationForm)"
+                #invitationForm="ngForm"
+                novalidate>
                 <div class="modal-body">
 
                   <div class="input-group">
-                    <!-- <span class="input-group-prepend">
+                    <span class="input-group-prepend">
                       <label class="input-group-text">
                         <i class="icofont icofont-box"></i>
                       </label>
-                      </span> -->
+                      </span>
                     <ng-select
-                    [ngStyle]="{'width': '100%'}"
+                    [ngStyle]="{'width': '90%'}"
                       [items]="listOffres"
                       bindLabel="titre"
                       placeholder="Séléctionner une offre"
                       searchable="true"
-                      [(ngModel)]="tabSelected"
+                      [(ngModel)]="offreSelected"
+                      name="offreSelected"
+                      required
                     >
                   </ng-select>
                   </div>
@@ -232,21 +237,19 @@
                     ></span>
                     <input
                       class="form-control"
-                      type="datetime-local"
+                      [type]="this.htmlinputType"
+                      (click)="geninputtype()"
+                      placeholder="Date d'entretien"
                       onkeydown="return false"
-                      name="dd"
+                      name="dentretien"
+                      #dentretien="ngModel"
                       ngModel
                       required
-                      #dd="ngModel"
-                      min="{{actualDate}}"
-
+                      min="{{actualDate|date:'dd/MM/yyyy HH:mm'}}"
                       />
                   </div>
-
-
-
                   <div
-                    *ngIf="dd.invalid && dd.touched"
+                    *ngIf="dentretien.invalid && dentretien.touched"
                     class="alert alert-danger p-2"
                     role="alert"
                   >
@@ -265,7 +268,7 @@
                       type="text"
                       [disabled]="true"
                       rows="1"
-                      ngModel="{{'Bonjour Mme/Mr '+(this.etudiant&&this.etudiant.nom)+' '+(this.etudiant&&this.etudiant.prenom)}}"
+                      value="{{'Bonjour Mme/Mr '+(this.etudiant&&this.etudiant.nom)+' '+(this.etudiant&&this.etudiant.prenom)}}"
 
                     ></textarea>
                   </div>
@@ -277,16 +280,16 @@
                     <textarea
                       class="form-control"
                       type="text"
-                      name="body"
+                      name="mbdy"
                       rows="9"
-                      #body="ngModel"
+                      #mbdy="ngModel"
                       [(ngModel)]="this.msg_body"
                       placeholder="Message"
                       required
                     ></textarea>
                   </div>
                   <div
-                    *ngIf="body.invalid&&body.touched"
+                    *ngIf="mbdy.invalid&&mbdy.touched"
                     class="alert alert-danger p-2"
                     role="alert"
                   >
@@ -305,7 +308,8 @@
                       type="text"
                       [disabled]="true"
                       rows="4"
-                      ngModel="{{'Priére de confirmer le rendez-vous le '+(this.sharedService.formatDate(dd.value,true))+' .                                                                      '+(this.entrepriseInfo[0]&&this.entrepriseInfo[0].nom_societe) +' situé à '+(this.entrepriseInfo[0]&&this.entrepriseInfo[0].localisation)+' .                                                                             Bien cordialement .'}}"
+
+                      value="{{'Priére de confirmer le rendez-vous le '+(this.sharedService.formatDate(dentretien.value,true))+' .                                                                                  Bien cordialement .'}}"
 
                     ></textarea>
                   </div>
@@ -313,10 +317,10 @@
                   <div class="modal-footer">
                     <input
                       value="Confirmer"
-                      type="button"
+                      type="submit"
                       class="btn btn-outline-primary"
-                      [disabled]="dd.invalid||body.value==''||(!this.tabSelected)"
-                      (click)="invite(dd.value)"
+                      [disabled]="invitationForm.invalid"
+
                     />
                     <button
                       type="button"
@@ -328,7 +332,7 @@
                   </div>
 
                 </div>
-
+              </form>
               <!-- end of table col-lg-6 -->
             </div>
             <!-- end of row -->

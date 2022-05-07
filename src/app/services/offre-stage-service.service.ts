@@ -66,21 +66,6 @@ export class OffreStageServiceService {
     });
   }
 
-  getAllOffresEntreprise(id_entreprise:string){
-
-    return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/offrestage/getAllOffresEntreprise/${id_entreprise}`)
-
-        .forEach(data =>
-          {
-            resolve(data)
-          }
-
-        ).catch((err) => {
-          reject(err);
-        });
-    });
-  }
 
   getOneOffreDetails(id_offre_stage:string){
 
@@ -119,7 +104,7 @@ export class OffreStageServiceService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.patch(`${environment.api}/offrestage/update_Nbr_vue`, {"id_offre_stage":id_offre_stage})
+      this.httpC.patch(`${environment.api}/offrestage/update_Nbr_vue/${id_offre_stage}`,null)
         .forEach(data =>
           resolve(data)
         ).catch((err) => {
@@ -132,7 +117,7 @@ export class OffreStageServiceService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.patch(`${environment.api}/offrestage/update_Nbr_postulations`, {id_offre_stage})
+      this.httpC.patch(`${environment.api}/offrestage/update_Nbr_postulations/${id_offre_stage}`,null)
         .forEach(data =>
           resolve(data)
         ).catch((err) => {
@@ -155,11 +140,18 @@ export class OffreStageServiceService {
   }
 
 
-  getAllOffresOuvertes(id_responsable:string){
-
+  getOffresEtudiantsTousContacts(id_etudiant:string,tabid:string){
+    let api:string;
+    switch (tabid) {
+      case '0':
+        api=`${environment.api}/offrestage/getOffresEtudiantsNonContactes/${id_etudiant}`
+        break;
+        case '1':
+          api=`${environment.api}/offrestage/getOffresEtudiantsContactes/${id_etudiant}`
+          break;
+    }
     return new Promise((resolve, reject) => {
-
-      this.httpC.get(`${environment.api}/offrestage/getAllOffresOuvertes/${id_responsable}`)
+      this.httpC.get(api)
         .forEach(data =>
           resolve(data)
         ).catch((err) => {
@@ -167,48 +159,4 @@ export class OffreStageServiceService {
         });
     });
   }
-
-
-  getOffresEtudiantsContactes(id_responsable:string,id_etudiant:string){
-
-    return new Promise((resolve, reject) => {
-
-      this.httpC.get(`${environment.api}/offrestage/getOffresEtudiantsContactes/${id_responsable}/${id_etudiant}`)
-        .forEach(data =>
-          resolve(data)
-        ).catch((err) => {
-          reject(err);
-        });
-    });
-  }
-
-
-  offreExpired(){
-
-    return new Promise((resolve, reject) => {
-
-      this.httpC.patch(`${environment.api}/offrestage/offreExpired`,null)
-        .forEach(data =>
-          resolve(data)
-        ).catch((err) => {
-          reject(err);
-        });
-    });
-  }
-
-
-  loadAllOffres(id_responsable:string){
-
-    return new Promise((resolve, reject) => {
-
-      this.httpC.get(`${environment.api}/offrestage/loadAllOffres/${id_responsable}`)
-        .forEach(data =>
-          resolve(data)
-        ).catch((err) => {
-          reject(err);
-        });
-    });
-  }
-
-
 }

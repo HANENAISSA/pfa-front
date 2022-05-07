@@ -9,10 +9,10 @@ export class ChercherProfilService {
 
   constructor(private httpC: HttpClient) { }
 
-  getListEtudiant()
+  getListEtudiant(tabId:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/etudiantController/getAll`)
+      this.httpC.get(`${environment.api}/etudiant/getAll/${tabId}`)
         .forEach(data =>
           {
             resolve(data)

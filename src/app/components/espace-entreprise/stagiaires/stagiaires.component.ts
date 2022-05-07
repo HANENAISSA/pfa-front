@@ -48,18 +48,18 @@ export class StagiairesComponent implements OnInit {
 
 
    async loadAllOffres() {
-    try {
-      const id_responsable = "2";
-      const { err, rows } =
-        ((await this.offreStageServ.loadAllOffres(
-          id_responsable,
-        )) as any) || [];
-      if (!err) {
-        this.listOffres = rows;
-      }
-    } catch (error) {
-      this.listOffres = [];
-    }
+    // try {
+    //   const id_responsable = "2";
+    //   const { err, rows } =
+    //     ((await this.offreStageServ.loadAllOffres(
+    //       id_responsable,
+    //     )) as any) || [];
+    //   if (!err) {
+    //     this.listOffres = rows;
+    //   }
+    // } catch (error) {
+    //   this.listOffres = [];
+    // }
   }
 
 

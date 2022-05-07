@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ChercherProfilService } from '../../../services/chercher-profil.service';
 import { CompetenceService } from '../../../services/competence.service';
@@ -13,221 +14,70 @@ import { PopupShowCompetenceEtudiantComponent } from '../../popups/popup-show-co
 })
 export class FilterEtudiantComponent implements OnInit {
   listEtudiant: any[] = [null];
-  listEtudiantContacte: any[] = [null];
-  listDepartements: any[] = [];
-  listCompetences: any[] = [];
   searchText;
-  tabSelected:any
-  selectedidDomaine:string="-1"
-
-
-
   page = 1;
   pageSize = 5;
   pageSizes = [5, 10, 15];
+  tabid: any;
   constructor( private serviceEtudiant:ChercherProfilService,
                private modalService: NgbModal,
-               private competenceService:CompetenceService
-    ) { }
+               private router:Router
+    ) {
+      this.tabid='0';
+    }
 
   ngOnInit() {
-    this.getAllListEtudiant();
-    this.loadDepartmentsList();
-    this.loadCompetences();
-    this.getAllListEtudiantContacte("2");
+    this.getAllListEtudiant(this.tabid);// 0 tabid
   }
 
 
-  async getAllListEtudiant() {
+  async getAllListEtudiant(etat:string) {
 
     try {
       const { err, rows } =
-        ((await this.serviceEtudiant.getListEtudiant(
+        ((await this.serviceEtudiant.getListEtudiant(etat
         )) as any) || [];
       if (!err) {
         this.listEtudiant = rows;
-
       }
     } catch (error) {
       this.listEtudiant = [];
     }
   }
-
-  async filterEtudiantsByDep(id:string) {
-    try {
-      const { err, rows } =
-        ((await this.serviceEtudiant.filterEtudiants(id
-        )) as any) || [];
-      if (!err) {
-        this.listEtudiant = rows;
-
-      }
-    } catch (error) {
-      this.listEtudiant = [];
-    }
-  }
-
-  async filterEtudiantsByDepContacted(id:string,id_responsable:string) {
-    try {
-      const { err, rows } =
-        ((await this.serviceEtudiant.filterEtudiantsContacte(id,id_responsable
-        )) as any) || [];
-      if (!err) {
-        this.listEtudiantContacte = rows;
-
-      }
-    } catch (error) {
-      this.listEtudiantContacte = [];
-    }
+  changeTabid(event) {
+    this.listEtudiant = [null];
+    const etat = event.nextId.toString();
+    this.getAllListEtudiant(etat);
+    this.tabid=etat;//send to get offre contactes or not switch the tabid
   }
 
 
-
-  async loadDepartmentsList() {
-    try {
-      const { err, rows } =
-        ((await this.serviceEtudiant.getDepartementsList(
-        )) as any) || [];
-      if (!err) {
-        this.listDepartements = rows;
-      }
-    } catch (error) {
-      this.listDepartements = [];
-    }
+  consulterProfil(crypted_user:string){
+    this.router.navigate(['/entreprise/etudiant/profil/',crypted_user])
   }
 
 
-  showCompetencesEtudiant(etudiant){
-    const modalRef = this.modalService.open(PopupShowCompetenceEtudiantComponent);
-    modalRef.componentInstance.title = `Compétences Etudiant`;
-    modalRef.componentInstance.etudiant = etudiant;
-
-  }
   contacter(etudiant){
     const modalRef = this.modalService.open(PopupDemandeComponent);
     modalRef.componentInstance.title = `INVITATION A UN ENTRETIEN DE STAGE`;
-  //   modalRef.componentInstance.id = Number(demande.id_offre_stage);
     modalRef.componentInstance.etudiant = etudiant;
     modalRef.componentInstance.invitation = true;
-  }
-
-  showOffresEtudiant(etudiant){
-    const modalRef = this.modalService.open(PopupOffreComponent);
-    modalRef.componentInstance.title = `LISTE DES OFFRES AFFECTEES`;
-    modalRef.componentInstance.etudiant = etudiant;
-  }
-
-  changeDep(event){
-    this.selectedidDomaine=event.toString();//ngModel init
-    this.tabSelected=[]
-
-    if(event==-1){
-       this.getAllListEtudiant();
-       this.getAllListEtudiantContacte("2");
-       this.loadCompetences()
-       return;
-    }
-    this.filterEtudiantsByDep(event)
-    this.filterEtudiantsByDepContacted(this.selectedidDomaine,"2")
-    this.filterCompetences(event)
+    modalRef.componentInstance.tabid = this.tabid;
   }
 
 
 
-  async getAllListEtudiantContacte(id_responsable:string) {
-
-    try {
-      const { err, rows } =
-        ((await this.serviceEtudiant.getToutEtudiantContacte(id_responsable
-        )) as any) || [];
-      if (!err) {
-        this.listEtudiantContacte = rows;
-
-      }
-    } catch (error) {
-      this.listEtudiantContacte = [];
-    }
-  }
-
-  async loadCompetences() {
-    try {
-      const { err, rows } =
-        ((await this.competenceService.loadCompetences(
-        )) as any) || [];
-      if (!err) {
-        this.listCompetences = rows;
-      }
-    } catch (error) {
-      this.listCompetences = [];
-    }
-  }
-
-  async filterCompetences(idomaine:string) {
-
-    try {
-      const { err, rows } =
-        ((await this.competenceService.filterCompetences(idomaine
-        )) as any) || [];
-      if (!err) {
-        this.listCompetences = rows;
-      }
-    } catch (error) {
-      this.listCompetences = [];
-    }
-  }
-
-  changeCompetences(){
-    if(this.tabSelected.length>0){
-      const list=this.getSelectedValues(this.tabSelected)
-      this.filterAllEtudiantsByCompetences(list)
-      this.filterAllEtudiantsContactesByCompetences(list)
-    }
-    else{
-      this.getAllListEtudiant();
-      this.getAllListEtudiantContacte("2");
-    }
-
-  }
-
-
-  getSelectedValues(tab){
-    const cList:string[]=[]
-    for (const c of tab) {
-      cList.push(c.libelle)
-    }
-    return cList;
-  }
-
-
-  async filterAllEtudiantsByCompetences(list:string[]) {
-
-    try {
-      const { err, rows } =
-        ((await this.competenceService.filterAllEtudiantsByCompetences(list
-        )) as any) || [];
-      if (!err) {
-        this.listEtudiant = rows;
-      }
-    } catch (error) {
-      this.listEtudiant = [];
-    }
-  }
-
-  async filterAllEtudiantsContactesByCompetences(list:string[]) {
-
-    try {
-      const { err, rows } =
-        ((await this.serviceEtudiant.getListEtudiantsContactesByCompetences(list
-        )) as any) || [];
-      if (!err) {
-        this.listEtudiantContacte = rows;
-      }
-    } catch (error) {
-      this.listEtudiantContacte = [];
-    }
-  }
   handlePageSizeChange(event: any): void {
     this.pageSize = event.target.value;
     this.page = 1;
   }
+
+  showOffresListContactees(etudiant){
+    const modalRef = this.modalService.open(PopupOffreComponent);
+    modalRef.componentInstance.title = `LISTE DES OFFRES CONTACTEES POUR ${etudiant.nom +' '+etudiant.prenom}`;
+    modalRef.componentInstance.etudiant = etudiant;
+  }
+
+
 }
+

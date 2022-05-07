@@ -31,7 +31,7 @@ import { ListOffresStageComponent } from './offre-stage/list-offres-stage/list-o
     FormsModule,
     NgbModule,
     Ng2SearchPipeModule,
-    PagesModule
+    PagesModule,
   ],
   exports: [
     DemandeCandidaturesComponent,
@@ -44,7 +44,6 @@ import { ListOffresStageComponent } from './offre-stage/list-offres-stage/list-o
     VisitProfilEtudiantComponent
   ],
   schemas: [NO_ERRORS_SCHEMA],
-
 
 })
 export class EspaceEntrepriseModule { }

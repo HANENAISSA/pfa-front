@@ -129,28 +129,7 @@
                         <td>{{ this.details.duree + " mois" }}</td>
                       </tr> -->
                     </ng-container>
-                    <!-- <tr>
-                      <th scope="row">Date début offre</th>
-                      <td>
-                        {{
-                          this.sharedService.formatDate(this.details.date_debut)
-                        }}
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Date fin offre</th>
-                      <td>
-                        {{
-                          this.sharedService.formatDate(this.details.date_fin)
-                        }}
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Etat de l'offre</th>
-                      <td *ngIf="this.details.id_etat_offre_stage === 2">Fermé</td>
-                      <td *ngIf="this.details.id_etat_offre_stage === 1">Ouvert</td>
-                    </tr>
-                  -->
+
                     <tr *ngIf="this.details.cahier_charge">
                       <th scope="row">Cahier de charge</th>
                       <td>
@@ -200,7 +179,61 @@
     <!-- end of row -->
   </div>
   <div class="modal-footer">
-    <button *ngIf="this.role === 'StudentPostuler'" type="button" [disabled]="this.disabled" class="btn btn-outline-primary"  (click)="postulerOffre()">Postuler</button>
+    <button *ngIf="this.role === 'StudentPostuler'" type="button" class="btn btn-outline-primary"  (click)="postulerOffre()">Postuler</button>
+
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="activeModal.close('Close click')"
+    >
+      Fermer
+    </button>
+  </div>
+</div>
+<div class="modal-body" *ngIf="this.etudiant">
+  <div class="view-info">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="general-info">
+          <div class="row">
+            <div class="col-lg-12 col-xl-12">
+              <div class="table-responsive">
+                <table class="table m-0">
+                  <tbody *ngFor="let offre of listOffres">
+                    <tr>
+                      <th scope="row">Titre</th>
+                      <td>
+                        <h5>{{ offre.titre }}</h5>
+                      </td>
+                    </tr>
+
+                    <tr *ngIf="offre.cahier_charge">
+                      <th scope="row">Cahier de charge</th>
+                      <td>
+                        <a
+                          href="{{ offre.cahier_charge }}"
+                          target="_blank"
+                        >
+                          Ouvrir
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- end of table col-lg-6 -->
+          </div>
+          <!-- end of row -->
+        </div>
+        <!-- end of general info -->
+      </div>
+      <!-- end of col-lg-12 -->
+    </div>
+    <!-- end of row -->
+  </div>
+  <div class="modal-footer">
 
     <button
       type="button"

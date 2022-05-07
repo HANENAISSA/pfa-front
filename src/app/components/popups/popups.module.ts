@@ -7,6 +7,7 @@ import { PopupExperienceComponent } from './popup-experience/popup-experience.co
 import { PopupOffreComponent } from './popup-offre/popup-offre.component';
 import { PopupShowCompetenceEtudiantComponent } from './popup-show-competence-etudiant/popup-show-competence-etudiant.component';
 import { FormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 
@@ -21,7 +22,8 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    NgSelectModule
   ],
   entryComponents : [
     PopupAccrefStageComponent,

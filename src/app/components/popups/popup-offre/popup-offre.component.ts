@@ -19,33 +19,21 @@ export class PopupOffreComponent implements OnInit {
   @Input() role:string;
   uploaded:boolean=false;
   listOffres=[]
-  disabled:boolean=false
 
 
     constructor(private offreService:OffreStageServiceService,
       private formCvServ:FormulaireCvServiceService,
     public activeModal: NgbActiveModal,
     public sharedService:SharedServiceService,
+    private offreStageServ:OffreStageServiceService
      ) {
     }
 
   ngOnInit() {
-    this.getOffresEtudiantsContactes()
-  }
-
-  async getOffresEtudiantsContactes() {
-    const id_responsable_entreprise = "2"
-    try {
-      const { err, rows } =
-        ((await this.offreService.getOffresEtudiantsContactes(id_responsable_entreprise,this.etudiant.id_etudiant)) as any) || [];
-      if (!err) {
-        this.listOffres = rows;
-      }
-    } catch (error) {
-      this.listOffres = [];
+    if(this.etudiant){
+      this.getOffresEtudiantsTousContacts();
     }
   }
-
 
 
 async postulerOffre() {
@@ -63,6 +51,21 @@ async postulerOffre() {
   this.activeModal.dismiss();
 }
 
+
+async getOffresEtudiantsTousContacts() {
+  try {
+    const { err, rows } =
+      ((await this.offreStageServ.getOffresEtudiantsTousContacts(
+        this.etudiant.id_etudiant,
+        '1'//1 because its coming from list students contacted
+      )) as any) || [];
+    if (!err) {
+      this.listOffres = rows;
+    }
+  } catch (error) {
+    this.listOffres = [];
+  }
+}
 
 
 }

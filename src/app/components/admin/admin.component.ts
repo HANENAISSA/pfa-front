@@ -181,9 +181,11 @@ export class AdminComponent implements OnInit {
     // this.setNavBarTheme('theme1');
     // this.navType = 'st3';
   }
+  id_role:string;
 
   ngOnInit() {
     this.setBackgroundPattern("pattern2");
+    this.id_role=this.sharedService.getCookie('id_role')
   }
 
   onResize(event) {
@@ -331,5 +333,6 @@ export class AdminComponent implements OnInit {
 
   logout() {
     this.sharedService.deleteCookie("token");
+    this.sharedService.deleteCookie("id_role");
   }
 }

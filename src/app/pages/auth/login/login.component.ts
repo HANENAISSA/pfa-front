@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private sharedService: SharedServiceService,
-    private router:Router
+    private router: Router
   ) {}
 
   ngOnInit() {}
@@ -27,7 +27,16 @@ export class LoginComponent implements OnInit {
       )) as any;
       if (!err) {
         this.sharedService.setCookie("token", token, 7);
-        this.router.navigate(['/etudiant']);
+        this.sharedService.setCookie("id_role", id_role, 9999);
+        switch (id_role) {
+          case 1:
+            this.router.navigate(["/etudiant"]);
+            break;
+          case 2:
+            this.router.navigate(["/entreprise"]);
+            break;
+
+        }
       }
     } catch (error) {
       swal("Echec!", error.error.message, "error");

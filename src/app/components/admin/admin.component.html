@@ -114,9 +114,8 @@
                   alt="User-Profile-Image"
                 />
                 <div class="user-details">
-                  <span>John Doe</span>
                   <span id="more-details" (click)="toggleOpenedSidebar()"
-                    >UX Designer<i class="ti-angle-down"></i
+                    >John Doe<i class="ti-angle-down"></i
                   ></span>
                 </div>
               </div>
@@ -154,7 +153,11 @@
 
                 </ul>
               </div>
-              <div class="d-color">
+
+
+
+
+              <div class="d-color" *ngIf="this.id_role=='2'">
                 <ul
                   class="pcoded-item pcoded-left-item"
                   [attr.item-border]="itemBorder"
@@ -228,8 +231,16 @@
                   </li>
                 </ul>
               </div>
-              <div class="d-color">
-                <ul
+
+
+
+
+
+
+
+
+              <div class="d-color" *ngIf="this.id_role=='1'">
+                 <ul
                   class="pcoded-item pcoded-left-item"
                   [attr.item-border]="itemBorder"
                   [attr.item-border-style]="itemBorderStyle"
@@ -244,7 +255,7 @@
                     appAccordionLink
                     group="dashboard"
                   >
-                    <a href="javascript:;" appAccordionToggle>
+                   <a href="javascript:;" appAccordionToggle>
                       <span class="pcoded-micon"
                         ><i class="ti-home"></i><b>d</b></span
                       >

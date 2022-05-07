@@ -1,5 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
+import { AuthGuard } from "../guards/auth.guard";
+import { CompteGuard } from "../guards/compte.guard";
 import { AboutComponent } from "./about/about.component";
 import { AccueilComponent } from "./accueil/accueil.component";
 import { LoginComponent } from "./auth/login/login.component";
@@ -28,14 +30,18 @@ const routes: Routes = [
   {
     path: "inscription",
     component: SignUpComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: "compte/:hashedid",
     component: VerifauthComponent,
+    canActivate:[CompteGuard]
+
   },
   {
     path: "connexion",
     component: LoginComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: "introuvable",

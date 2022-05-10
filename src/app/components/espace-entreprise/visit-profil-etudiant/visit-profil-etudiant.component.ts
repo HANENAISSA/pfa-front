@@ -69,6 +69,7 @@ export class VisitProfilEtudiantComponent implements OnInit {
           this.id_profil,
           tabId
         )) as any) || [];
+
       if (rows.length == 1) this.profil = rows[0];
       else this.list = rows;
     } catch (error) {

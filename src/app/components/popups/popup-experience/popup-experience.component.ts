@@ -51,7 +51,7 @@ export class PopupExperienceComponent implements OnInit {
           ...form.value,
         })) as any;
       if (!err) {
-        this.sharedService.reloadComponent(2);
+        this.sharedService.reloadComponent();
         swal("Succès!", "Ajout effectué avec succès", "success");
       }
     } catch (error) {
@@ -66,7 +66,7 @@ export class PopupExperienceComponent implements OnInit {
         {...form.value, id_experience: this.details.id_experience.toString()}
       )) as any;
       if (!err) {
-        this.sharedService.reloadComponent(2);
+        this.sharedService.reloadComponent();
         swal("Succès!", "Opération effectuée avec succès", "success");
       }
     } catch (error) {

@@ -43,7 +43,7 @@ export class PopupCompetenceComponent implements OnInit {
         { ...form.value }
       )) as any;
       if (!err) {
-        this.sharedService.reloadComponent(1);
+        this.sharedService.reloadComponent();
         swal("Succès!", "Ajout effectué avec succès", "success");
       }
     } catch (error) {
@@ -58,7 +58,7 @@ export class PopupCompetenceComponent implements OnInit {
         {...form.value, id_competence: this.details.id_competence.toString()}
       )) as any;
       if (!err) {
-        this.sharedService.reloadComponent(1);
+        this.sharedService.reloadComponent();
         swal("Succès!", "Opération effectuée avec succès", "success");
       }
     } catch (error) {

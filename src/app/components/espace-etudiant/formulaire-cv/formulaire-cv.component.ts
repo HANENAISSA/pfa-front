@@ -190,7 +190,7 @@ export class FormulaireCvComponent implements OnInit {
     try {
       const { err } = (await this.servicecompetence.deleteCompetence(id_competence)) as any;
       if (!err) {
-        this.sharedService.reloadComponent(1);
+        this.sharedService.reloadComponent();
         swal("Succès!", "Opération effectuée avec succès", "success");
       }
     } catch (error) {
@@ -201,7 +201,7 @@ export class FormulaireCvComponent implements OnInit {
     try {
       const { err } = (await this.serviceExperience.deleteExperience(id_experience)) as any;
       if (!err) {
-        this.sharedService.reloadComponent(2);
+        this.sharedService.reloadComponent();
         swal("Succès!", "Opération effectuée avec succès", "success");
       }
     } catch (error) {

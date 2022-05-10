@@ -66,7 +66,7 @@
                     class="img-radius"
                     alt="User-Profile-Image"
                   />
-                  <span>Username</span>
+                  <span>profile name</span>
                   <i class="ti-angle-down"></i>
                 </a>
                 <ul class="show-notification profile-notification">
@@ -115,7 +115,7 @@
                 />
                 <div class="user-details">
                   <span id="more-details" (click)="toggleOpenedSidebar()"
-                    >John Doe<i class="ti-angle-down"></i
+                    >Profile name<i class="ti-angle-down"></i
                   ></span>
                 </div>
               </div>
@@ -255,15 +255,12 @@
                     appAccordionLink
                     group="dashboard"
                   >
-                   <a href="javascript:;" appAccordionToggle>
-                      <span class="pcoded-micon"
-                        ><i class="ti-home"></i><b>d</b></span
-                      >
+                   <!-- <a href="javascript:;" appAccordionToggle>
+                      <span class="pcoded-micon"><i class="ti-home"></i><b>d</b></span>
                       <span class="pcoded-mtext">Coté Etudiant</span>
                       <span class="pcoded-mcaret"></span>
-                    </a>
-                    <ul class="pcoded-submenu">
-
+                    </a> -->
+                    <ul class="pcoded-menu">
                       <li appAccordionLink>
                         <a
                           [routerLink]="['/etudiant/offresStages']"
@@ -284,6 +281,28 @@
                             <i class="ti-angle-right"></i>
                           </span>
                           <span class="pcoded-mtext">Demandes de stage</span>
+                        </a>
+                      </li>
+                      <li appAccordionLink>
+                        <a
+                          [routerLink]="['/etudiant/recherche/entreprise']"
+                          appAccordionToggle
+                        >
+                          <span class="pcoded-micon">
+                            <i class="ti-angle-right"></i>
+                          </span>
+                          <span class="pcoded-mtext">Chercher entreprise</span>
+                        </a>
+                      </li>
+                      <li appAccordionLink>
+                        <a
+                          [routerLink]="['/etudiant/mesStages']"
+                          appAccordionToggle
+                        >
+                          <span class="pcoded-micon">
+                            <i class="ti-angle-right"></i>
+                          </span>
+                          <span class="pcoded-mtext">Mes stages</span>
                         </a>
                       </li>
                     </ul>

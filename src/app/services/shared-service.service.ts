@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import * as moment from "moment";
-import { ActivatedRoute, Router } from "@angular/router";
+import {  Router } from "@angular/router";
 import * as CryptoJS from "crypto-js";
 import { HttpClient } from "@angular/common/http";
 
@@ -18,62 +18,21 @@ export class SharedServiceService {
       return "(Date séléctionnée)";
     }
   }
-  // formatDateUpdate(date):string{
-  //   return moment(date).format("DD-MM-YYYY").toString();
-  // }
 
-  reloadComponent(tabid?: number) {
+
+  reloadComponent() {
     const currentRoute = this.router.url;
 
     this.router.navigateByUrl("/", { skipLocationChange: true }).then(() => {
-      if (tabid && tabid != 0)
+      // if (tabid && tabid != 0)
         // this.router.navigate([currentRoute+"/"+tabid]);
-        this.router.navigate(["/etudiant/profil", tabid.toString()]);
-      else this.router.navigate([currentRoute]);
+        // this.router.navigate(["/etudiant/profil", tabid.toString()]);
+      // else
+      this.router.navigate([currentRoute]);
       // navigate to same route
     });
   }
 
-  // dureeDiff = (date_debut, date_fin) => {
-  //   if (date_fin) {
-  //     const dd = moment(date_debut).format("MM/DD/YYYY hh:mm:ss").toString();
-  //     const df = moment(date_fin).format("MM/DD/YYYY hh:mm:ss").toString();
-  //     const date1 = new Date(dd) as any;
-  //     const date2 = new Date(df) as any;
-  //     const Difference_In_Time = date2.getTime() - date1.getTime();
-  //     const Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-
-  //     return Math.floor(Difference_In_Days);
-  //   }
-  // };
-
-  // getYears(yearsType:number){
-  //   let path:string=``;
-  //   switch (yearsType) {
-  //     case 0:
-  //       path=`${environment.api}/offrestage/getOffresYears`;
-  //       break;
-  //     case 1:
-  //       path=`${environment.api}/demandeEtudiantStageEntreprise/getAllDemandesYears`;
-  //       break;
-
-  //     default:
-  //       path=null;
-  //       break;
-  //   }
-
-  //   return new Promise((resolve, reject) => {
-  //     this.httpC.get(path)
-  //       .forEach(data =>
-  //         {
-  //           resolve(data)
-  //         }
-
-  //       ).catch((err) => {
-  //         reject(err);
-  //       });
-  //   });
-  // }
 
   encryptData(data) {
     try {

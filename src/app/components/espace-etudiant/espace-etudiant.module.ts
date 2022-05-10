@@ -9,6 +9,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { PagesModule } from '../../pages/pages.module';
 import { VisitProfilResponsableComponent } from './visit-profil-responsable/visit-profil-responsable.component';
+import { FilterEntrepriseComponent } from './filter-entreprise/filter-entreprise.component';
+import { MesStagesComponent } from './mes-stages/mes-stages.component';
 
 
 
@@ -19,6 +21,8 @@ import { VisitProfilResponsableComponent } from './visit-profil-responsable/visi
     ListDemandesEtudiantComponent,
     ListOffresEtudiantComponent,
     VisitProfilResponsableComponent,
+    FilterEntrepriseComponent,
+    MesStagesComponent,
   ],
   imports: [
     CommonModule,
@@ -33,7 +37,9 @@ import { VisitProfilResponsableComponent } from './visit-profil-responsable/visi
     FormulaireCvComponent,
     ListDemandesEtudiantComponent,
     ListOffresEtudiantComponent,
-    VisitProfilResponsableComponent
+    VisitProfilResponsableComponent,
+    FilterEntrepriseComponent,
+    MesStagesComponent,
   ],
 
   schemas: [NO_ERRORS_SCHEMA],

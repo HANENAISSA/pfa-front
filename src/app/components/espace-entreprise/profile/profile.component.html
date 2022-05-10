@@ -1,4 +1,3 @@
-<!--profile cover start-->
 <div class="row">
   <div class="col-lg-12">
     <div class="cover-profile">
@@ -7,21 +6,29 @@
         <div class="card-body user-info">
           <div class="col-md-12">
             <div class="media-left">
-              <a href="javascript:;" class="profile-image">
-                <img class="user-img img-radius" src="assets/images/user-profile/user-img.jpg" alt="user-img">
+              <a class="profile-image">
+                <img class="user-img img-radius" id="profil-photo" [src]="profil&&profil.photo" alt="user-img">
               </a>
             </div>
             <div class="media-body row">
-              <div class="col-lg-12">
-                <div class="user-title">
-                  <h2>Josephin Villa</h2>
-                  <span class="text-white">Web designer</span>
-                </div>
-              </div>
+
               <div>
                 <div class="pull-right cover-btn">
-                  <button type="button" class="btn btn-primary m-b-10 m-r-10"><i class="icofont icofont-plus"></i> Follow</button>
-                  <button type="button" class="btn btn-primary m-b-10"><i class="icofont icofont-ui-messaging"></i> Message</button>
+                  <div
+                    class="file-upload mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    <button class="btn btn-primary m-b-10 m-r-10">
+                      <input type="file" accept="image/*" (change)="changephoto($event)" name="FileAttachment"
+                        id="FileAttachment" class="upload" />
+                      <i class="icofont icofont-plus"></i>
+                      PHOTO
+                    </button>
+                  </div>
+                  <script>
+                    document.getElementById("FileAttachment").onchange = function () {
+                      document.getElementById("fileuploadurl").value = this.value.replace(/C:\\fakepath\\/i, '');
+                    };
+
+                  </script>
                 </div>
               </div>
             </div>
@@ -35,15 +42,15 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="md-tabs">
-      <ngb-tabset>
-        <ngb-tab title="Personal Info">
+      <ngb-tabset [activeId]="actifTabid">
+        <ngb-tab title="Informations Personnels" [id]="0">
           <ng-template ngbTabContent>
             <div [@fadeInOutTranslate] class="m-t-15">
               <!-- personal card start -->
               <div class="card">
                 <div class="card-header">
-                  <h5 class="card-header-text">About Me</h5>
-                  <button id="edit-btn" type="button" class="btn btn-sm btn-primary waves-effect waves-light f-right" (click)="toggleEditProfile()">
+                  <button id="edit-btn" type="button" class="btn btn-sm btn-primary waves-effect waves-light f-right"
+                    (click)="toggleEditProfile()">
                     <i class="icofont {{ editProfileIcon }}"></i>
                   </button>
                 </div>
@@ -57,26 +64,23 @@
                               <div class="table-responsive">
                                 <table class="table m-0">
                                   <tbody>
-                                  <tr>
-                                    <th scope="row">Full Name</th>
-                                    <td>Josephine Villa</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Gender</th>
-                                    <td>Female</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Birth Date</th>
-                                    <td>October 25th, 1990</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Marital Status</th>
-                                    <td>Single</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Location</th>
-                                    <td>New York, USA</td>
-                                  </tr>
+                                    <tr>
+                                      <th scope="row">Nom</th>
+                                      <td>{{profil&&profil.nom}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Prénom</th>
+                                      <td>{{profil&&profil.prenom}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Date naissance</th>
+                                      <td>{{profil&&profil.date_naissance|date:'dd/MM/yyyy'}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Identité utilisateur</th>
+                                      <td>{{profil&&profil.cin&&profil.cin}}</td>
+                                      <td>{{profil&&profil.num_passport&&profil.num_passport}}</td>
+                                    </tr>
                                   </tbody>
                                 </table>
                               </div>
@@ -86,33 +90,35 @@
                               <div class="table-responsive">
                                 <table class="table">
                                   <tbody>
-                                  <tr>
-                                    <th scope="row">Email</th>
-                                    <td><a href="javascript:;">Demo@phenix.com</a></td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Mobile Number</th>
-                                    <td>(0123) - 4567891</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Twitter</th>
-                                    <td>@codedthemes</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Skype</th>
-                                    <td>codedthemes.demo</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Website</th>
-                                    <td><a href="javascript:;">www.demo.com</a></td>
-                                  </tr>
+                                    <tr>
+                                      <th scope="row">N°Téléphone</th>
+                                      <td>{{profil&&profil.num_tel}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Email</th>
+                                      <td>
+                                        <a>{{profil&&profil.email}}</a>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Département</th>
+                                      <td>{{profil&&profil.libelle}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">C.V</th>
+                                      <td>
+                                        <a *ngIf="profil&&profil.cv" [href]="profil&&profil.cv"
+                                          target="_blank">OUVRIR</a>
+                                        <span *ngIf="profil&&profil.cv==null">AUCUN C.V</span>
+                                      </td>
+
+                                    </tr>
                                   </tbody>
                                 </table>
                               </div>
                             </div>
                             <!-- end of table col-lg-6 -->
                           </div>
-                          <!-- end of row -->
                         </div>
                         <!-- end of general info -->
                       </div>
@@ -124,115 +130,138 @@
                   <div class="edit-info" *ngIf="!editProfile">
                     <div class="row">
                       <div class="col-lg-12">
-                        <div class="general-info">
-                          <div class="row">
-                            <div class="col-lg-6">
-                              <div class="table-responsive">
-                                <table class="table">
-                                  <tbody>
-                                  <tr>
-                                    <td>
-                                      <div class="input-group">
-                                        <span class="input-group-prepend"><label class="input-group-text"><i class="icofont icofont-user"></i></label></span>
-                                        <input type="text" class="form-control" placeholder="Full Name" value="Josephine Villa">
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <div class="form-radio">
-                                        <div class="group-add-on">
-                                          <div class="radio radiofill radio-inline">
-                                            <label>
-                                              <input type="radio" name="radio"><i class="helper"></i> Male
-                                            </label>
+                        <form name="form" (ngSubmit)="submit(fprofil)" #fprofil="ngForm" novalidate>
+                          <div class="general-info">
+                            <div class="row">
+                              <div class="col-lg-6">
+                                <div class="table-responsive">
+                                  <table class="table">
+                                    <tbody>
+                                      <tr>
+                                        <td>
+                                          <div class="input-group">
+                                            <span class="input-group-prepend"><label class="input-group-text"><i
+                                                  class="icofont icofont-user"></i></label></span>
+                                            <input type="text" name="nom" required [(ngModel)]="profil&&profil.nom"
+                                              #nom="ngModel" class="form-control" placeholder="Prénom" />
                                           </div>
-                                          <div class="radio radiofill radio-inline">
-                                            <label>
-                                              <input type="radio" name="radio" checked><i class="helper"></i> Female
-                                            </label>
+                                        </td>
+                                      </tr>
+
+                                      <tr>
+                                        <td>
+                                          <div class="input-group">
+                                            <span class="input-group-prepend"><label class="input-group-text"><i
+                                                  class="icofont icofont-user"></i></label></span>
+                                            <input type="text" name="prenom" required
+                                              [(ngModel)]="profil&&profil.prenom" #prenom="ngModel" class="form-control"
+                                              placeholder="Prénom" />
                                           </div>
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <input id="dropper-default" class="form-control" type="text" value="October 25th, 1990" placeholder="Select Your Birth Date" />
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <select id="hello-single" class="form-control">
-                                        <option value="">---- Marital Status ----</option>
-                                        <option value="married">Married</option>
-                                        <option value="single" selected>Single</option>
-                                        <option value="unmarried">Unmarried</option>
-                                      </select>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <div class="input-group">
-                                        <span class="input-group-prepend"><label class="input-group-text"><i class="icofont icofont-location-pin"></i></label></span>
-                                        <input type="text" class="form-control" placeholder="Address" value="New York, USA">
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  </tbody>
-                                </table>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                          <div class="input-group">
+                                            <span class="input-group-prepend"><label class="input-group-text"><i
+                                                  class="icofont icofont-user"></i></label></span>
+                                            <input type="date" onkeydown="return false" name="date_naissance" required
+                                              [(ngModel)]="profil&&profil.dns" #date_naissance="ngModel"
+                                              class="form-control" max="{{this.actualDate | date:'yyyy-MM-dd'}}" />
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                          <div class="input-group">
+                                            <span class="input-group-prepend"><label class="input-group-text"><i
+                                                  class="icofont icofont-user"></i></label></span>
+                                            <input type="text" name="identite" required
+                                              [(ngModel)]="profil&&profil.cin?profil.cin:profil.num_passport"
+                                              #identite="ngModel" class="form-control"
+                                              placeholder="Identité utilisateur" />
+                                          </div>
+                                        </td>
+                                      </tr>
+
+
+                                    </tbody>
+                                  </table>
+                                </div>
                               </div>
-                            </div>
-                            <!-- end of table col-lg-6 -->
-                            <div class="col-lg-6">
-                              <div class="table-responsive">
-                                <table class="table">
-                                  <tbody>
-                                  <tr>
-                                    <td>
-                                      <div class="input-group">
-                                        <span class="input-group-prepend"><label class="input-group-text"><i class="icofont icofont-mobile-phone"></i></label></span>
-                                        <input type="text" class="form-control" value="(0123) - 4567891" placeholder="Mobile Number">
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <div class="input-group">
-                                        <span class="input-group-prepend"><label class="input-group-text"><i class="icofont icofont-social-twitter"></i></label></span>
-                                        <input type="text" class="form-control" value="@codedthemes" placeholder="Twitter Id">
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <div class="input-group">
-                                        <span class="input-group-prepend"><label class="input-group-text"><i class="icofont icofont-social-skype"></i></label></span>
-                                        <input type="email" class="form-control" value="codedthemes.demo" placeholder="Skype Id">
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <div class="input-group">
-                                        <span class="input-group-prepend"><label class="input-group-text"><i class="icofont icofont-earth"></i></label></span>
-                                        <input type="text" class="form-control" value="www.demo.com" placeholder="website">
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  </tbody>
-                                </table>
+                              <!-- end of table col-lg-6 -->
+
+                              <div class="col-lg-6">
+                                <div class="table-responsive">
+                                  <table class="table">
+                                    <tbody>
+                                      <tr>
+                                        <td>
+                                          <div class="input-group">
+                                            <span class="input-group-prepend"><label class="input-group-text"><i
+                                                  class="icofont icofont-location-pin"></i></label>
+                                            </span>
+                                            <input type="tel" class="form-control" placeholder="N°Téléphone" required
+                                              [(ngModel)]="profil&&profil.num_tel" #tel="ngModel" name="tel" />
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                          <div class="input-group">
+                                            <span class="input-group-prepend"><label class="input-group-text"><i
+                                                  class="icofont icofont-location-pin"></i></label>
+                                            </span>
+                                            <input type="email" class="form-control" placeholder="Email" required
+                                              [(ngModel)]="profil&&profil.email" #email="ngModel" name="email" />
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                          <div class="input-group">
+                                            <span class="input-group-prepend"><label class="input-group-text"><i
+                                                  class="icofont icofont-user"></i></label></span>
+                                            <select ngModel="{{ profil&&profil.id_departement }}"
+                                              #id_departement="ngModel" name="id_departement" class="form-control"
+                                              required>
+                                              <option value="3">Technologie de l'informatique</option>
+                                              <option value="4">Agro alimentaire</option>
+                                              <option value="5">Mécanique</option>
+                                              <option value="6">Electrique</option>
+                                              <option value="7">Génie civil</option>
+                                            </select>
+                                          </div>
+                                        </td>
+                                      </tr>
+
+                                      <tr>
+                                        <td>
+                                          <div class="input-group">
+                                            <span class="input-group-prepend"><label class="input-group-text"><i
+                                                  class="icofont icofont-location-pin"></i></label>
+                                            </span>
+                                            <!-- <input type="file" class="form-control" (change)="changecv($event)" /> -->
+                                          </div>
+                                        </td>
+                                      </tr>
+
+
+                                    </tbody>
+                                  </table>
+                                </div>
                               </div>
+                              <!-- end of table col-lg-6 -->
                             </div>
-                            <!-- end of table col-lg-6 -->
+                            <!-- end of row -->
+                            <div class="text-center">
+                              <a href="javascript:;"
+                                class="btn btn-primary waves-effect waves-light m-r-20">Enregistrer</a>
+                              <a href="javascript:;" id="edit-cancel" class="btn btn-default waves-effect"
+                                (click)="toggleEditProfile()">annuler</a>
+                            </div>
                           </div>
-                          <!-- end of row -->
-                          <div class="text-center">
-                            <a href="javascript:;" class="btn btn-primary waves-effect waves-light m-r-20">Save</a>
-                            <a href="javascript:;" id="edit-cancel" class="btn btn-default waves-effect" (click)="toggleEditProfile()">Cancel</a>
-                          </div>
-                        </div>
-                        <!-- end of edit info -->
+                          <!-- end of edit info -->
+                        </form>
                       </div>
                       <!-- end of col-lg-12 -->
                     </div>
@@ -244,346 +273,245 @@
               </div>
               <!-- personal card end-->
             </div>
+
           </ng-template>
         </ngb-tab>
-
-
-
-        <ngb-tab title="User's Services">
+        <ngb-tab title="Entreprise" [id]="1">
           <ng-template ngbTabContent>
             <div [@fadeInOutTranslate] class="m-t-15">
-              <!-- info card start -->
+              <!-- personal card start -->
               <div class="card">
                 <div class="card-header">
-                  <h5 class="card-header-text">User Services</h5>
+                  <button id="edit-btn" type="button" class="btn btn-sm btn-primary waves-effect waves-light f-right"
+                    (click)="toggleEditProfile()">
+                    <i class="icofont {{ editProfileIcon }}"></i>
+                  </button>
                 </div>
                 <div class="card-body">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="card b-l-success business-info services m-b-20">
-                        <div ngbDropdown class="card-header">
-                          <div class="service-header">
-                            <a href="javascript:;"><h5 class="card-header-text">Shivani Hero</h5></a>
-                          </div>
-                          <span ngbDropdownToggle class="dropdown-toggle addon-btn text-muted f-right service-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="tooltip">
-                                         </span>
-                          <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right b-none services-list">
-                            <a class="dropdown-item" href="javascript:;"><i class="icofont icofont-edit"></i> Edit</a>
-                            <a class="dropdown-item" href="javascript:;"><i class="icofont icofont-ui-delete"></i> Delete</a>
-                            <a class="dropdown-item" href="javascript:;"><i class="icofont icofont-eye-alt"></i> View</a>
-                          </div>
-                        </div>
-                        <div class="card-body">
+                  <div class="view-info" *ngIf="editProfile">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="general-info">
                           <div class="row">
-                            <div class="col-sm-12">
-                              <p class="task-detail">Lorem ipsum dolor sit amet, consectet ur adipisicing elit, sed do eiusmod temp or incidi dunt ut labore et.Lorem ipsum dolor sit amet, consecte.</p>
+                            <div class="col-lg-12 col-xl-6">
+                              <div class="table-responsive">
+                                <table class="table m-0">
+                                  <tbody>
+                                    <tr>
+                                      <th scope="row">Nom</th>
+                                      <td>{{profil&&profil.nom}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Prénom</th>
+                                      <td>{{profil&&profil.prenom}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Date naissance</th>
+                                      <td>{{profil&&profil.date_naissance|date:'dd/MM/yyyy'}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Identité utilisateur</th>
+                                      <td>{{profil&&profil.cin&&profil.cin}}</td>
+                                      <td>{{profil&&profil.num_passport&&profil.num_passport}}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
                             </div>
-                            <!-- end of col-sm-8 -->
-                          </div>
-                          <!-- end of row -->
-                        </div>
-                        <!-- end of card-body -->
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="card b-l-danger business-info services">
-                        <div ngbDropdown class="card-header">
-                          <div class="service-header">
-                            <a href="javascript:;"><h5 class="card-header-text">Dress and Sarees</h5></a>
-                          </div>
-                          <span ngbDropdownToggle class="dropdown-toggle addon-btn text-muted f-right service-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="tooltip">
-                                         </span>
-                          <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right b-none services-list">
-                            <a class="dropdown-item" href="javascript:;"><i class="icofont icofont-edit"></i> Edit</a>
-                            <a class="dropdown-item" href="javascript:;"><i class="icofont icofont-ui-delete"></i> Delete</a>
-                            <a class="dropdown-item" href="javascript:;"><i class="icofont icofont-eye-alt"></i> View</a>
-                          </div>
-                        </div>
-                        <div class="card-body">
-                          <div class="row">
-                            <div class="col-sm-12">
-                              <p class="task-detail">Lorem ipsum dolor sit amet, consectet ur adipisicing elit, sed do eiusmod temp or incidi dunt ut labore et.Lorem ipsum dolor sit amet, consecte.</p>
+                            <!-- end of table col-lg-6 -->
+                            <div class="col-lg-12 col-xl-6">
+                              <div class="table-responsive">
+                                <table class="table">
+                                  <tbody>
+                                    <tr>
+                                      <th scope="row">N°Téléphone</th>
+                                      <td>{{profil&&profil.num_tel}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Email</th>
+                                      <td>
+                                        <a>{{profil&&profil.email}}</a>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Département</th>
+                                      <td>{{profil&&profil.libelle}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">C.V</th>
+                                      <td>
+                                        <a *ngIf="profil&&profil.cv" [href]="profil&&profil.cv"
+                                          target="_blank">OUVRIR</a>
+                                        <span *ngIf="profil&&profil.cv==null">AUCUN C.V</span>
+                                      </td>
+
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
                             </div>
-                            <!-- end of col-sm-8 -->
+                            <!-- end of table col-lg-6 -->
                           </div>
-                          <!-- end of row -->
                         </div>
-                        <!-- end of card-body -->
+                        <!-- end of general info -->
                       </div>
+                      <!-- end of col-lg-12 -->
                     </div>
-                    <div class="col-md-6">
-                      <div class="card b-l-info business-info services">
-                        <div ngbDropdown class="card-header">
-                          <div class="service-header">
-                            <a href="javascript:;"><h5 class="card-header-text">Shivani Auto Port</h5></a>
-                          </div>
-                          <span ngbDropdownToggle class="dropdown-toggle addon-btn text-muted f-right service-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="tooltip">
-                                         </span>
-                          <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right b-none services-list">
-                            <a class="dropdown-item" href="javascript:;"><i class="icofont icofont-edit"></i> Edit</a>
-                            <a class="dropdown-item" href="javascript:;"><i class="icofont icofont-ui-delete"></i> Delete</a>
-                            <a class="dropdown-item" href="javascript:;"><i class="icofont icofont-eye-alt"></i> View</a>
-                          </div>
-                        </div>
-                        <div class="card-body">
-                          <div class="row">
-                            <div class="col-sm-12">
-                              <p class="task-detail">Lorem ipsum dolor sit amet, consectet ur adipisicing elit, sed do eiusmod temp or incidi dunt ut labore et.Lorem ipsum dolor sit amet, consecte.</p>
-                            </div>
-                            <!-- end of col-sm-8 -->
-                          </div>
-                          <!-- end of row -->
-                        </div>
-                        <!-- end of card-body -->
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="card b-l-warning business-info services">
-                        <div ngbDropdown class="card-header">
-                          <div class="service-header">
-                            <a href="javascript:;"><h5 class="card-header-text">Hair stylist</h5></a>
-                          </div>
-                          <span ngbDropdownToggle class="dropdown-toggle addon-btn text-muted f-right service-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="tooltip">
-                                         </span>
-                          <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right b-none services-list">
-                            <a class="dropdown-item" href="javascript:;"><i class="icofont icofont-edit"></i> Edit</a>
-                            <a class="dropdown-item" href="javascript:;"><i class="icofont icofont-ui-delete"></i> Delete</a>
-                            <a class="dropdown-item" href="javascript:;"><i class="icofont icofont-eye-alt"></i> View</a>
-                          </div>
-                        </div>
-                        <div class="card-body">
-                          <div class="row">
-                            <div class="col-sm-12">
-                              <p class="task-detail">Lorem ipsum dolor sit amet, consectet ur adipisicing elit, sed do eiusmod temp or incidi dunt ut labore et.Lorem ipsum dolor sit amet, consecte.</p>
-                            </div>
-                            <!-- end of col-sm-8 -->
-                          </div>
-                          <!-- end of row -->
-                        </div>
-                        <!-- end of card-body -->
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="card b-l-danger business-info services">
-                        <div ngbDropdown class="card-header">
-                          <div class="service-header">
-                            <a href="javascript:;"><h5 class="card-header-text">BMW India</h5></a>
-                          </div>
-                          <span ngbDropdownToggle class="dropdown-toggle addon-btn text-muted f-right service-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="tooltip">
-                                         </span>
-                          <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right b-none services-list">
-                            <a class="dropdown-item" href="javascript:;"><i class="icofont icofont-edit"></i> Edit</a>
-                            <a class="dropdown-item" href="javascript:;"><i class="icofont icofont-ui-delete"></i> Delete</a>
-                            <a class="dropdown-item" href="javascript:;"><i class="icofont icofont-eye-alt"></i> View</a>
-                          </div>
-                        </div>
-                        <div class="card-body">
-                          <div class="row">
-                            <div class="col-sm-12">
-                              <p class="task-detail">Lorem ipsum dolor sit amet, consectet ur adipisicing elit, sed do eiusmod temp or incidi dunt ut labore et.Lorem ipsum dolor sit amet, consecte.</p>
-                            </div>
-                            <!-- end of col-sm-8 -->
-                          </div>
-                          <!-- end of row -->
-                        </div>
-                        <!-- end of card-body -->
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="card b-l-success business-info services">
-                        <div ngbDropdown class="card-header">
-                          <div class="service-header">
-                            <a href="javascript:;"><h5 class="card-header-text">Shivani Hero</h5></a>
-                          </div>
-                          <span ngbDropdownToggle class="dropdown-toggle addon-btn text-muted f-right service-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="tooltip">
-                                         </span>
-                          <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right b-none services-list">
-                            <a class="dropdown-item" href="javascript:;"><i class="icofont icofont-edit"></i> Edit</a>
-                            <a class="dropdown-item" href="javascript:;"><i class="icofont icofont-ui-delete"></i> Delete</a>
-                            <a class="dropdown-item" href="javascript:;"><i class="icofont icofont-eye-alt"></i> View</a>
-                          </div>
-                        </div>
-                        <div class="card-body">
-                          <div class="row">
-                            <div class="col-sm-12">
-                              <p class="task-detail">Lorem ipsum dolor sit amet, consectet ur adipisicing elit, sed do eiusmod temp or incidi dunt ut labore et.Lorem ipsum dolor sit amet, consecte.</p>
-                            </div>
-                            <!-- end of col-sm-8 -->
-                          </div>
-                          <!-- end of row -->
-                        </div>
-                        <!-- end of card-body -->
-                      </div>
-                    </div>
+                    <!-- end of row -->
                   </div>
+                  <!-- end of view-info -->
+                  <div class="edit-info" *ngIf="!editProfile">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <form name="form" (ngSubmit)="submit(fprofil)" #fprofil="ngForm" novalidate>
+                          <div class="general-info">
+                            <div class="row">
+                              <div class="col-lg-6">
+                                <div class="table-responsive">
+                                  <table class="table">
+                                    <tbody>
+                                      <tr>
+                                        <td>
+                                          <div class="input-group">
+                                            <span class="input-group-prepend"><label class="input-group-text"><i
+                                                  class="icofont icofont-user"></i></label></span>
+                                            <input type="text" name="nom" required [(ngModel)]="profil&&profil.nom"
+                                              #nom="ngModel" class="form-control" placeholder="Prénom" />
+                                          </div>
+                                        </td>
+                                      </tr>
+
+                                      <tr>
+                                        <td>
+                                          <div class="input-group">
+                                            <span class="input-group-prepend"><label class="input-group-text"><i
+                                                  class="icofont icofont-user"></i></label></span>
+                                            <input type="text" name="prenom" required
+                                              [(ngModel)]="profil&&profil.prenom" #prenom="ngModel" class="form-control"
+                                              placeholder="Prénom" />
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                          <div class="input-group">
+                                            <span class="input-group-prepend"><label class="input-group-text"><i
+                                                  class="icofont icofont-user"></i></label></span>
+                                            <input type="date" onkeydown="return false" name="date_naissance" required
+                                              [(ngModel)]="profil&&profil.dns" #date_naissance="ngModel"
+                                              class="form-control" max="{{this.actualDate | date:'yyyy-MM-dd'}}" />
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                          <div class="input-group">
+                                            <span class="input-group-prepend"><label class="input-group-text"><i
+                                                  class="icofont icofont-user"></i></label></span>
+                                            <input type="text" name="identite" required
+                                              [(ngModel)]="profil&&profil.cin?profil.cin:profil.num_passport"
+                                              #identite="ngModel" class="form-control"
+                                              placeholder="Identité utilisateur" />
+                                          </div>
+                                        </td>
+                                      </tr>
+
+
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                              <!-- end of table col-lg-6 -->
+
+                              <div class="col-lg-6">
+                                <div class="table-responsive">
+                                  <table class="table">
+                                    <tbody>
+                                      <tr>
+                                        <td>
+                                          <div class="input-group">
+                                            <span class="input-group-prepend"><label class="input-group-text"><i
+                                                  class="icofont icofont-location-pin"></i></label>
+                                            </span>
+                                            <input type="tel" class="form-control" placeholder="N°Téléphone" required
+                                              [(ngModel)]="profil&&profil.num_tel" #tel="ngModel" name="tel" />
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                          <div class="input-group">
+                                            <span class="input-group-prepend"><label class="input-group-text"><i
+                                                  class="icofont icofont-location-pin"></i></label>
+                                            </span>
+                                            <input type="email" class="form-control" placeholder="Email" required
+                                              [(ngModel)]="profil&&profil.email" #email="ngModel" name="email" />
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                          <div class="input-group">
+                                            <span class="input-group-prepend"><label class="input-group-text"><i
+                                                  class="icofont icofont-user"></i></label></span>
+                                            <select ngModel="{{ profil&&profil.id_departement }}"
+                                              #id_departement="ngModel" name="id_departement" class="form-control"
+                                              required>
+                                              <option value="3">Technologie de l'informatique</option>
+                                              <option value="4">Agro alimentaire</option>
+                                              <option value="5">Mécanique</option>
+                                              <option value="6">Electrique</option>
+                                              <option value="7">Génie civil</option>
+                                            </select>
+                                          </div>
+                                        </td>
+                                      </tr>
+
+                                      <tr>
+                                        <td>
+                                          <div class="input-group">
+                                            <span class="input-group-prepend"><label class="input-group-text"><i
+                                                  class="icofont icofont-location-pin"></i></label>
+                                            </span>
+                                            <!-- <input type="file" class="form-control" (change)="changecv($event)" /> -->
+                                          </div>
+                                        </td>
+                                      </tr>
+
+
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                              <!-- end of table col-lg-6 -->
+                            </div>
+                            <!-- end of row -->
+                            <div class="text-center">
+                              <a href="javascript:;"
+                                class="btn btn-primary waves-effect waves-light m-r-20">Enregistrer</a>
+                              <a href="javascript:;" id="edit-cancel" class="btn btn-default waves-effect"
+                                (click)="toggleEditProfile()">annuler</a>
+                            </div>
+                          </div>
+                          <!-- end of edit info -->
+                        </form>
+                      </div>
+                      <!-- end of col-lg-12 -->
+                    </div>
+                    <!-- end of row -->
+                  </div>
+                  <!-- end of edit-info -->
                 </div>
+                <!-- end of card-body -->
               </div>
-              <!-- info card end -->
+              <!-- personal card end-->
             </div>
+
           </ng-template>
         </ngb-tab>
 
-
-        <ngb-tab title="Reviews">
-          <ng-template ngbTabContent>
-            <div [@fadeInOutTranslate] class="m-t-15">
-              <div class="card">
-                <div class="card-header">
-                  <h5 class="card-header-text">Review</h5>
-                </div>
-                <div class="card-body">
-                  <ul class="media-list">
-                    <li class="media">
-                      <div class="media-left">
-                        <a href="javascript:;">
-                          <img class="media-object img-radius comment-img" src="assets/images/avatar-1.jpg" alt="Generic placeholder image">
-                        </a>
-                      </div>
-                      <div class="media-body">
-                        <h6 class="media-heading">Sortino media<span class="f-12 text-muted m-l-5">Just now</span></h6>
-                        <div class="stars-example-css review-star">
-                          <i class="icofont icofont-star"></i>
-                          <i class="icofont icofont-star"></i>
-                          <i class="icofont icofont-star"></i>
-                          <i class="icofont icofont-star"></i>
-                          <i class="icofont icofont-star"></i>
-                        </div>
-                        <p class="m-b-0">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-                        <div class="m-b-25">
-                          <span><a href="javascript:;" class="m-r-10 f-12">Reply</a></span><span><a href="javascript:;" class="f-12">Edit</a> </span>
-                        </div>
-                        <hr>
-                        <!-- Nested media object -->
-                        <div class="media mt-2">
-                          <a class="media-left" href="javascript:;">
-                            <img class="media-object img-radius comment-img" src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
-                          </a>
-                          <div class="media-body">
-                            <h6 class="media-heading">Larry heading <span class="f-12 text-muted m-l-5">Just now</span></h6>
-                            <div class="stars-example-css review-star">
-                              <i class="icofont icofont-star"></i>
-                              <i class="icofont icofont-star"></i>
-                              <i class="icofont icofont-star"></i>
-                              <i class="icofont icofont-star"></i>
-                              <i class="icofont icofont-star"></i>
-                            </div>
-                            <p class="m-b-0"> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-                            <div class="m-b-25">
-                              <span><a href="javascript:;" class="m-r-10 f-12">Reply</a></span><span><a href="javascript:;" class="f-12">Edit</a> </span>
-                            </div>
-                            <hr>
-
-                          </div>
-                        </div>
-
-                      </div>
-                    </li>
-                    <!-- Nested media object -->
-                    <div class="media mt-2">
-                      <div class="media-left">
-                        <a href="javascript:;">
-                          <img class="media-object img-radius comment-img" src="assets/images/avatar-1.jpg" alt="Generic placeholder image">
-                        </a>
-                      </div>
-                      <div class="media-body">
-                        <h6 class="media-heading">Cedric Kelly<span class="f-12 text-muted m-l-5">Just now</span></h6>
-                        <div class="stars-example-css review-star">
-                          <i class="icofont icofont-star"></i>
-                          <i class="icofont icofont-star"></i>
-                          <i class="icofont icofont-star"></i>
-                          <i class="icofont icofont-star"></i>
-                          <i class="icofont icofont-star"></i>
-                        </div>
-                        <p class="m-b-0">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-                        <div class="m-b-25">
-                          <span><a href="javascript:;" class="m-r-10 f-12">Reply</a></span><span><a href="javascript:;" class="f-12">Edit</a> </span>
-                        </div>
-                        <hr>
-                      </div>
-                    </div>
-                    <div class="media mt-2">
-                      <a class="media-left" href="javascript:;">
-                        <img class="media-object img-radius comment-img" src="assets/images/avatar-4.jpg" alt="Generic placeholder image">
-                      </a>
-                      <div class="media-body">
-                        <h6 class="media-heading">Larry heading <span class="f-12 text-muted m-l-5">Just now</span></h6>
-                        <div class="stars-example-css review-star">
-                          <i class="icofont icofont-star"></i>
-                          <i class="icofont icofont-star"></i>
-                          <i class="icofont icofont-star"></i>
-                          <i class="icofont icofont-star"></i>
-                          <i class="icofont icofont-star"></i>
-                        </div>
-                        <p class="m-b-0"> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-                        <div class="m-b-25">
-                          <span><a href="javascript:;" class="m-r-10 f-12">Reply</a></span><span><a href="javascript:;" class="f-12">Edit</a> </span>
-                        </div>
-                        <hr>
-                        <!-- Nested media object -->
-                        <div class="media mt-2">
-                          <div class="media-left">
-                            <a href="javascript:;">
-                              <img class="media-object img-radius comment-img" src="assets/images/avatar-3.jpg" alt="Generic placeholder image">
-                            </a>
-                          </div>
-                          <div class="media-body">
-                            <h6 class="media-heading">Colleen Hurst <span class="f-12 text-muted m-l-5">Just now</span></h6>
-                            <div class="stars-example-css review-star">
-                              <i class="icofont icofont-star"></i>
-                              <i class="icofont icofont-star"></i>
-                              <i class="icofont icofont-star"></i>
-                              <i class="icofont icofont-star"></i>
-                              <i class="icofont icofont-star"></i>
-                            </div>
-                            <p class="m-b-0">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-                            <div class="m-b-25">
-                              <span><a href="javascript:;" class="m-r-10 f-12">Reply</a></span><span><a href="javascript:;" class="f-12">Edit</a> </span>
-                            </div>
-                          </div>
-                          <hr>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="media mt-2">
-                      <div class="media-left">
-                        <a href="javascript:;">
-                          <img class="media-object img-radius comment-img" src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
-                        </a>
-                      </div>
-                      <div class="media-body">
-                        <h6 class="media-heading">Mark Doe<span class="f-12 text-muted m-l-5">Just now</span></h6>
-                        <div class="stars-example-css review-star">
-                          <i class="icofont icofont-star"></i>
-                          <i class="icofont icofont-star"></i>
-                          <i class="icofont icofont-star"></i>
-                          <i class="icofont icofont-star"></i>
-                          <i class="icofont icofont-star"></i>
-                        </div>
-                        <p class="m-b-0">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-                        <div class="m-b-25">
-                          <span><a href="javascript:;" class="m-r-10 f-12">Reply</a></span><span><a href="javascript:;" class="f-12">Edit</a> </span>
-                        </div>
-                        <hr>
-                      </div>
-                    </div>
-                  </ul>
-                  <div class="md-float-material d-flex">
-                    <div class="md-group-add-on p-relative col-lg-12">
-                      <div class="input-group input-group-button input-group-primary">
-                        <span class="input-group-prepend"><label class="input-group-text"><i class="icofont icofont-comment"></i></label></span>
-                        <input type="text" class="form-control" placeholder="Write Comment">
-                        <span class="input-group-append"><label class="input-group-text">
-                                       <button type="button" class="btn btn-primary"><i class="icofont icofont-plus"></i>note</button>
-                        </label></span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ng-template>
-        </ngb-tab>
       </ngb-tabset>
+
     </div>
   </div>
 </div>

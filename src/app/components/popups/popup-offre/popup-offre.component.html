@@ -111,13 +111,14 @@
                         <th scope="row">Localisation</th>
                         <td>{{ this.details.localisation }}</td>
                       </tr> -->
-                      <tr>
+                      <tr *ngIf="this.details.site_web">
                         <th scope="row">Site web</th>
                         <td>
                           <a href="{{ this.details.site_web }}" target="_blank">
                             {{ this.details.site_web }}
                           </a>
                         </td>
+
                       </tr>
 
                       <tr>

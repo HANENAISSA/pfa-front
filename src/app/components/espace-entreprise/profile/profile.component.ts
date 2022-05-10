@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {animate, style, transition, trigger} from '@angular/animations';
+import swal from 'sweetalert';
+import { ChercherProfilService } from '../../../services/chercher-profil.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SharedServiceService } from '../../../services/shared-service.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -25,16 +30,16 @@ export class ProfileComponent implements OnInit {
   editAbout = true;
   editAboutIcon = 'icofont-edit';
 
-  public basicContent: string;
-
-
-  public rowsOnPage = 10;
-  public filterQuery = '';
-  public sortBy = '';
-  public sortOrder = 'desc';
   profitChartOption: any;
+  profil;
+  actualDate: string;
 
-  constructor() {
+  actifTabid: number;
+
+  constructor(public sharedService: SharedServiceService,
+  private modalService: NgbModal,
+  private profilService: ChercherProfilService
+) {
   }
 
   ngOnInit() {
@@ -48,6 +53,30 @@ export class ProfileComponent implements OnInit {
   toggleEditAbout() {
     this.editAboutIcon = (this.editAboutIcon === 'icofont-close') ? 'icofont-edit' : 'icofont-close';
     this.editAbout = !this.editAbout;
+  }
+
+  async changephoto(event) {
+    const fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+      const file: File = fileList[0];
+      if (file.type.split("/")[0] === "image") {
+        try {
+          const formData = new FormData();
+          formData.append("photo", file);
+            ((await this.profilService.changeEtudiantphoto(formData)) as any) ||
+            [];
+          this.sharedService.reloadComponent();
+        } catch (error) {
+          swal("Echec!", "Réessayer plus tard ! ", "error");
+        }
+      } else {
+        swal("Echec!", "choisir une image ! ", "error");
+      }
+    }
+  }
+
+  submit(form: NgForm) {
+    console.log(form);
   }
 
 }

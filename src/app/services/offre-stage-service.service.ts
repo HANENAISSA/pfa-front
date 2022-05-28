@@ -27,7 +27,7 @@ export class OffreStageServiceService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.patch(`${environment.api}/offrestage/update`, offreStage)
+      this.httpC.put(`${environment.api}/offrestage/update`, offreStage)
         .forEach(data =>
           resolve(data)
         ).catch((err) => {
@@ -104,7 +104,7 @@ export class OffreStageServiceService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.patch(`${environment.api}/offrestage/update_Nbr_vue/${id_offre_stage}`,null)
+      this.httpC.put(`${environment.api}/offrestage/update_Nbr_vue/${id_offre_stage}`,null)
         .forEach(data =>
           resolve(data)
         ).catch((err) => {
@@ -117,7 +117,7 @@ export class OffreStageServiceService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.patch(`${environment.api}/offrestage/update_Nbr_postulations/${id_offre_stage}`,null)
+      this.httpC.put(`${environment.api}/offrestage/update_Nbr_postulations/${id_offre_stage}`,null)
         .forEach(data =>
           resolve(data)
         ).catch((err) => {
@@ -130,7 +130,7 @@ export class OffreStageServiceService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.patch(`${environment.api}/offrestage/closeOpenOffre`, {id_offre_stage,id_etat_offre})
+      this.httpC.put(`${environment.api}/offrestage/closeOpenOffre`, {id_offre_stage,id_etat_offre})
         .forEach(data =>
           resolve(data)
         ).catch((err) => {

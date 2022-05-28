@@ -11,6 +11,7 @@ import { PopupCompetenceComponent } from "../../popups/popup-competence/popup-co
 import { ChercherProfilService } from "../../../services/chercher-profil.service";
 import { NgForm } from "@angular/forms";
 import swal from "sweetalert";
+import { EtudiantService } from "../../../../app/services/etudiant.service";
 
 @Component({
   selector: "app-formulaire-cv",
@@ -30,8 +31,6 @@ import swal from "sweetalert";
   ],
 })
 export class FormulaireCvComponent implements OnInit {
-  idEtudiant: string;
-
   editProfile = true;
   editProfileIcon = "icofont-edit";
 
@@ -44,15 +43,18 @@ export class FormulaireCvComponent implements OnInit {
   actualDate: string;
 
   actifTabid: number;
+  formData:FormData;
 
   constructor(
     public sharedService: SharedServiceService,
     private modalService: NgbModal,
     private serviceExperience: ExperienceService,
     private servicecompetence: CompetenceService,
-    private profilService: ChercherProfilService
+    private profilService: ChercherProfilService,
+    private etudiantService: EtudiantService
   ) {
     this.actualDate = new Date().toDateString();
+    this.formData=new FormData();
   }
 
   ngOnInit() {
@@ -101,7 +103,6 @@ export class FormulaireCvComponent implements OnInit {
         ((await this.profilService.getEtudiantInfo()) as any) || [];
       if (!err) {
         this.profil = rows[0];
-        console.log(this.profil);
       }
     } catch (error) {
     }
@@ -148,7 +149,7 @@ export class FormulaireCvComponent implements OnInit {
 
   openDeleteExper(id_experience: string) {
     swal({
-      title: "Voulez-vous supprimer l'expérience?",
+      title: "Voulez-vous supprimer l'expérience ?",
       buttons:['cancel','confirm'],
       closeOnEsc:true,
       closeOnClickOutside:true
@@ -171,21 +172,39 @@ export class FormulaireCvComponent implements OnInit {
             [];
           this.sharedService.reloadComponent();
         } catch (error) {
-          swal("Echec!", "Réessayer plus tard ! ", "error");
+          swal("Echec!", "Réessayer plus tard ! ", "warning");
         }
       } else {
-        swal("Echec!", "choisir une image ! ", "error");
+        swal("Echec!", "choisir une image ! ", "warning");
       }
     }
   }
-  changecv(event) {}
-
-  submit(form: NgForm) {
-    console.log(form);
+  changecv(event) {
+    const fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+      const file: File = fileList[0];
+      if (file.type.split("/")[0] === "image") {
+          this.formData.append("cv", file);
+      } else {
+        swal("Echec!", "choisir une image ! ", "warning");
+      }
+    }
   }
 
-
-
+  async submit(form: NgForm) {
+    console.log(form.value);
+    const {nom,prenom,date_naissance,identite,tel,email,id_departement}=form.value;
+    const etudiant={nom,prenom,date_naissance,identite,tel,email,id_departement}
+    try {
+      const { err } = (await this.etudiantService.updateEtudiant(etudiant)) as any;
+      if (!err) {
+        this.sharedService.reloadComponent();
+        swal("Succès!", "Opération effectuée avec succès", "success");
+      }
+    } catch (error) {
+      swal("Echec!", "Opération non effectuée", "error");
+    }
+  }
   async deleteComp(id_competence:string) {
     try {
       const { err } = (await this.servicecompetence.deleteCompetence(id_competence)) as any;

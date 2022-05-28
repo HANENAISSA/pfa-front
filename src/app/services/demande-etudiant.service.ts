@@ -26,7 +26,7 @@ export class DemandeEtudiantService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.patch(`${environment.api}/demandeEtudiantStageEntreprise/getAllDemandesEtudiant/patch`, demande)
+      this.httpC.put(`${environment.api}/demandeEtudiantStageEntreprise/getAllDemandesEtudiant/patch`, demande)
         .forEach(data =>
           resolve(data)
         ).catch((err) => {

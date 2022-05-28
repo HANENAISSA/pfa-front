@@ -9,6 +9,9 @@ import {
 } from "@angular/animations";
 import { MenuItems } from "../../shared/menu-items/menu-items";
 import { SharedServiceService } from "../../services/shared-service.service";
+import { ChercherProfilService } from "../../../app/services/chercher-profil.service";
+import { EntrepriseServiceService } from "../../../app/services/entreprise-service.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-admin",
@@ -121,10 +124,16 @@ export class AdminComponent implements OnInit {
   search_friends: ElementRef;
 
   public config: any;
+  profil: any;
+  id_role: string;
 
   constructor(
     public menuItems: MenuItems,
-    private sharedService: SharedServiceService
+    private sharedService: SharedServiceService,
+    private profilEtudiantService: ChercherProfilService,
+    private profilRespService: EntrepriseServiceService,
+    private router:Router
+
   ) {
     this.navType = "st5";
     this.themeLayout = "vertical";
@@ -181,11 +190,11 @@ export class AdminComponent implements OnInit {
     // this.setNavBarTheme('theme1');
     // this.navType = 'st3';
   }
-  id_role:string;
 
   ngOnInit() {
     this.setBackgroundPattern("pattern2");
-    this.id_role=this.sharedService.getCookie('id_role')
+    this.id_role = this.sharedService.getCookie("id_role");
+    this.getUser();
   }
 
   onResize(event) {
@@ -334,5 +343,34 @@ export class AdminComponent implements OnInit {
   logout() {
     this.sharedService.deleteCookie("token");
     this.sharedService.deleteCookie("id_role");
+    this.router.navigate(['/connexion'])
+  }
+
+  async getUser() {
+    switch (this.id_role) {
+      case "1":
+        try {
+          const { err, rows } =
+            ((await this.profilEtudiantService.getEtudiantInfo()) as any) || [];
+          if (!err) {
+            this.profil = rows[0];
+          }
+        } catch (error) {
+        }
+        break;
+      case "2":
+        try {
+          const { err, rows } =
+            ((await this.profilRespService.getEntrpriseInfo()) as any) || [];
+          if (!err) {
+            this.profil = rows[0];
+          }
+        } catch (error) {
+        }
+        break;
+      default:
+        this.logout()
+        break;
+    }
   }
 }

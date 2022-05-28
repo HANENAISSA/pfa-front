@@ -32,7 +32,7 @@ export class TokenInterceptorService implements HttpInterceptor {
       // });
     // }
 
-    next.handle(tokenizedreq).subscribe(interceptor=>console.log(interceptor))
+    // next.handle(tokenizedreq).subscribe(interceptor=>console.log(interceptor))
     return next.handle(tokenizedreq);
   }
 }

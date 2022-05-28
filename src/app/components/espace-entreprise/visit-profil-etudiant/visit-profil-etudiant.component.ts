@@ -40,8 +40,6 @@ export class VisitProfilEtudiantComponent implements OnInit {
     private profilService: ChercherProfilService,
     private actifRoute: ActivatedRoute,
     private router: Router,
-    private serviceExperience: ExperienceService,
-    private servicecompetence: CompetenceService
   ) {}
 
   ngOnInit() {

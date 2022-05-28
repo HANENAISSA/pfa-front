@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { DemandeStageEntreprise } from "../../../models/demande-stage-entreprise";
 import { FormulaireCvServiceService } from "../../../services/formulaire-cv-service.service";
 import  swal from "sweetalert";
 import { OffreStage } from "../../../models/offre-stage.model";
@@ -36,19 +35,7 @@ export class ListOffresEtudiantComponent implements OnInit {
     this.getAllOffreStages();
   }
 
-  // async getAllOffreYears(){
-  //   try {
-  //     const {err,rows}=await this.sharedService.getYears(0)as any||[];
-  //     if(!err){
-  //       this.listYears=rows;
-  //     }
 
-  //   } catch (error) {
-  //     this.listYears=[];
-
-  //   }
-
-  // }
   async getAllOffreStages() {
     try {
       const { err, rows } =
@@ -91,15 +78,6 @@ export class ListOffresEtudiantComponent implements OnInit {
     } catch (error) {
     }
   }
-
-  // showFormPostule(id_offre_stage: string) {
-  //   const modalRef = this.modalService.open(PopupOffreComponent);
-  //   modalRef.componentInstance.title = `FORMULAIRE POSTULATION`;
-  //   modalRef.componentInstance.id = Number(id_offre_stage);
-  //   modalRef.componentInstance.show = true;
-  // }
-
-
   handlePageSizeChange(event: any): void {
     this.pageSize = event.target.value;
     this.page = 1;

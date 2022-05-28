@@ -24,7 +24,7 @@ export class CompetenceService {
 
   updateCompetence(id_competence){
     return new Promise((resolve, reject) => {
-      this.httpC.patch(`${environment.api}/competences/update`, id_competence)
+      this.httpC.put(`${environment.api}/competences/update`, id_competence)
         .forEach(data =>
           resolve(data)
         ).catch((err) => {

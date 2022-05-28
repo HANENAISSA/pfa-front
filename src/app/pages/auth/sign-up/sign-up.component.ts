@@ -21,8 +21,6 @@ export class SignUpComponent implements OnInit {
   ngOnInit() {}
 
   async signup(form: NgForm) {
-    console.log(form.value);
-
     const {etranger,cinpassport,id_role}=form.value;
     const payload = { ...form.value,num_passport:etranger==true?cinpassport:null,cin:etranger!=true?cinpassport:null };
     delete payload['pass2'];

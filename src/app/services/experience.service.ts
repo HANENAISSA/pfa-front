@@ -26,7 +26,7 @@ export class ExperienceService {
 
   addExperience(experience : Experience){
     return new Promise((resolve, reject) => {
-      this.httpC.post(`http://localhost:5010/experience/add`, experience)
+      this.httpC.post(`${environment.api}/experience/add`, experience)
         .forEach(data =>{
           resolve(data)
         }
@@ -40,7 +40,7 @@ export class ExperienceService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.patch(`http://localhost:5010/experience/update`, experience)
+      this.httpC.put(`${environment.api}/experience/update`, experience)
         .forEach(data =>
           resolve(data)
         ).catch((err) => {
@@ -51,7 +51,7 @@ export class ExperienceService {
 
   deleteExperience(id_experience: string){
       return new Promise((resolve, reject) => {
-        this.httpC.delete(`http://localhost:5010/experience/delete/${id_experience}`)
+        this.httpC.delete(`${environment.api}/experience/delete/${id_experience}`)
           .forEach(data =>
             resolve(data)
           ).catch((err) => {

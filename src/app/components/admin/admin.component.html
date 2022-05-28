@@ -62,11 +62,11 @@
               <li class="user-profile header-notification">
                 <a [routerLink]="['/']">
                   <img
-                    src="assets/images/avatar-4.jpg"
+                    [src]="this.profil&&this.profil.photo"
                     class="img-radius"
                     alt="User-Profile-Image"
                   />
-                  <span>profile name</span>
+                  <span>{{this.profil&&this.profil.nom+" "+this.profil.prenom}}</span>
                   <i class="ti-angle-down"></i>
                 </a>
                 <ul class="show-notification profile-notification">
@@ -110,12 +110,12 @@
               <div class="main-menu-header">
                 <img
                   class="img-40 img-radius"
-                  src="assets/images/avatar-4.jpg"
+                  [src]="this.profil&&this.profil.photo"
                   alt="User-Profile-Image"
                 />
                 <div class="user-details">
                   <span id="more-details" (click)="toggleOpenedSidebar()"
-                    >Profile name<i class="ti-angle-down"></i
+                    >{{this.profil&&this.profil.nom+" "+this.profil.prenom}}<i class="ti-angle-down"></i
                   ></span>
                 </div>
               </div>

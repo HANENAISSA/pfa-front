@@ -1,53 +1,49 @@
-<!-- <div class="page-header card">
-  <div class="row align-items-end">
-    <div class="col-lg-8">
-      <div class="page-header-title">
-        <span><i class="icofont icofont-home bg-c-pink"></i></span>
-        <div class="d-inline">
-          <span class="d-block"><h4>Mes informations</h4></span>
-          <span>Mes informations personnelles</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-<!--profile cover start-->
 <div class="row">
   <div class="col-lg-12">
     <div class="cover-profile">
       <div class="profile-bg-img">
-        <img class="profile-bg-img img-fluid" src="assets/images/user-profile/bg-img1.jpg" alt="bg-img">
+        <img
+          class="profile-bg-img img-fluid"
+          src="assets/images/user-profile/bg-img1.jpg"
+          alt="bg-img"
+        />
         <div class="card-body user-info">
           <div class="col-md-12">
             <div class="media-left">
               <a class="profile-image">
-                <img class="user-img img-radius" id="profil-photo" [src]="profil&&profil.photo"
-                  alt="user-img">
+                <img
+                  class="user-img img-radius"
+                  id="profil-photo"
+                  [src]="profil && profil.photo"
+                  alt="user-img"
+                />
               </a>
             </div>
             <div class="media-body row">
-              <!-- <div class="col-lg-12"> -->
-              <!-- <div class="user-title"> -->
-              <!-- <h2>{{profil&&profil.nom+" "+profil&&profil.prenom}}</h2> -->
-              <!-- <span class="text-white">{{profil&&profil.libelle}}</span> -->
-              <!-- </div> -->
-              <!-- </div> -->
               <div>
                 <div class="pull-right cover-btn">
                   <div
-                    class="file-upload mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    class="file-upload mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                  >
                     <button class="btn btn-primary m-b-10 m-r-10">
-                      <input type="file" accept="image/*" (change)="changephoto($event)" name="FileAttachment"
-                        id="FileAttachment" class="upload" />
+                      <input
+                        type="file"
+                        accept="image/*"
+                        (change)="changephoto($event)"
+                        name="FileAttachment"
+                        id="FileAttachment"
+                        class="upload"
+                      />
                       <i class="icofont icofont-plus"></i>
                       PHOTO
                     </button>
                   </div>
                   <script>
-                    document.getElementById("FileAttachment").onchange = function () {
-                      document.getElementById("fileuploadurl").value = this.value.replace(/C:\\fakepath\\/i, '');
-                    };
-
+                    document.getElementById("FileAttachment").onchange =
+                      function () {
+                        document.getElementById("fileuploadurl").value =
+                          this.value.replace(/C:\\fakepath\\/i, "");
+                      };
                   </script>
                 </div>
               </div>
@@ -69,8 +65,12 @@
               <!-- personal card start -->
               <div class="card">
                 <div class="card-header">
-                  <button id="edit-btn" type="button" class="btn btn-sm btn-primary waves-effect waves-light f-right"
-                    (click)="toggleEditProfile()">
+                  <button
+                    id="edit-btn"
+                    type="button"
+                    class="btn btn-sm btn-primary waves-effect waves-light f-right"
+                    (click)="toggleEditProfile()"
+                  >
                     <i class="icofont {{ editProfileIcon }}"></i>
                   </button>
                 </div>
@@ -86,20 +86,33 @@
                                   <tbody>
                                     <tr>
                                       <th scope="row">Nom</th>
-                                      <td>{{profil&&profil.nom}}</td>
+                                      <td>{{ profil && profil.nom }}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row">Prénom</th>
-                                      <td>{{profil&&profil.prenom}}</td>
+                                      <td>{{ profil && profil.prenom }}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row">Date naissance</th>
-                                      <td>{{profil&&profil.date_naissance|date:'dd/MM/yyyy'}}</td>
+                                      <td>
+                                        {{
+                                          profil && profil.date_naissance
+                                            | date: "dd/MM/yyyy"
+                                        }}
+                                      </td>
                                     </tr>
                                     <tr>
                                       <th scope="row">Identité utilisateur</th>
-                                      <td>{{profil&&profil.cin&&profil.cin}}</td>
-                                      <td>{{profil&&profil.num_passport&&profil.num_passport}}</td>
+                                      <td>
+                                        {{ profil && profil.cin && profil.cin }}
+                                      </td>
+                                      <td>
+                                        {{
+                                          profil &&
+                                            profil.num_passport &&
+                                            profil.num_passport
+                                        }}
+                                      </td>
                                     </tr>
                                   </tbody>
                                 </table>
@@ -112,26 +125,32 @@
                                   <tbody>
                                     <tr>
                                       <th scope="row">N°Téléphone</th>
-                                      <td>{{profil&&profil.num_tel}}</td>
+                                      <td>{{ profil && profil.num_tel }}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row">Email</th>
                                       <td>
-                                        <a>{{profil&&profil.email}}</a>
+                                        <a>{{ profil && profil.email }}</a>
                                       </td>
                                     </tr>
                                     <tr>
                                       <th scope="row">Département</th>
-                                      <td>{{profil&&profil.libelle}}</td>
+                                      <td>{{ profil && profil.libelle }}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row">C.V</th>
                                       <td>
-                                        <a *ngIf="profil&&profil.cv" [href]="profil&&profil.cv"
-                                          target="_blank">OUVRIR</a>
-                                          <span *ngIf="profil&&profil.cv==null" >AUCUN C.V</span>
+                                        <a
+                                          *ngIf="profil && profil.cv"
+                                          [href]="profil && profil.cv"
+                                          target="_blank"
+                                          >OUVRIR</a
+                                        >
+                                        <span
+                                          *ngIf="profil && profil.cv == null"
+                                          >AUCUN C.V</span
+                                        >
                                       </td>
-
                                     </tr>
                                   </tbody>
                                 </table>
@@ -163,7 +182,12 @@
                   <div class="edit-info" *ngIf="!editProfile">
                     <div class="row">
                       <div class="col-lg-12">
-                        <form name="form" (ngSubmit)="submit(fprofil)" #fprofil="ngForm" novalidate>
+                        <form
+                          name="form"
+                          (ngSubmit)="submit(fprofil)"
+                          #fprofil="ngForm"
+                          novalidate
+                        >
                           <div class="general-info">
                             <div class="row">
                               <div class="col-lg-6">
@@ -173,10 +197,28 @@
                                       <tr>
                                         <td>
                                           <div class="input-group">
-                                            <span class="input-group-prepend"><label class="input-group-text"><i
-                                                  class="icofont icofont-user"></i></label></span>
-                                            <input type="text" name="nom" required [(ngModel)]="profil&&profil.nom"
-                                              #nom="ngModel" class="form-control" placeholder="Prénom" />
+                                            <span class="input-group-prepend"
+                                              ><label class="input-group-text"
+                                                ><i
+                                                  class="icofont icofont-user"
+                                                ></i></label
+                                            ></span>
+                                            <input
+                                              type="text"
+                                              name="nom"
+                                              required
+                                              [(ngModel)]="profil && profil.nom"
+                                              #nom="ngModel"
+                                              class="form-control"
+                                              placeholder="Prénom"
+                                            />
+                                          </div>
+                                          <div
+                                            *ngIf="nom.invalid && nom.touched"
+                                            class="alert alert-danger p-2"
+                                            role="alert"
+                                          >
+                                            Saisir le nom
                                           </div>
                                         </td>
                                       </tr>
@@ -184,39 +226,89 @@
                                       <tr>
                                         <td>
                                           <div class="input-group">
-                                            <span class="input-group-prepend"><label class="input-group-text"><i
-                                                  class="icofont icofont-user"></i></label></span>
-                                            <input type="text" name="prenom" required
-                                              [(ngModel)]="profil&&profil.prenom" #prenom="ngModel" class="form-control"
-                                              placeholder="Prénom" />
+                                            <span class="input-group-prepend"
+                                              ><label class="input-group-text"
+                                                ><i
+                                                  class="icofont icofont-user"
+                                                ></i></label
+                                            ></span>
+                                            <input
+                                              type="text"
+                                              name="prenom"
+                                              required
+                                              [(ngModel)]="
+                                                profil && profil.prenom
+                                              "
+                                              #prenom="ngModel"
+                                              class="form-control"
+                                              placeholder="Prénom"
+                                            />
+                                          </div>
+                                          <div
+                                            *ngIf="prenom.invalid && prenom.touched"
+                                            class="alert alert-danger p-2"
+                                            role="alert"
+                                          >
+                                            Saisir le prénom
                                           </div>
                                         </td>
                                       </tr>
                                       <tr>
                                         <td>
                                           <div class="input-group">
-                                            <span class="input-group-prepend"><label class="input-group-text"><i
-                                                  class="icofont icofont-user"></i></label></span>
-                                            <input type="date" onkeydown="return false" name="date_naissance" required
-                                              [(ngModel)]="profil&&profil.dns" #date_naissance="ngModel"
-                                              class="form-control" max="{{this.actualDate | date:'yyyy-MM-dd'}}" />
+                                            <span class="input-group-prepend"
+                                              ><label class="input-group-text"
+                                                ><i
+                                                  class="icofont icofont-user"
+                                                ></i></label
+                                            ></span>
+                                            <input
+                                              type="date"
+                                              onkeydown="return false"
+                                              name="date_naissance"
+                                              required
+                                              ngModel="{{profil && profil.date_naissance| date: 'yyyy-MM-dd'}}"
+                                              #date_naissance="ngModel"
+                                              class="form-control"
+                                              max="{{this.actualDate| date: 'yyyy-MM-dd'}}"
+                                            />
                                           </div>
+
                                         </td>
                                       </tr>
                                       <tr>
                                         <td>
                                           <div class="input-group">
-                                            <span class="input-group-prepend"><label class="input-group-text"><i
-                                                  class="icofont icofont-user"></i></label></span>
-                                            <input type="text" name="identite" required
-                                              [(ngModel)]="profil&&profil.cin?profil.cin:profil.num_passport"
-                                              #identite="ngModel" class="form-control"
-                                              placeholder="Identité utilisateur" />
+                                            <span class="input-group-prepend"
+                                              ><label class="input-group-text"
+                                                ><i
+                                                  class="icofont icofont-user"
+                                                ></i></label
+                                            ></span>
+                                            <input
+                                              type="text"
+                                              name="identite"
+                                              required
+                                              [(ngModel)]="
+                                                profil && profil.cin
+                                                  ? profil.cin
+                                                  : profil.num_passport
+                                              "
+                                              #identite="ngModel"
+                                              class="form-control"
+                                              placeholder="Identité utilisateur"
+                                            />
                                           </div>
+                                          <div
+                                            *ngIf="identite.invalid && identite.touched"
+                                            class="alert alert-danger p-2"
+                                            role="alert"
+                                          >
+                                            Saisir l'identité
+                                          </div>
+
                                         </td>
                                       </tr>
-
-
                                     </tbody>
                                   </table>
                                 </div>
@@ -230,38 +322,96 @@
                                       <tr>
                                         <td>
                                           <div class="input-group">
-                                            <span class="input-group-prepend"><label class="input-group-text"><i
-                                                  class="icofont icofont-location-pin"></i></label>
+                                            <span class="input-group-prepend"
+                                              ><label class="input-group-text"
+                                                ><i
+                                                  class="icofont icofont-location-pin"
+                                                ></i
+                                              ></label>
                                             </span>
-                                            <input type="tel" class="form-control" placeholder="N°Téléphone" required
-                                              [(ngModel)]="profil&&profil.num_tel" #tel="ngModel" name="tel" />
+                                            <input
+                                              type="tel"
+                                              class="form-control"
+                                              placeholder="N°Téléphone"
+                                              required
+                                              [(ngModel)]="profil && profil.num_tel"
+                                              #tel="ngModel"
+                                              name="tel"
+                                            />
+                                          </div>
+                                          <div
+                                            *ngIf="tel.invalid && tel.touched"
+                                            class="alert alert-danger p-2"
+                                            role="alert"
+                                          >
+                                            Saisir le N° téléphone
                                           </div>
                                         </td>
                                       </tr>
                                       <tr>
                                         <td>
                                           <div class="input-group">
-                                            <span class="input-group-prepend"><label class="input-group-text"><i
-                                                  class="icofont icofont-location-pin"></i></label>
+                                            <span class="input-group-prepend"
+                                              ><label class="input-group-text"
+                                                ><i
+                                                  class="icofont icofont-location-pin"
+                                                ></i
+                                              ></label>
                                             </span>
-                                            <input type="email" class="form-control" placeholder="Email" required
-                                              [(ngModel)]="profil&&profil.email" #email="ngModel" name="email" />
+                                            <input
+                                              type="email"
+                                              class="form-control"
+                                              placeholder="Email"
+                                              required
+                                              [(ngModel)]="
+                                                profil && profil.email
+                                              "
+                                              #email="ngModel"
+                                              name="email"
+                                            />
+                                          </div>
+                                          <div
+                                            *ngIf="email.invalid && email.touched"
+                                            class="alert alert-danger p-2"
+                                            role="alert"
+                                          >
+                                            Saisir l'email
                                           </div>
                                         </td>
                                       </tr>
                                       <tr>
                                         <td>
                                           <div class="input-group">
-                                            <span class="input-group-prepend"><label class="input-group-text"><i
-                                                  class="icofont icofont-user"></i></label></span>
-                                            <select ngModel="{{ profil&&profil.id_departement }}"
-                                              #id_departement="ngModel" name="id_departement" class="form-control"
-                                              required>
-                                              <option value="3">Technologie de l'informatique</option>
-                                              <option value="4">Agro alimentaire</option>
-                                              <option value="5">Mécanique</option>
-                                              <option value="6">Electrique</option>
-                                              <option value="7">Génie civil</option>
+                                            <span class="input-group-prepend"
+                                              ><label class="input-group-text"
+                                                ><i
+                                                  class="icofont icofont-user"
+                                                ></i></label
+                                            ></span>
+                                            <select
+                                              ngModel="{{
+                                                profil && profil.id_departement
+                                              }}"
+                                              #id_departement="ngModel"
+                                              name="id_departement"
+                                              class="form-control"
+                                              required
+                                            >
+                                              <option value="3">
+                                                Technologie de l'informatique
+                                              </option>
+                                              <option value="4">
+                                                Agro alimentaire
+                                              </option>
+                                              <option value="5">
+                                                Mécanique
+                                              </option>
+                                              <option value="6">
+                                                Electrique
+                                              </option>
+                                              <option value="7">
+                                                Génie civil
+                                              </option>
                                             </select>
                                           </div>
                                         </td>
@@ -270,15 +420,24 @@
                                       <tr>
                                         <td>
                                           <div class="input-group">
-                                            <span class="input-group-prepend"><label class="input-group-text"><i
-                                                  class="icofont icofont-location-pin"></i></label>
+                                            <span class="input-group-prepend"
+                                              ><label class="input-group-text"
+                                                ><i
+                                                  class="icofont icofont-location-pin"
+                                                ></i
+                                              ></label>
                                             </span>
-                                            <input type="file" class="form-control" (change)="changecv($event)" />
+                                            <input
+                                              type="file"
+                                              class="form-control"
+                                              (change)="changecv($event)"
+                                              ngModel
+                                              #cv="ngModel"
+                                              name="cv"
+                                            />
                                           </div>
                                         </td>
                                       </tr>
-
-
                                     </tbody>
                                   </table>
                                 </div>
@@ -287,10 +446,19 @@
                             </div>
                             <!-- end of row -->
                             <div class="text-center">
-                              <a href="javascript:;"
-                                class="btn btn-primary waves-effect waves-light m-r-20">Enregistrer</a>
-                              <a href="javascript:;" id="edit-cancel" class="btn btn-default waves-effect"
-                                (click)="toggleEditProfile()">annuler</a>
+                              <button
+                              [disabled]="fprofil.invalid"
+                                type="submit"
+                                class="btn btn-primary waves-effect waves-light m-r-20"
+                                >Enregistrer
+                              </button>
+                              <a
+                                href="javascript:;"
+                                id="edit-cancel"
+                                class="btn btn-default waves-effect"
+                                (click)="toggleEditProfile()"
+                                >annuler</a
+                              >
                             </div>
                           </div>
                           <!-- end of edit info -->
@@ -306,7 +474,6 @@
               </div>
               <!-- personal card end-->
             </div>
-
           </ng-template>
         </ngb-tab>
         <ngb-tab title="Compétences" [id]="1">
@@ -315,30 +482,54 @@
               <!-- info card start -->
               <div class="card">
                 <div class="card-header">
-                  <button type="button" class="btn btn-outline-primary col-12 col-md-3 offset-md-9 mt-3 w-100"
-                    (click)="this.addComptence()">Nouvelle compétence</button>
-
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary col-12 col-md-3 offset-md-9 mt-3 w-100"
+                    (click)="this.addComptence()"
+                  >
+                    Nouvelle compétence
+                  </button>
                 </div>
                 <div class="card-body">
                   <div class="row">
                     <ng-container *ngFor="let item of this.listCompetence">
                       <div class="col-md-6">
-                        <div class="card b-l-success business-info services m-b-20" style="background-color: #F0FBFC;">
+                        <div
+                          class="card b-l-success business-info services m-b-20"
+                          style="background-color: #f0fbfc"
+                        >
                           <div ngbDropdown class="card-header">
                             <div class="service-header">
                               <a href="javascript:;">
-                                <h5 class="card-header-text">{{item.libelle}}</h5>
+                                <h5 class="card-header-text">
+                                  {{ item.libelle }}
+                                </h5>
                               </a>
                             </div>
-                            <button ngbDropdownToggle class="dropdown-toggle addon-btn text-muted f-right service-btn"
-                              style="border: none;" id="dropdownBasic1">
+                            <button
+                              ngbDropdownToggle
+                              class="dropdown-toggle addon-btn text-muted f-right service-btn"
+                              style="border: none"
+                              id="dropdownBasic1"
+                            >
                               <i class="fa fa-ellipsis-v"></i>
                             </button>
-                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                              <button ngbDropdownItem (click)="openUpdateComp(item)">
+                            <div
+                              ngbDropdownMenu
+                              aria-labelledby="dropdownBasic1"
+                            >
+                              <button
+                                ngbDropdownItem
+                                (click)="openUpdateComp(item)"
+                              >
                                 <i class="icofont icofont-edit-alt"></i>Modifier
                               </button>
-                              <button (click)="this.openDeleteComp(item.id_competence)" ngbDropdownItem>
+                              <button
+                                (click)="
+                                  this.openDeleteComp(item.id_competence)
+                                "
+                                ngbDropdownItem
+                              >
                                 <i class="icofont icofont-trash"></i>Supprimer
                               </button>
                             </div>
@@ -348,17 +539,38 @@
                               <div class="col-sm-12">
                                 <!-- <p class="task-detail" *ngIf="item.niveau=='0'">Débutant</p> -->
                                 <div>
-                                  <span class="fa fa-star checked text-primary"></span>
                                   <span
-                                    [class]="item.niveau=='0'?'fa fa-star ':'fa fa-star checked text-primary'"></span>
+                                    class="fa fa-star checked text-primary"
+                                  ></span>
                                   <span
-                                    [class]="item.niveau=='0'||item.niveau=='1'?'fa fa-star':'fa fa-star checked text-primary'"></span>
+                                    [class]="
+                                      item.niveau == '0'
+                                        ? 'fa fa-star '
+                                        : 'fa fa-star checked text-primary'
+                                    "
+                                  ></span>
                                   <span
-                                    [class]="item.niveau=='3'||item.niveau=='4'?'fa fa-star checked text-primary':'fa fa-star'"></span>
+                                    [class]="
+                                      item.niveau == '0' || item.niveau == '1'
+                                        ? 'fa fa-star'
+                                        : 'fa fa-star checked text-primary'
+                                    "
+                                  ></span>
                                   <span
-                                    [class]="item.niveau=='4'?'fa fa-star checked text-primary':'fa fa-star'"></span>
+                                    [class]="
+                                      item.niveau == '3' || item.niveau == '4'
+                                        ? 'fa fa-star checked text-primary'
+                                        : 'fa fa-star'
+                                    "
+                                  ></span>
+                                  <span
+                                    [class]="
+                                      item.niveau == '4'
+                                        ? 'fa fa-star checked text-primary'
+                                        : 'fa fa-star'
+                                    "
+                                  ></span>
                                 </div>
-
                               </div>
                               <!-- end of col-sm-8 -->
                             </div>
@@ -367,9 +579,7 @@
                           <!-- end of card-body -->
                         </div>
                       </div>
-
                     </ng-container>
-
                   </div>
                 </div>
               </div>
@@ -382,25 +592,38 @@
             <div [@fadeInOutTranslate] class="m-t-15">
               <div class="card">
                 <div class="card-header">
-                  <button type="button" class="btn btn-outline-primary col-12 col-md-3 offset-md-9 mt-3 w-100"
-                    (click)="this.addExperience()">Nouvelle expérience</button>
-
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary col-12 col-md-3 offset-md-9 mt-3 w-100"
+                    (click)="this.addExperience()"
+                  >
+                    Nouvelle expérience
+                  </button>
                 </div>
 
                 <ng-container *ngFor="let item of this.listExperience">
                   <div class="card-body">
-
                     <ul class="media-list">
                       <div ngbDropdown class="card-header">
-                        <button ngbDropdownToggle class="dropdown-toggle addon-btn text-muted f-right service-btn"
-                          style="border: none;" id="dropdownBasic1">
+                        <button
+                          ngbDropdownToggle
+                          class="dropdown-toggle addon-btn text-muted f-right service-btn"
+                          style="border: none"
+                          id="dropdownBasic1"
+                        >
                           <i class="fa fa-ellipsis-v"></i>
                         </button>
                         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                          <button ngbDropdownItem (click)="openUpdateExper(item)">
+                          <button
+                            ngbDropdownItem
+                            (click)="openUpdateExper(item)"
+                          >
                             <i class="icofont icofont-edit-alt"></i>Modifier
                           </button>
-                          <button ngbDropdownItem (click)="openDeleteExper(item.id_experience)">
+                          <button
+                            ngbDropdownItem
+                            (click)="openDeleteExper(item.id_experience)"
+                          >
                             <i class="icofont icofont-trash"></i>Supprimer
                           </button>
                         </div>
@@ -408,15 +631,24 @@
                       <li class="media">
                         <div class="media-body">
                           <h4>
-                            {{item.post}}<span class="f-12 text-muted m-l-5"></span>
+                            {{ item.post
+                            }}<span class="f-12 text-muted m-l-5"></span>
                           </h4>
                           <br />
-                          <h5 class="media-heading">Au sein de l'entreprise <b>{{item.nom_entreprise.toUpperCase()}}</b>
+                          <h5 class="media-heading">
+                            Au sein de l'entreprise
+                            <b>{{ item.nom_entreprise.toUpperCase() }}</b>
                           </h5>
-                          <h5 class="media-heading">de {{ this.sharedService.formatDate(item.date_debut)}} jusqu'à
-                            {{this.sharedService.formatDate(item.date_fin)}}</h5>
+                          <h5 class="media-heading">
+                            de
+                            {{
+                              this.sharedService.formatDate(item.date_debut)
+                            }}
+                            jusqu'à
+                            {{ this.sharedService.formatDate(item.date_fin) }}
+                          </h5>
                           <p class="m-b-0">
-                            {{item.description}}
+                            {{ item.description }}
                           </p>
                           <hr />
                           <!-- Nested media object -->
@@ -426,24 +658,12 @@
                     </ul>
                   </div>
                 </ng-container>
-                <!-- <div class="container mb-5">
 
-                <div class="row">
-
-                  <button type="button"
-                  class="col-md-3 col-lg-2 offset-lg-5  btn btn-primary mt-5"
-                  (click)="postulerOffre()">
-                    <i class="icofont icofont-location-arrow"></i>
-                    Envoyer
-                  </button>
-                </div>
-              </div> -->
               </div>
             </div>
           </ng-template>
         </ngb-tab>
       </ngb-tabset>
-
     </div>
   </div>
 </div>

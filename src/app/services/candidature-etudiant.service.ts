@@ -45,7 +45,7 @@ export class CandidatureEtudiantService {
   updateCandidatureVue(id:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.patch(`${environment.api}/demandeEntreprise/updateVueDemande/${id}`,null)
+      this.httpC.put(`${environment.api}/demandeEntreprise/updateVueDemande/${id}`,null)
         .forEach(data =>
           {
             resolve(data)
@@ -62,7 +62,7 @@ export class CandidatureEtudiantService {
   updateCandidatResEntretien(id_demande:string,etat:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.patch(`${environment.api}/demandeEntreprise/updateEtatEntretien`,{id_etat_entretien_stage_pfe:etat,id_demande_stage_entreprise:id_demande})
+      this.httpC.put(`${environment.api}/demandeEntreprise/updateEtatEntretien`,{id_etat_entretien_stage_pfe:etat,id_demande_stage_entreprise:id_demande})
         .forEach(data =>
           {
             resolve(data)
@@ -72,14 +72,5 @@ export class CandidatureEtudiantService {
           reject(err);
         });
     });
-
   }
-//   {
-//     "receivers":"youssefbenmiled40@gmail.com,barhoumsouidene@gmail.com",
-//     "subject":"DEMANDE DE STAGE",
-//     "text":"text",
-//     "etat":"1",
-//     "id_demande":"1"
-//  }
-
 }

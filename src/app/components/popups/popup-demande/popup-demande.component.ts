@@ -173,7 +173,6 @@ export class PopupDemandeComponent implements OnInit {
   }
 
   refuseDemande(){
-    console.log(this.details);
     swal({
       title: "Voulez-vous refuser la demande?",
       buttons:['cancel','confirm'],

@@ -43,7 +43,7 @@ export class FormulaireCvComponent implements OnInit {
   actualDate: string;
 
   actifTabid: number;
-  formData:FormData;
+  formData: FormData;
 
   constructor(
     public sharedService: SharedServiceService,
@@ -54,7 +54,7 @@ export class FormulaireCvComponent implements OnInit {
     private etudiantService: EtudiantService
   ) {
     this.actualDate = new Date().toDateString();
-    this.formData=new FormData();
+    this.formData = new FormData();
   }
 
   ngOnInit() {
@@ -84,8 +84,7 @@ export class FormulaireCvComponent implements OnInit {
       if (!err) {
         this.listExperience = rows;
       }
-    } catch (error) {
-    }
+    } catch (error) {}
   }
   async getListCompetence() {
     try {
@@ -94,8 +93,7 @@ export class FormulaireCvComponent implements OnInit {
       if (!err) {
         this.listCompetence = rows;
       }
-    } catch (error) {
-    }
+    } catch (error) {}
   }
   async getEtudiantInfo() {
     try {
@@ -103,9 +101,9 @@ export class FormulaireCvComponent implements OnInit {
         ((await this.profilService.getEtudiantInfo()) as any) || [];
       if (!err) {
         this.profil = rows[0];
+        console.log(this.profil);
       }
-    } catch (error) {
-    }
+    } catch (error) {}
   }
 
   addExperience() {
@@ -125,20 +123,18 @@ export class FormulaireCvComponent implements OnInit {
     modalRef.componentInstance.edit = true;
   }
 
-
   openDeleteComp(id_competence: string) {
     swal({
       title: "Voulez-vous supprimer la compétence?",
-      buttons:['cancel','confirm'],
-      closeOnEsc:true,
-      closeOnClickOutside:true
+      buttons: ["cancel", "confirm"],
+      closeOnEsc: true,
+      closeOnClickOutside: true,
     }).then((result) => {
-      if(result){
+      if (result) {
         this.deleteComp(id_competence);
       }
     });
   }
-
 
   openUpdateExper(item) {
     const modalRef = this.modalService.open(PopupExperienceComponent);
@@ -150,11 +146,11 @@ export class FormulaireCvComponent implements OnInit {
   openDeleteExper(id_experience: string) {
     swal({
       title: "Voulez-vous supprimer l'expérience ?",
-      buttons:['cancel','confirm'],
-      closeOnEsc:true,
-      closeOnClickOutside:true
+      buttons: ["cancel", "confirm"],
+      closeOnEsc: true,
+      closeOnClickOutside: true,
     }).then((result) => {
-      if(result){
+      if (result) {
         this.deleteExperience(id_experience);
       }
     });
@@ -168,7 +164,7 @@ export class FormulaireCvComponent implements OnInit {
         try {
           const formData = new FormData();
           formData.append("photo", file);
-            ((await this.profilService.changeEtudiantphoto(formData)) as any) ||
+          ((await this.profilService.changeEtudiantphoto(formData)) as any) ||
             [];
           this.sharedService.reloadComponent();
         } catch (error) {
@@ -184,19 +180,38 @@ export class FormulaireCvComponent implements OnInit {
     if (fileList.length > 0) {
       const file: File = fileList[0];
       if (file.type.split("/")[0] === "image") {
-          this.formData.append("cv", file);
+        this.formData.append("fichier_cv", file);
       } else {
-        swal("Echec!", "choisir une image ! ", "warning");
+        swal("Echec!", "choisir le format image ! ", "warning");
       }
     }
   }
 
   async submit(form: NgForm) {
-    console.log(form.value);
-    const {nom,prenom,date_naissance,identite,tel,email,id_departement}=form.value;
-    const etudiant={nom,prenom,date_naissance,identite,tel,email,id_departement}
+    const {
+      nom,
+      prenom,
+      date_naissance,
+      identite,
+      num_tel,
+      email,
+      id_departement,
+      cv,
+    } = form.value;
+    const etudiant = {
+      nom,
+      prenom,
+      date_naissance,
+      cin: this.profil.cin ? identite : null,
+      num_passport: this.profil.num_passport ? identite : null,
+      num_tel,
+      email,
+      id_departement,
+    };
     try {
-      const { err } = (await this.etudiantService.updateEtudiant(etudiant)) as any;
+      const { err } = (await this.etudiantService.updateEtudiant(
+        cv ? this.getFormData(etudiant) : etudiant
+      )) as any;
       if (!err) {
         this.sharedService.reloadComponent();
         swal("Succès!", "Opération effectuée avec succès", "success");
@@ -205,9 +220,24 @@ export class FormulaireCvComponent implements OnInit {
       swal("Echec!", "Opération non effectuée", "error");
     }
   }
-  async deleteComp(id_competence:string) {
+  getFormData(etudiant) {
+    this.formData.append("nom", etudiant.nom);
+    this.formData.append("prenom", etudiant.prenom);
+    this.formData.append("email", etudiant.email);
+    this.formData.append("date_naissance", etudiant.date_naissance);
+    this.formData.append("num_tel", etudiant.num_tel);
+    this.formData.append(
+      `${this.profil.cin ? "cin" : "num_passport"}`,
+      etudiant.identite
+    );
+    this.formData.append("id_departement", etudiant.id_departement);
+    return this.formData;
+  }
+  async deleteComp(id_competence: string) {
     try {
-      const { err } = (await this.servicecompetence.deleteCompetence(id_competence)) as any;
+      const { err } = (await this.servicecompetence.deleteCompetence(
+        id_competence
+      )) as any;
       if (!err) {
         this.sharedService.reloadComponent();
         swal("Succès!", "Opération effectuée avec succès", "success");
@@ -216,9 +246,11 @@ export class FormulaireCvComponent implements OnInit {
       swal("Echec!", "Opération non effectuée", "error");
     }
   }
-  async deleteExperience(id_experience:string) {
+  async deleteExperience(id_experience: string) {
     try {
-      const { err } = (await this.serviceExperience.deleteExperience(id_experience)) as any;
+      const { err } = (await this.serviceExperience.deleteExperience(
+        id_experience
+      )) as any;
       if (!err) {
         this.sharedService.reloadComponent();
         swal("Succès!", "Opération effectuée avec succès", "success");
@@ -227,5 +259,24 @@ export class FormulaireCvComponent implements OnInit {
       swal("Echec!", "Opération non effectuée", "error");
     }
   }
-
+  deletecv() {
+    swal({
+      title: "Voulez-vous supprimer le cv?",
+      buttons: ["cancel", "confirm"],
+      closeOnEsc: true,
+      closeOnClickOutside: true,
+    }).then(async (result) => {
+      if (result) {
+        try {
+          const { err } = (await this.etudiantService.delCvEtudiant()) as any;
+          if (!err) {
+            this.sharedService.reloadComponent();
+            swal("Succés!", "cv supprimé !", "success");
+          }
+        } catch (error) {
+          swal("Echec!", error.error.message, "warning");
+        }
+      }
+    });
+  }
 }

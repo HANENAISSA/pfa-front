@@ -364,6 +364,8 @@ export class AdminComponent implements OnInit {
             ((await this.profilRespService.getEntrpriseInfo()) as any) || [];
           if (!err) {
             this.profil = rows[0];
+            console.log(this.profil);
+
           }
         } catch (error) {
         }

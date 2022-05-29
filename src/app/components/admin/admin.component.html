@@ -71,7 +71,7 @@
                 </a>
                 <ul class="show-notification profile-notification">
                   <li>
-                    <a [routerLink]="['/etudiant/profil']">
+                    <a [routerLink]="[this.id_role=='1'?'/etudiant/profil':'/entreprise/profil']">
                       <i class="ti-user"></i> Profil
                     </a>
                   </li>
@@ -126,8 +126,9 @@
                     class="more-details"
                     [ngClass]="isCollapsedSideBar"
                   >
-                    <a [routerLink]="['/etudiant/profil']"
-                      ><i class="ti-user"></i>Profil</a
+                  <!-- <a [routerLink]="['/entreprise/profil']"> -->
+                  <a [routerLink]="[this.id_role=='1'?'/etudiant/profil':'/entreprise/profil']">
+                    <i class="ti-user"></i>Profil</a
                     >
                     <a [routerLink]="['/connexion']" (click)="logout()"
                       ><i class="ti-layout-sidebar-left"></i>Déconnexion</a

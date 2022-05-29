@@ -141,13 +141,17 @@
                                       <th scope="row">C.V</th>
                                       <td>
                                         <a
-                                          *ngIf="profil && profil.cv"
-                                          [href]="profil && profil.cv"
+                                          *ngIf="profil && profil.fichier_cv"
+                                          [href]="profil && profil.fichier_cv"
                                           target="_blank"
-                                          >OUVRIR</a
-                                        >
+                                          >OUVRIR</a>&nbsp;&nbsp;&nbsp;
+                                          <a
+                                          *ngIf="profil && profil.fichier_cv"
+                                          id="a-del"
+                                          (click)="this.deletecv()"
+                                          >SUPPRIMER</a>
                                         <span
-                                          *ngIf="profil && profil.cv == null"
+                                          *ngIf="profil && profil.fichier_cv == null"
                                           >AUCUN C.V</span
                                         >
                                       </td>
@@ -259,7 +263,7 @@
                                             <span class="input-group-prepend"
                                               ><label class="input-group-text"
                                                 ><i
-                                                  class="icofont icofont-user"
+                                                  class="icofont icofont-calendar"
                                                 ></i></label
                                             ></span>
                                             <input
@@ -282,7 +286,7 @@
                                             <span class="input-group-prepend"
                                               ><label class="input-group-text"
                                                 ><i
-                                                  class="icofont icofont-user"
+                                                  class="icofont icofont-card"
                                                 ></i></label
                                             ></span>
                                             <input
@@ -325,22 +329,22 @@
                                             <span class="input-group-prepend"
                                               ><label class="input-group-text"
                                                 ><i
-                                                  class="icofont icofont-location-pin"
+                                                  class="icofont icofont-phone"
                                                 ></i
                                               ></label>
                                             </span>
                                             <input
-                                              type="tel"
+                                              type="number"
                                               class="form-control"
                                               placeholder="N°Téléphone"
                                               required
                                               [(ngModel)]="profil && profil.num_tel"
-                                              #tel="ngModel"
-                                              name="tel"
+                                              #num_tel="ngModel"
+                                              name="num_tel"
                                             />
                                           </div>
                                           <div
-                                            *ngIf="tel.invalid && tel.touched"
+                                            *ngIf="num_tel.invalid && num_tel.touched"
                                             class="alert alert-danger p-2"
                                             role="alert"
                                           >
@@ -354,7 +358,7 @@
                                             <span class="input-group-prepend"
                                               ><label class="input-group-text"
                                                 ><i
-                                                  class="icofont icofont-location-pin"
+                                                  class="icofont icofont-email"
                                                 ></i
                                               ></label>
                                             </span>
@@ -385,7 +389,7 @@
                                             <span class="input-group-prepend"
                                               ><label class="input-group-text"
                                                 ><i
-                                                  class="icofont icofont-user"
+                                                  class="icofont icofont-brand-myspace"
                                                 ></i></label
                                             ></span>
                                             <select
@@ -423,7 +427,7 @@
                                             <span class="input-group-prepend"
                                               ><label class="input-group-text"
                                                 ><i
-                                                  class="icofont icofont-location-pin"
+                                                  class="icofont icofont-file"
                                                 ></i
                                               ></label>
                                             </span>

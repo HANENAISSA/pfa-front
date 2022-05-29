@@ -23,5 +23,16 @@ export class EtudiantService {
     });
   }
 
+  delCvEtudiant(){
+    return new Promise((resolve, reject) => {
+
+      this.httpC.delete(`${environment.api}/cv/delete`)
+        .forEach(data =>
+          resolve(data)
+        ).catch((err) => {
+          reject(err);
+        });
+    });
+  }
 
 }

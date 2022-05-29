@@ -30,18 +30,18 @@ const routes: Routes = [
   {
     path: "inscription",
     component: SignUpComponent,
-    canActivate:[AuthGuard]
+    // canActivate:[AuthGuard]
   },
   {
     path: "compte/:hashedid",
     component: VerifauthComponent,
-    canActivate:[CompteGuard]
+    // canActivate:[CompteGuard]
 
   },
   {
     path: "connexion",
     component: LoginComponent,
-    canActivate:[AuthGuard]
+    // canActivate:[AuthGuard]
   },
   {
     path: "introuvable",

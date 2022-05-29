@@ -134,15 +134,6 @@ export class ProfileComponent implements OnInit {
   }
 
   getLocalisation() {
-    return [
-      "BEN AROUS",
-      "TUNIS",
-      "MONASTIR",
-      "ARIANA",
-      "NABEUL",
-      "SOUSSE",
-      "GAFSA",
-      "SIDI BOUZID",
-    ];
+    return this.sharedService.getLocalisation();
   }
 }

@@ -84,4 +84,18 @@ export class SharedServiceService {
     let cpath: string = path ? `; path=${path}` : "";
     document.cookie = `${name}=${value}; ${expires}${cpath}`;
   }
+
+  getLocalisation() {
+    return [
+      "BEN AROUS",
+      "TUNIS",
+      "MONASTIR",
+      "ARIANA",
+      "NABEUL",
+      "SOUSSE",
+      "GAFSA",
+      "SIDI BOUZID",
+      "MANOUBA"
+    ];
+  }
 }

@@ -22,9 +22,8 @@
             <div class="row">
               <div class="col-md-6 mb-4">
                 <div class="form-outline">
-                  <input type="text" ngModel required #nom="ngModel" placeholder="Nom" name="nom"
+                  <input type="text" ngModel required #nom="ngModel" placeholder="Nom*" name="nom"
                     class="form-control" />
-                  <label class="form-label mt-2">Nom*</label>
                 </div>
                 <div *ngIf="nom.invalid && nom.touched" class="alert alert-danger p-2" role="alert">
                   Saisir le nom
@@ -32,9 +31,8 @@
               </div>
               <div class="col-md-6 mb-4">
                 <div class="form-outline">
-                  <input type="text" ngModel required #prenom="ngModel" placeholder="Prénom" name="prenom"
+                  <input type="text" ngModel required #prenom="ngModel" placeholder="Prénom*" name="prenom"
                     class="form-control" />
-                  <label class="form-label mt-2" for="form3Example2">Prénom*</label>
                 </div>
                 <div *ngIf="prenom.invalid && prenom.touched" class="alert alert-danger p-2" role="alert">
                   Saisir le prénom
@@ -44,9 +42,9 @@
             <div class="row">
               <div class="col-md-6 mb-4">
                 <div class="form-outline">
-                  <input class="form-control" type="date" onkeydown="return false" ngModel required #dns="ngModel"
-                    name="dns" max="{{ this.actualDate | date: 'yyyy-MM-dd' }}" />
-                  <label class="form-label mt-2" for="dns">Date de naissance*</label>
+                  <input class="form-control" [type]="htmlinputType" (click)="geninputtype($event)"
+                    placeholder="date de naissance*" onkeydown="return false" ngModel required #dns="ngModel" name="dns"
+                    max="{{ this.actualDate | date: 'yyyy-MM-dd' }}" />
                 </div>
                 <div *ngIf="dns.invalid && dns.touched" class="alert alert-danger p-2" role="alert">
                   Saisir la date de naissance
@@ -58,16 +56,14 @@
                     <option value="1">Etudiant</option>
                     <option value="2">Responsable entreprise</option>
                   </select>
-                  <label class="form-label mt-2" for="role">Role*</label>
                 </div>
               </div>
             </div>
-            <div class="row" *ngIf="id_role.value=='2'">
+            <div class="row" *ngIf="id_role.value == '2'">
               <div class="col-md-4 mb-4">
                 <div class="form-outline">
-                  <input type="text" ngModel required #nom_entreprise="ngModel" placeholder="Nom entreprise"
+                  <input type="text" ngModel required #nom_entreprise="ngModel" placeholder="Nom entreprise*"
                     name="nom_entreprise" class="form-control" />
-                  <label class="form-label mt-2">Entreprise*</label>
                 </div>
                 <div *ngIf="nom_entreprise.invalid && nom_entreprise.touched" class="alert alert-danger p-2"
                   role="alert">
@@ -76,11 +72,10 @@
               </div>
               <div class="col-md-4 mb-4">
                 <div class="form-outline">
-                  <input type="text" ngModel required #reg_commercial="ngModel" placeholder="N° registre commercial"
-                    name="reg_commercial" class="form-control" />
-                  <label class="form-label mt-2">N° registre commercial*</label>
+                  <input type="text" ngModel required #num_reg_commercial="ngModel" placeholder="N° registre commercial*"
+                    name="num_reg_commercial" class="form-control" />
                 </div>
-                <div *ngIf="reg_commercial.invalid && reg_commercial.touched" class="alert alert-danger p-2"
+                <div *ngIf="num_reg_commercial.invalid && num_reg_commercial.touched" class="alert alert-danger p-2"
                   role="alert">
                   Saisir le numéro registre commercial
                 </div>
@@ -89,41 +84,38 @@
                 <div class="form-outline">
                   <input type="text" ngModel #site_web="ngModel" placeholder="Site web" name="site_web"
                     class="form-control" />
-                  <label class="form-label mt-2">Site web</label>
                 </div>
               </div>
-              <div class="row" *ngIf="id_role.value=='2'">
+              <div class="row" *ngIf="id_role.value == '2'">
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
                     <select ngModel="{{ '-1' }}" #id_domaine="ngModel" name="id_domaine" class="form-control" required>
-                      <option disabled value="-1">
-                        Séléctionner un domaine
+                      <option disabled value="-1" selected>
+                        Séléctionner un domaine*
                       </option>
                       <option value="1">Mécanique</option>
                       <option value="2">Informatique</option>
                       <option value="3">Electrique</option>
                       <option value="4">Génie civil</option>
                     </select>
-                    <label class="form-label mt-2" for="departement">
-                      Domaine entreprise*
-                    </label>
                   </div>
                   <div *ngIf="id_domaine.value == '-1' && id_domaine.touched" class="alert alert-danger p-2"
                     role="alert">
                     Séléctionner le domaine
                   </div>
                 </div>
+
                 <div class="col-md-6 mb-4">
-                  <div class="form-outline">
+                  <div class="form-outline mb-4">
                     <select ngModel="{{ '-1' }}" #localisation="ngModel" name="localisation" class="form-control"
                       required>
                       <option disabled value="-1">
-                        Séléctionner la localisation
+                        Séléctionner la localisation*
+                      </option>
+                      <option *ngFor="let ville of getLocalisation();" [value]="ville">
+                        {{ville}}
                       </option>
                     </select>
-                    <label class="form-label mt-2" for="departement">
-                      Localisation d'entreprise*
-                    </label>
                   </div>
                   <div *ngIf="localisation.value == '-1' && localisation.touched" class="alert alert-danger p-2"
                     role="alert">
@@ -136,9 +128,8 @@
             <div class="row">
               <div class="col-md-6 mb-4">
                 <div class="form-outline mb-4">
-                  <input type="email" name="email" ngModel #email="ngModel" placeholder="Adresse email"
+                  <input type="email" name="email" ngModel #email="ngModel" placeholder="Adresse email*"
                     class="form-control" required />
-                  <label class="form-label mt-2" for="email">Adresse email*</label>
                   <div *ngIf="email.invalid && email.touched" class="alert alert-danger p-2" role="alert">
                     Saisir l`email
                   </div>
@@ -146,9 +137,8 @@
               </div>
               <div class="col-md-6 mb-4">
                 <div class="form-outline mb-4">
-                  <input type="tel" ngModel #num_tel="ngModel" name="num_tel" placeholder="Numéro de téléphone"
+                  <input type="tel" ngModel #num_tel="ngModel" name="num_tel" placeholder="Numéro de téléphone*"
                     class="form-control" required />
-                  <label class="form-label mt-2" for="tel">Numéro de téléphone*</label>
                   <div *ngIf="num_tel.invalid && num_tel.touched" class="alert alert-danger p-2" role="alert">
                     Saisir le numéro de téléphone
                   </div>
@@ -159,9 +149,8 @@
             <div class="row">
               <div class="col-md-6 mb-4">
                 <div class="form-outline mb-4">
-                  <input type="password" ngModel #pass="ngModel" name="password" placeholder="Mot de passe"
+                  <input type="password" ngModel #pass="ngModel" name="password" placeholder="Mot de passe*"
                     class="form-control" required />
-                  <label class="form-label mt-2" for="password">Mot de passe*</label>
                   <div *ngIf="pass.invalid && pass.touched" class="alert alert-danger p-2" role="alert">
                     Saisir le mot de passe
                   </div>
@@ -169,11 +158,12 @@
               </div>
               <div class="col-md-6 mb-4">
                 <div class="form-outline mb-4">
-                  <input type="password" name="pass2" ngModel #pass2="ngModel" placeholder="Confirmez le mot de passe"
+                  <input type="password" name="pass2" ngModel #pass2="ngModel" placeholder="Confirmez le mot de passe*"
                     class="form-control" required />
-                  <label class="form-label mt-2" for="pass2">Confirmez le mot de passe*</label>
-                  <div *ngIf="pass2.invalid && pass2.touched || (pass.value!=pass2.value&&pass2.valid)"
-                    class="alert alert-danger p-2" role="alert">
+                  <div *ngIf="
+                      (pass2.invalid && pass2.touched) ||
+                      (pass.value != pass2.value && pass2.valid)
+                    " class="alert alert-danger p-2" role="alert">
                     Le mot de passe ne correspond pas
                   </div>
                 </div>
@@ -194,21 +184,16 @@
                   <div class="form-outline">
                     <input type="text" ngModel #cinpassport="ngModel" required name="cinpassport" [placeholder]="
                         etranger && etranger.value == true
-                          ? 'Numéro de passport'
-                          : 'Carte d`identité'
+                          ? 'Numéro de passport*'
+                          : 'Carte d`identité*'
                       " class="form-control" />
-                    <label class="form-label mt-2" for="cinpassport">{{
-                      etranger && etranger.value == true
-                        ? "Numéro de passport*"
-                        : "Carte d`identité*"
-                    }}</label>
                   </div>
                   <div *ngIf="cinpassport.invalid && cinpassport.touched" class="alert alert-danger p-2" role="alert">
                     Saisir
                     {{
-                      etranger && etranger.value == true
-                        ? "le Numéro de passport"
-                        : "la Carte d`identité"
+                    etranger && etranger.value == true
+                    ? "le Numéro de passport"
+                    : "la Carte d`identité"
                     }}
                   </div>
                 </div>
@@ -217,7 +202,7 @@
                     <select ngModel="{{ '-1' }}" #id_departement="ngModel" name="id_departement" class="form-control"
                       required>
                       <option disabled value="-1">
-                        Séléctionner un département
+                        Séléctionner un département*
                       </option>
 
                       <option value="3">Technologie de l'informatique</option>
@@ -226,13 +211,11 @@
                       <option value="6">Electrique</option>
                       <option value="7">Génie civil</option>
                     </select>
-                    <label class="form-label mt-2" for="departement">
-                      Département*
-                    </label>
                   </div>
-                  <div *ngIf="id_departement.value == '-1' && id_departement.touched" class="alert alert-danger p-2"
-                    role="alert">
-                    Séléctionner le département
+                  <div *ngIf="
+                      id_departement.value == '-1' && id_departement.touched
+                    " class="alert alert-danger p-2" role="alert">
+                    Séléctionner un département
                   </div>
                 </div>
               </div>
@@ -241,13 +224,15 @@
                   fadd.invalid ||
                   (id_departement &&
                     id_departement.value == '-1' &&
-                    id_role && id_role.value == '1')
+                    id_role &&
+                    id_role.value == '1')
                 " class="btn btn-primary btn-block mb-4">
                 S'inscrire
               </button>
             </ng-container>
 
-            <button *ngIf="id_role.value == '2'" type="submit" [disabled]="fadd.invalid"
+            <button *ngIf="id_role.value == '2'" type="submit"
+              [disabled]="fadd.invalid||(id_domaine&&id_domaine.value=='-1'||localisation&&localisation.value=='-1')"
               class="btn btn-primary btn-block mb-4">
               S'inscrire
             </button>

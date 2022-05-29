@@ -17,7 +17,7 @@ const routes: Routes = [
         path: "", loadChildren : () => import('./components/espace-entreprise/espace-entreprise.module').then(m => m.EspaceEntrepriseModule),
       },
     ],
-    canActivateChild:[EntrepriseGuard]
+    // canActivateChild:[EntrepriseGuard]
   },
   {
     path: "etudiant",
@@ -27,7 +27,7 @@ const routes: Routes = [
         path: "", loadChildren : () => import('./components/espace-etudiant/espace-etudiant.module').then(m => m.EspaceEtudiantModule),
       }
     ],
-    canActivateChild:[EtudiantGuard]
+    // canActivateChild:[EtudiantGuard]
   },
   {
     path: "",

@@ -11,11 +11,15 @@ import { AuthService } from "../../../services/auth.service";
 })
 export class SignUpComponent implements OnInit {
   actualDate: string;
+  htmlinputType:string;
+
   constructor(
     private authService: AuthService,
     private sharedService: SharedServiceService
   ) {
     this.actualDate = new Date().toDateString();
+    this.htmlinputType='text';
+
   }
 
   ngOnInit() {}
@@ -31,9 +35,15 @@ export class SignUpComponent implements OnInit {
       ) as any;
       swal("Succès!", `un email d'activation a été envoyé à ${form.value.email} vérifier votre spam aussi !`, "success");
       this.sharedService.reloadComponent();
-      // this.router.navigate(['/accueil'])
     } catch (error) {
       swal("Echec!", error.error.message, "error");
     }
+  }
+
+  geninputtype(){
+    this.htmlinputType='date';
+  }
+  getLocalisation() {
+    return this.sharedService.getLocalisation();
   }
 }

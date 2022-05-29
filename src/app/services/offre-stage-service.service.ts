@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 
@@ -54,7 +54,7 @@ export class OffreStageServiceService {
   getAllOffreStages(etat:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/offrestage/getAll/${etat}`)
+      this.httpC.get(`${environment.api}/offrestage/get/all/${etat}`)
         .forEach(data =>
           {
             resolve(data)
@@ -70,7 +70,7 @@ export class OffreStageServiceService {
   getOneOffreDetails(id_offre_stage:string){
 
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/offrestage/getOneOffreEntreprise/${id_offre_stage}`)
+      this.httpC.get(`${environment.api}/offrestage/get/one/offre/entreprise/${id_offre_stage}`)
 
         .forEach(data =>
           {
@@ -87,7 +87,7 @@ export class OffreStageServiceService {
   {
     return new Promise((resolve, reject) => {
 
-      this.httpC.get(`${environment.api}/offrestage/getAllOffresEntrepriseNotRegistred`)
+      this.httpC.get(`${environment.api}/offrestage/get/all/offres/entreprise/notregistred`)
         .forEach(data =>
           {
             resolve(data)
@@ -104,7 +104,7 @@ export class OffreStageServiceService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.put(`${environment.api}/offrestage/update_Nbr_vue/${id_offre_stage}`,null)
+      this.httpC.put(`${environment.api}/offrestage/update/nbr/vue/${id_offre_stage}`,null)
         .forEach(data =>
           resolve(data)
         ).catch((err) => {
@@ -117,7 +117,7 @@ export class OffreStageServiceService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.put(`${environment.api}/offrestage/update_Nbr_postulations/${id_offre_stage}`,null)
+      this.httpC.put(`${environment.api}/offrestage/update/nbr/postulations/${id_offre_stage}`,null)
         .forEach(data =>
           resolve(data)
         ).catch((err) => {
@@ -130,7 +130,7 @@ export class OffreStageServiceService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.put(`${environment.api}/offrestage/closeOpenOffre`, {id_offre_stage,id_etat_offre})
+      this.httpC.put(`${environment.api}/offrestage/close/open`, {id_offre_stage,id_etat_offre})
         .forEach(data =>
           resolve(data)
         ).catch((err) => {
@@ -144,10 +144,10 @@ export class OffreStageServiceService {
     let api:string;
     switch (tabid) {
       case '0':
-        api=`${environment.api}/offrestage/getOffresEtudiantsNonContactes/${id_etudiant}`
+        api=`${environment.api}/offrestage/get/offres/etudiants/noncontactes/${id_etudiant}`
         break;
         case '1':
-          api=`${environment.api}/offrestage/getOffresEtudiantsContactes/${id_etudiant}`
+          api=`${environment.api}/offrestage/get/offres/etudiants/contactes/${id_etudiant}`
           break;
     }
     return new Promise((resolve, reject) => {

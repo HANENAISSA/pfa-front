@@ -14,7 +14,7 @@ export class EntrepriseServiceService {
     getEntrpriseInfo()
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/entreprise/getEntrepriseInfo`)
+      this.httpC.get(`${environment.api}/entreprise/get/info`)
         .forEach(data =>
           {
             resolve(data)
@@ -54,18 +54,34 @@ export class EntrepriseServiceService {
     });
   }
 
-  // updateResposnableEntreprise(resposnable)
-  // {
-  //   return new Promise((resolve, reject) => {
-  //     this.httpC.put(`${environment.api}/entreprise/profil/responsable`,resposnable)
-  //       .forEach(data =>
-  //         {
-  //           resolve(data)
-  //         }
-  //       ).catch((err) => {
-  //         reject(err);
-  //       });
-  //   });
-  // }
+  getAllEntrprises()
+  {
+    return new Promise((resolve, reject) => {
+      this.httpC.get(`${environment.api}/entreprise/get/all`)
+        .forEach(data =>
+          {
+            resolve(data)
+          }
+
+        ).catch((err) => {
+          reject(err);
+        });
+    });
+  }
+
+  getEntrpriseProfile(crypted_profile:string)
+  {
+    return new Promise((resolve, reject) => {
+      this.httpC.get(`${environment.api}/entreprise/get/profil/${crypted_profile}`)
+        .forEach(data =>
+          {
+            resolve(data)
+          }
+
+        ).catch((err) => {
+          reject(err);
+        });
+    });
+  }
 
 }

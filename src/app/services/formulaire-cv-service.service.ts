@@ -11,7 +11,7 @@ export class FormulaireCvServiceService {
 
   addDemandeStageEntreprise(demande_stage){
       return new Promise((resolve, reject) => {
-        this.httpC.post(`${environment.api}/demandeEtudiantStageEntreprise/add`, {'id_offre_stage':demande_stage})
+        this.httpC.post(`${environment.api}/demande/etudiant/stage/entreprise/add`, {'id_offre_stage':demande_stage})
           .forEach(data =>{
             resolve(data)
           }

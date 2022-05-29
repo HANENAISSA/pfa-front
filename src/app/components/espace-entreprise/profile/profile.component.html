@@ -111,7 +111,7 @@
                                       <th scope="row">Localisation</th>
                                       <td>
                                         {{
-                                          profil && profil.localisation
+                                          profil && profil.localisation+", "+profil.adresse
                                         }}
                                       </td>
                                     </tr>
@@ -302,6 +302,36 @@
                                           </div>
                                         </td>
                                       </tr>
+                                      <tr>
+                                        <td>
+                                          <div class="input-group">
+                                            <span class="input-group-prepend"
+                                              ><label class="input-group-text"
+                                                ><i
+                                                  class="icofont icofont-location-pin"
+                                                ></i></label
+                                            ></span>
+                                            <input
+                                              type="text"
+                                              name="adresse"
+                                              [(ngModel)]="
+                                                profil && profil.adresse
+                                              "
+                                              #adresse="ngModel"
+                                              class="form-control"
+                                              placeholder="Adresse entreprise"
+                                              required
+                                            />
+                                          </div>
+                                          <div
+                                            *ngIf="adresse.invalid && adresse.touched"
+                                            class="alert alert-danger p-2"
+                                            role="alert"
+                                          >
+                                            Saisir l'adresse de l'entreprise
+                                          </div>
+                                        </td>
+                                      </tr>
 
                                     </tbody>
                                   </table>
@@ -367,12 +397,8 @@
                                 <table class="table m-0">
                                   <tbody>
                                     <tr>
-                                      <th scope="row">Nom</th>
-                                      <td>{{ profil && profil.nom }}</td>
-                                    </tr>
-                                    <tr>
-                                      <th scope="row">Prénom</th>
-                                      <td>{{ profil && profil.prenom }}</td>
+                                      <th scope="row">Nom complet</th>
+                                      <td>{{ profil && profil.nom+" "+profil.prenom }}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row">Date naissance</th>

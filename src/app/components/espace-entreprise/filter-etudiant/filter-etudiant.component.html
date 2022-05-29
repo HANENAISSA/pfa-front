@@ -111,7 +111,9 @@
                                       <!-- <i class="fa fa-ellipsis-v"></i> -->
                                     </button>
                                     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                                      <button (click)="
+                                      <button
+
+                                      (click)="
                                           this.consulterProfil(etudiant.crypted_user)
                                         " ngbDropdownItem>
                                         <i class="icofont icofont-eye-alt"></i>Profil
@@ -183,7 +185,7 @@
                         <table class="table table-hover">
                           <thead>
                             <tr style="text-align: center">
-                              <th scope="col">Photo</th>
+                              <th scope="col">#</th>
                               <th scope="col" [appSort]="listEtudiant" data-order="desc" data-name="nom">
                                 Nom et Prénom<i class="fa fa-sort" style="margin-left: 10px"></i>
                               </th>

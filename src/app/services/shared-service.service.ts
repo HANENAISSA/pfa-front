@@ -2,13 +2,12 @@ import { Injectable } from "@angular/core";
 import * as moment from "moment";
 import {  Router } from "@angular/router";
 import * as CryptoJS from "crypto-js";
-import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root",
 })
 export class SharedServiceService {
-  constructor(private router: Router, private httpC: HttpClient) {}
+  constructor(private router: Router) {}
 
   formatDate(date, hour?: boolean) {
     if (date) {

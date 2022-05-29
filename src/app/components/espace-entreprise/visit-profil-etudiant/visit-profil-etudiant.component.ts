@@ -68,7 +68,7 @@ export class VisitProfilEtudiantComponent implements OnInit {
           tabId
         )) as any) || [];
 
-      if (rows.length == 1) this.profil = rows[0];
+      if (tabId=='0') this.profil = rows[0];
       else this.list = rows;
     } catch (error) {
       const { err, rows } = error.error;
@@ -80,7 +80,6 @@ export class VisitProfilEtudiantComponent implements OnInit {
   changeTabset(event) {
     this.list = [null];
     const tabId = event.nextId.toString();
-    this.load_id_profil();
     this.getEtudiantProfil(tabId);
   }
 

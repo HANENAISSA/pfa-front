@@ -12,7 +12,7 @@ export class DemandeEtudiantService {
 
   addDemande(demande : DemandeEtudiant){
     return new Promise((resolve, reject) => {
-      this.httpC.post('${environment.api}/demandeEtudiantStageEntreprise/getAllDemandesEtudiant/add', demande)
+      this.httpC.post(`${environment.api}/demande/etudiant/stage/entreprise/add`, demande)
         .forEach(data =>{
           resolve(data)
         }
@@ -22,34 +22,10 @@ export class DemandeEtudiantService {
     });
   }
 
-  updateDemande(demande : DemandeEtudiant){
-
-    return new Promise((resolve, reject) => {
-
-      this.httpC.put(`${environment.api}/demandeEtudiantStageEntreprise/getAllDemandesEtudiant/patch`, demande)
-        .forEach(data =>
-          resolve(data)
-        ).catch((err) => {
-          reject(err);
-        });
-    });
-  }
-
-  deleteDemande(id_demande: string){
-      return new Promise((resolve, reject) => {
-        this.httpC.delete(`${environment.api}/demandeEtudiantStageEntreprise/getAllDemandesEtudiant/delete/${id_demande}`)
-          .forEach(data =>
-            resolve(data)
-          ).catch((err) => {
-            reject(err);
-          });
-      });
-  }
-
   getListDemande(etatDemande:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/demandeEtudiantStageEntreprise/getAllDemandesEtudiant/${etatDemande}`)
+      this.httpC.get(`${environment.api}/demande/etudiant/stage/entreprise/get/all/demandes/etudiant/${etatDemande}`)
         .forEach(data =>
           {
             resolve(data)
@@ -65,7 +41,7 @@ export class DemandeEtudiantService {
   decideDemande(id_demande_stage:string,etat_demande:string='4')
   {
     return new Promise((resolve, reject) => {
-      this.httpC.put(`${environment.api}/demandeEtudiantStageEntreprise/decide/${id_demande_stage}/${etat_demande}`,null)
+      this.httpC.put(`${environment.api}/demande/etudiant/stage/entreprise/decision/${id_demande_stage}/${etat_demande}`,null)
         .forEach(data =>
           {
             resolve(data)

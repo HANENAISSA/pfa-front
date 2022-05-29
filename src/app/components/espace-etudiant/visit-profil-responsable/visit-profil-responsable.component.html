@@ -1,1 +1,185 @@
-<p>visit-profil-responsable works!</p>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="cover-profile">
+      <div class="profile-bg-img">
+        <img
+          class="profile-bg-img img-fluid"
+          src="assets/images/user-profile/bg-img1.jpg"
+          alt="bg-img"
+        />
+        <div class="card-body user-info">
+          <div class="col-md-12">
+            <div class="media-left">
+              <a class="profile-image">
+                <img
+                  class="user-img img-radius"
+                  id="profil-photo"
+                  [src]="profil && profil.photo"
+                  alt="user-img"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--profile cover end-->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="md-tabs">
+      <ngb-tabset>
+        <ngb-tab title="Informations d'Entreprise" [id]="0">
+          <ng-template ngbTabContent>
+            <div [@fadeInOutTranslate] class="m-t-15">
+              <!-- personal card start -->
+              <div class="card">
+
+                <div class="card-body">
+                  <div class="view-info">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="general-info">
+                          <div class="row">
+                            <div class="col-lg-12 col-xl-6">
+                              <div class="table-responsive">
+                                <table class="table m-0">
+                                  <tbody>
+                                    <tr>
+                                      <th scope="row">Entreprise</th>
+                                      <td>{{ profil && profil.nom_entreprise }}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">N° registre commercial</th>
+                                      <td>{{ profil && profil.num_reg_commerce }}</td>
+                                    </tr>
+                                    <tr *ngIf="profil && profil.site_web">
+                                      <th scope="row">Site web</th>
+                                      <td>
+                                        <a [href]="'http://'+profil.site_web" target="_blank">{{ profil.site_web }}</a>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                            <!-- end of table col-lg-6 -->
+                            <div class="col-lg-12 col-xl-6">
+                              <div class="table-responsive">
+                                <table class="table">
+                                  <tbody>
+                                    <tr>
+                                      <th scope="row">Localisation</th>
+                                      <td>
+                                        {{
+                                          profil && profil.localisation
+                                        }}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Domaine</th>
+                                      <td>
+                                        {{
+                                          profil && profil.libelle_domaine
+                                        }}
+                                      </td>
+                                    </tr>
+
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- end of row -->
+                        </div>
+                        <!-- end of general info -->
+                      </div>
+                      <!-- end of col-lg-12 -->
+                    </div>
+                    <!-- end of row -->
+                  </div>
+                  <!-- end of view-info -->
+                  <!-- end of edit-info -->
+                </div>
+                <!-- end of card-body -->
+              </div>
+              <!-- personal card end-->
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Informations Personnelles" [id]="1">
+          <ng-template ngbTabContent>
+            <div [@fadeInOutTranslate] class="m-t-15">
+              <!-- personal card start -->
+              <div class="card">
+                <div class="card-body">
+                  <div class="view-info" >
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="general-info">
+                          <div class="row">
+                            <div class="col-lg-12 col-xl-6">
+                              <div class="table-responsive">
+                                <table class="table m-0">
+                                  <tbody>
+                                    <tr>
+                                      <th scope="row">Nom complet</th>
+                                      <td>{{ profil && profil.nom+" "+profil.prenom }}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Date naissance</th>
+                                      <td>
+                                        {{
+                                          profil && profil.date_naissance
+                                            | date: "dd/MM/yyyy"
+                                        }}
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                            <!-- end of table col-lg-6 -->
+                            <div class="col-lg-12 col-xl-6">
+                              <div class="table-responsive">
+                                <table class="table">
+                                  <tbody>
+                                    <tr>
+                                      <th scope="row">N° Téléphone</th>
+                                      <td>{{ profil && profil.num_tel }}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Email</th>
+                                      <td>
+                                        {{ profil && profil.email }}
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                            <!-- end of table col-lg-6 -->
+                          </div>
+
+                          <!-- end of row -->
+                        </div>
+                        <!-- end of general info -->
+                      </div>
+                      <!-- end of col-lg-12 -->
+                    </div>
+                    <!-- end of row -->
+                  </div>
+                  <!-- end of edit-info -->
+                </div>
+                <!-- end of card-body -->
+              </div>
+              <!-- personal card end-->
+            </div>
+          </ng-template>
+        </ngb-tab>
+
+      </ngb-tabset>
+    </div>
+  </div>
+</div>

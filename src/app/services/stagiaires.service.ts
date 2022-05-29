@@ -13,7 +13,7 @@ export class StagiairesService {
   getAllSatgiares()
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/stagiaires/getAllSatgiares`)
+      this.httpC.get(`${environment.api}/stagiaires/get/all`)
         .forEach(data =>
           {
             resolve(data)
@@ -29,7 +29,7 @@ export class StagiairesService {
   deleteStagiaire(id_demande:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.delete(`${environment.api}/stagiaires/deleteStagiaire/${id_demande}`)
+      this.httpC.delete(`${environment.api}/stagiaires/delete/${id_demande}`)
         .forEach(data =>
           {
             resolve(data)

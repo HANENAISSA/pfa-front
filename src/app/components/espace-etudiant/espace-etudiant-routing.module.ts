@@ -21,7 +21,7 @@ const routes: Routes = [
     path: "profil", component : FormulaireCvComponent,
   },
   {
-    path: "responsbale/profil/:id", component : VisitProfilResponsableComponent,
+    path: "entreprise/profil/:id", component : VisitProfilResponsableComponent,
   },
   {
     path: "recherche/entreprise", component: FilterEntrepriseComponent

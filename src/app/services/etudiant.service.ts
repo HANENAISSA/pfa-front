@@ -14,7 +14,7 @@ export class EtudiantService {
 
     return new Promise((resolve, reject) => {
 
-      this.httpC.put(`${environment.api}/etudiant/updatetudiant`, etudiant)
+      this.httpC.put(`${environment.api}/etudiant/update`, etudiant)
         .forEach(data =>
           resolve(data)
         ).catch((err) => {

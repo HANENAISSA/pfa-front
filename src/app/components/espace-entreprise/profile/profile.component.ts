@@ -88,6 +88,7 @@ export class ProfileComponent implements OnInit {
         const {
           libelle_domaine,
           localisation,
+          adresse,
           nom_entreprise,
           num_reg_commerce,
           site_web,
@@ -95,6 +96,7 @@ export class ProfileComponent implements OnInit {
         entreprise = {
           libelle_domaine,
           localisation,
+          adresse,
           nom_entreprise,
           num_reg_commerce,
           site_web,

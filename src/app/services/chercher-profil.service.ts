@@ -12,7 +12,7 @@ export class ChercherProfilService {
   getListEtudiant(tabId:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/etudiant/getAll/${tabId}`)
+      this.httpC.get(`${environment.api}/etudiant/get/all/${tabId}`)
         .forEach(data =>
           {
             resolve(data)
@@ -25,7 +25,7 @@ export class ChercherProfilService {
   }
   contacterProfil(mailPayload){
     return new Promise((resolve, reject) => {
-      this.httpC.post(`${environment.api}/confirmationDemande/contactStudent`, mailPayload)
+      this.httpC.post(`${environment.api}/confirmation/demande/contact/etudiant`, mailPayload)
         .forEach(data =>{
           resolve(data)
         }
@@ -38,7 +38,7 @@ export class ChercherProfilService {
   getEtudiantInfo()
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/etudiant/getetudiant`)
+      this.httpC.get(`${environment.api}/etudiant/get/one`)
         .forEach(data =>
           {
             resolve(data)
@@ -64,8 +64,6 @@ export class ChercherProfilService {
     });
 
   }
-
-
   getEtudiantProfil(id_profil:string,tabId:string)
   {
     return new Promise((resolve, reject) => {

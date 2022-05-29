@@ -12,7 +12,7 @@ export class CandidatureEtudiantService {
   getListCandidature(etat:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.get(`${environment.api}/demandeEntreprise/getAllDemandesEntreprise/${etat}`)
+      this.httpC.get(`${environment.api}/demande/entreprise/get/all/${etat}`)
         .forEach(data =>
           {
             resolve(data)
@@ -29,7 +29,7 @@ export class CandidatureEtudiantService {
   sendMail(payload)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.post(`${environment.api}/confirmationDemande/sendMail`,payload)
+      this.httpC.post(`${environment.api}/confirmation/demande/send/email`,payload)
         .forEach(data =>
           {
             resolve(data)
@@ -45,7 +45,7 @@ export class CandidatureEtudiantService {
   updateCandidatureVue(id:string)
   {
     return new Promise((resolve, reject) => {
-      this.httpC.put(`${environment.api}/demandeEntreprise/updateVueDemande/${id}`,null)
+      this.httpC.put(`${environment.api}/demande/entreprise/update/vuedemande/${id}`,null)
         .forEach(data =>
           {
             resolve(data)
@@ -58,19 +58,4 @@ export class CandidatureEtudiantService {
 
   }
 
-
-  updateCandidatResEntretien(id_demande:string,etat:string)
-  {
-    return new Promise((resolve, reject) => {
-      this.httpC.put(`${environment.api}/demandeEntreprise/updateEtatEntretien`,{id_etat_entretien_stage_pfe:etat,id_demande_stage_entreprise:id_demande})
-        .forEach(data =>
-          {
-            resolve(data)
-          }
-
-        ).catch((err) => {
-          reject(err);
-        });
-    });
-  }
 }

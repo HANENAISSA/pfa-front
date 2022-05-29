@@ -272,7 +272,7 @@ export class FormulaireCvComponent implements OnInit {
           const { err } = (await this.etudiantService.delCvEtudiant()) as any;
           if (!err) {
             this.sharedService.reloadComponent();
-            swal("Succés!", "cv supprimé !", "success");
+            swal("Succés!", "C.V supprimé !", "success");
           }
         } catch (error) {
           swal("Echec!", error.error.message, "warning");

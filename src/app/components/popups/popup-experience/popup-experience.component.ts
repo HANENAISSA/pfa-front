@@ -55,7 +55,7 @@ export class PopupExperienceComponent implements OnInit {
         swal("Succès!", "Ajout effectué avec succès", "success");
       }
     } catch (error) {
-      swal("Échec!", "Opération non effectuée", "error");
+      swal("Échec!", error.error.message, "warning");
     }
     this.activeModal.dismiss();
   }
@@ -70,7 +70,7 @@ export class PopupExperienceComponent implements OnInit {
         swal("Succès!", "Opération effectuée avec succès", "success");
       }
     } catch (error) {
-      swal("Echec!", "Opération non effectuée", "error");
+      swal("Echec!", error.error.message, "warnin");
     }
     this.activeModal.dismiss();
   }

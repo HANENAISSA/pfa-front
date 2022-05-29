@@ -47,7 +47,7 @@ export class PopupCompetenceComponent implements OnInit {
         swal("Succès!", "Ajout effectué avec succès", "success");
       }
     } catch (error) {
-      swal("Echec!", "Opération non effectuée", "error");
+      swal("Echec!", error.error.message, "warning");
     }
     this.activeModal.dismiss();
   }
@@ -62,7 +62,7 @@ export class PopupCompetenceComponent implements OnInit {
         swal("Succès!", "Opération effectuée avec succès", "success");
       }
     } catch (error) {
-      swal("Echec!", "Opération non effectuée", "error");
+      swal("Echec!", error.error.message, "warning");
     }
     this.activeModal.dismiss();
   }

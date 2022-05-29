@@ -68,7 +68,7 @@ export class DemandeCandidaturesComponent implements OnInit {
       }
     }
     catch (error) {
-      swal('Echec!','Erreur ! Réssayer plus tard ! ','error')
+      swal('Echec!','Erreur ! Réssayer plus tard ! ','warning')
    }
   }
 
@@ -104,7 +104,7 @@ export class DemandeCandidaturesComponent implements OnInit {
         swal("Succès!", "Opération effectuée", "success");
       }
     } catch (error) {
-      swal("Echec!", "Opération non effectuée", "error");
+      swal("Echec!", error.error.message, "warning");
     }
   }
 

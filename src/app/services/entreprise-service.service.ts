@@ -25,6 +25,47 @@ export class EntrepriseServiceService {
         });
     });
   }
+  changeEntreprisephoto(photo:FormData)
+  {
+    return new Promise((resolve, reject) => {
+      this.httpC.put(`${environment.api}/entreprise/profil/photo`,photo)
+        .forEach(data =>
+          {
+            resolve(data)
+          }
+        ).catch((err) => {
+          reject(err);
+        });
+    });
 
+  }
+
+  update(object,endpoint:string)
+  {
+    return new Promise((resolve, reject) => {
+      this.httpC.put(`${environment.api}/${endpoint}`,object)
+        .forEach(data =>
+          {
+            resolve(data)
+          }
+        ).catch((err) => {
+          reject(err);
+        });
+    });
+  }
+
+  // updateResposnableEntreprise(resposnable)
+  // {
+  //   return new Promise((resolve, reject) => {
+  //     this.httpC.put(`${environment.api}/entreprise/profil/responsable`,resposnable)
+  //       .forEach(data =>
+  //         {
+  //           resolve(data)
+  //         }
+  //       ).catch((err) => {
+  //         reject(err);
+  //       });
+  //   });
+  // }
 
 }

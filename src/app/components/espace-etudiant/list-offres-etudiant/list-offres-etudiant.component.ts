@@ -93,7 +93,7 @@ export class ListOffresEtudiantComponent implements OnInit {
         this.sharedService.reloadComponent()
       }
     } catch (error) {
-      swal("Échec!", "Postulation non effectuée", "error");
+      swal("Échec!", error.error.message, "warning");
     }
   }
 }

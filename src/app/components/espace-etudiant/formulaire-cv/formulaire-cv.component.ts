@@ -63,12 +63,14 @@ export class FormulaireCvComponent implements OnInit {
     this.getListExperience();
   }
 
-  toggleEditProfile() {
+  toggleEditProfile(cancel?:boolean) {
     this.editProfileIcon =
       this.editProfileIcon === "icofont-close"
         ? "icofont-edit"
         : "icofont-close";
     this.editProfile = !this.editProfile;
+    if(cancel)
+    this.sharedService.reloadComponent();
   }
 
   toggleEditAbout() {
@@ -101,7 +103,6 @@ export class FormulaireCvComponent implements OnInit {
         ((await this.profilService.getEtudiantInfo()) as any) || [];
       if (!err) {
         this.profil = rows[0];
-        console.log(this.profil);
       }
     } catch (error) {}
   }
@@ -168,10 +169,10 @@ export class FormulaireCvComponent implements OnInit {
             [];
           this.sharedService.reloadComponent();
         } catch (error) {
-          swal("Echec!", "Réessayer plus tard ! ", "warning");
+          swal("Echec!", error.error.message, "warning");
         }
       } else {
-        swal("Echec!", "choisir une image ! ", "warning");
+        swal("info!", "choisir une image ! ", "info");
       }
     }
   }
@@ -182,7 +183,7 @@ export class FormulaireCvComponent implements OnInit {
       if (file.type.split("/")[0] === "image") {
         this.formData.append("fichier_cv", file);
       } else {
-        swal("Echec!", "choisir le format image ! ", "warning");
+        swal("info!", "choisir une image ! ", "info");
       }
     }
   }
@@ -217,7 +218,7 @@ export class FormulaireCvComponent implements OnInit {
         swal("Succès!", "Opération effectuée avec succès", "success");
       }
     } catch (error) {
-      swal("Echec!", "Opération non effectuée", "error");
+      swal("Echec!", error.error.message, "warning");
     }
   }
   getFormData(etudiant) {
@@ -243,7 +244,7 @@ export class FormulaireCvComponent implements OnInit {
         swal("Succès!", "Opération effectuée avec succès", "success");
       }
     } catch (error) {
-      swal("Echec!", "Opération non effectuée", "error");
+      swal("Echec!", error.error.message, "warning");
     }
   }
   async deleteExperience(id_experience: string) {
@@ -256,7 +257,7 @@ export class FormulaireCvComponent implements OnInit {
         swal("Succès!", "Opération effectuée avec succès", "success");
       }
     } catch (error) {
-      swal("Echec!", "Opération non effectuée", "error");
+      swal("Echec!", error.error.message, "warning");
     }
   }
   deletecv() {

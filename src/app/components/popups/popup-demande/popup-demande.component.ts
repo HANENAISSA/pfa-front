@@ -101,7 +101,7 @@ export class PopupDemandeComponent implements OnInit {
         this.sharedService.reloadComponent();
       }
     } catch (error) {
-      swal("Echec!", "Opération non effectuée", "error");
+      swal("Echec!", error.error.message, "warning");
     }
     this.activeModal.dismiss();
   }
@@ -148,7 +148,7 @@ export class PopupDemandeComponent implements OnInit {
         swal("Succès!", "Confirmation effctuée avec succès", "success");
       }
     } catch (error) {
-      swal("Echec!", "Opération non effectuée", "error");
+      swal("Echec!", error.error.message, "warning");
     }
     this.activeModal.dismiss();
   }
@@ -185,10 +185,10 @@ export class PopupDemandeComponent implements OnInit {
             ((await this.demandeService.decideDemande(this.details.id_demande_stage_entreprise.toString())) as any) || [];
           if (!err) {
             this.sharedService.reloadComponent();
-            swal("Succès!", "Demande refusée", "warning");
+            swal("Succès!", "Demande refusée", "info");
           }
         } catch (error) {
-          swal("Echec!", "Opération non effectuée", "error");
+          swal("Echec!", error.error.message, "warning");
         }
       }
     });

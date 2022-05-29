@@ -131,7 +131,7 @@ export class ListOffresStageComponent implements OnInit {
         this.getAllOffreStages(this.etat);
       }
     } catch (error) {
-      swal("Échec!", "Opération non effectuée", "error");
+      swal("Échec!", error.error.message, "warning");
     }
   }
 
@@ -143,7 +143,7 @@ export class ListOffresStageComponent implements OnInit {
         this.sharedService.reloadComponent();
       }
     } catch (error) {
-      swal("Échec!", "Opération non effectuée", "error");
+      swal("Échec!", error.error.message, "warning");
     }
   }
 }

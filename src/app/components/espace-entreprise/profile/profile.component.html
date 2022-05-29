@@ -2,32 +2,48 @@
   <div class="col-lg-12">
     <div class="cover-profile">
       <div class="profile-bg-img">
-        <img class="profile-bg-img img-fluid" src="assets/images/user-profile/bg-img1.jpg" alt="bg-img">
+        <img
+          class="profile-bg-img img-fluid"
+          src="assets/images/user-profile/bg-img1.jpg"
+          alt="bg-img"
+        />
         <div class="card-body user-info">
           <div class="col-md-12">
             <div class="media-left">
               <a class="profile-image">
-                <img class="user-img img-radius" id="profil-photo" [src]="profil&&profil.photo" alt="user-img">
+                <img
+                  class="user-img img-radius"
+                  id="profil-photo"
+                  [src]="profil && profil.photo"
+                  alt="user-img"
+                />
               </a>
             </div>
             <div class="media-body row">
-
               <div>
                 <div class="pull-right cover-btn">
                   <div
-                    class="file-upload mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    class="file-upload mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                  >
                     <button class="btn btn-primary m-b-10 m-r-10">
-                      <input type="file" accept="image/*" (change)="changephoto($event)" name="FileAttachment"
-                        id="FileAttachment" class="upload" />
+                      <input
+                        type="file"
+                        accept="image/*"
+                        (change)="changephoto($event)"
+                        name="FileAttachment"
+                        id="FileAttachment"
+                        class="upload"
+                      />
                       <i class="icofont icofont-plus"></i>
                       PHOTO
                     </button>
                   </div>
                   <script>
-                    document.getElementById("FileAttachment").onchange = function () {
-                      document.getElementById("fileuploadurl").value = this.value.replace(/C:\\fakepath\\/i, '');
-                    };
-
+                    document.getElementById("FileAttachment").onchange =
+                      function () {
+                        document.getElementById("fileuploadurl").value =
+                          this.value.replace(/C:\\fakepath\\/i, "");
+                      };
                   </script>
                 </div>
               </div>
@@ -43,14 +59,18 @@
   <div class="col-lg-12">
     <div class="md-tabs">
       <ngb-tabset [activeId]="actifTabid">
-        <ngb-tab title="Informations Personnels" [id]="0">
+        <ngb-tab title="Informations d'Entreprise" [id]="0">
           <ng-template ngbTabContent>
             <div [@fadeInOutTranslate] class="m-t-15">
               <!-- personal card start -->
               <div class="card">
                 <div class="card-header">
-                  <button id="edit-btn" type="button" class="btn btn-sm btn-primary waves-effect waves-light f-right"
-                    (click)="toggleEditProfile()">
+                  <button
+                    id="edit-btn"
+                    type="button"
+                    class="btn btn-sm btn-primary waves-effect waves-light f-right"
+                    (click)="toggleEditProfile()"
+                  >
                     <i class="icofont {{ editProfileIcon }}"></i>
                   </button>
                 </div>
@@ -65,21 +85,18 @@
                                 <table class="table m-0">
                                   <tbody>
                                     <tr>
-                                      <th scope="row">Nom</th>
-                                      <td>{{profil&&profil.nom}}</td>
+                                      <th scope="row">Nom entreprise</th>
+                                      <td>{{ profil && profil.nom_entreprise }}</td>
                                     </tr>
                                     <tr>
-                                      <th scope="row">Prénom</th>
-                                      <td>{{profil&&profil.prenom}}</td>
+                                      <th scope="row">N° registre commercial</th>
+                                      <td>{{ profil && profil.num_reg_commerce }}</td>
                                     </tr>
-                                    <tr>
-                                      <th scope="row">Date naissance</th>
-                                      <td>{{profil&&profil.date_naissance|date:'dd/MM/yyyy'}}</td>
-                                    </tr>
-                                    <tr>
-                                      <th scope="row">Identité utilisateur</th>
-                                      <td>{{profil&&profil.cin&&profil.cin}}</td>
-                                      <td>{{profil&&profil.num_passport&&profil.num_passport}}</td>
+                                    <tr *ngIf="profil && profil.site_web">
+                                      <th scope="row">Site web</th>
+                                      <td>
+                                        <a [href]="'http://'+profil.site_web" target="_blank">{{ profil.site_web }}</a>
+                                      </td>
                                     </tr>
                                   </tbody>
                                 </table>
@@ -91,34 +108,28 @@
                                 <table class="table">
                                   <tbody>
                                     <tr>
-                                      <th scope="row">N°Téléphone</th>
-                                      <td>{{profil&&profil.num_tel}}</td>
-                                    </tr>
-                                    <tr>
-                                      <th scope="row">Email</th>
+                                      <th scope="row">Localisation</th>
                                       <td>
-                                        <a>{{profil&&profil.email}}</a>
+                                        {{
+                                          profil && profil.localisation
+                                        }}
                                       </td>
                                     </tr>
                                     <tr>
-                                      <th scope="row">Département</th>
-                                      <td>{{profil&&profil.libelle}}</td>
-                                    </tr>
-                                    <tr>
-                                      <th scope="row">C.V</th>
+                                      <th scope="row">Domaine</th>
                                       <td>
-                                        <a *ngIf="profil&&profil.cv" [href]="profil&&profil.cv"
-                                          target="_blank">OUVRIR</a>
-                                        <span *ngIf="profil&&profil.cv==null">AUCUN C.V</span>
+                                        {{
+                                          profil && profil.libelle_domaine
+                                        }}
                                       </td>
+                                    </tr>
 
-                                    </tr>
                                   </tbody>
                                 </table>
                               </div>
                             </div>
-                            <!-- end of table col-lg-6 -->
                           </div>
+                          <!-- end of row -->
                         </div>
                         <!-- end of general info -->
                       </div>
@@ -130,7 +141,12 @@
                   <div class="edit-info" *ngIf="!editProfile">
                     <div class="row">
                       <div class="col-lg-12">
-                        <form name="form" (ngSubmit)="submit(fprofil)" #fprofil="ngForm" novalidate>
+                        <form
+                          name="form"
+                          (ngSubmit)="submit(fentreprise,'entreprise')"
+                          #fentreprise="ngForm"
+                          novalidate
+                        >
                           <div class="general-info">
                             <div class="row">
                               <div class="col-lg-6">
@@ -140,10 +156,58 @@
                                       <tr>
                                         <td>
                                           <div class="input-group">
-                                            <span class="input-group-prepend"><label class="input-group-text"><i
-                                                  class="icofont icofont-user"></i></label></span>
-                                            <input type="text" name="nom" required [(ngModel)]="profil&&profil.nom"
-                                              #nom="ngModel" class="form-control" placeholder="Prénom" />
+                                            <span class="input-group-prepend"
+                                              ><label class="input-group-text"
+                                                ><i
+                                                  class="icofont icofont-company"
+                                                ></i></label
+                                            ></span>
+                                            <input
+                                              type="text"
+                                              name="nom_entreprise"
+                                              required
+                                              [(ngModel)]="profil && profil.nom_entreprise"
+                                              #nom_entreprise="ngModel"
+                                              class="form-control"
+                                              placeholder="Nom entreprise"
+                                            />
+                                          </div>
+                                          <div
+                                            *ngIf="nom_entreprise.invalid && nom_entreprise.touched"
+                                            class="alert alert-danger p-2"
+                                            role="alert"
+                                          >
+                                            Saisir le nom d'entreprise
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                          <div class="input-group">
+                                            <span class="input-group-prepend"
+                                              ><label class="input-group-text"
+                                                ><i
+                                                  class="icofont icofont-barcode"
+                                                ></i></label
+                                            ></span>
+                                            <input
+                                              type="text"
+                                              name="num_reg_commerce"
+                                              required
+                                              [(ngModel)]="
+                                                profil && profil.num_reg_commerce
+                                              "
+                                              #num_reg_commerce="ngModel"
+                                              class="form-control"
+                                              placeholder="N° registre commercial"
+                                            />
+                                          </div>
+                                          <div
+                                            *ngIf="num_reg_commerce.invalid && num_reg_commerce.touched"
+                                            class="alert alert-danger p-2"
+                                            role="alert"
+                                          >
+                                            Saisir le N° registre commercial
                                           </div>
                                         </td>
                                       </tr>
@@ -151,39 +215,25 @@
                                       <tr>
                                         <td>
                                           <div class="input-group">
-                                            <span class="input-group-prepend"><label class="input-group-text"><i
-                                                  class="icofont icofont-user"></i></label></span>
-                                            <input type="text" name="prenom" required
-                                              [(ngModel)]="profil&&profil.prenom" #prenom="ngModel" class="form-control"
-                                              placeholder="Prénom" />
+                                            <span class="input-group-prepend"
+                                              ><label class="input-group-text"
+                                                ><i
+                                                  class="icofont icofont-web"
+                                                ></i></label
+                                            ></span>
+                                            <input
+                                              type="url"
+                                              name="site_web"
+                                              [(ngModel)]="
+                                                profil && profil.site_web
+                                              "
+                                              #site_web="ngModel"
+                                              class="form-control"
+                                              placeholder="Site web"
+                                            />
                                           </div>
                                         </td>
                                       </tr>
-                                      <tr>
-                                        <td>
-                                          <div class="input-group">
-                                            <span class="input-group-prepend"><label class="input-group-text"><i
-                                                  class="icofont icofont-user"></i></label></span>
-                                            <input type="date" onkeydown="return false" name="date_naissance" required
-                                              [(ngModel)]="profil&&profil.dns" #date_naissance="ngModel"
-                                              class="form-control" max="{{this.actualDate | date:'yyyy-MM-dd'}}" />
-                                          </div>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td>
-                                          <div class="input-group">
-                                            <span class="input-group-prepend"><label class="input-group-text"><i
-                                                  class="icofont icofont-user"></i></label></span>
-                                            <input type="text" name="identite" required
-                                              [(ngModel)]="profil&&profil.cin?profil.cin:profil.num_passport"
-                                              #identite="ngModel" class="form-control"
-                                              placeholder="Identité utilisateur" />
-                                          </div>
-                                        </td>
-                                      </tr>
-
-
                                     </tbody>
                                   </table>
                                 </div>
@@ -197,54 +247,61 @@
                                       <tr>
                                         <td>
                                           <div class="input-group">
-                                            <span class="input-group-prepend"><label class="input-group-text"><i
-                                                  class="icofont icofont-location-pin"></i></label>
-                                            </span>
-                                            <input type="tel" class="form-control" placeholder="N°Téléphone" required
-                                              [(ngModel)]="profil&&profil.num_tel" #tel="ngModel" name="tel" />
-                                          </div>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td>
-                                          <div class="input-group">
-                                            <span class="input-group-prepend"><label class="input-group-text"><i
-                                                  class="icofont icofont-location-pin"></i></label>
-                                            </span>
-                                            <input type="email" class="form-control" placeholder="Email" required
-                                              [(ngModel)]="profil&&profil.email" #email="ngModel" name="email" />
-                                          </div>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td>
-                                          <div class="input-group">
-                                            <span class="input-group-prepend"><label class="input-group-text"><i
-                                                  class="icofont icofont-user"></i></label></span>
-                                            <select ngModel="{{ profil&&profil.id_departement }}"
-                                              #id_departement="ngModel" name="id_departement" class="form-control"
-                                              required>
-                                              <option value="3">Technologie de l'informatique</option>
-                                              <option value="4">Agro alimentaire</option>
-                                              <option value="5">Mécanique</option>
-                                              <option value="6">Electrique</option>
-                                              <option value="7">Génie civil</option>
+                                            <span class="input-group-prepend"
+                                              ><label class="input-group-text"
+                                                ><i
+                                                  class="icofont icofont-brand-myspace"
+                                                ></i></label
+                                            ></span>
+                                            <select
+                                              ngModel="{{
+                                                profil && profil.id_domaine
+                                              }}"
+                                              #libelle_domaine="ngModel"
+                                              name="libelle_domaine"
+                                              class="form-control"
+                                              required
+                                            >
+                                              <option value="1">
+                                                Mécanique
+                                              </option>
+                                              <option value="2">
+                                                Informatique
+                                              </option>
+                                              <option value="3">
+                                                Electrique
+                                              </option>
+                                              <option value="4">
+                                                Génie civil
+                                              </option>
                                             </select>
                                           </div>
                                         </td>
                                       </tr>
-
                                       <tr>
                                         <td>
                                           <div class="input-group">
-                                            <span class="input-group-prepend"><label class="input-group-text"><i
-                                                  class="icofont icofont-location-pin"></i></label>
-                                            </span>
-                                            <!-- <input type="file" class="form-control" (change)="changecv($event)" /> -->
+                                            <span class="input-group-prepend"
+                                              ><label class="input-group-text"
+                                                ><i
+                                                  class="icofont icofont-location-pin"
+                                                ></i></label
+                                            ></span>
+                                            <select
+                                              ngModel="{{
+                                                profil && profil.localisation
+                                              }}"
+                                              #localisation="ngModel"
+                                              name="localisation"
+                                              class="form-control"
+                                            >
+                                              <option *ngFor="let ville of getLocalisation()" [value]="ville">
+                                                {{ville}}
+                                              </option>
+                                            </select>
                                           </div>
                                         </td>
                                       </tr>
-
 
                                     </tbody>
                                   </table>
@@ -254,10 +311,19 @@
                             </div>
                             <!-- end of row -->
                             <div class="text-center">
-                              <a href="javascript:;"
-                                class="btn btn-primary waves-effect waves-light m-r-20">Enregistrer</a>
-                              <a href="javascript:;" id="edit-cancel" class="btn btn-default waves-effect"
-                                (click)="toggleEditProfile()">annuler</a>
+                              <button
+                              [disabled]="fentreprise.invalid"
+                                type="submit"
+                                class="btn btn-primary waves-effect waves-light m-r-20"
+                                >Enregistrer
+                              </button>
+                              <a
+                                href="javascript:;"
+                                id="edit-cancel"
+                                class="btn btn-default waves-effect"
+                                (click)="toggleEditProfile(true)"
+                                >annuler</a
+                              >
                             </div>
                           </div>
                           <!-- end of edit info -->
@@ -273,17 +339,20 @@
               </div>
               <!-- personal card end-->
             </div>
-
           </ng-template>
         </ngb-tab>
-        <ngb-tab title="Entreprise" [id]="1">
+        <ngb-tab title="Informations Personnelles" [id]="1">
           <ng-template ngbTabContent>
             <div [@fadeInOutTranslate] class="m-t-15">
               <!-- personal card start -->
               <div class="card">
                 <div class="card-header">
-                  <button id="edit-btn" type="button" class="btn btn-sm btn-primary waves-effect waves-light f-right"
-                    (click)="toggleEditProfile()">
+                  <button
+                    id="edit-btn"
+                    type="button"
+                    class="btn btn-sm btn-primary waves-effect waves-light f-right"
+                    (click)="toggleEditProfile()"
+                  >
                     <i class="icofont {{ editProfileIcon }}"></i>
                   </button>
                 </div>
@@ -299,20 +368,20 @@
                                   <tbody>
                                     <tr>
                                       <th scope="row">Nom</th>
-                                      <td>{{profil&&profil.nom}}</td>
+                                      <td>{{ profil && profil.nom }}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row">Prénom</th>
-                                      <td>{{profil&&profil.prenom}}</td>
+                                      <td>{{ profil && profil.prenom }}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row">Date naissance</th>
-                                      <td>{{profil&&profil.date_naissance|date:'dd/MM/yyyy'}}</td>
-                                    </tr>
-                                    <tr>
-                                      <th scope="row">Identité utilisateur</th>
-                                      <td>{{profil&&profil.cin&&profil.cin}}</td>
-                                      <td>{{profil&&profil.num_passport&&profil.num_passport}}</td>
+                                      <td>
+                                        {{
+                                          profil && profil.date_naissance
+                                            | date: "dd/MM/yyyy"
+                                        }}
+                                      </td>
                                     </tr>
                                   </tbody>
                                 </table>
@@ -324,27 +393,14 @@
                                 <table class="table">
                                   <tbody>
                                     <tr>
-                                      <th scope="row">N°Téléphone</th>
-                                      <td>{{profil&&profil.num_tel}}</td>
+                                      <th scope="row">N° Téléphone</th>
+                                      <td>{{ profil && profil.num_tel }}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row">Email</th>
                                       <td>
-                                        <a>{{profil&&profil.email}}</a>
+                                        {{ profil && profil.email }}
                                       </td>
-                                    </tr>
-                                    <tr>
-                                      <th scope="row">Département</th>
-                                      <td>{{profil&&profil.libelle}}</td>
-                                    </tr>
-                                    <tr>
-                                      <th scope="row">C.V</th>
-                                      <td>
-                                        <a *ngIf="profil&&profil.cv" [href]="profil&&profil.cv"
-                                          target="_blank">OUVRIR</a>
-                                        <span *ngIf="profil&&profil.cv==null">AUCUN C.V</span>
-                                      </td>
-
                                     </tr>
                                   </tbody>
                                 </table>
@@ -352,6 +408,8 @@
                             </div>
                             <!-- end of table col-lg-6 -->
                           </div>
+
+                          <!-- end of row -->
                         </div>
                         <!-- end of general info -->
                       </div>
@@ -363,7 +421,12 @@
                   <div class="edit-info" *ngIf="!editProfile">
                     <div class="row">
                       <div class="col-lg-12">
-                        <form name="form" (ngSubmit)="submit(fprofil)" #fprofil="ngForm" novalidate>
+                        <form
+                          name="form"
+                          (ngSubmit)="submit(fresp_profil,'responsable')"
+                          #fresp_profil="ngForm"
+                          novalidate
+                        >
                           <div class="general-info">
                             <div class="row">
                               <div class="col-lg-6">
@@ -373,10 +436,28 @@
                                       <tr>
                                         <td>
                                           <div class="input-group">
-                                            <span class="input-group-prepend"><label class="input-group-text"><i
-                                                  class="icofont icofont-user"></i></label></span>
-                                            <input type="text" name="nom" required [(ngModel)]="profil&&profil.nom"
-                                              #nom="ngModel" class="form-control" placeholder="Prénom" />
+                                            <span class="input-group-prepend"
+                                              ><label class="input-group-text"
+                                                ><i
+                                                  class="icofont icofont-user"
+                                                ></i></label
+                                            ></span>
+                                            <input
+                                              type="text"
+                                              name="nom"
+                                              required
+                                              [(ngModel)]="profil && profil.nom"
+                                              #nom="ngModel"
+                                              class="form-control"
+                                              placeholder="Nom"
+                                            />
+                                          </div>
+                                          <div
+                                            *ngIf="nom.invalid && nom.touched"
+                                            class="alert alert-danger p-2"
+                                            role="alert"
+                                          >
+                                            Saisir le nom
                                           </div>
                                         </td>
                                       </tr>
@@ -384,45 +465,59 @@
                                       <tr>
                                         <td>
                                           <div class="input-group">
-                                            <span class="input-group-prepend"><label class="input-group-text"><i
-                                                  class="icofont icofont-user"></i></label></span>
-                                            <input type="text" name="prenom" required
-                                              [(ngModel)]="profil&&profil.prenom" #prenom="ngModel" class="form-control"
-                                              placeholder="Prénom" />
+                                            <span class="input-group-prepend"
+                                              ><label class="input-group-text"
+                                                ><i
+                                                  class="icofont icofont-user"
+                                                ></i></label
+                                            ></span>
+                                            <input
+                                              type="text"
+                                              name="prenom"
+                                              required
+                                              [(ngModel)]="profil && profil.prenom"
+                                              #prenom="ngModel"
+                                              class="form-control"
+                                              placeholder="Prénom"
+                                            />
+                                          </div>
+                                          <div
+                                            *ngIf="prenom.invalid && prenom.touched"
+                                            class="alert alert-danger p-2"
+                                            role="alert"
+                                          >
+                                            Saisir le prénom
                                           </div>
                                         </td>
                                       </tr>
                                       <tr>
                                         <td>
                                           <div class="input-group">
-                                            <span class="input-group-prepend"><label class="input-group-text"><i
-                                                  class="icofont icofont-user"></i></label></span>
-                                            <input type="date" onkeydown="return false" name="date_naissance" required
-                                              [(ngModel)]="profil&&profil.dns" #date_naissance="ngModel"
-                                              class="form-control" max="{{this.actualDate | date:'yyyy-MM-dd'}}" />
+                                            <span class="input-group-prepend"
+                                              ><label class="input-group-text"
+                                                ><i
+                                                  class="icofont icofont-calendar"
+                                                ></i></label
+                                            ></span>
+                                            <input
+                                              type="date"
+                                              onkeydown="return false"
+                                              name="date_naissance"
+                                              required
+                                              ngModel="{{profil && profil.date_naissance| date: 'yyyy-MM-dd'}}"
+                                              #date_naissance="ngModel"
+                                              class="form-control"
+                                              max="{{this.actualDate| date: 'yyyy-MM-dd'}}"
+                                            />
                                           </div>
+
                                         </td>
                                       </tr>
-                                      <tr>
-                                        <td>
-                                          <div class="input-group">
-                                            <span class="input-group-prepend"><label class="input-group-text"><i
-                                                  class="icofont icofont-user"></i></label></span>
-                                            <input type="text" name="identite" required
-                                              [(ngModel)]="profil&&profil.cin?profil.cin:profil.num_passport"
-                                              #identite="ngModel" class="form-control"
-                                              placeholder="Identité utilisateur" />
-                                          </div>
-                                        </td>
-                                      </tr>
-
-
                                     </tbody>
                                   </table>
                                 </div>
                               </div>
                               <!-- end of table col-lg-6 -->
-
                               <div class="col-lg-6">
                                 <div class="table-responsive">
                                   <table class="table">
@@ -430,55 +525,63 @@
                                       <tr>
                                         <td>
                                           <div class="input-group">
-                                            <span class="input-group-prepend"><label class="input-group-text"><i
-                                                  class="icofont icofont-location-pin"></i></label>
+                                            <span class="input-group-prepend"
+                                              ><label class="input-group-text"
+                                                ><i
+                                                  class="icofont icofont-phone"
+                                                ></i
+                                              ></label>
                                             </span>
-                                            <input type="tel" class="form-control" placeholder="N°Téléphone" required
-                                              [(ngModel)]="profil&&profil.num_tel" #tel="ngModel" name="tel" />
+                                            <input
+                                              type="number"
+                                              class="form-control"
+                                              placeholder="N° Téléphone"
+                                              required
+                                              [(ngModel)]="profil && profil.num_tel"
+                                              #num_tel="ngModel"
+                                              name="num_tel"
+                                            />
+                                          </div>
+                                          <div
+                                            *ngIf="num_tel.invalid && num_tel.touched"
+                                            class="alert alert-danger p-2"
+                                            role="alert"
+                                          >
+                                            Saisir le N° téléphone
                                           </div>
                                         </td>
                                       </tr>
                                       <tr>
                                         <td>
                                           <div class="input-group">
-                                            <span class="input-group-prepend"><label class="input-group-text"><i
-                                                  class="icofont icofont-location-pin"></i></label>
+                                            <span class="input-group-prepend"
+                                              ><label class="input-group-text"
+                                                ><i
+                                                  class="icofont icofont-email"
+                                                ></i
+                                              ></label>
                                             </span>
-                                            <input type="email" class="form-control" placeholder="Email" required
-                                              [(ngModel)]="profil&&profil.email" #email="ngModel" name="email" />
+                                            <input
+                                              type="email"
+                                              class="form-control"
+                                              placeholder="Email"
+                                              required
+                                              [(ngModel)]="
+                                                profil && profil.email
+                                              "
+                                              #email="ngModel"
+                                              name="email"
+                                            />
+                                          </div>
+                                          <div
+                                            *ngIf="email.invalid && email.touched"
+                                            class="alert alert-danger p-2"
+                                            role="alert"
+                                          >
+                                            Saisir l'email
                                           </div>
                                         </td>
                                       </tr>
-                                      <tr>
-                                        <td>
-                                          <div class="input-group">
-                                            <span class="input-group-prepend"><label class="input-group-text"><i
-                                                  class="icofont icofont-user"></i></label></span>
-                                            <select ngModel="{{ profil&&profil.id_departement }}"
-                                              #id_departement="ngModel" name="id_departement" class="form-control"
-                                              required>
-                                              <option value="3">Technologie de l'informatique</option>
-                                              <option value="4">Agro alimentaire</option>
-                                              <option value="5">Mécanique</option>
-                                              <option value="6">Electrique</option>
-                                              <option value="7">Génie civil</option>
-                                            </select>
-                                          </div>
-                                        </td>
-                                      </tr>
-
-                                      <tr>
-                                        <td>
-                                          <div class="input-group">
-                                            <span class="input-group-prepend"><label class="input-group-text"><i
-                                                  class="icofont icofont-location-pin"></i></label>
-                                            </span>
-                                            <!-- <input type="file" class="form-control" (change)="changecv($event)" /> -->
-                                          </div>
-                                        </td>
-                                      </tr>
-
-
                                     </tbody>
                                   </table>
                                 </div>
@@ -487,10 +590,19 @@
                             </div>
                             <!-- end of row -->
                             <div class="text-center">
-                              <a href="javascript:;"
-                                class="btn btn-primary waves-effect waves-light m-r-20">Enregistrer</a>
-                              <a href="javascript:;" id="edit-cancel" class="btn btn-default waves-effect"
-                                (click)="toggleEditProfile()">annuler</a>
+                              <button
+                              [disabled]="fresp_profil.invalid"
+                                type="submit"
+                                class="btn btn-primary waves-effect waves-light m-r-20"
+                                >Enregistrer
+                              </button>
+                              <a
+                                href="javascript:;"
+                                id="edit-cancel"
+                                class="btn btn-default waves-effect"
+                                (click)="toggleEditProfile(true)"
+                                >annuler</a
+                              >
                             </div>
                           </div>
                           <!-- end of edit info -->
@@ -506,12 +618,10 @@
               </div>
               <!-- personal card end-->
             </div>
-
           </ng-template>
         </ngb-tab>
 
       </ngb-tabset>
-
     </div>
   </div>
 </div>

@@ -63,7 +63,7 @@ supprimerStagiaire(id_demande_stage_entreprise){
 
       }
     } catch (error) {
-      swal("Echec!", "Opération non effectuée", "error");
+      swal("Echec!", error.error.message, "warning");
     }
   }
 

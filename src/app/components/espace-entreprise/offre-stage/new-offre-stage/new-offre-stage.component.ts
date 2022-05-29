@@ -65,7 +65,7 @@ export class NewOffreStageComponent implements OnInit {
         this.route.navigate(['/entreprise/offresStages']);
       }
     } catch (error) {
-      swal("Echec!", "Opération non effectuée", "error");
+      swal("Echec!", error.error.message, "warning");
     }
   }
 

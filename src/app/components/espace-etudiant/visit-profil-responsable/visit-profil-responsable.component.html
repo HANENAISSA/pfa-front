@@ -14,7 +14,7 @@
                 <img
                   class="user-img img-radius"
                   id="profil-photo"
-                  [src]="profil && profil.photo"
+                  [src]="profil?profil.photo:'assets/images/user-profile/introuvable.png'"
                   alt="user-img"
                 />
               </a>
@@ -32,12 +32,12 @@
       <ngb-tabset>
         <ngb-tab title="Informations d'Entreprise" [id]="0">
           <ng-template ngbTabContent>
-            <div [@fadeInOutTranslate] class="m-t-15">
+            <div class="m-t-15">
               <!-- personal card start -->
               <div class="card">
 
                 <div class="card-body">
-                  <div class="view-info">
+                  <div *ngIf="profil" class="view-info">
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="general-info">
@@ -48,13 +48,13 @@
                                   <tbody>
                                     <tr>
                                       <th scope="row">Entreprise</th>
-                                      <td>{{ profil && profil.nom_entreprise }}</td>
+                                      <td>{{  profil.nom_entreprise }}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row">N° registre commercial</th>
-                                      <td>{{ profil && profil.num_reg_commerce }}</td>
+                                      <td>{{  profil.num_reg_commerce }}</td>
                                     </tr>
-                                    <tr *ngIf="profil && profil.site_web">
+                                    <tr *ngIf=" profil.site_web">
                                       <th scope="row">Site web</th>
                                       <td>
                                         <a [href]="'http://'+profil.site_web" target="_blank">{{ profil.site_web }}</a>
@@ -65,7 +65,7 @@
                               </div>
                             </div>
                             <!-- end of table col-lg-6 -->
-                            <div class="col-lg-12 col-xl-6">
+                            <div *ngIf="profil" class="col-lg-12 col-xl-6">
                               <div class="table-responsive">
                                 <table class="table">
                                   <tbody>
@@ -73,7 +73,7 @@
                                       <th scope="row">Localisation</th>
                                       <td>
                                         {{
-                                          profil && profil.localisation
+                                          profil.localisation
                                         }}
                                       </td>
                                     </tr>
@@ -81,7 +81,7 @@
                                       <th scope="row">Domaine</th>
                                       <td>
                                         {{
-                                          profil && profil.libelle_domaine
+                                           profil.libelle_domaine
                                         }}
                                       </td>
                                     </tr>
@@ -110,11 +110,11 @@
         </ngb-tab>
         <ngb-tab title="Informations Personnelles" [id]="1">
           <ng-template ngbTabContent>
-            <div [@fadeInOutTranslate] class="m-t-15">
+            <div  class="m-t-15">
               <!-- personal card start -->
               <div class="card">
                 <div class="card-body">
-                  <div class="view-info" >
+                  <div *ngIf="profil" class="view-info" >
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="general-info">
@@ -125,13 +125,13 @@
                                   <tbody>
                                     <tr>
                                       <th scope="row">Nom complet</th>
-                                      <td>{{ profil && profil.nom+" "+profil.prenom }}</td>
+                                      <td>{{  profil.nom+" "+profil.prenom }}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row">Date naissance</th>
                                       <td>
                                         {{
-                                          profil && profil.date_naissance
+                                           profil.date_naissance
                                             | date: "dd/MM/yyyy"
                                         }}
                                       </td>
@@ -147,12 +147,12 @@
                                   <tbody>
                                     <tr>
                                       <th scope="row">N° Téléphone</th>
-                                      <td>{{ profil && profil.num_tel }}</td>
+                                      <td>{{  profil.num_tel }}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row">Email</th>
                                       <td>
-                                        {{ profil && profil.email }}
+                                        {{  profil.email }}
                                       </td>
                                     </tr>
                                   </tbody>

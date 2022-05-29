@@ -63,6 +63,8 @@ async getOffresEtudiantsTousContacts() {
       )) as any) || [];
     if (!err) {
       this.listOffres = rows;
+      console.log(rows);
+
     }
   } catch (error) {
     this.listOffres = [];

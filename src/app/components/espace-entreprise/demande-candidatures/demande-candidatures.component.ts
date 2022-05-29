@@ -37,6 +37,7 @@ export class DemandeCandidaturesComponent implements OnInit {
   }
 
   async getAllCandidature(etat) {
+
     try {
       const { err, rows } =
         ((await this.candidatureService.getListCandidature(

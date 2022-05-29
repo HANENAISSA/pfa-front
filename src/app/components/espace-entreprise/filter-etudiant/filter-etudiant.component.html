@@ -29,46 +29,6 @@
                 <div class="card">
                   <div class="col-sm-12">
                     <div class="card-header"></div>
-
-                    <!-- <div class="container">
-                    <div class="row">
-                      <div class="col-md-6 col-lg-5 offset-lg-1">
-                         <div class="pcoded-search">
-                          <div class="pcoded-search-box">
-
-                            <ng-select [items]="listCompetences"
-                              bindLabel="libelle"
-                              placeholder="Filtrer par compétence(s)"
-                              appendTo="body"
-                              multiple="true"
-                              searchable="true"
-                              (change)="changeCompetences()"
-                              [(ngModel)]="tabSelected"
-                              >
-                            </ng-select>
-
-                           </div>
-                        </div>
-                      </div>
-
-                      <div class="col-md-6 col-lg-4 offset-lg-2">
-                        <div class="input-group">
-                          <select
-                            [(ngModel)]="this.selectedidDomaine"
-                            name="departments"
-                            class="form-control"
-                            (change)="this.changeDep($event.target.value)"
-                          >
-                            <option [value]="-1">Tous les domaines</option>
-                            <ng-container  *ngFor="let dep of listDepartements ">
-                              <option  [value]="dep.id_departement">{{ dep.libelle }}</option>
-                            </ng-container>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                  </div> -->
-
                     <div class="table-responsive">
                       <div style="margin: 50px">
                         <table class="table table-hover">
@@ -172,13 +132,7 @@
 
                     </div>
 
-                    <!-- <div class="container">
-                      <div class="row">
-                        <div class="col-md-6 col-lg-5 offset-lg-1">
 
-                        </div>
-                      </div>
-                    </div> -->
 
                     <div class="table-responsive">
                       <div style="margin: 50px">
@@ -227,7 +181,7 @@
                                         " ngbDropdownItem>
                                         <i class="icofont icofont-eye-alt"></i>Profil
                                       </button>
-                                      <button id="{{ etudiant.id_etudiant }}" (click)="showOffresListContactees(etudiant.id_etudiant)" ngbDropdownItem>
+                                      <button id="{{ etudiant.id_etudiant }}" (click)="showOffresListContactees(etudiant)" ngbDropdownItem>
                                         <i class="icofont icofont-sign-in"></i>Offres contactées
                                       </button>
                                     </div>
@@ -265,7 +219,6 @@
                         </div>
                       </div>
                     </div>
-                    <!-- </app-card> -->
                   </div>
                 </div>
               </div>

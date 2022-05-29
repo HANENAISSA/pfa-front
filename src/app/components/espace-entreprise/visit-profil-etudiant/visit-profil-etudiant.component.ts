@@ -1,10 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { animate, style, transition, trigger } from "@angular/animations";
 import { SharedServiceService } from "../../../services/shared-service.service";
-import { ExperienceService } from "../../../services/experience.service";
-import { CompetenceService } from "../../../services/competence.service";
-import { Competence } from "../../../models/competence";
-import { Experience } from "../../../models/experience";
 import { ChercherProfilService } from "../../../services/chercher-profil.service";
 import { ActivatedRoute, Router } from "@angular/router";
 @Component({
@@ -71,10 +67,10 @@ export class VisitProfilEtudiantComponent implements OnInit {
       if (tabId=='0') this.profil = rows[0];
       else this.list = rows;
     } catch (error) {
-      const { err, rows } = error.error;
-      if (!err && rows && rows.length == 0) {
-        this.router.navigate(["/introuvable"]);
-      }
+      // const { err, rows } = error.error;
+      // if (!err && rows && rows.length == 0) {
+      //   this.router.navigate(["/introuvable"]);
+      // }
     }
   }
   changeTabset(event) {

@@ -53,12 +53,6 @@
                         <div style="margin: 5px; ">
                           <table class="table table-hover">
                             <thead>
-                              <!-- <ng-container matColumnDef="actions"> -->
-                                <!-- <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
-                                  <button mat-button>Edit</button>
-                                </mat-cell> -->
-                              <!-- </ng-container> -->
                               <tr style="text-align: center">
                                 <th scope="col"></th>
                                 <th scope="col" [appSort]="listCandidature" data-order="desc" data-name="titre">Titre<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
@@ -78,7 +72,7 @@
                                   <td >
                                       <ul *ngIf="this.demande.vue===0" class="show-notification">
                                         <li>
-                                          <label class="label label-danger">Nouvelle</label>
+                                          <label class="label label-danger">nouvelle</label>
                                         </li>
                                       </ul>
                                   </td>
@@ -132,13 +126,7 @@
                           </div>
                         </div>
                       </div>
-
-
-
-
                   </div>
-
-
               </div>
             </div>
 

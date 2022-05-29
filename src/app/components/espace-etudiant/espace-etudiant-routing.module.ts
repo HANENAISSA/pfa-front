@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotfoundComponent } from '../../pages/notfound/notfound.component';
-import { VisitProfilEtudiantComponent } from '../espace-entreprise/visit-profil-etudiant/visit-profil-etudiant.component';
 import { FilterEntrepriseComponent } from './filter-entreprise/filter-entreprise.component';
 import { FormulaireCvComponent } from './formulaire-cv/formulaire-cv.component';
 import { ListDemandesEtudiantComponent } from './list-demandes-etudiant/list-demandes-etudiant.component';

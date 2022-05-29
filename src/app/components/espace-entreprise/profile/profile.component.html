@@ -14,7 +14,7 @@
                 <img
                   class="user-img img-radius"
                   id="profil-photo"
-                  [src]="profil && profil.photo"
+                  [src]="profil.photo"
                   alt="user-img"
                 />
               </a>
@@ -61,7 +61,7 @@
       <ngb-tabset [activeId]="actifTabid">
         <ngb-tab title="Informations d'Entreprise" [id]="0">
           <ng-template ngbTabContent>
-            <div [@fadeInOutTranslate] class="m-t-15">
+            <div  class="m-t-15">
               <!-- personal card start -->
               <div class="card">
                 <div class="card-header">
@@ -75,7 +75,7 @@
                   </button>
                 </div>
                 <div class="card-body">
-                  <div class="view-info" *ngIf="editProfile">
+                  <div class="view-info" *ngIf="editProfile&&profil">
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="general-info">
@@ -86,13 +86,13 @@
                                   <tbody>
                                     <tr>
                                       <th scope="row">Nom entreprise</th>
-                                      <td>{{ profil && profil.nom_entreprise }}</td>
+                                      <td>{{ profil.nom_entreprise }}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row">N° registre commercial</th>
-                                      <td>{{ profil && profil.num_reg_commerce }}</td>
+                                      <td>{{ profil.num_reg_commerce }}</td>
                                     </tr>
-                                    <tr *ngIf="profil && profil.site_web">
+                                    <tr *ngIf="profil.site_web">
                                       <th scope="row">Site web</th>
                                       <td>
                                         <a [href]="'http://'+profil.site_web" target="_blank">{{ profil.site_web }}</a>
@@ -111,7 +111,7 @@
                                       <th scope="row">Localisation</th>
                                       <td>
                                         {{
-                                          profil && (profil.localisation+(profil.adresse?", "+profil.adresse:''))
+                                          (profil.localisation+(profil.adresse?", "+profil.adresse:''))
                                         }}
                                       </td>
                                     </tr>
@@ -119,7 +119,7 @@
                                       <th scope="row">Domaine</th>
                                       <td>
                                         {{
-                                          profil && profil.libelle_domaine
+                                          profil.libelle_domaine
                                         }}
                                       </td>
                                     </tr>
@@ -138,7 +138,7 @@
                     <!-- end of row -->
                   </div>
                   <!-- end of view-info -->
-                  <div class="edit-info" *ngIf="!editProfile">
+                  <div class="edit-info" *ngIf="!editProfile&&profil">
                     <div class="row">
                       <div class="col-lg-12">
                         <form
@@ -166,7 +166,7 @@
                                               type="text"
                                               name="nom_entreprise"
                                               required
-                                              [(ngModel)]="profil && profil.nom_entreprise"
+                                              [(ngModel)]="profil.nom_entreprise"
                                               #nom_entreprise="ngModel"
                                               class="form-control"
                                               placeholder="Nom entreprise"
@@ -195,7 +195,7 @@
                                               name="num_reg_commerce"
                                               required
                                               [(ngModel)]="
-                                                profil && profil.num_reg_commerce
+                                                profil.num_reg_commerce
                                               "
                                               #num_reg_commerce="ngModel"
                                               class="form-control"
@@ -225,7 +225,7 @@
                                               type="url"
                                               name="site_web"
                                               [(ngModel)]="
-                                                profil && profil.site_web
+                                                profil.site_web
                                               "
                                               #site_web="ngModel"
                                               class="form-control"
@@ -255,7 +255,7 @@
                                             ></span>
                                             <select
                                               ngModel="{{
-                                                profil && profil.id_domaine
+                                                profil.id_domaine
                                               }}"
                                               #libelle_domaine="ngModel"
                                               name="libelle_domaine"
@@ -289,7 +289,7 @@
                                             ></span>
                                             <select
                                               ngModel="{{
-                                                profil && profil.localisation
+                                                profil.localisation
                                               }}"
                                               #localisation="ngModel"
                                               name="localisation"
@@ -315,7 +315,7 @@
                                               type="text"
                                               name="adresse"
                                               [(ngModel)]="
-                                                profil && profil.adresse
+                                                profil.adresse
                                               "
                                               #adresse="ngModel"
                                               class="form-control"
@@ -373,7 +373,7 @@
         </ngb-tab>
         <ngb-tab title="Informations Personnelles" [id]="1">
           <ng-template ngbTabContent>
-            <div [@fadeInOutTranslate] class="m-t-15">
+            <div  class="m-t-15">
               <!-- personal card start -->
               <div class="card">
                 <div class="card-header">
@@ -387,7 +387,7 @@
                   </button>
                 </div>
                 <div class="card-body">
-                  <div class="view-info" *ngIf="editProfile">
+                  <div class="view-info" *ngIf="editProfile && profil">
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="general-info">
@@ -398,13 +398,13 @@
                                   <tbody>
                                     <tr>
                                       <th scope="row">Nom complet</th>
-                                      <td>{{ profil && profil.nom+" "+profil.prenom }}</td>
+                                      <td>{{ profil.nom+" "+profil.prenom }}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row">Date naissance</th>
                                       <td>
                                         {{
-                                          profil && profil.date_naissance
+                                          profil.date_naissance
                                             | date: "dd/MM/yyyy"
                                         }}
                                       </td>
@@ -420,12 +420,12 @@
                                   <tbody>
                                     <tr>
                                       <th scope="row">N° Téléphone</th>
-                                      <td>{{ profil && profil.num_tel }}</td>
+                                      <td>{{ profil.num_tel }}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row">Email</th>
                                       <td>
-                                        {{ profil && profil.email }}
+                                        {{ profil.email }}
                                       </td>
                                     </tr>
                                   </tbody>
@@ -444,7 +444,7 @@
                     <!-- end of row -->
                   </div>
                   <!-- end of view-info -->
-                  <div class="edit-info" *ngIf="!editProfile">
+                  <div class="edit-info" *ngIf="!editProfile && profil">
                     <div class="row">
                       <div class="col-lg-12">
                         <form
@@ -472,7 +472,7 @@
                                               type="text"
                                               name="nom"
                                               required
-                                              [(ngModel)]="profil && profil.nom"
+                                              [(ngModel)]=" profil.nom"
                                               #nom="ngModel"
                                               class="form-control"
                                               placeholder="Nom"
@@ -501,7 +501,7 @@
                                               type="text"
                                               name="prenom"
                                               required
-                                              [(ngModel)]="profil && profil.prenom"
+                                              [(ngModel)]=" profil.prenom"
                                               #prenom="ngModel"
                                               class="form-control"
                                               placeholder="Prénom"
@@ -530,7 +530,7 @@
                                               onkeydown="return false"
                                               name="date_naissance"
                                               required
-                                              ngModel="{{profil && profil.date_naissance| date: 'yyyy-MM-dd'}}"
+                                              ngModel="{{ profil.date_naissance| date: 'yyyy-MM-dd'}}"
                                               #date_naissance="ngModel"
                                               class="form-control"
                                               max="{{this.actualDate| date: 'yyyy-MM-dd'}}"
@@ -563,7 +563,7 @@
                                               class="form-control"
                                               placeholder="N° Téléphone"
                                               required
-                                              [(ngModel)]="profil && profil.num_tel"
+                                              [(ngModel)]=" profil.num_tel"
                                               #num_tel="ngModel"
                                               name="num_tel"
                                             />
@@ -593,7 +593,7 @@
                                               placeholder="Email"
                                               required
                                               [(ngModel)]="
-                                                profil && profil.email
+                                                 profil.email
                                               "
                                               #email="ngModel"
                                               name="email"

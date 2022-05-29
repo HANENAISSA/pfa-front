@@ -27,10 +27,10 @@ export class VisitProfilResponsableComponent implements OnInit {
         ((await this.entrepriseService.getEntrpriseProfile(this.id_profil)) as any) || [];
        this.profil = rows[0];
     } catch (error) {
-      const { err, rows } = error.error;
-      if (!err && rows && rows.length == 0) {
-        this.router.navigate(["/introuvable"]);
-      }
+      // const { err, rows } = error.error;
+      // if (!err && rows && rows.length == 0) {
+      //   this.router.navigate(["/introuvable"]);
+      // }
     }
   }
 

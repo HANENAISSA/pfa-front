@@ -66,6 +66,7 @@ export class DemandeCandidaturesComponent implements OnInit {
         modalRef.componentInstance.title = `DETAILS DEMANDE`;
         modalRef.componentInstance.etat = this.etat;
         modalRef.componentInstance.details = demande;
+        console.log(demande);
       }
     }
     catch (error) {
@@ -83,7 +84,7 @@ export class DemandeCandidaturesComponent implements OnInit {
   accref(id_demande:string,decision:boolean)
   {
       swal({
-        title: `Voulez-vous ${decision?'accepter':'refuser'} la demande?`,
+        title: `Voulez-vous ${decision?'inviter l etudiant(e) pour un stage':'refuser la demande'} ?`,
         buttons:['cancel','confirm'],
         closeOnEsc:true,
         closeOnClickOutside:true

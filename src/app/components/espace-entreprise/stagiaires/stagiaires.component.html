@@ -21,35 +21,58 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="md-tabs">
-        <ngb-tabset >
-         <ngb-tab title="LISTE DES STAGIAIRES">
-            <ng-template ngbTabContent>
-              <div class="m-t-15">
-                <div class="card">
-                  <div class="col-sm-12">
-                    <div class="table-responsive">
-                      <div style="margin: 50px">
-                        <table class="table table-hover">
-                          <thead>
-                            <tr style="text-align: center">
-                              <th scope="col">Photo</th>
-                              <th scope="col" [appSort]="listStagiaires" data-order="desc" data-name="nom">
-                                Nom et Prénom<i class="fa fa-sort" style="margin-left: 10px"></i>
-                              </th>
-                              <th scope="col" [appSort]="listStagiaires" data-order="desc" data-name="email">
-                                Email<i class="fa fa-sort" style="margin-left: 10px"></i>
-                              </th>
-                              <th scope="col" [appSort]="listStagiaires" data-order="desc" data-name="cahier_charge">
-                                Cahier de charge<i class="fa fa-sort" style="margin-left: 10px"></i>
-                              </th>
-                              <th scope="col"></th>
-                            </tr>
-                          </thead>
-                          <ng-container *ngIf="
+        <div class="m-t-15">
+          <div class="card">
+            <div class="col-sm-12">
+              <div class="card-header">
+                <!-- <h5 class="card-header-text">Liste des offres</h5> -->
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12 col-lg-4 mb-5">
+                    <div class="pcoded-search">
+                      <div class="pcoded-search-box">
+                        <input
+                          type="text"
+                          placeholder="Rechercher"
+                          name="search"
+                          [(ngModel)]="searchText"
+                          autocomplete="off"
+                        />
+                        <span class="search-icon"
+                          ><i class="ti-search" aria-hidden="true"></i
+                        ></span>
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <div style="margin: 50px">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr style="text-align: center">
+                        <th scope="col">Photo</th>
+                        <th scope="col" [appSort]="listStagiaires" data-order="desc" data-name="nom">
+                          Nom et Prénom<i class="fa fa-sort" style="margin-left: 10px"></i>
+                        </th>
+                        <th scope="col" [appSort]="listStagiaires" data-order="desc" data-name="email">
+                          Email<i class="fa fa-sort" style="margin-left: 10px"></i>
+                        </th>
+                        <th scope="col" [appSort]="listStagiaires" data-order="desc" data-name="cahier_charge">
+                          Cahier de charge<i class="fa fa-sort" style="margin-left: 10px"></i>
+                        </th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <ng-container *ngIf="
                               this.listStagiaires.length > 0 &&
                               this.listStagiaires[0] !== null
                             ">
-                            <tbody *ngFor="
+                      <tbody *ngFor="
                                 let stagiaire of this.listStagiaires
                                   | filter: searchText
                                   | slice
@@ -57,82 +80,76 @@
                                     : page * pageSize;
                                 let i = index
                               ">
-                              <tr style="text-align: center">
-                                <td>
-                                  <img class="user-img img-radius" id="profil-photo" alt="photo-utilisateur"
-                                    [src]="stagiaire.photo" />
-                                </td>
-                                <td scope="row">
-                                  {{ stagiaire.nom + " " + stagiaire.prenom }}
-                                </td>
-                                <td scope="row">{{ stagiaire.email }}</td>
-                                <td scope="row">
-                                  <a *ngIf="stagiaire.cahier_charge"
-                                    href="{{ stagiaire.cahier_charge }}"
-                                    target="_blank"
-                                  >
-                                    Ouvrir
-                                  </a>
-                                  <span *ngIf="!stagiaire.cahier_charge">AUCUN C.C</span>
-                                </td>
-                                <td>
-                                  <div ngbDropdown placement="bottom-right" class="d-inline-block">
-                                    <button class="btn btn-outline-none" id="dropdownBasic1" ngbDropdownToggle>
-                                    </button>
-                                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                                      <button (click)="
+                        <tr style="text-align: center">
+                          <td>
+                            <img class="user-img img-radius" id="profil-photo" alt="photo-utilisateur"
+                              [src]="stagiaire.photo" />
+                          </td>
+                          <td scope="row">
+                            {{ stagiaire.nom + " " + stagiaire.prenom }}
+                          </td>
+                          <td scope="row">{{ stagiaire.email }}</td>
+                          <td scope="row">
+                            <a *ngIf="stagiaire.cahier_charge" href="{{ stagiaire.cahier_charge }}" target="_blank">
+                              Ouvrir
+                            </a>
+                            <span *ngIf="!stagiaire.cahier_charge">AUCUN C.C</span>
+                          </td>
+                          <td>
+                            <div ngbDropdown placement="bottom-right" class="d-inline-block">
+                              <button class="btn btn-outline-none" id="dropdownBasic1" ngbDropdownToggle>
+                              </button>
+                              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                <button (click)="
                                           this.consulterProfil(stagiaire.crypted_user)
                                         " ngbDropdownItem>
-                                        <i class="icofont icofont-eye-alt"></i>Profil
-                                      </button>
-                                      <button (click)="
+                                  <i class="icofont icofont-eye-alt"></i>Profil
+                                </button>
+                                <button (click)="
                                           this.supprimerStagiaire(stagiaire.id_demande_stage_entreprise)
                                         " ngbDropdownItem>
-                                        <i class="icofont icofont-trash"></i>Supprimer
-                                      </button>
+                                  <i class="icofont icofont-trash"></i>Supprimer
+                                </button>
 
-                                    </div>
-                                  </div>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </ng-container>
-                          <ng-container *ngIf="this.listStagiaires.length === 0">
-                            <tbody>
-                              <tr style="text-align: center">
-                                <td colspan="5">AUCUN STAGIAIRE TROUVE </td>
-                              </tr>
-                            </tbody>
-                          </ng-container>
-                          <ng-container *ngIf="this.listStagiaires[0] === null">
-                            <tbody>
-                              <tr style="text-align: center">
-                                <td colspan="5">Chargement ...</td>
-                              </tr>
-                            </tbody>
-                          </ng-container>
-                        </table>
-                        <div class="d-flex justify-content-between p-2">
-                          <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="listStagiaires.length">
-                          </ngb-pagination>
-                          <div>
-                            <select class="custom-select" style="width: auto" name="pageSize"
-                              (change)="handlePageSizeChange($event)">
-                              <option *ngFor="let size of pageSizes" [ngValue]="size">
-                                {{ size }}
-                              </option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </ng-container>
+                    <ng-container *ngIf="this.listStagiaires.length === 0">
+                      <tbody>
+                        <tr style="text-align: center">
+                          <td colspan="5">AUCUN STAGIAIRE TROUVE </td>
+                        </tr>
+                      </tbody>
+                    </ng-container>
+                    <ng-container *ngIf="this.listStagiaires[0] === null">
+                      <tbody>
+                        <tr style="text-align: center">
+                          <td colspan="5">Chargement ...</td>
+                        </tr>
+                      </tbody>
+                    </ng-container>
+                  </table>
+                  <div class="d-flex justify-content-between p-2">
+                    <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="listStagiaires.length">
+                    </ngb-pagination>
+                    <div>
+                      <select class="custom-select" style="width: auto" name="pageSize"
+                        (change)="handlePageSizeChange($event)">
+                        <option *ngFor="let size of pageSizes" [ngValue]="size">
+                          {{ size }}
+                        </option>
+                      </select>
                     </div>
-                    <!-- </app-card> -->
                   </div>
                 </div>
               </div>
-            </ng-template>
-          </ngb-tab>
-        </ngb-tabset>
+              <!-- </app-card> -->
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

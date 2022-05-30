@@ -27,7 +27,6 @@ export class PopupDemandeComponent implements OnInit {
   msg_body: string = `Suite à la consultation des profils existant sur la plateforme, nous vous propose une offre de stage au sein de notre entreprise . En effet, vos compétences ont retenues notre attention c'est pourquoi nous vous invitons à passer un entretien pour un stage qui peut être considéré comme un atout pour atteindre votre objectif professionnel .Nous nous tenons à votre disposition pour toute information complémentaire .`;
   listOffres = [];
   htmlinputType: string = "text";
-  offreSelected: any;
 
   constructor(
     private modalService: NgbModal,
@@ -62,6 +61,8 @@ export class PopupDemandeComponent implements OnInit {
     let etat = "2";
     let text = "";
     if (this.accepted) {
+      console.log(this.details);
+
       etat = "1";
       text = `<div style="text-align: justify;text-justify: inter-word;"><p style="color:black">Bonjour <strong>${
         this.details.nom
@@ -70,7 +71,7 @@ export class PopupDemandeComponent implements OnInit {
       }</strong>,</p> <p style="color:black">Dans le prolongement de nos échanges, nous avons le plaisir de vous confirmer notre accord initial pour votre demande de stage au sein de notre entreprise <strong style="color:#294a70">${
         this.details.nom_entreprise
       }</strong> située à <strong style="color:#294a70">${
-        this.details.localisation
+        this.details.localisation+(this.details.adresse?', '+this.details.adresse:'')
       }</strong>.</p><p style="color:black">Votre entretien se déroulera au <strong style="color:#294a70">${this.sharedService.formatDate(
         fadd.value.dd,
         true
@@ -89,10 +90,10 @@ export class PopupDemandeComponent implements OnInit {
       if (!err) {
         switch (etat) {
           case "1":
-            swal("Succès!", "Confirmation effectuée avec succès", "success");
+            swal("Succès!", "Confirmation effectuée ! un email a été envoyé", "success");
             break;
           case "2":
-            swal("Succès!", "Mise en attente effectuée avec succès", "success");
+            swal("Succès!", "Mise en attente effectuée avec succès", "info");
             break;
         }
         this.sharedService.reloadComponent();
@@ -109,6 +110,7 @@ export class PopupDemandeComponent implements OnInit {
     modalRef.componentInstance.title = `ACCEPTATION CANDIDATURE`;
     modalRef.componentInstance.accepted = accept;
     modalRef.componentInstance.details = this.details;
+
   }
 
   async invite(invitationForm: NgForm) {
@@ -132,7 +134,7 @@ export class PopupDemandeComponent implements OnInit {
       </div>`;
     const payload = {
       id_etudiant: this.etudiant.id_etudiant,
-      id_offre_stage_entreprise: this.offreSelected.id_offre_stage,
+      id_offre_stage_entreprise: offre,
       receivers: this.etudiant.email,
       subject: `ENTRETIEN DE STAGE EN ${offre}`,
       text: text,

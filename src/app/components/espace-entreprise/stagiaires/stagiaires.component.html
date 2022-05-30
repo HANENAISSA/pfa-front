@@ -5,9 +5,6 @@
       <div class="row align-items-end">
         <div class="col-lg-8">
           <div class="page-header-title">
-            <!-- <span>
-              <i class="icofont icofont-tools-bag card1-icon" style="background-color: #f4a024"></i>
-            </span> -->
             <div class="d-inline">
               <span class="d-block">
                 <h4>LISTE DES STAGIAIRES</h4>
@@ -56,14 +53,14 @@
                     <thead>
                       <tr style="text-align: center">
                         <th scope="col">Photo</th>
-                        <th scope="col" [appSort]="listStagiaires" data-order="desc" data-name="nom">
-                          Nom et Prénom<i class="fa fa-sort" style="margin-left: 10px"></i>
+                        <th scope="col" >
+                          Nom et Prénom
                         </th>
-                        <th scope="col" [appSort]="listStagiaires" data-order="desc" data-name="email">
-                          Email<i class="fa fa-sort" style="margin-left: 10px"></i>
+                        <th scope="col" >
+                          Email
                         </th>
-                        <th scope="col" [appSort]="listStagiaires" data-order="desc" data-name="cahier_charge">
-                          Cahier de charge<i class="fa fa-sort" style="margin-left: 10px"></i>
+                        <th scope="col" >
+                          Cahier de charge
                         </th>
                         <th scope="col"></th>
                       </tr>
@@ -120,7 +117,7 @@
                     <ng-container *ngIf="this.listStagiaires.length === 0">
                       <tbody>
                         <tr style="text-align: center">
-                          <td colspan="5">AUCUN STAGIAIRE TROUVE </td>
+                          <td colspan="5">AUCUNE ENTREPRISE TROUVEE </td>
                         </tr>
                       </tbody>
                     </ng-container>

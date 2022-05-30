@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { FormulaireCvServiceService } from "../../../services/formulaire-cv-service.service";
 import  swal from "sweetalert";
 import { OffreStage } from "../../../models/offre-stage.model";
@@ -25,6 +25,7 @@ export class ListOffresEtudiantComponent implements OnInit {
 
     public sharedService: SharedServiceService,
 
+    public activeModal: NgbActiveModal,
 
     private offreStageServ: OffreStageServiceService,
     private formCvServ:FormulaireCvServiceService
@@ -84,16 +85,27 @@ export class ListOffresEtudiantComponent implements OnInit {
   }
 
   async postulerOffre(idOffre : string) {
-    try {
-      (await this.offreStageServ.updateOffrePostulations(idOffre)) as any;
-      const { err, rows } =
-        (await this.formCvServ.addDemandeStageEntreprise(idOffre)) as any;
-      if (!err) {
-        swal("Succès!", "Postulation effectuée avec succès", "success");
-        this.sharedService.reloadComponent()
+    swal({
+      title: `Voulez-vous postuler dans cette offre ?`,
+      buttons:['cancel','confirm'],
+      closeOnEsc:true,
+      closeOnClickOutside:true
+    }).then(async(result) => {
+      if(result){
+        try {
+          (await this.offreStageServ.updateOffrePostulations(idOffre)) as any;
+          const { err, rows } =
+            (await this.formCvServ.addDemandeStageEntreprise(idOffre)) as any;
+          if (!err) {
+            swal("Succès!", "Postulation effectuée avec succès", "success");
+            this.sharedService.reloadComponent()
+          }
+        } catch (error) {
+          swal("Échec!", error.error.message, "warning");
+        }
       }
-    } catch (error) {
-      swal("Échec!", error.error.message, "warning");
-    }
+    });
+    this.activeModal.dismiss();
+   
   }
 }

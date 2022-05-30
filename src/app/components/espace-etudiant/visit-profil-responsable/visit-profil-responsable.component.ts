@@ -13,7 +13,6 @@ export class VisitProfilResponsableComponent implements OnInit {
   constructor(
     private entrepriseService: EntrepriseServiceService,
     private actifRoute: ActivatedRoute,
-    private router:Router
   ) {}
 
   ngOnInit() {

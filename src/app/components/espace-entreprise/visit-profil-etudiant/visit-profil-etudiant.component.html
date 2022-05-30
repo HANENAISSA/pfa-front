@@ -110,12 +110,11 @@
           <ng-template ngbTabContent>
             <div  class="m-t-15">
               <!-- info card start -->
+              <ng-container *ngFor="let competence of this.list">
               <div class="card">
-
-                <div class="card-body">
+                <div *ngIf="competence" class="card-body">
                   <div class="row">
-                    <ng-container *ngFor="let competence of this.list">
-                      <div *ngIf="competence" class="col-md-6">
+                      <div class="col-md-6">
                         <div class="card b-l-success business-info services m-b-20" style="background-color: #F0FBFC;">
                           <div ngbDropdown class="card-header">
                             <div class="service-header">
@@ -127,7 +126,6 @@
                           <div class="card-body">
                             <div class="row">
                               <div class="col-sm-12">
-                                <!-- <p class="task-detail" *ngIf="competence.niveau=='0'">Débutant</p> -->
                                 <div>
                                   <span class="fa fa-star checked text-primary"></span>
                                   <span
@@ -147,13 +145,11 @@
                           </div>
                           <!-- end of card-body -->
                         </div>
-                      </div>
-
-                    </ng-container>
-
+                      </div>                      
+                    </div>
                   </div>
                 </div>
-              </div>
+              </ng-container>
               <!-- info card end -->
             </div>
           </ng-template>
@@ -161,10 +157,10 @@
         <ngb-tab title="Expériences" [id]="2">
           <ng-template ngbTabContent>
             <div  class="m-t-15">
+              <ng-container *ngFor="let experience of this.list">
               <div class="card">
 
 
-                <ng-container *ngFor="let experience of this.list">
                   <div *ngIf="experience" class="card-body">
 
                     <ul class="media-list">
@@ -188,9 +184,9 @@
                       <!-- Nested media object -->
                     </ul>
                   </div>
-                </ng-container>
-
-              </div>
+                  
+                </div>
+              </ng-container>
             </div>
           </ng-template>
         </ngb-tab>

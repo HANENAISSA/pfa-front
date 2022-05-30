@@ -87,15 +87,29 @@ export class SharedServiceService {
 
   getLocalisation() {
     return [
-      "BEN AROUS",
-      "TUNIS",
-      "MONASTIR",
       "ARIANA",
+      "BEN AROUS",
+      "BEJA",
+      "Bizerte",
+      "GAFSA",
+      "Gabes",
+      "Jendouba",
+      "Kairouan",
+      "Kebili",
+      "Kef",
+      "Mahdia",
+      "MANOUBA",
+      "MONASTIR",
+      "MEDNINE",
       "NABEUL",
       "SOUSSE",
-      "GAFSA",
       "SIDI BOUZID",
-      "MANOUBA"
+      "SFAX",
+      "SILIANA",
+      "TATAOUINE",
+      "TOZEUR",
+      "TUNIS",
+      "ZAGHOUAN",
     ];
   }
 }

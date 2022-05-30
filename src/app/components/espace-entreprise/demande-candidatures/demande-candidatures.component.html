@@ -3,10 +3,10 @@
     <div class="row align-items-end">
       <div class="col-lg-8">
         <div class="page-header-title">
-          <span><i class="icofont icofont-home" style="background-color: #f4a024"></i></span>
+          <!-- <span><i class="icofont icofont-home" style="background-color: #f4a024"></i></span> -->
           <div class="d-inline">
-            <span class="d-block"><h4>Liste des candidatures</h4></span>
-            <span>Liste des candidatures</span>
+            <span class="d-block"><h4>GESTION DES CANDIDATURES</h4></span>
+            <!-- <span>Liste des candidatures</span> -->
           </div>
         </div>
       </div>
@@ -84,9 +84,8 @@
 
                                     <button
                                       class="btn hor-grd ml-1"
-                                      id="{{ demande.id_offre_stage }}"
                                       (click)="this.showDemande(demande)"
-                                      style="background-color: #878787"
+                                      style="background-color: #2bc5d4"
                                     >
                                       <i class="icofont icofont-eye-alt" style="color: white;"></i>
                                     </button>
@@ -205,7 +204,6 @@
                                   </button>
                                   <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                                                                       <button
-                                      id="{{ demande.id_demande_stage_entreprise }}"
                                       (click)="accref(demande.id_demande_stage_entreprise,true)"
 
                                       ngbDropdownItem
@@ -213,14 +211,12 @@
                                       <i class="icofont icofont-tick-boxed"></i>Inviter pour un stage
                                     </button>
                                     <button
-                                      id="{{ demande.id_demande_stage_entreprise }}"
                                       (click)="accref(demande.id_demande_stage_entreprise,false)"
                                       ngbDropdownItem
                                     >
                                       <i class="icofont icofont-close-squared"></i>Refuser
                                     </button>
                                     <button
-                                      id="{{ demande.id_demande_stage_entreprise }}"
                                       (click)="this.showDemande(demande)"
 
                                       ngbDropdownItem
@@ -336,9 +332,8 @@
 
                                   <button
                                     class="btn hor-grd ml-1"
-                                    id="{{ demande.id_offre_stage }}"
                                     (click)="this.showDemande(demande)"
-                                    style="background-color: #878787"
+                                    style="background-color: #2bc5d4"
                                   >
                                     <i class="icofont icofont-eye-alt" style="color: white;"></i>
                                   </button>

@@ -61,8 +61,9 @@ export class NewOffreStageComponent implements OnInit {
         this.offre
       ) as any;
       if (!err) {
-        swal("Succès!", "Ajout effectué avec succès", "success");
+        swal("Succès!", "offre ajoutée ! ", "success");
         this.route.navigate(['/entreprise/offresStages']);
+        this.sharedService.reloadComponent();
       }
     } catch (error) {
       swal("Echec!", error.error.message, "warning");

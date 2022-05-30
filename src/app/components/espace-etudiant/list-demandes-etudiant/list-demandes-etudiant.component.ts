@@ -46,8 +46,6 @@ export class ListDemandesEtudiantComponent implements OnInit {
     const modalRef = this.modalService.open(PopupOffreComponent);
     modalRef.componentInstance.title = `DETAILS OFFRE`;
     modalRef.componentInstance.details = demande;
-    modalRef.componentInstance.show = true;
-    modalRef.componentInstance.role = "StudentDemande";
   }
 
 

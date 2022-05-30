@@ -5,15 +5,9 @@
       <div class="row align-items-end">
         <div class="col-lg-8">
           <div class="page-header-title">
-            <span>
-              <i class="icofont icofont-tools-bag card1-icon" style="background-color: #f4a024"></i>
-            </span>
             <div class="d-inline">
               <span class="d-block">
-                <h4>Liste Des Offres de stages disponibles</h4>
-              </span>
-              <span>
-                Liste des offres de stages disponibles pour l'etudiant
+                <h4>LISTE DES OFFRES DE STAGE</h4>
               </span>
             </div>
           </div>
@@ -84,11 +78,11 @@
                               <i class="fa fa-ellipsis-v"></i>
                             </button>
                             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                              <button id="{{ offre.id_offre_stage }}" (click)="this.showOffre(offre.id_offre_stage)"
+                              <button (click)="this.showOffre(offre.id_offre_stage)"
                                 ngbDropdownItem>
                                 <i class="icofont icofont-eye-alt"></i>Détails
                               </button>
-                              <button id="{{ offre.id_offre_stage }}" (click)="postulerOffre(offre.id_offre_stage)"
+                              <button (click)="postulerOffre(offre.id_offre_stage)"
                                 ngbDropdownItem>
                                 <i class="icofont icofont-sign-in"></i>Postuler
                               </button>

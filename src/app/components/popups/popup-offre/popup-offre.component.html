@@ -1,12 +1,7 @@
 <div class="modal-header">
   <h4 class="modal-title">{{ title }}</h4>
 
-  <button
-    type="button"
-    class="close"
-    aria-label="Close"
-    (click)="activeModal.dismiss('Cross click')"
-  >
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
@@ -28,26 +23,25 @@
                       <th scope="col">Date contact</th>
                     </tr>
                   </thead>
-                  <tbody
-                  *ngFor="
+                  <tbody *ngFor="
                     let offre of this.listOffres
                      ;
                     let i = index
                   ">
                     <tr style="text-align: center">
                       <!-- <th scope="row">Titre</th> -->
-                        <th>{{offre.titre}}</th>
-                    <!-- </tr> -->
-                    <!-- <tr> -->
+                      <th>{{offre.titre}}</th>
+                      <!-- </tr> -->
+                      <!-- <tr> -->
                       <!-- <th scope="row">Type</th> -->
                       <td>{{offre.type}}</td>
-                    <!-- </tr> -->
-                    <!-- <tr> -->
+                      <!-- </tr> -->
+                      <!-- <tr> -->
                       <!-- <th scope="row">Date début</th> -->
                       <td>{{this.sharedService.formatDate(offre.date_debut)}}</td>
-                    <!-- </tr> -->
+                      <!-- </tr> -->
 
-                    <!-- <tr> -->
+                      <!-- <tr> -->
                       <!-- <th scope="row">Date contact</th> -->
                       <td>{{this.sharedService.formatDate(offre.date_demande,true)}}</td>
                     </tr>
@@ -70,11 +64,7 @@
   </div>
   <div class="modal-footer">
 
-    <button
-      type="button"
-      class="btn btn-outline-dark"
-      (click)="activeModal.close('Close click')"
-    >
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">
       Fermer
     </button>
   </div>
@@ -97,24 +87,20 @@
                         <h5>{{ this.details.titre }}</h5>
                       </td>
                     </tr>
-                    <ng-container *ngIf="this.role === 'StudentPostuler'">
+                    <!-- <ng-container *ngIf="this.role === 'StudentPostuler'">
 
                       <tr>
                         <th scope="row">Entreprise</th>
-                        <td>{{ this.details.nom_entreprise }} , {{ this.details.localisation }}</td>
+                        <td>{{ this.details.nom_entreprise }} situé à  {{ this.details.localisation+(this.details.adresse?", "+this.details.adresse:'') }}</td>
                       </tr>
                       <tr>
                         <th scope="row">Domaine entreprise</th>
                         <td>{{ this.details.libelle_domaine }}</td>
                       </tr>
-                      <!-- <tr>
-                        <th scope="row">Localisation</th>
-                        <td>{{ this.details.localisation }}</td>
-                      </tr> -->
                       <tr *ngIf="this.details.site_web">
                         <th scope="row">Site web</th>
                         <td>
-                          <a href="{{ this.details.site_web }}" target="_blank">
+                          <a href="{{ 'http://'+this.details.site_web }}" target="_blank">
                             {{ this.details.site_web }}
                           </a>
                         </td>
@@ -125,45 +111,31 @@
                         <th scope="row">Type offre</th>
                         <td>{{ this.details.type }}, {{ this.details.duree + " mois" }}</td>
                       </tr>
-                      <!-- <tr>
-                        <th scope="row">Durée</th>
-                        <td>{{ this.details.duree + " mois" }}</td>
-                      </tr> -->
-                    </ng-container>
 
-                    <tr *ngIf="this.details.cahier_charge">
+                    </ng-container> -->
+
+                    <tr>
                       <th scope="row">Cahier de charge</th>
                       <td>
-                        <a
-                          href="{{ this.details.cahier_charge }}"
-                          target="_blank"
-                        >
+                        <a href="{{ this.details.cahier_charge }}" target="_blank">
                           Ouvrir
                         </a>
                       </td>
                     </tr>
 
+
+                    <!-- <ng-container *ngIf="this.role === 'StudentPostuler'"> -->
+                    <tr>
+                      <th scope="row">Infos offre</th>
+                      <td>{{ this.details.nbr_vue }} vues, {{ this.details.nbr_postulation }} postulations</td>
+                    </tr>
+
+                    <!-- </ng-container> -->
                     <tr *ngIf="this.details.description">
                       <th scope="row">Description</th>
                       <td>{{ this.details.description }}</td>
                     </tr>
-                    <!-- <ng-container  *ngIf="this.role!='StudentPostuler'"> -->
-                    <ng-container *ngIf="this.role === 'StudentPostuler'">
-                    <tr>
-                      <th scope="row">Infos supplementaires</th>
-                      <td>{{ this.details.nbr_vue }} vues, {{ this.details.nbr_postulation }} postulations</td>
-                    </tr>
-                    <!-- <tr>
-                      <th scope="row">Nombre de postulations</th>
-                      <td>{{ this.details.nbr_postulation }}</td>
-                    </tr> -->
-                    </ng-container>
-                    <!-- <tr>
-                      <th scope="row">Etat de la demande</th>
-                      <td>{{  }}</td>
 
-                    </tr> -->
-                    <!-- </ng-container> -->
                   </tbody>
                 </table>
               </div>
@@ -180,13 +152,10 @@
     <!-- end of row -->
   </div>
   <div class="modal-footer">
-    <button *ngIf="this.role === 'StudentPostuler'" type="button" class="btn btn-outline-primary"  (click)="postulerOffre()">Postuler</button>
+    <button *ngIf="this.role === 'StudentPostuler'" type="button" class="btn btn-outline-primary"
+      (click)="postulerOffre()">Postuler</button>
 
-    <button
-      type="button"
-      class="btn btn-outline-dark"
-      (click)="activeModal.close('Close click')"
-    >
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">
       Fermer
     </button>
   </div>
@@ -200,24 +169,26 @@
             <div class="col-lg-12 col-xl-12">
               <div class="table-responsive">
                 <table class="table m-0">
+                  <tr>
+                    <th scope="row">Titre</th>
+                    <th scope="row">Cahier de charge</th>
+                    <th scope="row">Infos offre</th>
+                    <th scope="row">Description</th>
+
+                  </tr>
                   <tbody *ngFor="let offre of listOffres">
                     <tr>
-                      <th scope="row">Titre</th>
-                      <td>
-                        <h5>{{ offre.titre }}</h5>
-                      </td>
-                    </tr>
 
-                    <tr *ngIf="offre.cahier_charge">
-                      <th scope="row">Cahier de charge</th>
                       <td>
-                        <a
-                          href="{{ offre.cahier_charge }}"
-                          target="_blank"
-                        >
+                        <h6>{{ offre.titre }}</h6>
+                      </td>
+                      <td>
+                        <a href="{{ offre.cahier_charge&&offre.cahier_charge }}" target="_blank">
                           Ouvrir
                         </a>
                       </td>
+                      <td>{{ offre.nbr_vue }} vues, {{ offre.nbr_postulation }} postulations</td>
+                      <td>{{ offre.description&&offre.description }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -236,11 +207,7 @@
   </div>
   <div class="modal-footer">
 
-    <button
-      type="button"
-      class="btn btn-outline-dark"
-      (click)="activeModal.close('Close click')"
-    >
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">
       Fermer
     </button>
   </div>

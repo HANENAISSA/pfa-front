@@ -5,10 +5,14 @@
       <div class="row align-items-end">
         <div class="col-lg-8">
           <div class="page-header-title">
-            <span>
+            <!-- <span>
               <i class="icofont icofont-tools-bag card1-icon" style="background-color: #f4a024"></i>
-            </span>
-
+            </span> -->
+            <div class="d-inline">
+              <span class="d-block">
+                <h4>LISTE DES STAGIAIRES</h4>
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -96,7 +100,7 @@
                           <ng-container *ngIf="this.listStagiaires.length === 0">
                             <tbody>
                               <tr style="text-align: center">
-                                <td colspan="5">AUCUN ETUDIANT TROUVE </td>
+                                <td colspan="5">AUCUN STAGIAIRE TROUVE </td>
                               </tr>
                             </tbody>
                           </ng-container>

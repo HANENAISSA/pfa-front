@@ -33,6 +33,8 @@ export class PopupOffreComponent implements OnInit {
     if(this.etudiant){
       this.getOffresEtudiantsTousContacts();
     }
+    console.log(this.details);
+
   }
 
 

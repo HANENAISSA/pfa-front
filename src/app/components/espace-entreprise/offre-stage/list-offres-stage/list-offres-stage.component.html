@@ -5,19 +5,15 @@
       <div class="row align-items-end">
         <div class="col-lg-8">
           <div class="page-header-title">
-            <span>
+            <!-- <span>
               <i
                 class="icofont icofont-tools-bag card1-icon"
                 style="background-color: #f4a024"
               ></i>
-            </span>
+            </span>-->
             <div class="d-inline">
               <span class="d-block">
-                <h4>Gestion Des Offres</h4>
-              </span>
-              <span>
-                Si il y a des postulations dans une offre les opérations seront
-                désactivées
+                <h4>GESTION DES OFFRES DE STAGE</h4>
               </span>
             </div>
           </div>
@@ -25,6 +21,8 @@
       </div>
     </div>
   </div>
+
+
   <!-- Page-header end -->
   <div class="row">
     <div class="col-lg-12">
@@ -60,7 +58,7 @@
 
 
 
-                        <div class="col-md-12 col-lg-4 offset-lg-4">
+                        <div class="col-md-12 col-lg-3 offset-lg-5">
                           <div class="pcoded-search">
                             <div class="pcoded-search-box">
                               <button
@@ -84,32 +82,16 @@
                         <table class="table table-hover">
                           <!-- <table datatable class="row-border hover"> -->
                           <thead>
-                            <!-- <ng-container matColumnDef="actions">
-                              <mat-header-cell *matHeaderCellDef>
-                                Actions
-                              </mat-header-cell>
-                              <mat-cell *matCellDef="let row">
-                                <button mat-button>Edit</button>
-                              </mat-cell>
-                            </ng-container> -->
+
                             <tr style="text-align: center">
                               <!-- <tr> -->
                                 <th scope="col" [appSort]="listStage" data-order="desc" data-name="titre">Titre<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                                 <th scope="col" [appSort]="listStage" data-order="desc" data-name="type">Type<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                                 <th scope="col" [appSort]="listStage" data-order="desc" data-name="date_debut" data-type="date" >Date début<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                                 <th scope="col" [appSort]="listStage" data-order="desc" data-name="duree" >Durée<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
-                                <th scope="col" [appSort]="listStage" data-order="desc" data-name="nbr_postulation" >Nombre de postulations<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
-                                <th scope="col" [appSort]="listStage" data-order="desc" data-name="nbr_vue" >Nombre de vues<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                                 <th scope="col"></th>
 
-                              <!-- </tr>
-                              <th scope="col">Titre</th>
-                              <th scope="col">Type</th>
-                              <th scope="col">Date début</th>
-                              <th scope="col">Durée</th>
-                              <th scope="col">Nombre de postulations</th>
-                              <th scope="col">Nombre de vues</th>
-                              <th scope="col"></th> -->
+
                             </tr>
                           </thead>
                           <ng-container
@@ -149,24 +131,12 @@
                                   }}
                                 </td>
                                 <td>
-                                  {{
-                                    offre.nbr_postulation
-                                  }}
-                                </td>
-                                <td>
-                                  {{
-                                    offre.nbr_vue
-                                  }}
-                                </td>
-
-                                <td>
                                   <button
                                     class="btn hor-grd ml-2"
-                                    id="{{ offre.id_offre_stage }}"
                                     (click)="
                                       this.showOffre(offre.id_offre_stage)
                                     "
-                                    style="background-color: #878787"
+                                    style="background-color: #2bc5d4"
                                   >
                                     <i class="icofont icofont-eye-alt" style="color: white;"></i>
                                   </button>
@@ -268,8 +238,6 @@
                               <th scope="col" [appSort]="listStage" data-order="desc" data-name="type">Type<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col" [appSort]="listStage" data-order="desc" data-name="date_debut" data-type="date" >Date début<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col" [appSort]="listStage" data-order="desc" data-name="duree" >Durée<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
-                              <th scope="col" [appSort]="listStage" data-order="desc" data-name="nbr_postulation" >Nombre de postulations<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
-                              <th scope="col" [appSort]="listStage" data-order="desc" data-name="nbr_vue" >Nombre de vues<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col"></th>
                              </tr>
                           </thead>
@@ -310,17 +278,6 @@
                                   }}
                                 </td>
                                 <td>
-                                  {{
-                                    offre.nbr_postulation
-                                  }}
-                                </td>
-                                <td>
-                                  {{
-                                    offre.nbr_vue
-                                  }}
-                                </td>
-
-                                <td>
                                   <div
                                     ngbDropdown
                                     placement="bottom-right"
@@ -338,7 +295,6 @@
                                       aria-labelledby="dropdownBasic1"
                                     >
                                       <button
-                                        id="{{ offre.id_offre_stage }}"
                                         (click)="
                                           this.showOffre(offre.id_offre_stage)
                                         "
@@ -349,7 +305,6 @@
                                       </button>
                                       <button
                                         [disabled]="offre.nbr_postulation > 0"
-                                        id="{{ offre.id_offre_stage }}"
                                         (click)="passerOffre(offre)"
                                         [routerLink]="[
                                           '/entreprise/modif'
@@ -361,7 +316,6 @@
                                       </button>
                                       <button
                                         [disabled]="offre.nbr_postulation > 0"
-                                        id="{{ offre.id_offre_stage }}"
                                         (click)="
                                           supprimerOffre(offre.id_offre_stage)
                                         "
@@ -371,7 +325,6 @@
                                         >Suppression
                                       </button>
                                       <button
-                                        id="{{ offre.id_offre_stage }}"
                                         (click)="
                                           closeOpenOffre(offre.id_offre_stage,'2')
                                         "
@@ -476,8 +429,6 @@
                               <th scope="col" [appSort]="listStage" data-order="desc" data-name="type">Type<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col" [appSort]="listStage" data-order="desc" data-name="date_debut" data-type="date" >Date début<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col" [appSort]="listStage" data-order="desc" data-name="duree" >Durée<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
-                              <th scope="col" [appSort]="listStage" data-order="desc" data-name="nbr_postulation" >Nombre de postulations<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
-                              <th scope="col" [appSort]="listStage" data-order="desc" data-name="nbr_vue" >Nombre de vues<i class="fa fa-sort" style="margin-left: 10px;"></i></th>
                               <th scope="col"></th>
                             </tr>
                           </thead>
@@ -518,17 +469,6 @@
                                     }}
                                   </td>
                                 <td>
-                                  {{
-                                    offre.nbr_postulation
-                                  }}
-                                </td>
-                                <td>
-                                  {{
-                                    offre.nbr_vue
-                                  }}
-                                </td>
-
-                                <td>
                                   <div
                                     ngbDropdown
                                     placement="bottom-right"
@@ -546,7 +486,6 @@
                                       aria-labelledby="dropdownBasic1"
                                     >
                                       <button
-                                        id="{{ offre.id_offre_stage }}"
                                         (click)="
                                           this.showOffre(offre.id_offre_stage)
                                         "
@@ -557,7 +496,6 @@
                                       </button>
                                       <button
                                         [disabled]="offre.nbr_postulation > 0"
-                                        id="{{offre.id_offre_stage}}"
                                         (click)="passerOffre(offre)"
                                         ngbDropdownItem
                                       >
@@ -566,7 +504,6 @@
                                       </button>
                                       <button
                                         [disabled]="offre.nbr_postulation > 0"
-                                        id="{{ offre.id_offre_stage }}"
                                         (click)="
                                           supprimerOffre(offre.id_offre_stage)
                                         "
@@ -576,7 +513,6 @@
                                         >Suppression
                                       </button>
                                       <button
-                                        id="{{ offre.id_offre_stage }}"
                                         (click)="
                                           closeOpenOffre(offre.id_offre_stage,'1')
                                         "

@@ -79,7 +79,7 @@ export class EditOffreStageComponent implements OnInit {
         this.offre
       )) as any;
       if (!err) {
-        swal("Succès!", "Modification effectuée avec succès", "success");
+        swal("Succès!", "Offre modifiée ! ", "success");
         this.route.navigate(["/entreprise/offresStages"]);
       }
     } catch (error) {

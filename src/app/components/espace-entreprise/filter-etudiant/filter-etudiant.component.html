@@ -5,14 +5,11 @@
       <div class="row align-items-end">
         <div class="col-lg-8">
           <div class="page-header-title">
-            <span>
-              <i class="icofont icofont-tools-bag card1-icon" style="background-color: #f4a024"></i>
-            </span>
+
             <div class="d-inline">
               <span class="d-block">
-                <h4>Liste Des Etudiants</h4>
+                <h4>LISTE DES ETUDIANTS</h4>
               </span>
-              <span> Liste Des Etudiants disponibles pour un Stage </span>
             </div>
           </div>
         </div>
@@ -78,7 +75,7 @@
                                         " ngbDropdownItem>
                                         <i class="icofont icofont-eye-alt"></i>Profil
                                       </button>
-                                      <button id="{{ etudiant.id_etudiant }}" (click)="contacter(etudiant)" ngbDropdownItem>
+                                      <button  (click)="contacter(etudiant)" ngbDropdownItem>
                                         <i class="icofont icofont-sign-in"></i>Contacter
                                       </button>
                                     </div>
@@ -129,11 +126,7 @@
                 <div class="card">
                   <div class="col-sm-12">
                     <div class="card-header">
-
                     </div>
-
-
-
                     <div class="table-responsive">
                       <div style="margin: 50px">
                         <table class="table table-hover">
@@ -181,7 +174,7 @@
                                         " ngbDropdownItem>
                                         <i class="icofont icofont-eye-alt"></i>Profil
                                       </button>
-                                      <button id="{{ etudiant.id_etudiant }}" (click)="showOffresListContactees(etudiant)" ngbDropdownItem>
+                                      <button (click)="showOffresListContactees(etudiant)" ngbDropdownItem>
                                         <i class="icofont icofont-sign-in"></i>Offres contactées
                                       </button>
                                     </div>
@@ -193,7 +186,7 @@
                           <ng-container *ngIf="this.listEtudiant.length === 0">
                             <tbody>
                               <tr style="text-align: center">
-                                <td colspan="5">AUCUN ETUDIANT TROUVE !</td>
+                                <td colspan="5">AUCUN ETUDIANT CONTACTE !</td>
                               </tr>
                             </tbody>
                           </ng-container>

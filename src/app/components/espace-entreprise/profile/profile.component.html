@@ -14,8 +14,8 @@
                 <img
                   class="user-img img-radius"
                   id="profil-photo"
-                  [src]="profil.photo"
-                  alt="user-img"
+                  [src]="profil&&profil.photo"
+                  alt="image_utilisateur"
                 />
               </a>
             </div>
@@ -371,7 +371,7 @@
             </div>
           </ng-template>
         </ngb-tab>
-        <ngb-tab title="Informations Personnelles" [id]="1">
+        <ngb-tab title="Mes informations" [id]="1">
           <ng-template ngbTabContent>
             <div  class="m-t-15">
               <!-- personal card start -->

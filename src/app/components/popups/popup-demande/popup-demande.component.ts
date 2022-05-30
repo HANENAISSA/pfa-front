@@ -15,11 +15,9 @@ import { SharedServiceService } from "../../../services/shared-service.service";
   styleUrls: ["./popup-demande.component.scss"],
 })
 export class PopupDemandeComponent implements OnInit {
-  // @Input() show:boolean=false;
   @Input() details: any = null;
   @Input() title: string;
   @Input() invitation: boolean;
-  // @Input() demande:any=null;
   @Input() accepted: boolean = false;
   @Input() etat: string;
   @Input() etudiant = null;
@@ -44,7 +42,7 @@ export class PopupDemandeComponent implements OnInit {
 
   ngOnInit() {
     this.actualDate = new Date().toISOString().slice(0, 16);
-    this.getOffresEtudiantsTousContacts();
+    this.getallOffres();
     this.loadEntrepriseInfo();
   }
 
@@ -80,7 +78,6 @@ export class PopupDemandeComponent implements OnInit {
     }
     const payload = {
       receivers: this.details.email,
-      //  receivers:"barhoumsouidene@gmail.com, aissahanen08@gmail.com,youssefbenmiled40@gmail.com",//this.demande.email
       subject: "INVITATION A UN ENTRETIEN DE STAGE",
       text: text,
       id_etat_demande_stage_entreprise: etat,
@@ -115,7 +112,7 @@ export class PopupDemandeComponent implements OnInit {
   }
 
   async invite(invitationForm: NgForm) {
-    const { dentretien, mbdy } = invitationForm.value;
+    const { dentretien, mbdy,offre } = invitationForm.value;
     const text = `
       <div style="text-align: justify;text-justify: inter-word;">
       <p style="color:black">Bonjour Mme/Mr <strong>${this.etudiant.nom} ${
@@ -129,7 +126,7 @@ export class PopupDemandeComponent implements OnInit {
       <p style="color:black"><strong style="color:#294a70">${
         this.entrepriseInfo && this.entrepriseInfo.nom_entreprise
       }</strong> situé à <strong style="color:#294a70">${
-      this.entrepriseInfo && this.entrepriseInfo.localisation
+      this.entrepriseInfo && this.entrepriseInfo.localisation+", "+this.entrepriseInfo.adresse
     }</strong>.</p>
       <p style="color:black">Bien cordialement .</p>
       </div>`;
@@ -137,7 +134,7 @@ export class PopupDemandeComponent implements OnInit {
       id_etudiant: this.etudiant.id_etudiant,
       id_offre_stage_entreprise: this.offreSelected.id_offre_stage,
       receivers: this.etudiant.email,
-      subject: `ENTRETIEN DE STAGE EN ${this.offreSelected.titre}`,
+      subject: `ENTRETIEN DE STAGE EN ${offre}`,
       text: text,
     };
     try {
@@ -153,11 +150,10 @@ export class PopupDemandeComponent implements OnInit {
     this.activeModal.dismiss();
   }
 
-  async getOffresEtudiantsTousContacts() {
+  async getallOffres() {
     try {
       const { err, rows } =
-        ((await this.offreStageServ.getOffresEtudiantsTousContacts(
-          this.etudiant.id_etudiant,
+        ((await this.offreStageServ.getAllOffreStages(
           this.tabid
         )) as any) || [];
       if (!err) {

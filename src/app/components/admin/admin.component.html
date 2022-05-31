@@ -1,39 +1,20 @@
-<div
-  class="pcoded"
-  [attr.nav-type]="navType"
-  [attr.theme-layout]="themeLayout"
-  [attr.layout-type]="layoutType"
-  [attr.vertical-placement]="verticalPlacement"
-  [attr.vertical-layout]="verticalLayout"
-  [attr.pcoded-device-type]="deviceType"
-  [attr.vertical-nav-type]="verticalNavType"
-  [attr.vertical-effect]="verticalEffect"
-  [attr.vnavigation-view]="vNavigationView"
-  (window:resize)="onResize($event)"
->
+<div class="pcoded" [attr.nav-type]="navType" [attr.theme-layout]="themeLayout" [attr.layout-type]="layoutType"
+  [attr.vertical-placement]="verticalPlacement" [attr.vertical-layout]="verticalLayout"
+  [attr.pcoded-device-type]="deviceType" [attr.vertical-nav-type]="verticalNavType"
+  [attr.vertical-effect]="verticalEffect" [attr.vnavigation-view]="vNavigationView" (window:resize)="onResize($event)">
   <div class="pcoded-overlay-box"></div>
   <div class="pcoded-container navbar-wrapper">
-    <nav
-      class="navbar header-navbar pcoded-header"
-      [attr.pcoded-header-position]="pcodedHeaderPosition"
-      [attr.header-theme]="headerTheme"
-    >
+    <nav class="navbar header-navbar pcoded-header" [attr.pcoded-header-position]="pcodedHeaderPosition"
+      [attr.header-theme]="headerTheme">
       <div class="navbar-wrapper">
         <div class="navbar-logo" [attr.logo-theme]="logoTheme" style="background-color: #06BBCC;">
-          <a
-            class="mobile-menu"
-            id="mobile-collapse"
-            href="javascript:;"
-            (click)="toggleOpened()"
-            [exclude]="'#main_navbar'"
-            (clickOutside)="onClickedOutside($event)"
-          >
+          <a class="mobile-menu" id="mobile-collapse" href="javascript:;" (click)="toggleOpened()"
+            [exclude]="'#main_navbar'" (clickOutside)="onClickedOutside($event)">
             <i class="ti-menu"></i>
           </a>
-            <!-- <a class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-              <h2 class="m-0 text-white"><i class="fa fa-book me-3"></i>Stages</h2>
-            </a> -->
-          <!-- </a> -->
+          <a class="navbar-brand">
+            <h2 class="m-3 text-white"><i class="fa fa-book me-3"></i>Stages</h2>
+          </a>
           <a (click)="onMobileMenu()" class="mobile-options">
             <i class="ti-more"></i>
           </a>
@@ -43,9 +24,7 @@
             <ul class="nav-left">
               <li>
                 <div class="sidebar_toggle">
-                  <a href="javascript:;" (click)="toggleOpened()"
-                    ><i class="ti-menu f-18"></i
-                  ></a>
+                  <a href="javascript:;" (click)="toggleOpened()"><i class="ti-menu f-18"></i></a>
                 </div>
               </li>
               <li>
@@ -54,18 +33,10 @@
                 </a>
               </li>
             </ul>
-            <ul
-              [@mobileMenuTop]="isCollapsedMobile"
-              class="nav-right"
-              [ngClass]="isCollapsedMobile"
-            >
+            <ul [@mobileMenuTop]="isCollapsedMobile" class="nav-right" [ngClass]="isCollapsedMobile">
               <li class="user-profile header-notification">
-                <a >
-                  <img
-                    [src]="this.profil&&this.profil.photo"
-                    class="img-radius"
-                    alt="User-Profile-Image"
-                  />
+                <a>
+                  <img [src]="this.profil&&this.profil.photo" class="img-radius" alt="User-Profile-Image" />
                   <span>{{this.profil&&this.profil.nom+" "+this.profil.prenom}}</span>
                   <i class="ti-angle-down"></i>
                 </a>
@@ -90,103 +61,49 @@
     <!-- right-bar inner chat end -->
     <div class="pcoded-main-container" [style.margin-top]="headerFixedMargin">
       <div class="pcoded-wrapper">
-        <nav
-          id="main_navbar"
-          class="pcoded-navbar"
-          (clickOutside)="onClickedOutside($event)"
-          [exclude]="'#mobile-collapse'"
-          [attr.pcoded-header-position]="pcodedHeaderPosition"
-          [attr.navbar-theme]="navBarTheme"
-          [attr.active-item-theme]="activeItemTheme"
-          sub-item-theme="theme2"
-          active-item-style="style0"
-          [attr.pcoded-navbar-position]="pcodedSidebarPosition"
-        >
+        <nav id="main_navbar" class="pcoded-navbar" (clickOutside)="onClickedOutside($event)"
+          [exclude]="'#mobile-collapse'" [attr.pcoded-header-position]="pcodedHeaderPosition"
+          [attr.navbar-theme]="navBarTheme" [attr.active-item-theme]="activeItemTheme" sub-item-theme="theme2"
+          active-item-style="style0" [attr.pcoded-navbar-position]="pcodedSidebarPosition">
           <div class="sidebar_toggle">
             <a href="javascript:;"><i class="icon-close icons"></i></a>
           </div>
           <div class="pcoded-inner-navbar main-menu" appAccordion>
             <div class="">
               <div class="main-menu-header">
-                <img
-                  class="img-40 img-radius"
-                  [src]="this.profil&&this.profil.photo"
-                  alt="User-Profile-Image"
-                />
+                <img class="img-40 img-radius" [src]="this.profil&&this.profil.photo" alt="User-Profile-Image" />
                 <div class="user-details">
-                  <span id="more-details" (click)="toggleOpenedSidebar()"
-                    >{{this.profil&&this.profil.nom+" "+this.profil.prenom}}<i class="ti-angle-down"></i
-                  ></span>
+                  <span id="more-details" (click)="toggleOpenedSidebar()">{{this.profil&&this.profil.nom+"
+                    "+this.profil.prenom}}<i class="ti-angle-down"></i></span>
                 </div>
               </div>
               <div class="main-menu-content">
                 <ul>
-                  <li
-                    [@mobileMenuTop]="isCollapsedSideBar"
-                    class="more-details"
-                    [ngClass]="isCollapsedSideBar"
-                  >
-                  <!-- <a [routerLink]="['/entreprise/profil']"> -->
-                  <a [routerLink]="[this.id_role=='1'?'/etudiant/profil':'/entreprise/profil']">
-                    <i class="ti-user"></i>Profil</a
-                    >
-                    <a [routerLink]="['/connexion']" (click)="logout()"
-                      ><i class="ti-layout-sidebar-left"></i>Déconnexion</a
-                    >
+                  <li [@mobileMenuTop]="isCollapsedSideBar" class="more-details" [ngClass]="isCollapsedSideBar">
+                    <a [routerLink]="[this.id_role=='1'?'/etudiant/profil':'/entreprise/profil']">
+                      <i class="ti-user"></i>Profil</a>
+                    <a [routerLink]="['/connexion']" (click)="logout()"><i
+                        class="ti-layout-sidebar-left"></i>Déconnexion</a>
                   </li>
                 </ul>
               </div>
             </div>
-            <perfect-scrollbar
-              [style.max-width]="'100%'"
-              [style.max-height]="'calc(100vh - 230px)'"
-              [config]="config"
-            >
+            <perfect-scrollbar [style.max-width]="'100%'" [style.max-height]="'calc(100vh - 230px)'" [config]="config">
               <div class="d-color">
-                <ul
-                  class="pcoded-item pcoded-left-item"
-                  [attr.item-border]="itemBorder"
-                  [attr.item-border-style]="itemBorderStyle"
-                  [attr.subitem-border]="subItemBorder"
-                  appAccordionLink
-                >
+                <ul class="pcoded-item pcoded-left-item" [attr.item-border]="itemBorder"
+                  [attr.item-border-style]="itemBorderStyle" [attr.subitem-border]="subItemBorder" appAccordionLink>
                   <li appAccordionLink>
-
                 </ul>
               </div>
-
-
-
-
               <div class="d-color" *ngIf="this.id_role=='2'">
-                <ul
-                  class="pcoded-item pcoded-left-item"
-                  [attr.item-border]="itemBorder"
-                  [attr.item-border-style]="itemBorderStyle"
-                  [attr.subitem-border]="subItemBorder"
-                  appAccordionLink
-                  group="dashboard"
-                >
-                  <li
-                    class="pcoded-hasmenu"
-                    [attr.dropdown-icon]="dropDownIcon"
-                    [attr.subitem-icon]="subItemIcon"
-                    appAccordionLink
-                    group="dashboard"
-                  >
-                    <!-- <a href="javascript:;" appAccordionToggle>
-                      <span class="pcoded-micon"
-                        ><i class="ti-home"></i><b>d</b></span
-                      >
-                      <span class="pcoded-mtext">Coté Entreprise</span>
-                      <span class="pcoded-mcaret"></span>
-                    </a> -->
+                <ul class="pcoded-item pcoded-left-item" [attr.item-border]="itemBorder"
+                  [attr.item-border-style]="itemBorderStyle" [attr.subitem-border]="subItemBorder" appAccordionLink
+                  group="dashboard">
+                  <li class="pcoded-hasmenu" [attr.dropdown-icon]="dropDownIcon" [attr.subitem-icon]="subItemIcon"
+                    appAccordionLink group="dashboard">
                     <ul class="pcoded-menu">
                       <li appAccordionLink>
-                        <a
-                          [routerLink]="['/entreprise/offresStages']"
-                          appAccordionToggle
-                        >
+                        <a [routerLink]="['/entreprise/offresStages']" appAccordionToggle>
                           <span class="pcoded-micon">
                             <i class="ti-angle-right"></i>
                           </span>
@@ -194,10 +111,7 @@
                         </a>
                       </li>
                       <li appAccordionLink>
-                        <a
-                          [routerLink]="['/entreprise/candidatures']"
-                          appAccordionToggle
-                        >
+                        <a [routerLink]="['/entreprise/candidatures']" appAccordionToggle>
                           <span class="pcoded-micon">
                             <i class="ti-angle-right"></i>
                           </span>
@@ -205,68 +119,36 @@
                         </a>
                       </li>
                       <li appAccordionLink>
-                        <a
-                          [routerLink]="['/entreprise/recherche/profil']"
-                          appAccordionToggle
-                        >
+                        <a [routerLink]="['/entreprise/recherche/profil']" appAccordionToggle>
                           <span class="pcoded-micon">
                             <i class="ti-angle-right"></i>
                           </span>
                           <span class="pcoded-mtext">Chercher un profil
-                              </span>
+                          </span>
                         </a>
                       </li>
                       <li appAccordionLink>
-                        <a
-                          [routerLink]="['/entreprise/stagiaires']"
-                          appAccordionToggle
-                        >
+                        <a [routerLink]="['/entreprise/stagiaires']" appAccordionToggle>
                           <span class="pcoded-micon">
                             <i class="ti-angle-right"></i>
                           </span>
                           <span class="pcoded-mtext">Stagiaires
-                              </span>
+                          </span>
                         </a>
                       </li>
                     </ul>
                   </li>
                 </ul>
               </div>
-
-
-
-
-
-
-
-
               <div class="d-color" *ngIf="this.id_role=='1'">
-                 <ul
-                  class="pcoded-item pcoded-left-item"
-                  [attr.item-border]="itemBorder"
-                  [attr.item-border-style]="itemBorderStyle"
-                  [attr.subitem-border]="subItemBorder"
-                  appAccordionLink
-                  group="dashboard"
-                >
-                  <li
-                    class="pcoded-hasmenu"
-                    [attr.dropdown-icon]="dropDownIcon"
-                    [attr.subitem-icon]="subItemIcon"
-                    appAccordionLink
-                    group="dashboard"
-                  >
-                   <!-- <a href="javascript:;" appAccordionToggle>
-                      <span class="pcoded-micon"><i class="ti-home"></i><b>d</b></span>
-                      <span class="pcoded-mtext">Coté Etudiant</span>
-                      <span class="pcoded-mcaret"></span>
-                    </a> -->
+                <ul class="pcoded-item pcoded-left-item" [attr.item-border]="itemBorder"
+                  [attr.item-border-style]="itemBorderStyle" [attr.subitem-border]="subItemBorder" appAccordionLink
+                  group="dashboard">
+                  <li class="pcoded-hasmenu" [attr.dropdown-icon]="dropDownIcon" [attr.subitem-icon]="subItemIcon"
+                    appAccordionLink group="dashboard">
                     <ul class="pcoded-menu">
                       <li appAccordionLink>
-                        <a
-                          [routerLink]="['/etudiant/offresStages']"
-                          appAccordionToggle
-                        >
+                        <a [routerLink]="['/etudiant/offresStages']" appAccordionToggle>
                           <span class="pcoded-micon">
                             <i class="ti-angle-right"></i>
                           </span>
@@ -274,10 +156,7 @@
                         </a>
                       </li>
                       <li appAccordionLink>
-                        <a
-                          [routerLink]="['/etudiant/demandesStages']"
-                          appAccordionToggle
-                        >
+                        <a [routerLink]="['/etudiant/demandesStages']" appAccordionToggle>
                           <span class="pcoded-micon">
                             <i class="ti-angle-right"></i>
                           </span>
@@ -285,10 +164,7 @@
                         </a>
                       </li>
                       <li appAccordionLink>
-                        <a
-                          [routerLink]="['/etudiant/recherche/entreprise']"
-                          appAccordionToggle
-                        >
+                        <a [routerLink]="['/etudiant/recherche/entreprise']" appAccordionToggle>
                           <span class="pcoded-micon">
                             <i class="ti-angle-right"></i>
                           </span>
@@ -296,10 +172,7 @@
                         </a>
                       </li>
                       <li appAccordionLink>
-                        <a
-                          [routerLink]="['/etudiant/mesStages']"
-                          appAccordionToggle
-                        >
+                        <a [routerLink]="['/etudiant/mesStages']" appAccordionToggle>
                           <span class="pcoded-micon">
                             <i class="ti-angle-right"></i>
                           </span>

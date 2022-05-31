@@ -88,7 +88,10 @@
                 </ul>
               </div>
             </div>
-            <perfect-scrollbar [style.max-width]="'100%'" [style.max-height]="'calc(100vh - 230px)'" [config]="config">
+
+
+
+           <!-- <perfect-scrollbar [style.max-width]="'100%'" [style.max-height]="'calc(100vh - 230px)'" [config]="config">
               <div class="d-color">
                 <ul class="pcoded-item pcoded-left-item" [attr.item-border]="itemBorder"
                   [attr.item-border-style]="itemBorderStyle" [attr.subitem-border]="subItemBorder" appAccordionLink>
@@ -99,13 +102,13 @@
                 <ul class="pcoded-item pcoded-left-item" [attr.item-border]="itemBorder"
                   [attr.item-border-style]="itemBorderStyle" [attr.subitem-border]="subItemBorder" appAccordionLink
                   group="dashboard">
-                  <!-- <li class="pcoded-hasmenu" [attr.dropdown-icon]="dropDownIcon" [attr.subitem-icon]="subItemIcon"
+                  <li class="pcoded-hasmenu" [attr.dropdown-icon]="dropDownIcon" [attr.subitem-icon]="subItemIcon"
                     appAccordionLink group="dashboard">
-                    <ul class="pcoded-menu"> -->
+                    <ul class="pcoded-menu">
                       <li appAccordionLink>
                         <a [routerLink]="['/entreprise/offresStages']" appAccordionToggle>
                           <span class="pcoded-micon">
-                            <i class="fas fa-list" style="color: #06BBCC;"></i>
+                            <i class="ti-angle-right"></i>
                           </span>
                           <span class="pcoded-mtext">Liste des offres de stage</span>
                         </a>
@@ -113,7 +116,7 @@
                       <li appAccordionLink>
                         <a [routerLink]="['/entreprise/candidatures']" appAccordionToggle>
                           <span class="pcoded-micon">
-                            <i class="fas fa-list" style="color: #06BBCC;"></i>
+                            <i class="ti-angle-right"></i>
                           </span>
                           <span class="pcoded-mtext">Liste des candidatures </span>
                         </a>
@@ -121,7 +124,7 @@
                       <li appAccordionLink>
                         <a [routerLink]="['/entreprise/recherche/profil']" appAccordionToggle>
                           <span class="pcoded-micon">
-                            <i class="fas fa-list" style="color: #06BBCC;"></i>
+                            <i class="ti-angle-right"></i>
                           </span>
                           <span class="pcoded-mtext">Chercher un profil
                           </span>
@@ -130,28 +133,27 @@
                       <li appAccordionLink>
                         <a [routerLink]="['/entreprise/stagiaires']" appAccordionToggle>
                           <span class="pcoded-micon">
-                            <i class="fas fa-list" style="color: #06BBCC;"></i>
+                            <i class="ti-angle-right"></i>
                           </span>
                           <span class="pcoded-mtext">Stagiaires
                           </span>
                         </a>
                       </li>
                     </ul>
-                  <!-- </li>
-                </ul> -->
+                  </li>
+                </ul>
               </div>
-              
               <div class="d-color" *ngIf="this.id_role=='1'">
                 <ul class="pcoded-item pcoded-left-item" [attr.item-border]="itemBorder"
                   [attr.item-border-style]="itemBorderStyle" [attr.subitem-border]="subItemBorder" appAccordionLink
                   group="dashboard">
-                  <!-- <li class="pcoded-hasmenu" [attr.dropdown-icon]="dropDownIcon" [attr.subitem-icon]="subItemIcon" -->
-                    <!-- appAccordionLink group="dashboard"> -->
-                    <!-- <ul class="pcoded-menu"> -->
+                  <li class="pcoded-hasmenu" [attr.dropdown-icon]="dropDownIcon" [attr.subitem-icon]="subItemIcon"
+                    appAccordionLink group="dashboard">
+                    <ul class="pcoded-menu">
                       <li appAccordionLink>
                         <a [routerLink]="['/etudiant/offresStages']" appAccordionToggle>
                           <span class="pcoded-micon">
-                            <i class="fas fa-list" style="color: #06BBCC;"></i>
+                            <i class="ti-angle-right"></i>
                           </span>
                           <span class="pcoded-mtext">Liste des offres de stage</span>
                         </a>
@@ -159,7 +161,7 @@
                       <li appAccordionLink>
                         <a [routerLink]="['/etudiant/demandesStages']" appAccordionToggle>
                           <span class="pcoded-micon">
-                            <i class="fas fa-list" style="color: #06BBCC;"></i>
+                            <i class="ti-angle-right"></i>
                           </span>
                           <span class="pcoded-mtext">Demandes de stage</span>
                         </a>
@@ -167,7 +169,7 @@
                       <li appAccordionLink>
                         <a [routerLink]="['/etudiant/recherche/entreprise']" appAccordionToggle>
                           <span class="pcoded-micon">
-                            <i class="fas fa-list" style="color: #06BBCC;"></i>
+                            <i class="ti-angle-right"></i>
                           </span>
                           <span class="pcoded-mtext">Chercher entreprise</span>
                         </a>
@@ -175,11 +177,84 @@
                       <li appAccordionLink>
                         <a [routerLink]="['/etudiant/mesStages']" appAccordionToggle>
                           <span class="pcoded-micon">
-                            <i class="fas fa-list" style="color: #06BBCC;"></i>
+                            <i class="ti-angle-right"></i>
                           </span>
                           <span class="pcoded-mtext">Mes stages</span>
                         </a>
                       </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </perfect-scrollbar>  -->
+             <perfect-scrollbar [style.max-width]="'100%'" [style.max-height]="'calc(100vh - 230px)'" [config]="config">
+              <div *ngFor="let asideItems of menuItems.getAll(this.id_role)" class="d-color">
+                <div class="pcoded-navigatio-lavel" [attr.menu-title-theme]="menuTitleTheme">{{asideItems.label}}</div>
+                <ul class="pcoded-item pcoded-left-item" [attr.item-border]="itemBorder" [attr.item-border-style]="itemBorderStyle" [attr.subitem-border]="subItemBorder" *ngFor="let asideItem of asideItems.main" appAccordionLink group="{{asideItem.state}}">
+                  <!-- <li [routerLinkActive]="['active']" *ngIf="asideItem.type === 'external'" appAccordionLink group="{{asideItem.state}}">
+                    <a href="" target="{{asideItem.target ? '_blank' : '_self'}}" appAccordionToggle>
+                      <span class="pcoded-micon"><i class="{{ asideItem.icon }}"></i><b>{{ asideItem.short_label }}</b></span>
+                      <span class="pcoded-mtext">{{ asideItem.name }}</span>
+                      <span *ngFor="let asideBadge of asideItem.badge" class="pcoded-badge label label-{{ asideBadge.type }}">{{asideBadge.value}}</span>
+                      <span class="pcoded-mcaret"></span>
+                    </a>
+                  </li> -->
+
+                  <li [routerLinkActive]="['active']" *ngIf="asideItem.type === 'link'" appAccordionLink group="{{asideItem.state}}">
+                    <a [routerLink]="[asideItem.routerLink]" target="{{asideItem.target ? '_blank' : '_self'}}" appAccordionToggle *ngIf="asideItem.main_state; else mainContent">
+                      <span class="pcoded-micon"><i class="{{ asideItem.icon }}"></i><b>{{ asideItem.short_label }}</b></span>
+                      <span class="pcoded-mtext">{{ asideItem.name }}</span>
+                      <span *ngFor="let asideBadge of asideItem.badge" class="pcoded-badge label label-{{ asideBadge.type }}">{{asideBadge.value}}</span>
+                      <span class="pcoded-mcaret"></span>
+                    </a>
+                    <ng-template #mainContent>
+                      <a [routerLink]="[asideItem.routerLink]" target="{{asideItem.target ? '_blank' : '_self'}}" appAccordionToggle>
+                        <span class="pcoded-micon"><i class="{{ asideItem.icon }}"></i><b>{{ asideItem.short_label }}</b></span>
+                        <span class="pcoded-mtext">{{ asideItem.name }}</span>
+                        <span *ngFor="let asideBadge of asideItem.badge" class="pcoded-badge label label-{{ asideBadge.type }}">{{asideBadge.value}}</span>
+                        <span class="pcoded-mcaret"></span>
+                      </a>
+                    </ng-template>
+                  </li>
+                  <!-- <li [routerLinkActive]="['active']" *ngIf="asideItem.type === 'sub'" class="pcoded-hasmenu" [attr.dropdown-icon]="dropDownIcon" [attr.subitem-icon]="subItemIcon" appAccordionLink group="{{asideItem.state}}">
+                    <a [routerLinkActive]="['active']" href="javascript:;" appAccordionToggle>
+                      <span class="pcoded-micon"><i class="{{ asideItem.icon }}"></i><b>{{ asideItem.short_label }}</b></span>
+                      <span class="pcoded-mtext">{{ asideItem.name }}</span>
+                      <span *ngFor="let asideBadge of asideItem.badge" class="pcoded-badge label label-{{ asideBadge.type }}">{{asideBadge.value}}</span>
+                      <span class="pcoded-mcaret"></span>
+                    </a> -->
+                    <!-- <ul class="pcoded-submenu"> -->
+                      <!-- <ng-template ngFor let-asideChildren [ngForOf]="asideItem.children"> -->
+                        <!-- <li [routerLinkActive]="['active']" *ngIf="asideChildren.type !== 'sub'">
+                          <a [routerLink]="['/', asideItem.state, asideChildren.state]" target="{{asideChildren.target ? '_blank' : '_self'}}">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext">{{ asideChildren.name }} </span>
+                            <span *ngFor="let asideChildrenBadge of asideChildren.badge" class="pcoded-badge label label-{{ asideChildrenBadge.type }}">{{asideChildrenBadge.value}}</span>
+                            <span class="pcoded-mcaret"></span>
+                          </a>
+                        </li> -->
+
+                        <!-- <li [routerLinkActive]="['active']" class="pcoded-hasmenu" [attr.dropdown-icon]="dropDownIcon" [attr.subitem-icon]="subItemIcon" *ngIf="asideChildren.type === 'sub'" appAccordionLink group="sub-toggled">
+                          <a href="javascript:;" appAccordionToggle>
+                            <span class="pcoded-micon"><i class="ti-direction-alt"></i></span>
+                            <span class="pcoded-mtext">{{ asideChildren.name }}</span>
+                            <span *ngFor="let asideChildrenBadge of asideChildren.badge" class="pcoded-badge label label-{{ asideChildrenBadge.type }}">{{asideChildrenBadge.value}}</span>
+                            <span class="pcoded-mcaret"></span>
+                          </a>
+                          <ul class="pcoded-submenu">
+                            <ng-template ngFor let-asideChildrenSub [ngForOf]="asideChildren.children">
+                              <li [routerLinkActive]="['active']">
+                                <a [routerLink]="['/', asideItem.state, asideChildren.state, asideChildrenSub.state]" target="{{asideChildrenSub.target ? '_blank' : '_self'}}">
+                                  <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                  <span class="pcoded-mtext">{{ asideChildrenSub.name }}</span>
+                                  <span *ngFor="let asideChildrenSubBadge of asideChildrenSub.badge" class="pcoded-badge label label-{{ asideChildrenSubBadge.type }}">{{asideChildrenSubBadge.value}}</span>
+                                  <span class="pcoded-mcaret"></span>
+                                </a>
+                              </li>
+                            </ng-template>
+                          </ul>
+                        </li> -->
+                      <!-- </ng-template> -->
                     <!-- </ul> -->
                   <!-- </li> -->
                 </ul>

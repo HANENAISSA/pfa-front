@@ -23,6 +23,7 @@ export interface MainMenuItems {
   icon: string;
   badge?: BadgeItem[];
   children?: ChildrenItems[];
+  routerLink:string
 }
 
 export interface Menu {
@@ -30,175 +31,96 @@ export interface Menu {
   main: MainMenuItems[];
 }
 
-const MENUITEMS = [
+ const ETUDAINT_MENUITEMS = [
   {
     label: 'Navigation',
     main: [
       {
-        state: 'dashboard',
+        state: 'Offres de stages',
+        short_label: 'ODS',
+        name: 'Offres de stage',
+        type: 'link',
+        icon: 'icofont icofont-newspaper',
+        routerLink:'/etudiant/offresStages'
+      },
+      {
+        state: 'Chercher entreprise',
         short_label: 'D',
-        name: 'Dashboard',
+        name: 'Chercher entreprise',
         type: 'link',
-        icon: 'ti-home'
+        icon: 'icofont icofont-company',
+        routerLink:'/etudiant/recherche/entreprise'
       },
       {
-        state: 'basic',
-        short_label: 'B',
-        name: 'Basic Components',
-        type: 'sub',
-        icon: 'ti-layout-grid2-alt',
-        children: [
-          {
-            state: 'button',
-            name: 'Button'
-          },
-          {
-            state: 'typography',
-            name: 'Typography'
-          }
-        ]
+        state: 'Demandes de stages',
+        short_label: 'D',
+        name: 'Demandes de stage',
+        type: 'link',
+        icon: 'icofont icofont-tasks',
+        routerLink:'/etudiant/demandesStages'
       },
       {
-        state: 'notifications',
-        short_label: 'n',
-        name: 'Notifications',
+        state: 'Mes stages',
+        short_label: 'D',
+        name: 'Mes stages',
         type: 'link',
-        icon: 'ti-crown'
+        icon: 'icofont icofont-unique-idea',
+        routerLink:'/etudiant/mesStages'
       },
     ],
   },
-  {
-    label: 'Tables',
-    main: [
-      {
-        state: 'bootstrap-table',
-        short_label: 'B',
-        name: 'Bootstrap Table',
-        type: 'link',
-        icon: 'ti-receipt'
-      }
-    ]
-  },
-  {
-    label: 'Map And Extra Pages ',
-    main: [
-      {
-        state: 'map',
-        short_label: 'M',
-        name: 'Maps',
-        type: 'link',
-        icon: 'ti-map-alt'
-      },
-      {
-        state: 'authentication',
-        short_label: 'A',
-        name: 'Authentication',
-        type: 'sub',
-        icon: 'ti-id-badge',
-        children: [
-          {
-            state: 'login',
-            type: 'link',
-            name: 'Login',
-            target: true
-          }, {
-            state: 'registration',
-            type: 'link',
-            name: 'Registration',
-            target: true
-          }
-        ]
-      },
-      {
-        state: 'user',
-        short_label: 'U',
-        name: 'User Profile',
-        type: 'link',
-        icon: 'ti-user'
-      }
-    ]
-  },
-  {
-    label: 'Other',
-    main: [
-      {
-        state: '',
-        short_label: 'M',
-        name: 'Menu Levels',
-        type: 'sub',
-        icon: 'ti-direction-alt',
-        children: [
-          {
-            state: '',
-            name: 'Menu Level 2.1',
-            target: true
-          }, {
-            state: '',
-            name: 'Menu Level 2.2',
-            type: 'sub',
-            children: [
-              {
-                state: '',
-                name: 'Menu Level 2.2.1',
-                target: true
-              },
-              {
-                state: '',
-                name: 'Menu Level 2.2.2',
-                target: true
-              }
-            ]
-          }, {
-            state: '',
-            name: 'Menu Level 2.3',
-            target: true
-          }, {
-            state: '',
-            name: 'Menu Level 2.4',
-            type: 'sub',
-            children: [
-              {
-                state: '',
-                name: 'Menu Level 2.4.1',
-                target: true
-              },
-              {
-                state: '',
-                name: 'Menu Level 2.4.2',
-                target: true
-              }
-            ]
-          }
-        ]
-      },
-      {
-        state: 'simple-page',
-        short_label: 'S',
-        name: 'Simple Page',
-        type: 'link',
-        icon: 'ti-layout-sidebar-left'
-      }
-    ]
-  }, {
-    label: 'Support',
-    main: [
-      {
-        state: 'Upgrade To Pro',
-        short_label: 'U',
-        external: 'https://codedthemes.com/item/guru-able-admin-template/',
-        name: 'Upgrade To Pro',
-        type: 'external',
-        icon: 'ti-layout-list-post',
-        target: true
-      }
-    ]
-  }
+
 ];
+
+const RESPONSABLE_MENUITEMS = [
+  {
+    label: 'Navigation',
+    main: [
+      {
+        state: 'Offres de stage',
+        short_label: 'ODS',
+        name: 'Offres de stage',
+        type: 'link',
+        icon: 'icofont icofont-company',
+        routerLink:'/entreprise/offresStages'
+      },
+      {
+        state: 'Candidatures',
+        short_label: 'cdtrs',
+        name: 'Candidatures',
+        type: 'link',
+        icon: 'icofont icofont-ui-folder',
+        routerLink:'/entreprise/candidatures'
+      },
+      {
+        state: 'Profils',
+        short_label: 'n',
+        name: 'Profils',
+        type: 'link',
+        icon: 'icofont icofont-group-students',
+        routerLink:'/entreprise/recherche/profil'
+      },
+      {
+        state: 'Stagiaires',
+        short_label: 'n',
+        name: 'Stagiaires',
+        type: 'link',
+        icon: 'icofont icofont-unique-idea',
+        routerLink:'/entreprise/stagiaires'
+      },
+    ],
+  },
+];
+
 
 @Injectable()
 export class MenuItems {
-  getAll(): Menu[] {
-    return MENUITEMS;
+  getAll(id_role:string): Menu[] {
+    if(id_role=='1')
+    return ETUDAINT_MENUITEMS;
+    else
+    return RESPONSABLE_MENUITEMS;
+
   }
 
   /*add(menu: Menu) {

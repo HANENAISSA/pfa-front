@@ -14120,14 +14120,14 @@ td.highlight {
   }
 }
 
-td.details-control {
-  background: url("assets/images/details_open.png") no-repeat center center;
-  cursor: pointer;
-}
+// td.details-control {
+//   background: url("assets/images/details_open.png") no-repeat center center;
+//   cursor: pointer;
+// }
 
-tr.shown td.details-control {
-  background: url("assets/images/details_close.png") no-repeat center center;
-}
+// tr.shown td.details-control {
+//   background: url("assets/images/details_close.png") no-repeat center center;
+// }
 
 #row-select .selected, #row-delete .selected {
   background-color: #4680ff;
